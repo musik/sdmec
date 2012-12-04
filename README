@@ -1,7 +1,29 @@
 Tb
 ========================
+2012.10.27
+
+21:09
+下次升级，
+1\服务器上先
+bundle
+rake db:migrate && rake ts:index && rake ts:restart
+2\导出本地categories到服务器
+3\
+rails runner Store::Jie.new.run_all_cities
+4\
+./script/bjob
+5\
+rake assets:precompile && thin restart -C thin.yml
+
+1\
+重启之前 
+rake assets:precompile
+
+采店铺脚本
+PIDFILE=./shop.pid BACKGROUND=YES QUEUE=shopxtao,shopdata,jie rake environment resque:work
 
 
 ________________________
+
 
 License

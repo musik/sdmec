@@ -1,17 +1,27 @@
-= link_to "Tb", root_path, :class => 'brand'
-%ul.nav
-  - if user_signed_in?
-    %li
-      = link_to('Logout', destroy_user_session_path, :method=>'delete')
-  - else
-    %li
-      = link_to('Login', new_user_session_path)
-  - if user_signed_in?
-    %li
-      = link_to('Edit account', edit_user_registration_path)
-    - if current_user.has_role? :admin
-      %li
-        = link_to('Admin', users_path)
-  - else
-    %li
-      = link_to('Sign up', new_user_registration_path)
+-if @city.present?
+  = link_to t('appname_city',:city=>@city.name), root_path, :class => 'brand'
+-else
+  = link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:rel=>"nofollow"
+  
+%form.navbar-search.pull-left{:action=>search_url(:subdomain=>'www'),:method=>'get'}
+  -a={:id=>'q',:type=>"text",:name=>"q"}
+  -a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
+  .input-append
+    %input.search-queryx.input-medium{a}
+    %button.btn{:name=>'tb',:type=>"submit"} 淘宝搜
+    %button.btn{:type=>"submit"} 本站搜
+  %input{:type=>'hidden',:name=>'live',:value=>1}
+%ul.nav.nav-mini
+  %li=link_to "首页",root_url,:rel=>"nofollow"
+  -if @city
+    %li=link_to "#{@city.name}名店",top_stores_url
+    -if @city.name.length < 5
+      -Cat.nav.slice(0,6).each do |c|
+        %li=link_to c.name,cat_city_url(c,:subdomain=>@city.slug),:title=>"#{@city.name}淘宝#{c.name}"
+    %li=link_to '切换城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
+  -else
+    %li=link_to "淘宝名店",top_stores_url
+    -Cat.nav.slice(0,6).each do |c|
+      %li=link_to c.name,tbcat_url(c,:subdomain=>"www"),:title=>"淘宝#{c.name}"
+
+-#=render "layouts/unav"

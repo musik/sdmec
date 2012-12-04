@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Tb::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -5,7 +6,7 @@ Tb::Application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
-
+  
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -13,6 +14,7 @@ Tb::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  config.action_controller.cache_store = nil
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
@@ -22,7 +24,7 @@ Tb::Application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.gmail.com",      
     port: 587,
     domain: "example.com",
     authentication: "plain",
@@ -50,5 +52,6 @@ Tb::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
+  config.action_controller.asset_host = "http://www.42foo.com:3000"
 end

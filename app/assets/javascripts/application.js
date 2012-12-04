@@ -1,16 +1,99 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
-//
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require_tree .
+// = require bootstrap-alert
+// = require bootstrap-affix
+//comment// = require jquery.ui.autocomplete
+function reverse(s){
+    return s.split("").reverse().join("");
+}
+function rl(str){
+	reverse(unescape(str))
+}
+function goto(url,o){
+	if ($(o).attr("href") == "javascript://"){
+		$(o).attr("href",reverse(unescape(url)))
+		$(o).attr("target","_blank")
+		$(o).attr("onclick","")
+	}
+}
+$(function () {
+	$('a.rl').click(function(){
+		$(this).attr("href",reverse(unescape($(this).attr('data'))))
+		$(this).attr("target","_blank")
+	})
+})
+function loadFull(){
+  $('body').html('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="2432px" width="100%" src="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_10853963&eventid=101329" ></iframe>').prepend('<div id="bookmark" data-area="top_add_fav">为保证购物安全 <a class="taf_add" target="_self" href="javascript:AddFavorite(window.location.href,document.title)">收藏淘店铺</a> 正品保证，安全购物！ ')
+}
+function appendFull(){
+  return ;
+  $('#main').after('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="2432px" width="100%" src="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_10853963&eventid=101329" ></iframe>')
+}
+function AddFavorite(sURL, sTitle){
+     try{
+              window.external.addFavorite(sURL, sTitle);
+                 } catch (e){
+                          try{
+                                       window.sidebar.addPanel(sTitle, sURL, "");
+                                              }catch (e){
+                                                           alert("请按Ctrl+D收藏我们");
+                                                                  }
+                             }
+}
+function track_store_click(id,title,act){
+  _gaq.push(['_trackEvent',act,title,"http://shop" + String(id) + ".taobao.com"])
+}
+function track_store_action(id,gaq,act){
+  gaq.push(['_trackEvent','store',act,"http://shop" + String(id) + ".taobao.com"])
+}
+function track_store_visit(id,gaq){
+  gaq.push(['_trackEvent','store','link',"http://shop" + String(id) + ".taobao.com"])
+}
+function track_search_visit(id,gaq){
+  gaq.push(['_trackEvent','search','link',id])
+}
+function link_load(id,link_id){
+  $(id).load('/links/' + String(link_id) + '.json',function(){
+    $('#mingdian a').click(function(){
+      _gaq.push(['_trackEvent','mingdian','click',$(this).attr('href')])
+      _gaq.push(['_trackEvent','mingdian','name',$(this).text()])
+    })
+  })
+}
+function convert_shop(nick,context,valueable){
+  console.debug(document.cookie)
+  $.post('/xtao.js',function(){
+    console.debug(document.cookie)
+    fields = valueable ? 'click_url,commission_rate' : 'user_id,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count' 
+    TOP.api('rest', 'get',{
+      method:'taobao.taobaoke.widget.shops.convert',
+      'fields': fields,
+      seller_nicks: nick,
+      outer_code: context
+    },function(resp){
+      if(resp.error_response){
+        console.debug('Fail:taobao.taobaoke.widget.shops.convert'+resp.error_response.msg);
+        return false;
+       }
+       //console.debug(resp)
+       if(typeof(resp.taobaoke_shops) != "undefined"){
+         if(valueable == false){
+           var respShop=resp.taobaoke_shops.taobaoke_shop[0];
+           console.debug(respShop)
+           $('#shoplink').attr('href',respShop.click_url)
+           var args = $('#shoplink').attr('onclick').match(/(\d+),\'(.+?)\'/)
+            $('#shoplink').click(function(){
+              track_store_click(args[1],args[2],'freetodirect')
+            })
+         }
+       }else{
+         if(valueable){
+           var args = $('#shoplink').attr('onclick').match(/(\d+),\'(.+?)\'/)
+            $('#shoplink').click(function(){
+              track_store_click(args[1],args[2],'tofree')
+            })
+         }
+       }
+    })  
+  })
+}

@@ -3,5 +3,9 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
+require 'resque/tasks'
+require 'resque_scheduler/tasks'
+#require 'thinking_sphinx/deltas/resque_delta/tasks'
 
 Tb::Application.load_tasks
+#require 'thinking_sphinx/deltas/delayed_delta/tasks'
