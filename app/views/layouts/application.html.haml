@@ -1,19 +1,18 @@
--#-_set_xtao_cookie unless @no_xtao
+-_set_xtao_cookie if @xtao
 ='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.html_safe
 %html
   %head
     %meta{:charset => "utf-8"}
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-    ='<meta property="wb:webmaster" content="ee082922aa77efd9" />'.html_safe
     ='<meta name="baidu-site-verification" content="me8boZYUw0ffz4s0" />'.html_safe
     %title= content_for?(:title) ? yield(:title) : "Tb"
     = stylesheet_link_tag    @noad ? "simple" : "application", :media => "all"
     = render :partial=>'layouts/iefix'
     = csrf_meta_tags
     = yield(:head)
-    ='<script type="text/javascript" src="http://cbjs.baidu.com/js/m.js"></script>'.html_safe unless @noad
     =javascript_include_tag 'http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=12060575' unless @no_xtao
+    =javascript_include_tag "http://cbjs.baidu.com/js/m.js" unless @nocbjs
     =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
   %body{:class=>@bodyname}
     %header.navbar.navbar-fixed-top
@@ -56,34 +55,28 @@
                 =render "layouts/content"
               .span4#primary
                 =render "layouts/primary"
-    = render :partial => 'layouts/belt'
+    .belt.container                
+      = render :partial => 'layouts/belt'
+      -if request.subdomain == 'www' and is_home?
+        #links=render 'layouts/links'
+      =yield :links
     %footer
       .container
-        -if request.subdomain == 'www' and is_home?
-          #links=render 'layouts/links'
-        =yield :links
         .left
           &copy; 2012
           =t('footer_left').html_safe
-          %p#contact-note
-            %span.badge.badge-important=javascript_tag "document.write('敏感内容联系')"
-            =javascript_tag "document.write('18087409631 18087465331')"
-            %span.badge.badge-info=javascript_tag "document.write('QQ')"
-            =javascript_tag 'document.write(\'<a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=f62e57b812e5ba6bcabb95e781a841ed8edb5efa46c90997">58265826</a>\')'
-            %span.badge.badge-success=javascript_tag "document.write('Email')"
-            =javascript_tag "document.write('admin@sdmec.com')"
-
 
         .right
           =t('footer_right').html_safe
           %p=yield :title
         .clear
+        %p#contact-note
     = javascript_include_tag "application"
     =render "layouts/iefixjs"
     =yield :footer
     =javascript_tag "link_load('#mingdian',1);"
-    -unless @hide_xuanfu
-      =bdad "悬浮，120*120，创建于2012-11-9",1118592,'f'
+    -#-unless @hide_xuanfu
+      -#=bdad "悬浮，120*120，创建于2012-11-9",1118592,'f'
     .hidden
       ='<script type="text/javascript" src="http://js.tongji.linezing.com/3017959/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3017959/tongji.gif"/></a></noscript>'.html_safe
       = render :file=>'analytics/google'

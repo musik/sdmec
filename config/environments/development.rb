@@ -52,6 +52,6 @@ Tb::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false
+  config.assets.debug = true
   config.action_controller.asset_host = "http://www.42foo.com:3000"
 end

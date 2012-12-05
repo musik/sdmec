@@ -21,6 +21,7 @@ $(function () {
 		$(this).attr("href",reverse(unescape($(this).attr('data'))))
 		$(this).attr("target","_blank")
 	})
+  $('#contact-note').html('<span class="badge badge-important"> 敏感内容联系</span>0874-3335702 18087409631&nbsp;'+'<span class="badge badge-info">QQ</span><a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=f62e57b812e5ba6bcabb95e781a841ed8edb5efa46c90997">58265826</a>&nbsp;'+'<span class="badge badge-success">Email</span>admin@sdmec.com')
 })
 function loadFull(){
   $('body').html('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="2432px" width="100%" src="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_10853963&eventid=101329" ></iframe>').prepend('<div id="bookmark" data-area="top_add_fav">为保证购物安全 <a class="taf_add" target="_self" href="javascript:AddFavorite(window.location.href,document.title)">收藏淘店铺</a> 正品保证，安全购物！ ')
@@ -61,9 +62,9 @@ function link_load(id,link_id){
   })
 }
 function convert_shop(nick,context,valueable){
-  console.debug(document.cookie)
-  $.post('/xtao.js',function(){
-    console.debug(document.cookie)
+  //console.debug(document.cookie)
+  //$.post('/xtao.js',function(){
+    //console.debug(document.cookie)
     fields = valueable ? 'click_url,commission_rate' : 'user_id,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count' 
     TOP.api('rest', 'get',{
       method:'taobao.taobaoke.widget.shops.convert',
@@ -82,18 +83,20 @@ function convert_shop(nick,context,valueable){
            console.debug(respShop)
            $('#shoplink').attr('href',respShop.click_url)
            var args = $('#shoplink').attr('onclick').match(/(\d+),\'(.+?)\'/)
-            $('#shoplink').click(function(){
-              track_store_click(args[1],args[2],'freetodirect')
-            })
+            _gaq.push(['_trackEvent','tovalue',args[2],"http://shop" + args[1] + ".taobao.com"])
+            //$('#shoplink').click(function(){
+              //track_store_click(args[1],args[2],'freetodirect')
+            //})
          }
        }else{
          if(valueable){
            var args = $('#shoplink').attr('onclick').match(/(\d+),\'(.+?)\'/)
-            $('#shoplink').click(function(){
-              track_store_click(args[1],args[2],'tofree')
-            })
+            _gaq.push(['_trackEvent','tofree',args[2],"http://shop" + args[1] + ".taobao.com"])
+            //$('#shoplink').click(function(){
+              //track_store_click(args[1],args[2],'tofree')
+            //})
          }
        }
     })  
-  })
+  //})
 }

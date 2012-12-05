@@ -25,6 +25,6 @@ var sogou_ad_width=#{width};
     {:timestamp=>timestamp,:sign=>Digest::HMAC.hexdigest(param_string,settings['secret_key'],Digest::MD5).upcase}
   end
   def baidu_clb id
-    javascript_tag("BAIDU_CLB_fillSlot(#{id});") if Rails.env.production?
+    #javascript_tag("BAIDU_CLB_fillSlot(#{id});") if Rails.env.production?
   end
 end
