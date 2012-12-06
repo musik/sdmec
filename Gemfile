@@ -101,3 +101,5 @@ gem 'acts_as_commentable_with_threading'
 #gem "redis-model", "~> 0.1.3"
 gem 'redis-objects', :require => 'redis/objects'
 gem 'ohm'
+
+gem 'acts-as-taggable-on'
