@@ -20,7 +20,7 @@
         %li=link_to c.name,cat_city_url(c,:subdomain=>@city.slug),:title=>"#{@city.name}淘宝#{c.name}"
     %li=link_to '切换城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
   -else
-    %li=link_to "淘宝名店",top_stores_url
+    %li=link_to "名店",top_stores_url
     -Cat.nav.slice(0,6).each do |c|
       %li=link_to c.name,tbcat_url(c,:subdomain=>"www"),:title=>"淘宝#{c.name}"
 

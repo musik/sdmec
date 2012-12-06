@@ -90,6 +90,8 @@ gem 'resque-ensure-connected'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'resque-retry'
 gem 'resque-cleaner'
+gem 'resque-pool'
+gem 'god'
 
 #gem 'capistrano'
 
