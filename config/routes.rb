@@ -22,6 +22,7 @@ Tb::Application.routes.draw do
     end
     member do
       get 'convert'
+      get 'flush'
     end
   end
 
@@ -56,6 +57,14 @@ Tb::Application.routes.draw do
   match '/zhuan' => 'home#zhuan'
   devise_for :users
   resources :users, :only => [:show, :index]
+  #mount Resque::Server, :at => "/resque"
+  resque_constraint = lambda do |request|
+    request.env['warden'].authenticate? and
+      request.env['warden'].user.has_role?(:admin)
+  end
+  constraints resque_constraint do
+    mount Resque::Server.new, :at => "/resque"
+  end
   #match '/(topics|mai|start|browse)/:any'=>"home#deleted"
   #match "/:action/:any" => "home#deleted",:constraints=>{:action=>/topics|mai|start|browse/}
 end

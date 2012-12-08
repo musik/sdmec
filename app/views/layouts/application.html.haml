@@ -22,7 +22,8 @@
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
       .double11#full1
-        #mingdian
+        -unless @nomingdian
+          #mingdian
         -#=javascript_tag 'BAIDU_CLB_fillSlot("504553");'
         -#.clearfix
         -#=baidu_clb 503903
@@ -34,6 +35,7 @@
       .clearfix
 
       .container
+        =yield :full
         .content
           -if @shout
             #shout
