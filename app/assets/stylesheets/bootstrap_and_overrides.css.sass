@@ -251,12 +251,16 @@ h2
 body.store 
   h1
     font-size: 18px
+  h3,h4
+    color: #080
   h3
-    font-size: 14px
-    color: #000
+    font-size: 16px
     font-weight: 600
     line-height: 1.5em
-    border-bottom: 1px solid #ccc
+    //border-bottom: 1px solid #ccc
+  h4
+    font-size: 14px
+    font-weight: 600
 #primary
   h4,h1
     font-size: 14px
@@ -343,8 +347,14 @@ body.store
     width: 120px
   .link
     margin-top: 8px
+.store
+  .content
 .shop-header
-  padding: 10px 0
+  padding: 10px
+  border: 1px solid #eee
+  border-width: 0 0 1px
+  @include box-shadow(0px 1px rgba(0,0,0,.15))
+  margin: 0 0 10px
   .photo
     margin: 0 10px 0 0 
   h1.shop-name
@@ -355,21 +365,24 @@ body.store
   
 .relative
   position: relative
-.doc-sidebar    
-  //position: absolute
-  position: fixed
+.doc-sidebar
+  width: 68px
   margin-left: -75px
   margin-right: 0
-  width: 68px
-//.affix-top 
-  //position: absolute
-  
-.doc-sidenav
-  //width: 170px
-  background-color: #fff
+  position: absolute
   border: 1px solid #eee
   @include border-radius(6px 0 0 6px)
   @include box-shadow(1px 1px 2px rgba(0,0,0,.15))
+  //display: none
+.doc-sidebar.affix
+  //display: block
+  //position: fixed
+  //left: 75px
+  position: fixed
+.affix-top 
+  
+.doc-sidenav
+  background-color: #fff
 .section
   position: relative
 a.loc
@@ -482,5 +495,37 @@ ul.comments
       margin-left: 20px
     a.first
       margin-left: 0
+
+ul.item-3cols 
+  margin-left: 0
+  li
+    float: left
+    list-style: none
+    width: 300px
+    margin: 10px 0 0 20px
+    cursor: pointer
+  li.a
+    margin-left: 0
+    clear: left
+  li:hover
+    background: #ffc
+  .hd
+    height: 3em
+    padding: 3px 5px
+  .title a
+    color: #444
+  .ft
+    padding: 3px 5px
+    .price
+      tt
+        font-size: 32px
+        line-height: 48px
+        color: #f60
+    .volume
+      color: #ccc
+      margin-top: 18px
+  .photo
+    height: 300px
+    background: #fff
 
     

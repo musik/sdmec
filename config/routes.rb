@@ -23,6 +23,7 @@ Tb::Application.routes.draw do
     member do
       get 'convert'
       get 'flush'
+      get 'items'
     end
   end
 
@@ -38,6 +39,7 @@ Tb::Application.routes.draw do
   match '/taobao-:id'=>'cats#show',:as=>'tbcat'
   match '/t/:id'=>'home#page',:as=>'page'
   match '/link/:nid'=>"home#item_go",:as=>'item_go'
+  match '/itemlink/:id/:position'=>"home#shopitem_go",:as=>'shopitem_go'
   match '/tracklink/:id'=>"home#store_go",:as=>'store_go'
   match '/ad/:id'=>'home#ad',:as=>'ad'
   resources :tbpages

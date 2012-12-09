@@ -100,3 +100,6 @@ function convert_shop(nick,context,valueable){
     })  
   //})
 }
+function load_items(id){ 
+  $.get('/shop/' + String(id) + '/items.js',{update:true})
+}

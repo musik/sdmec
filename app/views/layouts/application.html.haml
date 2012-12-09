@@ -34,12 +34,12 @@
           -#=javascript_tag 'BAIDU_CLB_fillSlot("503096");'
       .clearfix
 
-      .container
+      .container.relative
         =yield :full
         .content
           -if @shout
             #shout
-          = render 'layouts/messages'
+          -#= render 'layouts/messages'
           -if @col1
             .row
               .span12
@@ -57,6 +57,7 @@
                 =render "layouts/content"
               .span3.pull-right#primary
                 =render "layouts/primary"
+        =yield :affix
     .belt.container                
       = render :partial => 'layouts/belt'
       -if request.subdomain == 'www' and is_home?
