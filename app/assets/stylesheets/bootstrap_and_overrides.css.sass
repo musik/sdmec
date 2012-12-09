@@ -1,6 +1,7 @@
 // Set the correct sprite paths
 $iconSpritePath: url('glyphicons-halflings.png')
 $iconWhiteSpritePath: url('glyphicons-halflings-white.png')
+$iconLoadingPath: url('process.png')
 //@import "bootstrap/variables"
 @import "bootstrap"
 //@import "bootstrap-responsive"
@@ -502,8 +503,9 @@ ul.item-3cols
     float: left
     list-style: none
     width: 300px
-    margin: 10px 0 0 20px
+    margin: 10px 0 0 17px
     cursor: pointer
+    border: 1px solid #eee
   li.a
     margin-left: 0
     clear: left
@@ -526,6 +528,17 @@ ul.item-3cols
       margin-top: 18px
   .photo
     height: 300px
-    background: #fff
+    //background: #fff $iconLoadingPath 50% 50% no-repeat
+    //img
+      //margin: 0 auto
 
+p.desc
+  color: #666
+  margin: 1em 0
+  tt
+    //text-decoration: underline
+    border-bottom: 1px dashed #ccc
+.belt-link    
+  display: block
+  
     
