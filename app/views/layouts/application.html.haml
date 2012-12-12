@@ -21,9 +21,19 @@
           = render 'layouts/navigation'
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
+      -unless @hide_bread
+        .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
       .double11#full1
-        -unless @nomingdian
-          #mingdian
+        .container
+          %a{:href=>"http://s.click.taobao.com/t?e=zGU34CA7K%2BPkqB05%2Bm7rfGGjlY60oHcc7bkKOQtOouwRWe%2FuBqs3%2FLwRzZRXx8YnEUIU2aFrXRUnt7fl9aVr5x4LfgTiBdggpSuCurl%2FKKVh1ITtSwP6QJVfyKqNLYT7da5E9DB6aW%2BKdUMkk6K%2B74BBOOBsDXfdMcBPtg%3D%3D",:target=>'_blank',:rel=>'nofollow',:onclick=>"track_top_ad()"}
+            %img{:src=>'http://img02.taobaocdn.com/tps/i3/T1PdEsXfVXXXav1iDh-990-177.jpg'}
+            %img{:src=>'http://img03.taobaocdn.com/tps/i3/T18c3rXnVbXXbUJODh-990-176.jpg'}
+            -#%img{:src=>"http://img02.taobaocdn.com/tps/i2/T1Gg.bXe0iXXbeBPzh-990-318.jpg",:alt=>"全民疯抢"}
+            -#%img{:src=>"http://img03.taobaocdn.com/tps/i3/T1yXocXnFjXXaRrOzh-990-171.jpg",:alt=>"五折包邮"}
+
+        -#=javascript_include_tag 'http://cbjs.baidu.com/js/o.js'
+        -#-unless @nomingdian
+          -##mingdian
         -#=javascript_tag 'BAIDU_CLB_fillSlot("504553");'
         -#.clearfix
         -#=baidu_clb 503903
