@@ -31,7 +31,7 @@ $(function () {
   $('#details-section').before('<div id="slotb"></div>')
   $('#reviews-section').after('<div id="slotf"></div>')
   $.getScript('http://cbjs.baidu.com/js/m.js',function(){
-    //BAIDU_CLB_fillSlotAsync('503903','full1')
+    BAIDU_CLB_fillSlotAsync('503903','full1')
     BAIDU_CLB_fillSlotAsync('484907','slotb')
     BAIDU_CLB_fillSlotAsync('484908','slotf')
   })
@@ -83,8 +83,8 @@ function convert_shop(nick,context,valueable){
        //console.debug(resp)
        if(typeof(resp.taobaoke_shops) != "undefined"){
          var respShop=resp.taobaoke_shops.taobaoke_shop[0];
-         $('.shoplink').attr('href',respShop.click_url)
          if(valueable == false){
+           $('.shoplink').attr('href',respShop.click_url)
            var args = $('#shoplink').attr('onclick').match(/(\d+),\'(.+?)\'/)
             _gaq.push(['_trackEvent','tovalue',args[2],"http://shop" + args[1] + ".taobao.com"])
          }
