@@ -1,0 +1,6 @@
+-title @title
+-if @max_page
+  =paginate @stores,:total_pages=>@max_page,:window=>@max_page
+-else
+  =paginate @stores
+= render :partial => 'list'

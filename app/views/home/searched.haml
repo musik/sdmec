@@ -1,0 +1,10 @@
+-title "近期搜索"
+
+-@col1=true
+-@searched.each do |query|
+  =link_to query,search_url(:q=>query,:subdomain=>'www')
+.paginationx
+  -i=0
+  -while @total_pages >= i+=1
+    =link_to i,url_for(:page=>i)
+

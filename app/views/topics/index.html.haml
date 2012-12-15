@@ -1,0 +1,13 @@
+- title t('.title'),t('.header')
+
+-#= page_entries_info @topics, :entry_name => 'topic'
+.topics 
+  - for topic in @topics
+    = link_to topic.name, topic
+
+.clear
+
+=paginate @topics,:window=>params[:page]==1 ? 15 : 7
+  
+%p
+  =link_to 'new',new_topic_path if can? :create,Topic

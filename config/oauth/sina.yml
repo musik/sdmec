@@ -1,0 +1,10 @@
+development:
+      key:    1205190349
+      secret: f5fe4ac2dfce3082fdf5b470c4838907
+      url:    http://www.42foo.com:3000
+      callback: http://www.42foo.com:3000/syncs/sina/callback
+production:
+      key:    1205190349
+      secret: f5fe4ac2dfce3082fdf5b470c4838907
+      url:    http://www.sdmec.com
+      callback: http://www.sdmec.com/syncs/sina/callback

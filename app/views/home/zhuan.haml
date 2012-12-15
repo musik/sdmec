@@ -1,0 +1,40 @@
+-title "转换工具"
+-@col1 = true
+
+%form{}
+  .input-append
+    %input.input-xxlarge{:name=>"url",:type=>"text",:value=>@url}
+    %button.btn 转换
+-if @item    
+  .row-fluid
+    .span8
+      %table.table.table-bordered
+        %tr
+          %th 标题
+          %td{:colspan=>3}=link_to @item['title'],@item['click_url'],:target=>'_blank'
+        %tr
+          %th 单价
+          %td #{@item['price']}元
+          %th 30天售出
+          %td #{@item['volume']}件
+        %tr
+          %th 佣金
+          %td #{@item['commission']}元
+          %th 佣金率
+          %td #{@item['commission_rate'].to_f/100}%
+        %tr
+          %th 总推介
+          %td #{@item['commission_rate']}件
+          %th 总佣金
+          %td #{@item['commission_volume']}元
+        %tr 
+          %th 卖家
+          %td
+            =@item['nick']
+            =img_credit @item['seller_credit_score']
+          %th 所在
+          %td #{@item['item_location']}
+    .span4
+      %img{:src=>@item['pic_url']}
+
+

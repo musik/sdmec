@@ -1,0 +1,8 @@
+.alphabet
+  %p
+    -if @is_huati
+      -("a".."z").each do |s|
+        =link_to s.upcase,browse_huatis_path(s)
+    -else
+      -("a".."z").each do |s|
+        =link_to s.upcase,browse_topics_path(:i=>s)

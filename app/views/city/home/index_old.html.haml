@@ -1,0 +1,17 @@
+- title t('city.home.title',:city=>@city.name),nil,false
+-meta :keywords,t('city.home.keywords',:city=>@city.name)
+-meta :description,t('city.home.description',:city=>@city.name)
+
+.hero-unit
+  %h1=t('city.home.header',:city=>@city.name)
+  %p
+    =t('city.home.description',:city=>@city.name).html_safe
+  -if @cities.present?
+    %p
+      -@cities.each do |r|
+        =link_to r.name,root_url(:subdomain=>r.slug)
+
+-content_for :footer do
+  =javascript_tag "loadFull()"
+
+-#=render :partial=>"categories/items",:locals=>{:items=>@items}

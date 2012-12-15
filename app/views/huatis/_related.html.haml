@@ -1,0 +1,9 @@
+- if APP_CONFIG["enable_sphinx"]
+  -cache "huati-related-#{huati.id}",:expires_in=>1.hour do
+    -rs =huati.related(21)
+    -if rs.present?
+      %h3=t('.other_huatis')
+      -rs.each do |t|
+        -next if t.nil?
+        .span2=link_to t.name,huati_url(t)
+      .clear

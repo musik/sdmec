@@ -1,0 +1,16 @@
+development:
+  domain: localhost:3000
+  expires_in: 5.minute
+  expires_in_city: 5.minute
+  enable_sphinx: false
+
+test:
+  domain: test.host
+  expires_in: 5.minute
+  expires_in_city: 5.minute
+
+production:
+  domain: example.com
+  expires_in: 7.day
+  expires_in_city: 14.day
+  enable_sphinx: false

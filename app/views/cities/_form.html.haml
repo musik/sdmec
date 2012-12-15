@@ -1,0 +1,24 @@
+= form_for @city do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  %p
+    = f.label :slug
+    %br
+    = f.text_field :slug
+  %p
+    = f.label :parent_id
+    %br
+    = f.number_field :parent_id
+  %p
+    = f.label :use_subdomain
+    %br
+    = f.check_box :use_subdomain
+  %p
+    = f.label :zhixiashi
+    %br
+    = f.check_box :zhixiashi
+  %p
+    = f.submit

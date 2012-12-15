@@ -1,0 +1,30 @@
+-title @huati.name
+-metalink :canonical,huati_url(@huati,:host=>"www.sdmec.com",:port=>nil)
+#pics
+  -if data = Mzfetcher.read('images/old',@huati.name) and data.present?
+    = render :file=>"/cached/images/old",:locals=>{:data=>data}
+  -else
+    = render :file=>"/cached/pics/bing",:locals=>{:q=>@huati.name}
+.row
+  .span8
+    -if data = Mzfetcher.read('news/old',@huati.name) and data.present?
+      = render :file=>"/cached/news/old",:locals=>{:data=>data}
+    -else
+      -if data = Mzfetcher.read('news/bing',@huati.name) and data.present?
+        = render :file=>"/cached/news/bing",:locals=>{:data=>data}
+      -else
+        = render :file=>"/cached/news/youdao",:locals=>{:data=>@huati.fetch("news/youdao")}
+    =render :partial=>'related',:locals=>{:huati=>@huati}
+
+
+    -if can? :manage,@huati
+      = link_to 'Edit', edit_huati_path(@huati)
+      \|
+      = link_to 'Back', huatis_path
+
+  .span4
+    #livestream
+    -#%iframe{:src=>"http://widget.weibo.com/livestream/listlive.php?language=zh_cn&width=0&height=600&uid=1706312214&skin=1&refer=1&appkey=1205190349&pic=0&titlebar=1&border=1&publish=1&atalk=1&recomm=0&at=0&atopic=#{@huati.name}&ptopic=#{@huati.name}&dpc=1",:width=>"100%",:height=>600,:frameborder=>0,:scrolling=>"no"}
+#pinglunxiang
+  
+-#=render :file=>'huatis/pinglunbox'

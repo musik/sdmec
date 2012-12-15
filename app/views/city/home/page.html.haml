@@ -1,0 +1,12 @@
+- title t('.title',:city=>@city.name,:name=>@page.name),t('.header',:city=>@city.name,:name=>@page.name)
+-meta :keywords,t('.keywords',:city=>@city.name,:name=>@page.name)
+-meta :description,t('.description',:city=>@city.name,:name=>@page.name) 
+-# =debug @navs.join("|")
+
+-unless @items.present?
+  =t('topics.items_not_found',:name=>@page.name).html_safe 
+-else  
+  =render :partial=>'/home/list',:locals=>{:items=>@items}
+  .btn-group
+    =link_to t('topics.show.more_results',:name=>nil).html_safe,taokq_url(@page.name),:target=>'_blank',:rel=>'nofollow',:class=>"btn btn-success btn-large"
+

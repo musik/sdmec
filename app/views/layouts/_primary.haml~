@@ -1,0 +1,6 @@
+='<iframe name="alimamaifrm" frameborder="0" marginheight="0" marginwidth="0" border="0" scrolling="no" width="230" height="421" src="http://top.taobao.com/interface_v2.php?pid=mm_10894158_2495491_10748961&type=y&f=html&ie=utf8&from=taoke&unid=&name=%E4%BB%8A%E6%97%A5%E5%85%B3%E6%B3%A8%E9%A3%99%E5%8D%87&trtp=2&up=false&goodsFilter=all&sw=230&sh=421&sn=10&bgc=E8E9EB&bc=DADADA&fc=0A63AA&tc=535353&cat_ids=1267615521_ZB_ZGZB%2CTR_FS%2CTR_JJ%2CTR_MY%2CTR_SM%2CTR_SP%2CTR_WT%2CTR_ZH" ></iframe>'.html_safe
+.well{:style=>"padding: 8px 5px"}
+  %strong 全部分类
+  %ul.nav.unstyled
+    -Category.cached_roots.each do |c|
+      %li=link_to c.name,c

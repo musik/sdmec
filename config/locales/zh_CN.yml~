@@ -1,0 +1,104 @@
+# encoding: utf-8
+
+zh_CN:
+  search: 搜索
+  appname: 淘热点
+  appname_city: "%{city}淘热点"
+  breadcrumbs:
+    home: 首页
+    topics: 关键词列表
+    browse: "%{acr}开头"
+    popular: 热门
+    huatis: 热点话题
+  home:
+    index:
+      title: 热点导购网
+      desco: 本站采用<a href="http://open.taobao.com">taobao api</a>建立,为你提供分城市话题导购。
+      desc: 跟踪淘宝热点
+    page:
+      title: "%{name}"
+      header: "%{name}"
+      keywords: "%{name}"
+      description: "%{name}"
+  city:
+    title: "%{name}淘宝"
+    nav:
+      lady: 女人
+      yifu: 衣服
+      xiezi: 鞋子
+      baobao: 包包
+      peishi: 配饰
+      meirong: 美容
+      jiaju: 家居
+      muying: 母婴
+      men: 男人
+    home:
+      title: "%{city}淘宝-%{city}淘宝网"
+      header: "%{city}淘宝热点"
+      keywords: "%{city}淘宝,%{city}淘宝网"
+      description: "sdmec.com %{city}淘宝信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}淘宝信息，满足您不同的%{city}淘宝需求。%{city}淘宝网，做最好的%{city}淘宝信息网。"
+      page:
+        title: "%{city}%{name}_淘宝%{city}%{name}卖家_%{city}%{name}网"
+        header: "%{city}%{name}"
+        keywords: "%{city}%{name},淘宝%{city}%{name}卖家,淘宝%{city}%{name}品牌"
+        description: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+        description2: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+    topics:
+      index:
+        title: "%{city}淘宝网"
+        header: "%{city}淘宝热点"
+        keywords: "%{city}淘宝,%{city}淘宝网"
+        description: "sdmec.com %{city}淘宝信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}淘宝信息，满足您不同的%{city}淘宝需求。%{city}淘宝网，做最好的%{city}淘宝信息网。"
+      popular:
+        title: "%{city} - 热门关键词"
+      browse:
+        title: "%{city} - %{acr}开头"
+      list:
+        total_found: "找到<b>%{city}</b><b>%{name}</b>%{count}件"
+        recent_volume: "最近卖出%{count}件"
+      show:
+        total_found: "找到<b>%{city}</b><b>%{name}</b>%{count}件"
+        total_found_replaced: "没找到<b>%{city}%{name}</b>相关宝贝，只找到<b>%{name}</b>相关结果%{count}件"
+        title: "%{city}哪里有%{name}卖?"
+        items_not_found: "在<b>%{city}</b>没找到<b>%{name}</b>信息"
+        other_cities: "去其它城市买%{name}"
+        other_topics: "%{city}买别的宝贝"
+        keywords: "%{city}%{name},%{city}买%{name},%{city}%{name}网"
+        description: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+        intro: "%{city}%{name}频道介绍"
+        description2: "%{city}哪里有%{name}卖?%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+  huatis:
+    related:
+      other_huatis: 相关搜索
+  topics:
+    random: 你也许会喜欢...
+    recent_volume: "最近卖出%{count}件"
+    items_not_found: "没找到<b>%{name}</b>信息"
+    index:
+      title: 热点关键词
+      header: 淘宝热点
+    popular:
+      title: 热门关键词
+    browse:
+      title: "%{acr}开头"
+    other_cities:
+      wheretobuy: "%{city}哪里有%{name}卖?"
+    show:
+      loading: 正在为您载入数据...
+      total_found: "找到<b>%{name}</b>%{count}件"
+      recent_volume: "最近卖出%{count}件"
+      title: "淘宝%{name}_那里有%{name}卖?"
+      keywords: "%{name},%{name}网,买%{name}"
+      description: "%{name}网提供淘宝%{name}信息、%{name}品牌淘宝导购,淘宝%{name}卖家信息。信息涵盖全国各地如北京%{name}、上海%{name}、广东%{name}。"
+      intro: "%{name}频道介绍"
+      description2: "%{name}频道为您提供最新的%{name},%{name}品牌,淘宝%{name}卖家信息。每天有大量优秀的%{name}卖家提供专业的%{name}信息，您可以随意查询和购买%{name}。 - sdmec.com"
+      header: "%{name}"
+      items_not_found: "没找到<b>%{name}</b>信息"
+      more_results: "去淘宝查看更多%{name} &raquo;"
+      other_cities: "各地%{name}"
+      other_topics: "相关搜索"
+  auto_complete:
+    not_found: 暂无相关结果,请调整你的输入
+  Not authorized as an administrator: 您不是管理员.
+  footer_left: 淘热点 鲁ICP备05022080号
+  footer_right: '<a href="http://www.sdmec.com">淘宝热点导购</a>'

@@ -1,0 +1,28 @@
+.row
+  .span4
+    %h4 热点搜索
+    -limit ||= 20
+    -exp = Rails.env.production? ? 30.minute : 1.second
+    -cache "hot-topics-limit-#{limit}",:expires_in=>exp do
+      -rs = PageView.get_top_in(Topic).limit(limit)
+      -if rs.present?
+        .topics
+          -rs.each do |r|
+            -t=r.viewable
+            =link_to t.name,t
+          .more=link_to "更多 &raquo;".html_safe,popular_topics_url
+          .clear
+  .span4
+    %h4 最近访问
+    -cache "visited-topics-limit-#{limit}",:expires_in=>3.minutes do
+      -rs = PageView.get_recent_for(Topic,limit)
+      -if rs.present?
+        .topics
+          -rs.each do |r|
+            -t=r.viewable
+            =link_to t.name,t
+          -#.more=link_to "更多 &raquo;".html_safe,huatis_url
+          .clear
+  .span4
+    %h4 热点城市
+    =render 'cities/hot'

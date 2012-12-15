@@ -1,0 +1,28 @@
+%h1 Listing huatis
+.btn-group
+  =link_to "unpublished",url_for(:published=>false),:class=>"btn" 
+  
+=paginate @huatis
+%table.table
+  %tr
+    %th Name
+    %th Slug
+    %th 
+    %th
+    %th
+    %th
+
+  - @huatis.each do |huati|
+    %tr
+      %td= link_to huati.name,huati
+      %td= huati.slug
+      %td= huati.published
+      %td= huati.priority
+      %td= huati.created_at 
+      %td
+        = link_to 'Edit', edit_huati_path(huati)
+        = link_to 'Destroy', huati, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Huati', new_huati_path

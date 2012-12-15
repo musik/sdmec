@@ -1,0 +1,14 @@
+-title @huati.name
+-metalink :canonical,huati_url(@huati,:host=>"www.sdmec.com",:port=>nil)
+
+#rdata
+  -if @huati.weibo.nil?
+    .text-warning
+      暂时没有找到<strong>#{@huati.name}</strong>的相关信息。
+    -content_for :footer do 
+      -javascript_tag "setTimeout('check_weibo(#{@huati.id},1)',1000)"
+  -else    
+    =javascript_tag 'BAIDU_CLB_fillSlot("484804");'
+    = render :partial => 'youdao',:locals=>{:news=>@huati.weibo}
+    
+

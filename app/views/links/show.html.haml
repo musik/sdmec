@@ -1,0 +1,16 @@
+%p#notice= notice
+
+%div
+  =@link.data
+%div
+  =@link.data.html_safe
+  -#-@link.data.split("\r\n").each do |str|
+    -#=eval str.sub(/^ +/,'')
+  
+%p
+  %b Name:
+  = @link.name
+
+= link_to 'Edit', edit_link_path(@link)
+\|
+= link_to 'Back', links_path

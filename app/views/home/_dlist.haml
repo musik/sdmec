@@ -1,0 +1,23 @@
+-i=0
+-items.each do |item|
+  -i+=1
+  .item{:class=>i.divmod(4)[1]==1 ? "first" : nil}
+    .inner
+      .photo
+        -# =link_to(image_tag("#{item['pic_url']}_b.jpg",:alt=>item["title"].gsub(/<.+?>/,''),:width=>220,:height=>220),item["click_url"],:target=>'_blank')
+        =link_to image_tag("#{item['pic_url']}_b.jpg",:alt=>item["title"].gsub(/<.+?>/,'')),item["click_url"],:target=>"_blank",:rel=>"nofollow"
+      .fn=link_to item["title"].html_safe,item["click_url"],:target=>"_blank",:rel=>"nofollow"
+      .price.left
+        ￥
+        =item["price"]
+      .right
+        =t('topics.recent_volume',:count=>item["volume"])
+      -# .location.right
+        -# =item["item_location"]
+      .clear
+      .shop.left
+        =link_to item["nick"],item["shop_click_url"],:target=>"_blank",:rel=>"nofollow"
+      .rank.right{:class=>"seller-rank-#{item['seller_credit_score']}"}
+        =item["seller_credit_score"]
+      .clear
+.clear

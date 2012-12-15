@@ -1,0 +1,6 @@
+- title @title || "热点话题"
+=paginate @huatis
+.huati
+  - @huatis.each do |huati|
+    = link_to huati.name,huati#,:class=>cycle("badge","label")
+

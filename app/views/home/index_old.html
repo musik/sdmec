@@ -1,0 +1,21 @@
+
+
+-title t('.title'),nil,false
+
+.hero-unit
+  %h1 热点导购网
+  %p
+    =t('.desc').html_safe
+=render :partial=>"categories/items",:locals=>{:items=>@items}
+-#=render :partial=> '/layouts/foot_widgets_default'
+-if 1==2 # Rails.env.production?
+  -cache "home-lists",:expires_in=>1.hour do
+    -@items = Tbpage.all_items
+    -@items.each do |tp,items|
+      %h3=link_to tp.name,page_url(:id=>tp.slug)
+      =render :partial=>'list',:locals=>{:items=>items.slice(0,8)}
+
+-if @cities.present?
+  %p
+    -@cities.each do |r|
+      =link_to r.name,root_url(:subdomain=>r.slug)

@@ -1,0 +1,9 @@
+= simple_form_for(@link) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :data,:input_html=>{:class=>"input-xxlarge",:rows=>12}
+    = f.input :name
+
+  .form-actions
+    = f.button :submit

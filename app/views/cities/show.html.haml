@@ -1,0 +1,24 @@
+- title "City"
+
+%p
+  %strong Name:
+  = @city.name
+%p
+  %strong Slug:
+  = @city.slug
+%p
+  %strong Parent:
+  = @city.parent_id
+%p
+  %strong Use Subdomain:
+  = @city.use_subdomain
+%p
+  %strong Zhixiashi:
+  = @city.zhixiashi
+
+%p
+  = link_to "Edit", edit_city_path(@city)
+  |
+  = link_to "Destroy", @city, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", cities_path

@@ -1,0 +1,5 @@
+<%if @huati.weibo%>
+  $('#rdata').html('<%=escape_javascript render :partial => 'youdao',:locals=>{:news=>@huati.weibo}%>')
+<%elsif @n < 5%>
+  setTimeout("check_weibo(<%=@huati.id%>,<%=@n%>)",<%=@n%>000)
+  <%end%>

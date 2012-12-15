@@ -1,0 +1,17 @@
+-title t('.title'),nil,false
+
+.hero-unit
+  %h1 热点导购网
+  %p
+    =t('.desc').html_safe
+.row
+  .span8
+    %h2 切换城市
+    =render "cities/tree"
+  .span4
+    %h2 热点搜索
+    =render 'layouts/whole',:locals=>{:limit=>50}
+    %h2 热点城市
+    =render "cities/hot"
+    -# =render "topics/hot"
+

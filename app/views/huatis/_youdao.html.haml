@@ -1,0 +1,5 @@
+-news["hits"].each do |entry|
+  .hentry
+    .fn=link_to entry["title"].html_safe,entry["url"]
+    .entry-body=entry["content"].html_safe
+    .meta=entry["source"]

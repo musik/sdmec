@@ -1,0 +1,15 @@
+var shop1:text=0;//店铺
+var shop1Link:link=0;//URL
+var shop2:text=0;//店铺
+var shop2Link:link=0;//URL
+var shop3:text=0;//店铺
+var shop3Link:link=0;//URL
+var shop4:text=0;//店铺
+var shop4Link:link=0;//URL
+<div class="recommend">
+女装:
+<a href="${shop1Link}" target="_blank">${shop1}</a>
+<a href="${shop2Link}" target="_blank">${shop2}</a>
+<a href="${shop3Link}" target="_blank">${shop3}</a>
+<a href="${shop4Link}" target="_blank">${shop4}</a>
+</div>

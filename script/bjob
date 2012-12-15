@@ -1,0 +1,4 @@
+#PIDFILE=./tmp/resque_scd.pid BACKGROUND=YES rake resque:scheduler
+#PIDFILE=./tmp/resque_search.pid BACKGROUND=YES QUEUE=shop_search rake environment resque:work
+PIDFILE=./tmp/resque_shop.pid BACKGROUND=YES QUEUE=shopxtao,shopdata,taoshop rake resque:work
+INTERVAL=180 PIDFILE=./tmp/resque_delta.pid BACKGROUND=YES QUEUE=ts_delta rake environment resque:work

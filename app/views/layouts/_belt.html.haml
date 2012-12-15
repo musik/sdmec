@@ -1,0 +1,19 @@
+-unless @hide_cities
+  -cache 'cities_cap' do
+    %p.cats
+      -rs = City.caps
+      -rs.delete_if{|r| r.slug = @city.slug} if @city
+      -City.caps.each do |r|
+        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝网"
+%p.pagin
+  =link_to "店铺",stores_url
+  =render "stores/creditmap" unless @creditmap_loaded
+  -if is_home?
+    -cache 'shops-paging',:expires_in => 1.hour do
+      -i = 11
+      -max_page = (Store.count / 240 ).ceil
+      %br
+      %span.numbers
+        -while i <= max_page
+          =link_to i,stores_url(:page=>i,:subdomain=>'www')
+          -i+=10

@@ -1,0 +1,28 @@
+-title t('.title',:cat=>@cat.name,:city=>@city.name),nil,false
+-meta :keywords,t('.keywords',:city=>@city.name,:cat=>@cat.name)
+-meta :description,t('.description',:city=>@city.name,:cat=>@cat.name)
+.bdct
+  -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
+  =bdad 'SD5200-CITYCAT-BEFORE，2012-12-5',1153615
+  -#=javascript_tag 'BAIDU_CLB_fillSlot("484908");'
+.page-headerx
+  %h1=[@city.name,@cat.name,"店铺"].join()
+  %small
+    =js_write(link_to "去淘宝搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
+-if @instead and @stores
+  %p.text-warning
+    暂时没找到<strong>#{@city.name}#{@cat.name}</strong>,以下是来自全国的#{@cat.name}店铺
+-else    
+  %p.stats
+    搜索"#{@city.name}#{@cat.name}"共找到#{@stores.total_entries}条记录，耗时#{(@stores.query_time * 1000).ceil}毫秒
+= render :partial => 'stores/list'
+-if @stores && !@instead
+  =nofollow_sub paginate @stores
+
+
+
+=js_link_to_with_class "&raquo; 去淘宝查看更多",taokq_url(@cat.name),"highlight"
+
+-content_for :sidebar do
+  %h1="#{@city.name}#{@cat.name}"
+  %p=@meta[:description]

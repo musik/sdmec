@@ -1,0 +1,17 @@
+- title t('city.home.title',:city=>@city.name),t('city.home.header',:city=>@city.name)
+-meta :keywords,t('city.home.keywords',:city=>@city.name)
+-meta :description,t('city.home.description',:city=>@city.name) 
+-# =debug @navs.join("|")
+%ul.nav.nav-pills
+  %li=link_to '女人'
+.row
+  .span8
+
+  .span4
+    %h2 热点搜索
+    =render 'layouts/whole',:locals=>{:limit=>50}
+    %h2 热点城市
+    =render "cities/hot"
+
+%p
+  =t('city.home.description',:city=>@city.name).html_safe

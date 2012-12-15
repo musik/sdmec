@@ -1,0 +1,15 @@
+-unless @hide_bread
+  .breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
+-if @show_title
+  .page-header
+    %h1.pull-left=yield :header
+    .pull-left=render 'layouts/bdshare'
+    .clear
+-unless @hidead
+  ='<script type="text/javascript">BAIDU_CLB_fillSlot("453449");</script>'.html_safe
+  .clear
+= yield
+-unless @hidead
+  .clear
+  ='<script type="text/javascript">BAIDU_CLB_fillSlot("453583");</script>'.html_safe
+  .clear

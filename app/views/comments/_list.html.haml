@@ -1,0 +1,12 @@
+%ul.comments
+  -@comments.each do |c|
+    %li.comment{:class=>cycle('o','e'),:id=>"comment-#{c.id}"}
+      .author
+        =c.guest_name
+      .comment
+        =simple_format sanitize(c.body,:tags=>%w(b i hr))
+        -#=simple_format c.body
+      .meta
+        =time_tag(c.created_at)
+        评论
+        =link_to c.commentable.name,url_for(c.commentable)

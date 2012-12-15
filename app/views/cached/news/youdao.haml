@@ -1,0 +1,18 @@
+-#-data = Mzfetcher.get('News/Youdao',q)
+.news-youdao
+  -if data.present? and data["hits"].present?
+    -data["hits"].each do |e|
+      .entry{:class=>['news',cycle("odd",'even'),e["hasThumb"] ? 'has-thumb' : nil].join(" ")}
+        %h4
+          =sanitize e["title"]
+          =js_external_link_to e["url"]
+        -if e["hasThumb"] == true
+          .photo
+            =image_tag sprintf("http://n0.ydstatic.com/improxy?s=80&id=%s",e["docId"]),:alt=>e["title"]
+        %p
+          =sanitize(e["content"].html_safe)
+          %span.meta
+            =[e["source"],time_ago_in_words(Time.at(e["pubTime"].to_s[0,10].to_i)) + '前'].join(' - ')
+        .clear
+      
+=debug data if params[:debug].present?

@@ -1,0 +1,7 @@
+-cache "ad" do
+  -cid ||= Ad::IDS.sample
+  -ad = Ad.new cid
+  -items = ad.items
+  -if items.present?
+    %h3=t('topics.random') 
+    =render :partial=>'home/list',:locals=>{:items=>items["taobaoke_items"]["taobaoke_item"].slice(0,4)}

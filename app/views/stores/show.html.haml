@@ -1,0 +1,79 @@
+-title @store.safe_title,nil,false
+-metalink "canonical",store_url(@store,:subdomain=>@store.city_slug) 
+-@bodyname = "store"
+-#-@col1 = true
+-@nocbjs = true
+-@xtao = true
+-@ad_after = @store.click_url.present?
+-unless @ad_after
+  .bdct
+    -#=baidu_clb 484804
+    =bdad 'SD5200-SHOP-BEFORE，2012-12-5',1151174
+.page-header
+  %h1=@store.safe_title
+-@sidenav=%w(details reviews related)
+.doc-sidebar{'data-spy'=>"affix",'data-offset-top'=>"10"}
+  %ul.nav.nav-list.doc-sidenav
+    -@sidenav.each do |n|
+      %li=link_to t("sidenav.#{n}"),"##{n}"
+.store_sg
+  -s = @store
+  .photo.pull-left
+    =image_tag s.pic_url,:width=>100,:height=>100,:alt=>s.title unless @store.mingan?
+  .details.pull-left
+    .meta
+      -if s.city.present?
+        %tt 所在:
+        =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
+        %br
+      %tt 卖家:
+      =s.nick
+      -#-if s.category.present?
+        -#%br
+        -#%tt 类目:
+        -#=s.category.name
+      -if s.seller_credit
+        %br 
+        %tt 信誉:
+        =img_credit(s.seller_credit)
+    .link
+      =link_to "进入淘宝店铺",s.url,:target=>'_blank',:id=>"shoplink",:class=>"btn btn-warning",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
+  .bdr.pull-right
+    ='<script type="text/javascript">/*120*90，创建于2012-11-9*/var cpro_id = "u1118579";</script><script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>'.html_safe
+  .clearfix
+    
+-#=debug s    
+.row
+  .span7
+    -if @ad_after
+      .bdc2
+        -#=baidu_clb 484804
+        =bdad 'SD5200-SHOP-AFTER，2012-12-5',1151181
+    #details-section.section
+      %a.loc#details
+      %h3 简介
+      .desc
+        -unless @store.mingan?
+          =sanitize safe_print(s.bulletin)
+          =sanitize safe_print(s.desc)
+    #reviews-section.section
+      %a.loc#reviews
+      %h3 评论
+      = render :partial => 'stores/comments'
+    #related-section.section
+      %a.loc#related
+      -unless @store.mingan?
+        %h3 相关
+        -stores = @store.related
+        -if stores.present? 
+          =render :partial => 'stores/index',:locals=>{:stores=>stores}
+          -#= render :partial => 'stores/list_related',:locals=>{:stores=>stores}
+
+  .span1
+
+-content_for :footer do
+  =javascript_tag "convert_shop('#{@store.nick}','show',#{@store.click_url.present?})"
+
+
+
+=debug @store if params[:debug].present?

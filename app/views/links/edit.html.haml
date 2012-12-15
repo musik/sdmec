@@ -1,0 +1,10 @@
+-@col1= true
+%h1 Editing link
+
+%div
+  =@link.data.html_safe
+= render 'form'
+
+= link_to 'Show', @link
+\|
+= link_to 'Back', links_path

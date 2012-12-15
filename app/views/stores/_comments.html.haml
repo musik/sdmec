@@ -1,0 +1,27 @@
+-comments = @store.root_comments.recent.limit(30)
+-if comments.present?
+  %ul.comments
+    -comments.each do |c|
+      %li.comment{:class=>cycle('o','e'),:id=>"comment-#{c.id}"}
+        .author
+          =c.guest_name
+        .comment
+          =simple_format safe_print(sanitize(c.body,:tags=>%w()))
+        .meta
+          -#%span.date=link_to time_tag(c.created_at),c
+          =time_tag(c.created_at)
+-else
+  暂时没有#{@store.title}的评论.
+
+%h4 写下评论
+- comment = @store.root_comments.new
+= simple_form_for(comment) do |f|
+  =f.input :commentable_type,:as=>:hidden
+  =f.input :commentable_id,:as=>:hidden
+  -#=f.input :guest_email
+  -#=f.input :guest_website
+  %p #{@store.title}怎么样?有#{@store.title}优惠券可以分享?
+  =f.input :body,:input_html=>{:class=>"input-xxlarge",:rows=>4},:lable=>'评论'
+  =f.input :guest_name,:required=>true
+  = f.button :submit,'发表评论'
+

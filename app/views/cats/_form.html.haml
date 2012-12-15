@@ -1,0 +1,10 @@
+= simple_form_for(@cat) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :slug
+    = f.input :oid
+
+  .form-actions
+    = f.button :submit

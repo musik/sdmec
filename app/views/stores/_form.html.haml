@@ -1,0 +1,23 @@
+= simple_form_for(@store) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :shop_title
+    = f.input :seller_nick
+    = f.input :seller_id
+    = f.association :city
+    = f.input :seller_credit
+    = f.input :shop_type
+    = f.input :commission_rate
+    = f.input :total_auction
+    = f.input :auction_count
+    = f.input :shop_id
+    = f.input :cid
+    = f.input :pic_path
+    = f.input :created
+    = f.input :delivery_score
+    = f.input :item_score
+    = f.input :service_score
+
+  .form-actions
+    = f.button :submit

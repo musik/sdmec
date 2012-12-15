@@ -1,0 +1,7 @@
+= simple_form_for @topic do |f|
+  = f.error_messages
+  %div
+    = f.input :name
+    = f.input :public
+  %p
+    = f.submit

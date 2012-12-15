@@ -1,0 +1,21 @@
+- title "Tbpage"
+
+%p
+  %strong Name:
+  = @tbpage.name
+%p
+  %strong Slug:
+  = @tbpage.slug
+%p
+  %strong Tburl:
+  = @tbpage.tburl
+%p
+  %strong Last Fetched At:
+  = @tbpage.last_fetched_at
+
+%p
+  = link_to "Edit", edit_tbpage_path(@tbpage)
+  |
+  = link_to "Destroy", @tbpage, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", tbpages_path

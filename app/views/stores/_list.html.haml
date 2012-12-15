@@ -1,0 +1,24 @@
+-stores ||= @stores
+.store_list
+  -i=0
+  -stores.each do |s|
+    .store_il{:id=>"position-#{i}",:class=>s.click_url.present? ? "pro" : 'free'}
+      -i+=1
+      .photo.pull-left
+        =image_tag s.pic_url,:width=>60,:height=>60
+      .details
+        -#.title= link_to s.title,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_action(#{s.sid},_gaq,'#{s.click_url.present? ? 'link' : 'free'}')"
+        .title
+          -if s.click_url.present?
+            .title= link_to s.safe_title,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','shopinlist')"
+          -else
+            .title= s.safe_title
+
+        .summary
+          -if s.city.present?
+            =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
+          =strip_tags(safe_print("#{s.bulletin} #{s.desc}")).truncate 60
+        .meta 
+          =img_credit(s.seller_credit)
+          =link_to s.nick,store_url(s,:subdomain=>s.city_slug),:title=>"点评#{s.title}"
+      .clearfix

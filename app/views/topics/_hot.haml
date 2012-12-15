@@ -1,0 +1,8 @@
+-limit ||= 80
+-cache "hot-topics-#{limit}",:expires_in=>5.minutes do
+  -topics = Topic.fetched.limit(limit).order("volume desc")
+  .topics
+    - for topic in topics
+      = link_to topic.name, topic
+  .clear
+  .more=link_to "更多 &raquo;".html_safe,topics_url

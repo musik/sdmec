@@ -1,0 +1,27 @@
+-items = TaobaoFu::Api.new.get_items_by_keyword(@topic.name)["taobaoke_items_get_response"]
+%p
+  =t('.total_found',:count=>items["total_results"],:name=>@topic.name).html_safe
+-#=debug items["taobaoke_items"]["taobaoke_item"][0]
+-i=0
+-items["taobaoke_items"]["taobaoke_item"].each do |item|
+  -i+=1
+  .item{:class=>i.divmod(4)[1]==1 ? "first" : nil}
+    .photo
+      =link_to(image_tag(item['pic_url'],:alt=>item["title"],:width=>250,:height=>250),item["click_url"],:target=>'_blank')
+    .fn=link_to item["title"].html_safe,item["click_url"].to_rev,:target=>'_blank'
+    .price.left
+      ￥
+      =item["price"]
+    .right
+      =t('.recent_volume',:count=>item["volume"])
+    .clear
+    .shop.left
+      =link_to item["nick"],item["shop_click_url"],:target=>'_blank'
+    .rank.left{:class=>"seller-rank-#{item['seller_credit_score']}"}
+      =item["seller_credit_score"]
+    .location.right
+      =item["item_location"]
+    .clear
+
+
+.clear

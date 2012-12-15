@@ -1,0 +1,16 @@
+- title "Cats"
+
+%table.table
+  %tr
+    %th Name
+    %th parent
+    %th
+  - for r in @categories
+    %tr
+      %td= link_to r.name, r
+      %td=r.parent_name
+      %td
+        = link_to 'Show', r,:class=>"btn"
+        = link_to 'Edit', edit_category_path(r),:class=>"btn"
+
+=paginate @categories

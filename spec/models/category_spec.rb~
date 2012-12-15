@@ -1,0 +1,11 @@
+# -*- encoding : utf-8 -*-
+require 'spec_helper'
+
+describe Category do
+  it "should fetch cats" do
+    # pp Category.import_all
+    #Category.import_from_parent 26
+    c = Category.create :cid=>50022088
+    c.update_items
+  end
+end

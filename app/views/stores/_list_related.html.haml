@@ -1,0 +1,13 @@
+-stores ||= @stores
+.store_list
+  -stores.each do |s|
+    .store_il
+      .photo.pull-left
+        =image_tag s.pic_url,:width=>60,:height=>60
+      .details
+        .title= link_to s.title,s.url,:rel=>"nofollow",:target=>"_blank"
+        .meta
+          =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
+          =img_credit(s.seller_credit)
+          =link_to '评论',store_url(s,:subdomain=>s.city.slug)
+      .clearfix

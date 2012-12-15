@@ -1,0 +1,6 @@
+= stylesheet_link_tag    "application", :media => "all"
+-unless @items.present?
+  =t('topics.items_not_found',:name=>@ad.id).html_safe 
+-else  
+  %h3=t('topics.random') 
+  =render :partial=>'dlist',:locals=>{:items=>@items["taobaoke_items"]["taobaoke_item"].rand_slice(params[:num])}

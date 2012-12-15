@@ -1,0 +1,8 @@
+-cache "views-related-#{topic.id}" do
+  -rs =topic.related(21)
+  -if rs.present?
+    %h3=t('topics.show.other_topics')
+    -rs.each do |t|
+      -next if t.nil?
+      .span2=link_to t.name,url_for(:subdomain=>"www",:id=>t.slug,:page=>nil),:class=>"badge"
+    .clear

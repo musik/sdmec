@@ -1,0 +1,1 @@
+rsync -avzP /home/muzik/as3/tb3 hbhost:~/www/ --exclude "log/" --exclude "tmp/" --exclude "Gemfile.lock" --exclude "*.sql" --exclude "database.yml" --exclude "xcache" --exclude "public/assetsx" --exclude ".git" --exclude ".sett*"  --exclude "development" --exclude "*.kch" --exclude "*~" --exclude "config/environments/production.rb" --exclude "*.pid"

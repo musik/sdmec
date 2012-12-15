@@ -1,0 +1,9 @@
+-stores ||= @stores
+-i=0
+%ul.shoplist
+  -stores.each do |s|
+    %li{:id=>"position-#{i}",:class=>cycle('a','b','c')}
+      -i+=1
+      -#= link_to s.title,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_action(#{s.sid},_gaq,'#{s.click_url.present? ? 'link' : 'free'}')"
+      =link_to s.safe_title.truncate(30),store_url(s,:subdomain=>s.city_slug),:title=>s.title
+.clear      

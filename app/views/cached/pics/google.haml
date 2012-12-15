@@ -1,0 +1,20 @@
+-data = Mzfetcher.read('Pics/google',q)
+-if data.nil?
+  .waiting#pics-google
+-else
+  .pics-g
+    -if data["items"].present?
+      %ul.thumbnails
+        -data["items"].each do |r|
+          %li.thumbnail
+            =link_to image_tag(r["image"]["thumbnailLink"],:height=>80,:alt=>r["title"]),r["image"]["contextLink"],:title=>r["title"],:rel=>"nofollow",:target=>"blank"
+  -# #myCarousel.carousel.slide
+    -# .carousel-inner
+      -# -i=0
+      -# -data["items"].each do |r|
+        -# -i+=1
+        -# .item{:class=>i==1 ? "active" : nil}
+          -# =image_tag r["image"]["thumbnailLink"],:height=>120
+    -# %a.carousel-control.left{:href=>"#myCarousel","data-slide"=>"prev"}
+    -# %a.carousel-control.right{:href=>"#myCarousel","data-slide"=>"next"}
+  -#=debug data["items"][0]

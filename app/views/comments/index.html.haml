@@ -1,0 +1,4 @@
+-title "评论"
+-if @comments
+  = render :partial => 'comments/list'
+  =paginate @comments

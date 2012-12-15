@@ -1,0 +1,25 @@
+-title t('.title',:q=>@q),nil,false
+-meta :keywords,t('.keywords',:q=>@q)
+-meta :description,t('.description',:q=>@q)
+-@hide_top = true
+-@hide_recent = true
+-if @stores.present? 
+  .bdct
+    =bdad 'SD5200-SEARCH-BEFORE，2012-12-5',1153617
+    -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
+.page-headerx
+  %h1= @q
+  %small
+    =js_write(link_to "去淘宝搜索\"#{@q}\"",taokq_url(@q),:onclick=>"track_search_visit('#{@q}',_gaq)",:target=>'_blank',:rel=>"nofollow")
+-#-@col1 = true
+-if @stores.present?  
+  %p.stats
+    搜索"#{@q}"共找到#{@stores.total_entries}条记录，耗时#{(@stores.query_time * 1000).ceil}毫秒
+  = render :partial => 'stores/list'
+  =nofollow_sub paginate @stores
+-else
+  %p.stats
+    没找到任何有关记录.
+
+-content_for :sidebar do
+  %p.description=@meta[:description]

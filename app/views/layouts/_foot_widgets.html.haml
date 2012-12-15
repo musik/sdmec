@@ -1,0 +1,35 @@
+.row
+  .span4
+    %h4 热点搜索
+    -limit ||= 20
+    -exp = Rails.env.production? ? 1.minute : 1.second
+    -cache "hot-huatis-limit-#{limit}",:expires_in=>30.minute do
+      -rs = PageView.get_top_in(Huati).limit(limit)
+      -if rs.present?
+        .topics
+          -rs.each do |r|
+            -t=r.viewable
+            =link_to t.name,t
+          .more=link_to "更多 &raquo;".html_safe,popular_huatis_url
+          .clear
+  .span4
+    %h4 最近访问
+    -cache "visited-huatis-limit-#{limit}",:expires_in=>1.minute do
+      -rs = PageView.get_recent_for(Huati,limit)
+      -if rs.present?
+        .topics
+          -rs.each do |r|
+            -t=r.viewable
+            =link_to t.name,t
+          -#.more=link_to "更多 &raquo;".html_safe,huatis_url
+          .clear
+  .span4
+    %h4 最新收录
+    -cache "recent-huatis-limit-#{limit}",:expires_in=>30.minute do
+      -rs = Huati.published.recent.limit(limit)
+      -if rs.present?
+        .topics
+          -rs.each do |t|
+            =link_to t.name,t
+          .more=link_to "更多 &raquo;".html_safe,huatis_url
+          .clear

@@ -1,0 +1,15 @@
+-#-data = Mzfetcher.get('News/Youdao',q)
+.news-b
+  -if data.present?
+    -data.each do |e|
+      .entry.news{:class=>cycle("odd",'even')}
+        %h4
+          =sanitize e.title
+          =js_external_link_to e.url
+        %p
+          =sanitize(e.description.html_safe)
+          %span.meta
+            =[e.source,time_ago_in_words(e.date) + '前'].join(' - ')
+        -# .clear
+      
+-# =debug data.first.inspect

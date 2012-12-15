@@ -1,0 +1,31 @@
+- title t('.title',:name=>@topic.name,:city=>@city.name),@city.name + @topic.name
+
+-meta :keywords,t('.keywords',:name=>@topic.name,:city=>@city.name)
+-meta :description,t('.description',:name=>@topic.name,:city=>@city.name)
+
+=render :partial=>'/topics/related',:locals=>{:topic=>@topic} if APP_CONFIG["enable_sphinx"]
+-# =debug @items
+-unless @items.present? # and !@items["total_results"].to_i.zero?
+  -if @items.nil?
+    #waiting
+      =t('topics.show.loading',:name=>@topic.name).html_safe
+  -else
+    =t('.items_not_found',:name=>@topic.name,:city=>@city.name).html_safe
+    -if @nitems.present? and @nitems["taobaoke_items"].present?
+      %p=t('.total_found',:count=>@nitems["total_results"],:name=>@topic.name,:city=>@parent_city.name).html_safe
+      =render :partial=>'/topics/list',:locals=>{:items=>resort_items(@nitems)}
+-else
+  %p
+    =t(".total_found#{@replaced ? '_replaced' : ''}",:count=>@items["total_results"],:name=>@topic.name,:city=>@city.name).html_safe
+  =render :partial=>'/topics/list',:locals=>{ :items=>resort_items(@items)}
+.btn-group
+  =link_to t('topics.show.more_results',:name=>@topic.name).html_safe,taokq_url(@topic.name),:target=>'_blank',:rel=>'nofollow',:class=>"btn btn-success btn-large"
+
+
+%p
+  =link_to 'edit',edit_topic_path(@topic) if can? :edit,@topic
+
+
+=render :partial=>'/topics/other_cities',:locals=>{:topic=>@topic}
+%h3=t('.intro',:name=>@topic.name,:city=>@city.name)
+%p=t('.description2',:name=>@topic.name,:city=>@city.name)

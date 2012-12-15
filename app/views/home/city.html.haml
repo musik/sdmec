@@ -1,0 +1,28 @@
+- title t('city.home.title',:city=>@city.name),nil,false
+-meta :keywords,t('city.home.keywords',:city=>@city.name)
+-meta :description,t('city.home.description',:city=>@city.name)
+-@hide_top = true
+.bdct
+  -#=sogou 85072,500,200
+  -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
+  =bdad 'SD5200-CITY-BEFORE，2012-12-5',1153604
+  -#=javascript_tag 'BAIDU_CLB_fillSlot("484908");'
+%h2="#{@city.name}淘宝店铺"
+= render :partial => 'stores/list'
+-#= render :partial => 'categories/hlist'
+        
+=link_to "更多",top_stores_url(:anchor=>"position-11")
+        
+-content_for :sidebar do
+  %h1=t('city.home.header',:city=>@city.name)
+  %p.description
+    =t('city.home.description',:city=>@city.name).html_safe
+
+-content_for :links do
+  -citylink=city_link @city.name
+  -if citylink
+    %div
+      友情链接
+      =link_to citylink[0],citylink[1],:target=>"_blank"
+-content_for :footer do
+  -javascript_tag 'appendFull()' if Rails.env.production?

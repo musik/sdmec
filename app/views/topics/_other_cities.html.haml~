@@ -1,0 +1,12 @@
+-# -rs = City.others(topic,18)
+-if @city.present?
+  -rs=@city.children_or_siblings
+-else  
+  -rs = City.cached_roots
+-if rs.present?
+  %h3=t('topics.show.other_cities',:name=>topic.name)
+  -rel = topic.id.nil? ? "nofollow" : nil
+  %ul
+    -rs.each do |c|
+      %li=link_to "#{c.name}#{topic.name}",url_for(:subdomain=>c.slug,:page=>nil),:title=>t('.wheretobuy',:city=>c.name,:name=>topic.name),:rel => rel
+  .clear

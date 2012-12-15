@@ -1,0 +1,33 @@
+var imgSrc1:media=0;//图1
+var imgLink1:link=0;//链接
+var imgSrc2:media=0;//图2
+var imgLink2:link=0;//链接
+var imgSrc3:media=0;//图3
+var imgLink3:link=0;//链接
+var imgSrc4:media=0;//图4
+var imgLink4:link=0;//链接
+var imgSrc5:media=0;//图5
+var imgLink5:link=0;//链接
+var imgSrc6:media=0;//图6
+var imgLink6:link=0;//链接
+/**/
+<style>
+.muzik_photos{
+  width: 960px;  
+}
+.muzik_photos a{
+  float:left;
+}
+.muzik_photos a.first{
+  margin-left:0;
+}
+</style>
+<div class="muzik_photos">
+<a href="${imgLink1}" class="first"><img src="${imgSrc1}_160x160.jpg" width="160" height="160" /></a>
+<a href="${imgLink2}"><img src="${imgSrc2}_160x160.jpg" width="160" height="160" /></a>
+<a href="${imgLink3}"><img src="${imgSrc3}_160x160.jpg" width="160" height="160" /></a>
+<a href="${imgLink3}"><img src="${imgSrc4}_160x160.jpg" width="160" height="160" /></a>
+<a href="${imgLink3}"><img src="${imgSrc5}_160x160.jpg" width="160" height="160" /></a>
+<a href="${imgLink3}"><img src="${imgSrc6}_160x160.jpg" width="160" height="160" /></a>
+</div>
+<div style="clear:both"></div>

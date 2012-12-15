@@ -1,0 +1,17 @@
+-cats = Category.display_with_priority.roots.includes(:children_displayed).all
+-childless_cats = cats.select{|c| !c.children_displayed.present?}
+.childless
+  -childless_cats.each do |c|
+    =link_to c.nick,c
+-cats = cats - childless_cats
+.catalog.row-fluid
+  -cats.each do |rcat|
+    .span6{:class=>cycle('odd','even')}
+      %strong=link_to rcat.name,rcat
+      %p.cats
+        -len = 0
+        -rcat.children_displayed.slice(0,9).each do |c|
+          -len += (c.name.length + 1)
+          -break if len > 56
+          =link_to c.name,c
+

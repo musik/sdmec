@@ -1,0 +1,14 @@
+-title t('.title'),nil,false
+-@col1 = true
+-@hide_top = true
+-#.bdc2
+  -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
+= render :partial => 'cities/less'
+.clear
+%h2 最新收录
+-cache "home_recent",:expires_in=>1.minutes do
+  =render :partial=>"stores/index",:locals=>{:stores=>@stores}
+
+.clear
+-@hide_cities = true
+        

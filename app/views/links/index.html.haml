@@ -1,0 +1,22 @@
+%h1 Listing links
+
+%table.table
+  %tr
+    %th Data
+    %th Name
+    %th
+    %th
+
+  - @links.each do |link|
+    %tr
+      %td= pp_link link.data
+      %td= link.name
+      %td= link.data.split("\r\n").size
+      %td
+        = link_to 'Show', link
+        = link_to 'Edit', edit_link_path(link)
+        = link_to 'Destroy', link, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Link', new_link_path

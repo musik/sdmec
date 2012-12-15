@@ -1,0 +1,7 @@
+-rs = tree[id]
+-if rs.present?
+  %ul
+    -rs.each do |r|
+      %li
+        =link_to r.name,r
+        =render :partial=>"leaf",:locals=>{:tree=>tree,:id=>r.id}

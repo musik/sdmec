@@ -1,0 +1,8 @@
+-title @title
+-logger.debug @category.to_yaml
+- @category.children.each do |c|
+  =link_to c.name,c
+-cache [@category.name,"items"],:expires_in=>1.day do
+  -if @items.present?
+    =paginate @items
+    =render :partial=>"items",:locals=>{:items=>@items}

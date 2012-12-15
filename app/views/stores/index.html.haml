@@ -1,0 +1,8 @@
+-title @title
+-@col1 = true
+-if @max_page
+  =paginate @stores,:total_pages=>@max_page,:window=>(@max_page < 11 ? @max_page : nil)
+-else
+  =paginate @stores,:window=>10
+= render :partial => 'index'
+

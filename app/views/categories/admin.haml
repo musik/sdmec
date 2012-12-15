@@ -1,0 +1,21 @@
+- title @title ||  "Cats"
+%p
+=paginate @categories
+%table.table.table-bordered
+  %tr
+    %th{:colspan=>3}
+    %th 优先
+    %th 排序
+  - for r in @categories
+    %tr
+      %td{:class=>r.display? ? "display" : "hid"}= link_to r.name, r,:target=>"_blank"
+      %td=r.slug
+      %td=r.nicename
+      %td=r.priority
+      %td=r.sort_order
+      -#%td=r.parent_name
+      %td
+        = link_to 'children', admin_categories_path(:parent_id=>r.id),:class=>"btn btn-mini" unless r.leaf?
+        = link_to 'E', edit_category_path(r),:class=>"btn btn-mini"
+
+=paginate @categories

@@ -1,0 +1,12 @@
+- title t('.title')
+
+-#= page_entries_info @topics, :entry_name => 'topic'
+.topics
+  - for pv in @topics
+    -topic = pv.viewable
+    -next if topic.nil?
+    = link_to topic.name, topic
+
+.clear
+
+=paginate @topics,:window=>params[:page]==1 ? 20 : 9

@@ -1,0 +1,9 @@
+-limit ||= 20
+-cache "hot-cities-limit-#{limit}",:expires=>21.hours do
+  -rs = PageView.get_top_in(City).limit(limit)
+  -if rs.present?
+    .topics
+      -rs.each do |c|
+        -r=c.viewable
+        =link_to r.name,root_url(:subdomain=>r.slug),:title=>t('city.title',:name=>r.name)
+      .clear

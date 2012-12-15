@@ -1,0 +1,35 @@
+=debug items.first if params[:debug]
+-i=0
+-items.each do |item|
+  -i+=1
+  .item{:class=>i.divmod(4)[1]==1 ? "first" : nil}
+    -begin
+      .inner
+        .photo
+          -# =link_to(image_tag("#{item['pic_url']}_b.jpg",:alt=>item["title"].gsub(/<.+?>/,''),:width=>220,:height=>220),item["click_url"],:target=>'_blank')
+          =js_link_to(image_tag("#{item['pic_url']}_160x160.jpg",:alt=>item["title"].gsub(/<.+?>/,'')),item["click_url"]) rescue nil
+        .fn=js_link_to item["title"].html_safe,item["click_url"]
+        .price.left
+          ￥
+          =item["price"]
+        .right
+          .label=t('topics.recent_volume',:count=>item["volume"])
+        -# .location.right
+          -# =item["item_location"]
+        .clear
+        .shop.left
+          =js_link_to item["nick"],item["shop_click_url"]
+        .rank.right{:class=>"seller-rank-#{item['seller_credit_score']}"}
+          =item["seller_credit_score"]
+        .clear
+        -if params[:debug]
+          .debug
+            总佣金
+            =item["commission_volume"]
+            单件
+            =item["commission"]
+    -rescue Exception=>e
+      -logger.info e
+      -logger.info item
+      -logger.info request.url
+.clear

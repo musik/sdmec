@@ -1,0 +1,8 @@
+=link_to "金皇冠店铺",jinhuangguan_stores_url
+-(1..5).to_a.reverse.each do |i| 
+  =link_to "#{i}皇冠",dengji_stores_url(:dengji=>i+10)
+-(1..5).to_a.reverse.each do |i| 
+  =link_to "#{i}钻",dengji_stores_url(:dengji=>i+5)
+-(1..5).to_a.reverse.each do |i| 
+  =link_to "#{i}心",dengji_stores_url(:dengji=>i)
+-@creditmap_loaded = true  

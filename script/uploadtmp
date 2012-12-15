@@ -1,0 +1,3 @@
+rsync -avzP /home/muzik/as3/tb3/tmp/News grt:/data/www/tb3/tmp/
+rsync -avzP /home/muzik/as3/tb3/tmp/Pics grt:/data/www/tb3/tmp/
+rsync -avzP /home/muzik/as3/tb3/tmp/Images grt:/data/www/tb3/tmp/

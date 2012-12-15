@@ -1,0 +1,20 @@
+- title t('city.home.title',:city=>@city.name),nil,false
+-meta :keywords,t('city.home.keywords',:city=>@city.name)
+-meta :description,t('city.home.description',:city=>@city.name)
+
+.hero-unit
+  %h1=t('city.home.header',:city=>@city.name)
+  %p
+    =t('city.home.description',:city=>@city.name).html_safe
+  -if @cities.present?
+    %p
+      -@cities.each do |r|
+        =link_to r.name,root_url(:subdomain=>r.slug)
+
+=render :partial=>"categories/items",:locals=>{:items=>@items}
+
+-cache "home-lists",:expires_in=>1.hour do
+  -@items = Tbpage.all_items
+  -@items.each do |tp,items|
+    %h3=link_to tp.name,page_url(:id=>tp.slug)
+    =render :partial=>'/home/list',:locals=>{:items=>items.slice(0,8)}  

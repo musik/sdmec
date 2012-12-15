@@ -1,0 +1,9 @@
+-data = Mzfetcher.read('Pics/bing',q)
+-if data.nil?
+  .waiting#pics-bing
+-else
+  .pics-b
+    %ul.thumbnails
+      -data.each do |r|
+        %li.thumbnail
+          =link_to image_tag(r.thumbnail.media_url,:height=>80,:alt=>r.title),r.source_url,:title=>r.title,:rel=>"nofollow",:target=>"blank"

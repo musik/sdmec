@@ -1,0 +1,4 @@
+kill -QUIT `cat ./tmp/resque_shop.pid`
+#kill -QUIT `cat ./tmp/resque_search.pid`
+#kill -QUIT `cat ./tmp/resque_scd.pid`
+kill -QUIT `cat ./tmp/resque_delta.pid`

@@ -1,0 +1,23 @@
+- title "Tbpages"
+
+%table.table
+  %tr
+    %th Name
+    %th Slug
+    %th Tagid
+    %th Tburl
+    %th Last fetched at
+    %th
+  - for tbpage in @tbpages
+    %tr
+      %td= link_to tbpage.name, page_url(:id=>tbpage.slug)
+      %td= tbpage.slug
+      %td= tbpage.tagid
+      %td= tbpage.tburl
+      %td= tbpage.last_fetched_at
+      %td
+        = link_to 'Show', tbpage,:class=>"btn"
+        = link_to 'Edit', edit_tbpage_path(tbpage),:class=>"btn"
+        = link_to 'Destroy', tbpage, :confirm => 'Are you sure?', :method => :delete,:class=>"btn"
+
+%p= link_to "New Tbpage", new_tbpage_path

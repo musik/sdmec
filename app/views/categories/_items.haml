@@ -1,0 +1,13 @@
+.itemxs
+  -items.each do |item|
+    .itemx
+      .photo
+        %a{:href=>item_go_url(item.num_iid,:subdomain=>"www"),:onclick=>"_hmt.push(['_trackEvent', 'item', 'click', '#{item.num_iid}'])",:rel=>"nofollow",:target=>"_blank",:title=>item.title}
+          %img{:src=>item.photo_url,:width=>160,:height=>160,:alt=>item.title}
+          
+      .ix-bottom
+        .price
+          .value=item.price
+          元
+        %a{:href=>item_go_url(item.num_iid,:subdomain=>"www"),:onclick=>"_hmt.push(['_trackEvent', 'item', 'click', '#{item.num_iid}'])",:rel=>"nofollow",:target=>"_blank",:title=>item.title}=item.title
+.clearfix

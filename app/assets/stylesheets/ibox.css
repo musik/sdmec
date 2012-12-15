@@ -1,0 +1,27 @@
+#images{
+    padding:30px;
+}
+#images img{
+    float:left;
+    height:100px;
+    margin:5px;
+    padding:0px;
+}
+#ibox{
+    position:absolute;
+    overflow-y:none;
+    background:#fff;
+    border:1px solid #ccc;
+    z-index:1001;
+    display:none;
+    padding:4px;
+    -webkit-box-shadow: 0px 0px 6px 0px #bbb;
+    -moz-box-shadow: 0px 0px 6px 0px #bbb;
+    box-shadow: 0px 0px 6px 0px #bbb; 
+}
+#ibox img{
+    border:1px solid #444;
+}
+#ibox br{
+    clear:both;
+}​

@@ -1,0 +1,10 @@
+- title t('.title',:city=>@city.name)
+
+-#= page_entries_info @topics, :entry_name => 'topic'
+.topics
+  - for topic in @topics
+    = link_to topic.name, topic
+
+.clear
+
+=paginate @pvs,:window=>params[:page]==1 ? 20 : 9

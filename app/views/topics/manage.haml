@@ -1,0 +1,19 @@
+=paginate @topics
+=@topics.total_count
+%table.table.table-bordered.table-topics
+  %tr
+    %th.name Name
+    %th.slug slug
+    %th.created Created
+    %th.actions
+  -@topics.each do |t|
+    %tr{:class=>t.public? ? "public" : "unpublic",:id=>"topic-#{t.id}"}
+      %td=t.name
+      %td=t.slug
+      %td=t.created_at
+      %td
+        .btn-group
+          =link_to 'e',edit_topic_url(t),:class=>"btn btn-small"
+          =link_to 'p',publish_topic_url(t,:format=>:js), :remote => true,:class=>"btn btn-warning btn-small"
+          =link_to 'd',topic_url(t,:format=>:js), :remote => true, :method => :delete,:class=>"btn btn-danger btn-small"
+=paginate @topics

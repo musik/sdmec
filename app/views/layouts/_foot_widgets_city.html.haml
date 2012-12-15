@@ -1,0 +1,27 @@
+-city=@city
+.row
+  .span4
+    -limit ||= 20
+    -exp = Rails.env.production? ? 30.minute : 1.second
+    -cache "hot-city-#{city.id}-topics-limit-#{limit}",:expires_in=>exp do
+      -rs = Tc.top_topics(city.id,limit)
+      -if rs.present?
+        %h4 热点搜索
+        .topics
+          -rs.each do |t|
+            =link_to t.name,t
+          .more=link_to "更多 &raquo;".html_safe,popular_topics_url
+          .clear
+  .span4
+    -cache "visited-city-#{city.id}-topics-limit-#{limit}",:expires_in=>3.minute do
+      -rs = Tc.recent_topics(city.id,limit)
+      -if rs.present?
+        %h4 最近访问
+        .topics
+          -rs.each do |t|
+            =link_to t.name,t
+          -#.more=link_to "更多 &raquo;".html_safe,huatis_url
+          .clear
+  .span4
+    %h4 热点城市
+    =render 'cities/hot'
