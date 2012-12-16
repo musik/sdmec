@@ -1,4 +1,8 @@
 require 'redis/model'
+def logm ob
+  Rails.logger ob if Rails.env.test?
+  pp ob if Rails.env.test?
+end
   def keep_time n=1,&block
     s = Time.now
     yield

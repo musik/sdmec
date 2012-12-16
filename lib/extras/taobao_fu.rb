@@ -29,7 +29,7 @@ module TaobaoFu
       apply_settings
     end
     def change_settings
-      @settings = @all_settings[[Rails.env,"key2"].sample]
+      #@settings = @all_settings[[Rails.env,"key2"].sample]
     end
 
     def apply_settings
@@ -280,7 +280,12 @@ module TaobaoFu
       args =  {
         :cid => cid, 
         :page_no => 1,
-        :fields => 'shop_id,seller_nick,shop_title,user_id,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count'
+        :fields => 'shop_id,seller_nick,shop_title,user_id,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count',
+        :sort_field => 'total_auction',
+        :sort_type => 'desc',
+        :page_size => 100,
+        :outer_code => 'sdmec'
+
       }
       args.merge! options
       args[:method] = 'taobao.taobaoke.shops.get'

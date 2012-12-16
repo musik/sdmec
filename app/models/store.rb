@@ -206,15 +206,25 @@ class Store < ActiveRecord::Base
     end
     def run
       api = TaobaoFu::Api.new
-      #step 1
       cats = TaobaoFu.fetch :method=>'taobao.shopcats.list.get',:fields=>'cid,name'
       cats["shop_cats"]["shop_cat"].each do |c|
         Resque.enqueue(TaokeShop,c["cid"])
       end
     end
-    def fetch_by_cid cid,page=1,run_next=true
+    def count_cats
+      api = TaobaoFu::Api.new
+      cats = TaobaoFu.fetch :method=>'taobao.shopcats.list.get',:fields=>'cid,name'
+      data = []
+      cats["shop_cats"]["shop_cat"].each do |c|
+        results = api.taobaoke_shops_get c["cid"]
+        data << ["#{c['cid']}|#{c['name']}",results["total_results"]]
+      end
+      data.sort{|a,b| a[1] <=> b[1]}
+    end
+    def fetch_by_cid cid,page=1,run_next=true,options={}
       return if page > 100
-      results = api.taobaoke_shops_get cid,:page_no=>page
+      options[:page_no] = page
+      results = api.taobaoke_shops_get cid,options.to_options
 
       if results["total_results"] > 0
         shops = results["taobaoke_shops"]["taobaoke_shop"]
@@ -222,11 +232,35 @@ class Store < ActiveRecord::Base
           Store.import_from_taoke s
         end
       end
-      Resque.enqueue(TaokeShop,cid,page.succ) if run_next and results["total_results"].zero? or results["total_results"] > page * 40
+      if page == 1 and run_next and results["total_results"] > 20000
+        extend_options = options.has_key?(:start_credit) ? rate_options : credits_options
+        extend_options.each do |opts|
+          Resque.enqueue(TaokeShop,cid,1,run_next,options.merge(opts))
+        end
+        return
+      end
+      Resque.enqueue(TaokeShop,cid,page.succ,run_next,options) if run_next and results["total_results"].zero? or results["total_results"] > page * 40
     end
-    def self.perform cid,page=1,run_next=true
+    def credits_options
+      h = []
+      %w(heart diamond crown).each do |str|
+        for i in 1..5 
+          h << {:start_credit => "#{i}#{str}",:end_credit=>"#{i}#{str}"}
+        end
+      end
+      h << {:start_credit => "1goldencrown",:end_credit=>"5goldencrown"}
+      h
+    end
+    def rate_options
+      [
+        {:start_commissionrate => 50,:end_commissionrate => 499},
+        {:start_commissionrate => 500,:end_commissionrate => 500},
+        {:start_commissionrate => 501,:end_commissionrate => 5000}
+      ]
+    end
+    def self.perform cid,page=1,run_next=true,options={}
       keep_time 0.6 do
-        Store::TaokeShop.new.fetch_by_cid cid,page,run_next
+        Store::TaokeShop.new.fetch_by_cid cid,page,run_next,options
       end
     end
   end

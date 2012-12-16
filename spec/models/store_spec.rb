@@ -27,8 +27,12 @@ describe Store do
     #pp s
     #s.import_comments 
     #Store::TaokeShop.new.run
-    #Store::TaokeShop.new.fetch_by_cid 1055,39
-    #Store::TaokeShop.new.fetch_by_cid 1055,38
+    #Store::TaokeShop.new.fetch_by_cid 14
+    Store::TaokeShop.new.fetch_by_cid 14,1,true,:start_credit=>'1diamond',:end_credit=>'1diamond' 
+    #pp Store::TaokeShop.new.count_cats
+    #pp Store::TaokeShop.new.credits_options
+    #pp Store::TaokeShop.new.rate_options
+
   end     
   it "should fetch user" do
     # Store::Taobao.new.fetch_user "27984093"

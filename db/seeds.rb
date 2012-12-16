@@ -31,6 +31,7 @@ Topic.clean_percents
 Topic.init_public
 end
 def init_stores
-  Store::Jie.new.run_all_cities
+  #Store::Jie.new.run_all_cities
+  Store::TaokeShop.new.run
 end
 init_stores
