@@ -7,6 +7,15 @@
         =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝网"
 %p.pagin
   =link_to "店铺",stores_url
+  -if @city
+    =link_to "#{@city.name}名店",top_stores_url
+    -if @city.name.length < 5
+      -Cat.nav.slice(0,6).each do |c|
+        =link_to c.name,cat_city_url(c,:subdomain=>@city.slug),:title=>"#{@city.name}淘宝#{c.name}"
+  -else
+    =link_to "名店",top_stores_url
+    -Cat.nav.slice(0,6).each do |c|
+      =link_to c.name,tbcat_url(c,:subdomain=>"www"),:title=>"淘宝#{c.name}"
   =render "stores/creditmap" unless @creditmap_loaded
   -if is_home?
     -cache 'shops-paging',:expires_in => 1.hour do
