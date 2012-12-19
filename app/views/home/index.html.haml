@@ -4,10 +4,14 @@
 -#.bdc2
   -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
 .share  
-%div  
-  %h2.inline 金冠名店推荐
-  %small
-    =render :partial=>"stores/creditmap"
+-if @sites.present?
+  .sites.alert.alert-info
+    小站:
+    -@sites.each do |s|
+      =link_to s.name,root_url(:subdomain=>s.slug)
+%h2.inline 金冠名店推荐
+%small
+  =render :partial=>"stores/creditmap"
 -cache "home_popular",:expires_in=>1.day do
   =render :partial=>"stores/pindex",:locals=>{:stores=>@stores}
 %h2 最新收录

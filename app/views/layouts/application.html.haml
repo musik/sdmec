@@ -22,8 +22,6 @@
           = render 'layouts/navigation'
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
-      -unless @hide_bread
-        .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
       -unless @hide_fullad
         .double11#full1
           .container
@@ -32,6 +30,8 @@
       .container.relative
         =yield :full
         .content
+          -unless @hide_bread
+            .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
           -if @shout
             #shout
           -#= render 'layouts/messages'
@@ -54,10 +54,9 @@
                 =render "layouts/primary"
         =yield :affix
     .belt.container                
-      -if is_mainsite?
-        = render :partial => 'layouts/belt' unless @hide_belt
-        -if is_home?
-          #links=render 'layouts/links'
+      = render :partial => 'layouts/belt' unless @hide_belt
+      -if is_mainsite? and is_home?
+        #links=render 'layouts/links'
       =yield :links
     %footer
       .container

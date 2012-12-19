@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   def index
     @stores = Store.credit_desc.fullscan.search :include=>[:city],:per_page=>100
     @stores_recent = Store.srecent.fullscan.search :include=>[:city],:per_page=>51
+    @sites = Site.limit(30)
     @hide_bread = true
   end
   def xtao

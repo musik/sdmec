@@ -16,7 +16,9 @@
     .pull-left
       %h1.shop-name.inline=@store.safe_title
       -if s.seller_credit
-        =img_credit(s.seller_credit)
+        .rank.pull-left.rank-27{:class=>"seller-rank-#{s.seller_credit}"}
+          信誉等级: #{s.seller_credit}
+        -#=img_credit(s.seller_credit)
       .share
 
     .link.pull-left

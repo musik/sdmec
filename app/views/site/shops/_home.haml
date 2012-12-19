@@ -1,5 +1,6 @@
--ids = site.get_option("home_shop_ids").slice(0,15)
--shops = Store.all_by_ids(ids)
+-ids = site.get_option("home_shop_ids")
+-if ids.present?  
+  -shops = Store.all_by_ids(ids.slice(0,15))
 -unless shops.present?
   暂无记录
 -else  

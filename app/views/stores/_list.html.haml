@@ -19,6 +19,9 @@
             =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
           =strip_tags(safe_print("#{s.bulletin} #{s.desc}")).truncate 60
         .meta 
-          =img_credit(s.seller_credit)
+          -#=img_credit(s.seller_credit)
+          -if s.seller_credit
+            .rank.pull-left.rank-27{:class=>"seller-rank-#{s.seller_credit}"}
+              信誉等级: #{s.seller_credit}
           =link_to s.nick,store_url(s,:subdomain=>s.city_slug),:title=>"点评#{s.title}"
       .clearfix

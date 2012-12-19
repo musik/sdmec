@@ -5,6 +5,8 @@
   -stores.each do |s|
     %li{:id=>"position-#{i}",:class=>cycle('a','b','c','d','e')}
       -i+=1
-      =img_credit(s.seller_credit)
+      -#=img_credit(s.seller_credit)
+      .pull-left.rank{:class=>"seller-rank-#{s.seller_credit}"}
+        信誉等级: #{s.seller_credit}
       =link_to s.nick.truncate(13),store_url(s,:subdomain=>s.city_slug),:title=>s.title
 .clear      

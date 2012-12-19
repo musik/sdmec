@@ -8,7 +8,7 @@ class Site < ActiveRecord::Base
 
   attr_accessible :description, :name, :slug, :slogan
   validates_presence_of :name,:slug
-  validates_length_of :slug,:in=>6..16
+  validates_length_of :slug,:in=>4..16
 
 
   def add_item data
