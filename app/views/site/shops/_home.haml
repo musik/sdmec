@@ -1,0 +1,24 @@
+-ids = site.get_option("home_shop_ids").slice(0,15)
+-shops = Store.all_by_ids(ids)
+-unless shops.present?
+  暂无记录
+-else  
+  %ul.shops
+    -shops.each do |shop|
+      %li{:class=>cycle('a','b'),:id=>"shop-#{shop.id}"}
+        .photo
+          =image_tag  shop.pic_url,:width=>40,:height=>40
+          -#=image_tag  'http://www.sdmec.com/assets/loading.gif',:'data-original'=>"#{shop.pic_url}",:class=>'lazy',:width=>40,:height=>40
+        .hd
+          #{link_to shop.nick,store_url(shop,:subdomain=>shop.city_slug)}
+          .rank{:class=>"seller-rank-#{shop.seller_credit}"}
+            信誉等级: #{shop.seller_credit}
+        .clearfix
+        .title=link_to shop.title.html_safe,shop.url,:rel=>"nofollow",:target=>'_blank',:id=>"link-#{shop.id}",:title=>shop.title
+        -#=javascript_tag "str='#{item.click_url.reverse}'.split('').reverse().join('');document.getElementById('link-#{item.num_iid}').href=str;document.getElementById('item-#{item.num_iid}').onclick=function(){document.getElementById('link-#{item.num_iid}').click()}"
+
+    .clearfix
+
+  -#-content_for :footer do
+    -#=javascript_include_tag 'http://www.sdmec.com/assets/jquery.lazyload.js'
+    -#=javascript_tag "$('img.lazy').lazyload()"

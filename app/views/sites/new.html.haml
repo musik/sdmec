@@ -1,0 +1,16 @@
+-title "新建小站"
+
+-@col1 = true
+-@hide_fullad = true
+= render 'layouts/messages'
+-if can? :create,Site
+  = render 'form'
+-else
+  .alert.alert-warning
+    你要找的小站暂不存在.
+  -#= render :partial => "devise/shared/links",:locals=>{:resource_name=>'user'}
+  -#.btn-groupx
+    -#= link_to('登录', new_user_session_url(:subdomain=>"www"),:rel=>"nofollow",:class=>"btn btn-info")
+    -#= link_to('快速注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow",:class=>"btn btn-success")
+
+= link_to '返回', sites_path

@@ -1,4 +1,4 @@
-$('#items').next().replaceWith('<%=escape_javascript(render :partial=>"stores/items",:locals=>{:items=>@store.cached_items})%>');
+$('#items').next().html('<%=escape_javascript(render :partial=>"stores/items",:locals=>{:items=>@store.cached_items})%>');
 <%if @store.cached_items.present?%>
 $.getScript('http://www.sdmec.com/assets/jquery.lazyload.js',function(){
   $('img.lazy').lazyload()

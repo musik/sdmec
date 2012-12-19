@@ -12,31 +12,21 @@
     = csrf_meta_tags
     = yield(:head)
     =javascript_include_tag 'http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=12060575' unless @no_xtao
-    =javascript_include_tag "http://cbjs.baidu.com/js/m.js" unless @nocbjs
+    -#=javascript_include_tag "http://cbjs.baidu.com/js/m.js" unless @nocbjs
     =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
   %body{:class=>@bodyname}
     %header.navbar.navbar-fixed-top
       %nav.navbar-inner
+        =render 'layouts/unav'
         .container
           = render 'layouts/navigation'
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
       -unless @hide_bread
         .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
-      .double11#full1
-        .container
-
-        -#=javascript_include_tag 'http://cbjs.baidu.com/js/o.js'
-        -#-unless @nomingdian
-          -##mingdian
-        -#=javascript_tag 'BAIDU_CLB_fillSlot("504553");'
-        -#.clearfix
-        -#=baidu_clb 503903
-      -#.double12
-        -#.pull-left.l11
-          -#=javascript_tag 'BAIDU_CLB_fillSlot("503090");'
-        -#.pull-right.r11
-          -#=javascript_tag 'BAIDU_CLB_fillSlot("503096");'
+      -unless @hide_fullad
+        .double11#full1
+          .container
       .clearfix
 
       .container.relative
@@ -64,9 +54,10 @@
                 =render "layouts/primary"
         =yield :affix
     .belt.container                
-      = render :partial => 'layouts/belt'
-      -if request.subdomain == 'www' and is_home?
-        #links=render 'layouts/links'
+      -if is_mainsite?
+        = render :partial => 'layouts/belt' unless @hide_belt
+        -if is_home?
+          #links=render 'layouts/links'
       =yield :links
     %footer
       .container
@@ -82,7 +73,7 @@
     = javascript_include_tag "application"
     =render "layouts/iefixjs"
     =yield :footer
-    =javascript_tag "link_load('#mingdian',1);"
+    -#=javascript_tag "link_load('#mingdian',1);"
     -#-unless @hide_xuanfu
       -#=bdad "悬浮，120*120，创建于2012-11-9",1118592,'f'
     .hidden

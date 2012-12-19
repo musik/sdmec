@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
    :delist_time, :desc, :detail_url, :express_fee, :item_imgs, :item_location,
    :location_city, :location_state, :nick, :num_iid, :pic_url, :price, :sell_promise,
    :seller_credit_score, :shop_click_url, :title, :volume,:detail_updated_at
+  scope :top,order("commission_volume desc")
   def import_detail data
     loc = data["item"].delete "location"
     loc.each do |k,v|
@@ -15,7 +16,7 @@ class Item < ActiveRecord::Base
   def update_detail
     api = TaobaoFu::Api.new
     logger.debug num_iid
-    rs2 = api.taoke_items_detail_get num_iid
+    rs2 = api.taoke_items_detail_get num_iid,:outer_code=>'site'
     logger.debug rs2.inspect
     import_detail rs2["taobaoke_item_details"]["taobaoke_item_detail"].first
   end
@@ -34,6 +35,11 @@ class Item < ActiveRecord::Base
     end
     rs = api.taoke_get_items_by_cid(cid,options)
     import_taoke_results rs,cid
+  end
+  def import_by_num_iid iid
+    item = Item.find_or_create_by_num_iid iid
+    item.update_detail
+    item
   end
   def import_by_keyword str
     api = TaobaoFu::Api.new
@@ -56,7 +62,6 @@ class Item < ActiveRecord::Base
     data["num_iid"] = data["num_iid"].to_s
     e = where(:num_iid=>data["num_iid"]).first
     e.present? ? e.update_attributes(data) : e=create(data)
-    #e.delay.
     e
   end
  end

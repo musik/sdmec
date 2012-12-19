@@ -103,3 +103,4 @@ gem 'redis-objects', :require => 'redis/objects'
 gem 'ohm'
 
 gem 'acts-as-taggable-on'
+#gem 'best_in_place'

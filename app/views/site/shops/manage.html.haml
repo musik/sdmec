@@ -1,0 +1,16 @@
+-title "管理店铺"
+-@col1= true
+
+%h3 添加店铺
+
+%form.form-search{:action=>apisearch_shops_url(),:method=>'get',:'data-remote'=>true}
+  -a={:id=>'iq',:type=>"text",:name=>"iq",:value=>@site.name}
+  .input-append
+    %input.search-query.input-medium{a}
+    %button.btn{:type=>"submit"} 搜索
+#api-results    
+%h2 当前店铺
+.row
+  .span12
+    #current-shops  
+      = render :partial => 'manage_list',:locals=>{:results=>@stores}

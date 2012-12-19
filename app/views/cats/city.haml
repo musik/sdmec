@@ -15,6 +15,8 @@
 -else    
   %p.stats
     搜索"#{@city.name}#{@cat.name}"共找到#{@stores.total_entries}条记录，耗时#{(@stores.query_time * 1000).ceil}毫秒
+.share.pull-right
+.clear  
 = render :partial => 'stores/list'
 -if @stores && !@instead
   =nofollow_sub paginate @stores

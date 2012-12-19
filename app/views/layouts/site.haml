@@ -1,0 +1,78 @@
+-_set_xtao_cookie if @xtao
+='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.html_safe
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    ='<meta name="baidu-site-verification" content="me8boZYUw0ffz4s0" />'.html_safe
+    %title= content_for?(:title) ? yield(:title) : "Tb"
+    = stylesheet_link_tag    "site", :media => "all"
+    = stylesheet_link_tag    "themes/default", :media => "all"
+
+    = render :partial=>'layouts/iefix'
+    = csrf_meta_tags
+    = yield(:head)
+    =javascript_include_tag 'http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=12060575' unless @no_xtao
+    =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
+  %body{:class=>@bodyname}
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      %nav.navbar-inner
+        =render 'layouts/unav'
+        .container
+          = render 'layouts/site-navigation'
+      -# -if request.url != root_url(:subdomain=>'www')
+    #main{:role => "main"}
+      .container.relative
+        .content
+          .site-header
+            .name=link_to @site.name,root_url(:subdomain=>@site.slug)
+            %p= @site.slogan
+          -if user_signed_in? and can? :settings,@site
+            .site-config-nav.pull-left
+              小站管理:
+              =link_to '设置',settings_path
+              =link_to '管理宝贝',manage_items_path
+              =link_to '管理店铺',manage_shops_path
+              -#=link_to '添加宝贝',add_item_path
+              -#=link_to '添加店铺',add_shop_path
+            .clearfix
+
+          = render 'layouts/messages'
+          -if @col1
+            .row
+              .span12
+                =render "layouts/content"
+          -elsif @col2l
+            .row
+              .span3#primary
+                =render "layouts/site-primary"
+              .span9
+                =render "layouts/content"
+
+          -else
+            .row
+              .span8
+                =render "layouts/content"
+              .span3.pull-right#primary
+                =render "layouts/site-primary"
+        =yield :affix
+    .belt.container                
+      =yield :links
+    %footer
+      .container
+        .pull-left
+          &copy; 2012
+          =t('footer_left').html_safe
+
+        .pull-right
+          -#=link_to @site.name,root_url(:subdomain=>@site.slug)
+          %p=yield :title
+        .clearfix
+        %p#contact-note
+    = javascript_include_tag "site"
+    =render "layouts/iefixjs"
+    =yield :footer
+    .hidden
+      ='<script type="text/javascript" src="http://js.tongji.linezing.com/3017959/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3017959/tongji.gif"/></a></noscript>'.html_safe
+      = render :file=>'analytics/google'

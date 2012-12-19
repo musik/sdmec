@@ -1,0 +1,15 @@
+-title @site.name,nil,false
+-@col1 = @hide_fullad = true
+
+.row
+  .span9
+    =render :partial=>"site/items/home",:locals=>{:site=>@site}
+  .span3
+    -if is_home?
+      .widget
+        %h1 关于#{@site.name}
+        .desc
+          =simple_format @site.description
+    .widget
+      %h3 #{@site.name}店铺
+      =render :partial=>"site/shops/home",:locals=>{:site=>@site}

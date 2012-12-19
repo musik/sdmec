@@ -1,0 +1,3 @@
+$('#current-shops').html('<%=escape_javascript(
+      render :partial => 'manage_list.html',:locals=>{:results=>@shops}
+    )%>')

@@ -22,9 +22,9 @@ zh_CN:
       user:
         name: '用户名'
         new:
-          email: 'E-mail to sign in.'
+          email: '电子邮件'
         edit:
-          email: 'E-mail.'
+          email: '电子邮件'
           password: '修改密码'
           password_confirmation: 请再确认你的新密码
       comment:
@@ -32,10 +32,14 @@ zh_CN:
         guest_name: 昵称
         guest_email: 电邮
         guest_website: 个人网站
+      site:
+        name: 小站名称
+        slug: 域名
+        slogan: 副标题
+        description: 小站简介
     hints:
       defaults:
-        username: 'User name to sign in.'
-        password: 'No special characters, please.'
+        password: '不建议使用特殊字符'
       user:
         edit:
           password: '如不修改请留空'

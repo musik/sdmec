@@ -3,6 +3,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :options, :to=>:settings
     user ||= User.new # guest user (not logged in)
     if user.has_role? :admin
       can :manage, :all
@@ -10,6 +11,7 @@ class Ability
       can :read,:all
       can [:browse,:auto_complete,:search],Topic
       can :create,Comment
+      can :settings,Site,:user_id => user.id
     end
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions here are

@@ -1,0 +1,36 @@
+-if results.present?
+  .pull-right
+    %button.btn.btn-info{:onclick=>"save_list()"} 记住顺序
+  .clearfix
+  %table.table.shop-results
+    %thead
+      %tr
+        %th.title{:colspan=>2} 推广信息
+        -#%th 权重
+        %th 比例
+        %th 推广量
+        %th 宝贝数量
+        %th.actions
+    -i = 0
+    -results.each do |shop|
+      -i+=1
+      %tr{:id=>"shopx-#{shop.id}" }
+        %td.id #{i}
+        %td.title
+          =link_to strip_tags(shop.title),store_url(shop,:subdomain=>shop.city_slug),:target=>'_blank'
+          %br
+          掌柜
+          =link_to shop.nick,shop.real_url,:target=>'_blank'
+          =img_credit(shop.seller_credit) if shop.seller_credit
+        -#%td.priority=best_in_place shop,:priority,:path=>"/shops/#{shop.id}",:html_attrs=>{:class=>"input-mini"}
+        %td.rate #{shop.commission_rate.to_f}%
+        %td.total_auction #{shop.total_auction}
+        %td.auction_count #{shop.auction_count}
+        %td.actions
+          =link_to "移除",'javascript://',:class=>'btn',:onclick=>"remove_shop(#{shop.id})"
+  -content_for :footer do          
+    -javascript_include_tag 'inplace'
+
+-else
+  暂无记录
+

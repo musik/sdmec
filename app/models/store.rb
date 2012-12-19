@@ -7,6 +7,9 @@ class Store < ActiveRecord::Base
   scope :updated,where('shop_updated_at is not null')
   scope :credit,order('seller_credit desc')
   scope :recent,order('id desc')
+  scope :priority_asc,order('sites_stores.priority asc')
+  scope :rate_desc,order('commission_rate desc')
+  scope :with_priority,select('stores.*,sites_stores.priority')
   scope :short,select([:title,:id,:city_id,:seller_credit])
   scope :incity,lambda{|city|
     if city.present?
@@ -113,12 +116,19 @@ class Store < ActiveRecord::Base
     results = api.taobaoke_items_relate_get :seller_id=>user_id
     if results.has_key?("total_results") and results["total_results"] > 0
       Resque.redis.set cached_items_key,results["taobaoke_items"]["taobaoke_item"].to_json
+      Resque.redis.expire cached_items_key,86400
     else
       Rails.logger.info "shop.update_items:notice:#{results.inspect}"
     end
   end
   def cached_items_key
     "shop:items:#{id}"
+  end
+  def items_stale?
+    Resque.redis.ttl(cached_items_key) < 0
+  end
+  def remove_stale_items
+    Resque.redis.del cached_items_key if items_stale?
   end
   def cached_items
     @cached_items ||= 
@@ -154,7 +164,7 @@ class Store < ActiveRecord::Base
     "http://rate.taobao.com/user-rate-#{user_id}.htm"
   end
   def pic_url
-    "http://logo.taobaocdn.com/shop-logo#{pic_path}"
+    pic_path.present? ? "http://logo.taobaocdn.com/shop-logo#{pic_path}" : "loading.gif"
   end
   def city_slug
     city ? city.slug : "www"
@@ -164,6 +174,20 @@ class Store < ActiveRecord::Base
       @api ||= TaobaoFu::Api.new
     end
   class << self
+    def all_by_ids ids
+      shops = Store.where(:id=>ids).includes(:city).all
+      results = []
+      ids.each do |id|
+        id = id.to_i
+        shops.each do |r| 
+          if r.id == id
+            results << r
+            break
+          end
+        end
+      end
+      results
+    end
     def import_by_username_and_city uname,city
       e = where(:nick=>uname).first_or_initialize :city_id=>city.id,:delta=>:false
       if e.new_record?
@@ -223,6 +247,7 @@ class Store < ActiveRecord::Base
     end
     def fetch_by_cid cid,page=1,run_next=true,options={}
       return if page > 100
+      options.symbolize_keys!
       options[:page_no] = page
       results = api.taobaoke_shops_get cid,options.to_options
 
@@ -240,6 +265,15 @@ class Store < ActiveRecord::Base
         return
       end
       Resque.enqueue(TaokeShop,cid,page.succ,run_next,options) if run_next and results["total_results"].zero? or results["total_results"] > page * 40
+    end
+    def clean_redis
+      key = "queue:taoshop"
+      len = Resque.redis.llen key
+      arr = Resque.redis.lrange key,0,len
+      arr.uniq.each do |val|
+        Resque.redis.lrem key,0,val
+        Resque.redis.rpush key,val
+      end
     end
     def credits_options
       h = []

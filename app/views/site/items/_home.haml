@@ -1,0 +1,27 @@
+-items = site.items.top.limit(15)
+-if items.empty?
+  暂无记录
+-else  
+  %ul.item-3cols
+    -items.each do |item|
+      %li{:class=>cycle('a','b','c'),:id=>"item-#{item.num_iid}"}
+        .photo
+          =image_tag  'http://www.sdmec.com/assets/loading.gif',:'data-original'=>"#{item.pic_url}_220x220.jpg",:class=>'lazy',:width=>220,:height=>220
+        .hd
+          .title=link_to item.title,item_go_url(item.num_iid,:subdomain=>'www'),:rel=>"nofollow",:target=>'_blank',:id=>"link-#{item.num_iid}",:title=>item.title
+        =javascript_tag "str='#{item.click_url.reverse}'.split('').reverse().join('');document.getElementById('link-#{item.num_iid}').href=str;document.getElementById('item-#{item.num_iid}').onclick=function(){document.getElementById('link-#{item.num_iid}').click()}"
+        .ft
+          .volume.pull-right
+            30天售出#{item.volume}件
+          %span.price
+            ￥
+            %tt=item.price
+          .clear
+
+
+    .clear
+  -#=link_to "查看更多宝贝",@store.url,:target=>'_blank',:id=>"shoplink-bottom",:class=>"shoplink belt-link btn btn-warning",:rel=>"nofollow",:onclick=>"track_store_click(#{@store.sid},'#{@store.id}|#{@store.title}','#{@store.click_url.present? ? 'shopshow' : 'shopfree'}')"
+
+  -content_for :footer do
+    =javascript_include_tag 'http://www.sdmec.com/assets/jquery.lazyload.js'
+    =javascript_tag "$('img.lazy').lazyload()"

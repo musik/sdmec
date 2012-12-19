@@ -40,8 +40,11 @@ module LayoutHelper
       "<link rel='#{rel}' href='#{href}' />".html_safe
     }
   end
-  def is_home?
+  def is_home? 
     request.url == root_url
+  end
+  def is_mainsite?
+    !Subdomain.matches? request
   end
   def text_link_to text,url,options={}
     # "<tt class='text_link' longdesc='#{url}'>#{text}</tt>".html_safe

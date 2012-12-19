@@ -4,6 +4,10 @@ APP_CONFIG = YAML.load(raw_config)[Rails.env].symbolize_keys
 %w(expires_in expires_in_city).each do |str|
   APP_CONFIG[str.to_sym] = eval(APP_CONFIG[str.to_sym]) 
 end
+APP_CONFIG[:channels] = YAML.load(File.read("#{Rails.root}/config/channels.yml"))
+APP_CONFIG[:city_slugs] = File.read("#{Rails.root}/config/city_slugs.yml").split("\n")
+APP_CONFIG[:site_excludes] = File.read("#{Rails.root}/config/site_excludes.txt").split("\n")
+
 
 require 'extras/stringex_ex'
 require 'extras/taobao_fu'

@@ -31,6 +31,9 @@ module TaobaoFu
     def change_settings
       #@settings = @all_settings[[Rails.env,"key2"].sample]
     end
+    def use_front_key
+      @settings = @all_settings["front"]
+    end
 
     def apply_settings
       ENV['TAOBAO_API_KEY']    = @settings['app_key'].to_s
@@ -235,7 +238,6 @@ module TaobaoFu
     def taoke_items_detail_get nids,options={}
       args =  {
         :num_iids => nids,
-        :nick => 'usedcar',
         :fields => 'commission,click_url,shop_click_url,seller_credit_score,num_iid,title,nick,detail_url,desc,created,cid,pic_url,delist_time,location,price,express_fee,product_id,item_imgs,volume,sell_promise'
       }
       args.merge! options
@@ -288,6 +290,7 @@ module TaobaoFu
 
       }
       args.merge! options
+      args.delete :cid if cid.blank?
       args[:method] = 'taobao.taobaoke.shops.get'
       TaobaoFu.fetch(args)
     end

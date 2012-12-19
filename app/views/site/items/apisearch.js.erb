@@ -1,0 +1,6 @@
+$('#api-results').html('<%=
+     escape_javascript(
+       render :partial => 'results',:locals=>{:results=>@results}
+     )
+     %>')
+var items = <%=@results.to_json.html_safe%>;

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206093410) do
+ActiveRecord::Schema.define(:version => 20121219213838) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -176,6 +176,13 @@ ActiveRecord::Schema.define(:version => 20121206093410) do
   add_index "items", ["num_iid"], :name => "index_items_on_num_iid"
   add_index "items", ["price"], :name => "index_items_on_price"
 
+  create_table "items_sites", :id => false, :force => true do |t|
+    t.integer "item_id"
+    t.integer "site_id"
+  end
+
+  add_index "items_sites", ["item_id", "site_id"], :name => "pri"
+
   create_table "links", :force => true do |t|
     t.text     "data"
     t.string   "name"
@@ -221,6 +228,37 @@ ActiveRecord::Schema.define(:version => 20121206093410) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "site_options", :force => true do |t|
+    t.integer "site_id"
+    t.string  "name"
+    t.binary  "val"
+    t.boolean "autoload"
+  end
+
+  add_index "site_options", ["site_id", "autoload"], :name => "autoload"
+  add_index "site_options", ["site_id"], :name => "index_site_options_on_site_id"
+
+  create_table "sites", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "slogan"
+  end
+
+  add_index "sites", ["slug"], :name => "index_sites_on_slug"
+  add_index "sites", ["user_id"], :name => "index_sites_on_user_id"
+
+  create_table "sites_stores", :id => false, :force => true do |t|
+    t.integer "store_id"
+    t.integer "site_id"
+    t.integer "priority"
+  end
+
+  add_index "sites_stores", ["store_id", "site_id"], :name => "pri"
 
   create_table "stores", :force => true do |t|
     t.string   "title"
@@ -269,6 +307,14 @@ ActiveRecord::Schema.define(:version => 20121206093410) do
   add_index "stores", ["taoke_updated_at"], :name => "index_stores_on_taoke_updated_at"
   add_index "stores", ["total_auction"], :name => "index_stores_on_total_auction"
   add_index "stores", ["user_updated_at"], :name => "index_stores_on_user_updated_at"
+
+  create_table "stores_sites", :id => false, :force => true do |t|
+    t.integer "store_id"
+    t.integer "site_id"
+    t.integer "priority"
+  end
+
+  add_index "stores_sites", ["store_id", "site_id"], :name => "pri"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

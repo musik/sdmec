@@ -87,9 +87,20 @@ class StoresController < ApplicationController
 
     #@store.sync_update_taokedata if @store.user_id.nil?
     @items = @store.cached_items
+    @store.remove_stale_items
     #@items = nil
     breadcrumbs.add @store.title,nil
     render 'newshow'
+  end
+  def patch
+    if cookies[:sign].present?
+      @store = Store.find(params[:id])
+      @store.update_attributes params[:shop]
+      expire_action :action=>'show',:id=>@store.id
+      render :text => 'updated'
+    else
+      render :text => 'invalid put'
+    end
   end
   def items
     @store = Store.find(params[:id])

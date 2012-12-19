@@ -18,8 +18,6 @@
       -if s.seller_credit
         =img_credit(s.seller_credit)
       .share
-        ='<div class="bshare-custom"><a title="分享到淘江湖" class="bshare-taojianghu" href="javascript:void(0);"></a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到豆瓣" class="bshare-douban"></a><!-- <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>--></div>'.html_safe
-        -js_reg 'http://static.bshare.cn/b/button.js#style=-1&amp;uuid=94d0975d-9a2f-44f6-9aab-9e2fa246faf1&amp;pophcol=2&amp;lang=zh','http://static.bshare.cn/b/bshareC0.js'
 
     .link.pull-left
       =link_to "进入淘宝店铺",s.url,:target=>'_blank',:id=>"shoplink",:class=>"shoplink btn btn-info",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
@@ -35,7 +33,8 @@
 -if @display_items
   #items-section
     %a.loc#items
-    = render :partial => 'stores/items',:locals=>{:items=>@items}
+    .items-list
+      = render :partial => 'stores/items',:locals=>{:items=>@items}
 .row
   .span8
     #details-section.section
@@ -52,9 +51,7 @@
       =javascript_include_tag "http://open.denglu.cc/connect/commentcode?appid=36977denGHiyfkcbLRWFOT9XOO6jI3&postid=#{@store.sid}&title=#{@store.title}"
       -#= render :partial => 'stores/comments'
 
-  .span1
-    &nbsp;
-  .span3
+  .span3.pull-right
     .about
       %h2 关于#{@store.title}
       .meta
@@ -80,7 +77,7 @@
 -content_for :footer do
   =javascript_tag "rewrite_link('#{@store.real_url.reverse}')"
   =javascript_tag "convert_shop('#{@store.nick}','show',#{@store.click_url.present?})"
-  -if @display_items && @items.nil? && @store.user_id.present?
+  -if @display_items && @store.items_stale? && @store.user_id.present?
     =javascript_tag "load_items('#{@store.id}')"
     
 

@@ -17,7 +17,7 @@
     -Cat.nav.slice(0,6).each do |c|
       =link_to c.name,tbcat_url(c,:subdomain=>"www"),:title=>"淘宝#{c.name}"
   =render "stores/creditmap" unless @creditmap_loaded
-  -if is_home?
+  -if is_home? and is_mainsite?
     -cache 'shops-paging',:expires_in => 1.hour do
       -i = 11
       -max_page = (Store.count / 240 ).ceil

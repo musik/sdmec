@@ -7,7 +7,7 @@
   = link_to @city.name,root_path,:title=>t('appname_city',:city=>@city.name), :class => 'brand brand-mini'
 %ul.nav.nav-mini
   -#%li=link_to "首页",root_url(:subdomain=>'www'),:rel=>"nofollow"
-  -channels = YAML.load(File.read("#{Rails.root}/config/channels.yml"))
+  -channels = APP_CONFIG[:channels]
   -channels.delete_if{|k| %w(数码 机票).include? k} if @city.present? && @city.name.length > 4
   =javascript_tag do
     -channels.each do |k,v|
@@ -15,7 +15,7 @@
     
   -if @city
     %li=link_to '城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
-%form.navbar-search.pull-left{:action=>search_url(:subdomain=>'www'),:method=>'get'}
+%form.navbar-search.pull-right{:action=>search_url(:subdomain=>'www'),:method=>'get'}
   -a={:id=>'q',:type=>"text",:name=>"q"}
   -a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
   .input-append

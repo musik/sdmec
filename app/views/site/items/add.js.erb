@@ -1,0 +1,5 @@
+$('#current-items').html('<%=escape_javascript(
+      render :partial => 'manage_list',:locals=>{:results=>@items}
+    )%>')
+$("#item-<%=@item.num_iid%>").addClass('added')
+$("#item-<%=@item.num_iid%> .actions").text('已加入')

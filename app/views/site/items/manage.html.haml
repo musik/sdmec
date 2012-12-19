@@ -1,0 +1,14 @@
+-title "管理宝贝"
+-@col1= true
+
+%h3 添加宝贝
+
+%form.form-search{:action=>apisearch_items_url(),:method=>'get',:'data-remote'=>true}
+  -a={:id=>'iq',:type=>"text",:name=>"iq",:value=>@site.name}
+  .input-append
+    %input.search-queryx.input-medium{a}
+    %button.btn{:type=>"submit"} 搜索
+#api-results    
+%h2 当前宝贝
+#current-items  
+  = render :partial => 'manage_list',:locals=>{:results=>@items}

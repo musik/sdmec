@@ -1,0 +1,12 @@
+= link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:rel=>"nofollow"
+%ul.nav.nav-mini
+    
+%form.navbar-search.pull-right{:action=>search_url(:subdomain=>'www'),:method=>'get'}
+  -a={:id=>'q',:type=>"text",:name=>"q"}
+  -a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
+  .input-append
+    %input.search-queryx.input-medium{a}
+    %button.btn{:name=>'tb',:type=>"submit"} 淘
+    %button.btn{:type=>"submit"} 搜店
+  %input{:type=>'hidden',:name=>'live',:value=>1}
+-#=render "layouts/unav"

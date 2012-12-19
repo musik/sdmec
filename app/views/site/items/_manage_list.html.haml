@@ -1,0 +1,37 @@
+-if results.present?
+  %table.table.item-results
+    %thead
+      %tr
+        %th.title{:colspan=>3} 推广信息
+        %th 单价
+        %th 比例
+        %th 佣金
+        %th 售出
+        %th 推广量
+        %th 支出
+        %th.actions
+    -i = 0
+    -results.each do |item|
+      -i+=1
+      %tr{:id=>"itemx-#{item.num_iid}" }
+        %td.id #{i}
+        %td.photo
+          =image_tag "#{item.pic_url}_sum.jpg",:width=>60,:height=>60
+
+        %td.title
+          =link_to strip_tags(item.title),item.click_url,:target=>'_blank'
+          %br
+          掌柜
+          =link_to item.nick,item.shop_click_url,:target=>'_blank'
+        %td.price ￥#{item.price}
+        %td.rate #{item.commission_rate.to_f/100}%
+        %td.commission ￥#{item.commission}
+        %td.volume #{item.volume}
+        %td.commission_num #{item.commission_num}
+        %td.commission_volume ￥#{item.commission_volume}
+        %td.actions
+          =link_to "移除",'javascript://',:class=>'btn',:onclick=>"remove_item(#{item.id})"
+
+-else
+  暂无记录
+

@@ -23,6 +23,9 @@ class HomeController < ApplicationController
     @cities = @city.children_or_siblings unless @city.zhixiashi?
 
   end
+  def site
+
+  end
   def search
     @q = params[:q]
     if @q.match(/成人|性福|性用品|情趣/)

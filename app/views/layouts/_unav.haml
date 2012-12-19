@@ -1,12 +1,11 @@
 -if Rails.env == 'development' or params[:dev] or user_signed_in? 
-  %ul.nav.nav-pills.pull-right
+  %ul.nav.pull-right.nav-user
     - if user_signed_in?
-      %li.first
-        = link_to('退出'.html_safe, destroy_user_session_url(:subdomain=>"www"), :method=>'delete',:title=>'退出')
-      %li
-        = link_to('设置'.html_safe, edit_user_registration_url(:subdomain=>"www"),:title=>'设置')
+      %li.first= link_to(current_user.display, edit_user_registration_url(:subdomain=>"www"))
       - if current_user.has_role? :admin
         %li= link_to "管理",rails_admin_url(:subdomain=>"www")
+
+      %li= link_to('退出'.html_safe, destroy_user_session_url(:subdomain=>"www"), :method=>'delete',:title=>'退出')
     - else
       %li.first= link_to('登录', new_user_session_url(:subdomain=>"www"),:rel=>"nofollow")
       %li= link_to('注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow")

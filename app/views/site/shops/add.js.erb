@@ -1,0 +1,5 @@
+$('#current-shops').html('<%=escape_javascript(
+      render :partial => 'manage_list',:locals=>{:results=>@shops}
+    )%>')
+$("#shop-<%=@shop.user_id%>").addClass('added')
+$("#shop-<%=@shop.user_id%> .actions").text('已加入')

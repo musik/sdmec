@@ -1,0 +1,32 @@
+-if results.present?
+  %table.table.shop-results
+    %thead
+      %tr
+        %th.title{:colspan=>2} 推广信息
+        %th 比例
+        %th 推广量
+        %th 宝贝数量
+        %th.actions
+    -i = 0
+    -results.each do |user_id,shop|
+      -i+=1
+      %tr{:id=>"shop-#{shop['user_id']}",:class=>shop['class'] }
+        %td.id #{i}
+        %td.title
+          =link_to strip_tags(shop['shop_title']),shop['click_url'],:target=>'_blank'
+          %br
+          掌柜
+          =link_to shop['seller_nick'],shop['click_url'],:target=>'_blank'
+          =img_credit(shop['seller_credit'].to_i) if shop['seller_credit']
+        %td.rate #{shop['commission_rate'].to_f}%
+        %td.total_auction #{shop['total_auction']}
+        %td.auction_count #{shop['auction_count']}
+        %td.actions
+          -if shop['class']
+            已加入
+          -else
+            =link_to "加入",'javascript://',:class=>'btn',:onclick=>"add_shop(#{shop['user_id']})"
+
+-else
+  暂无记录
+

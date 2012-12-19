@@ -32,6 +32,7 @@ describe Store do
     #pp Store::TaokeShop.new.count_cats
     #pp Store::TaokeShop.new.credits_options
     #pp Store::TaokeShop.new.rate_options
+    #pp Store::TaokeShop.new.clean_redis
 
   end     
   it "should fetch user" do

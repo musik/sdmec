@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 Tb::Application.routes.draw do
+  resources :sites
   resources :comments,:except=>[:new]
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -7,11 +8,30 @@ Tb::Application.routes.draw do
     match '(:id)'=>'home#deleted'
   end
   match '/xtao' => 'home#xtao'
-  constraints(Subdomain) do
+  constraints(CitySubdomain) do
     match '/t/:id'=>'city/home#page',:as=>'page'
     get '/shop'=>"stores#city",:as=>"shops_city"
     get '/:id'=>"cats#city",:as=>"cat_city"
     root :to => 'home#city'
+  end
+  constraints SiteSubdomain do
+    match 'settings' => 'sites#settings',:as=>'settings'
+    match 'options' => 'sites#options',:as=>'options',:via=>'post'
+    resources :items,:controller=>'site/items' do
+      collection do
+        get 'manage'
+        get 'apisearch'
+        post 'add'
+      end
+    end
+    resources :shops,:controller=>'site/shops' do
+      collection do
+        get 'manage'
+        get 'apisearch'
+        post 'add'
+      end
+    end
+    root :to => 'home#site'
   end
   resources :stores,:path=>"shop",:only=>[:show,:index] do
     collection do
@@ -24,7 +44,11 @@ Tb::Application.routes.draw do
       get 'convert'
       get 'flush'
       get 'items'
+      put 'patch'
     end
+  end
+  resources :tags do
+
   end
 
   resources :cats do

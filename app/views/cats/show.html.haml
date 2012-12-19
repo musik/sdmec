@@ -9,6 +9,8 @@
   %h1="淘宝#{@cat.name}店铺"
   %small
     =js_write(link_to "去淘宝搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
+.share.pull-right
+.clear
 = render :partial => 'stores/list'
 =js_link_to_with_class "&raquo; 去淘宝查看更多",taokq_url(@cat.name),"highlight"
 
