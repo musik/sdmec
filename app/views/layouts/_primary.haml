@@ -15,11 +15,12 @@
     %h4 相关城市
     %p.cities
       -cities.each do |r|
-        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝"
+        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺"
 -unless @hide_top        
   -recent_limit ||= 10
   -cache "top-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.day do
-    -recents = Store.credit.incity(@city).limit(recent_limit).includes(:city).short.all
+    -#-recents = Store.credit.incity(@city).limit(recent_limit).includes(:city).short.all
+    -recents = Store.credit_desc.in_city(@city).fullscan.search(:include=>[:city],:per_page=>recent_limit)
     -if recents.present?
       %h4 #{@city.present? ? @city.name : nil}十大名店
       %ul.top.unstyled
@@ -30,7 +31,8 @@
 -unless @hide_recent        
   -recent_limit ||= 15        
   -cache "recent-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.hour do
-    -recents = Store.recent.updated.incity(@city).limit(recent_limit).includes(:city).short.all
+    -recents = Store.srecent.in_city(@city).fullscan.search(:include=>[:city],:per_page=>recent_limit)
+    -#-recents = Store.recent.updated.incity(@city).limit(recent_limit).includes(:city).short.all
     -if recents.present?
       %h4 #{@city.present? ? @city.name : nil}最新发现
       %ul.top.unstyled

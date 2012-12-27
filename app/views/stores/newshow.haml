@@ -12,19 +12,25 @@
 -content_for :full do
   .shop-header
     .photo.pull-left
-      =image_tag s.pic_url,:width=>60,:height=>60,:alt=>s.title unless @store.mingan?
-    .pull-left
+      =image_tag s.pic_url,:width=>48,:height=>48,:alt=>s.title unless @store.mingan?
+    .pull-left.shop-profile
       %h1.shop-name.inline=@store.safe_title
       -if s.seller_credit
-        .rank.pull-left.rank-27{:class=>"seller-rank-#{s.seller_credit}"}
-          信誉等级: #{s.seller_credit}
-        -#=img_credit(s.seller_credit)
+        -#.rank.pull-left.rank-27{:class=>"seller-rank-#{s.seller_credit}"}
+          -#信誉等级: #{s.seller_credit}
+        =img_credit(s.seller_credit)
       .share
 
-    .link.pull-left
-      =link_to "进入淘宝店铺",s.url,:target=>'_blank',:id=>"shoplink",:class=>"shoplink btn btn-info",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
+    -if @display_items
+      .link.pull-left
+        =link_to "<i class='icon-shopping-cart icon-white'></i>&nbsp;进入店铺".html_safe,s.url,:target=>'_blank',:id=>"shoplink",:class=>"shoplink label btn-warning",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
 
     .clear
+  .arow      
+    #slotl.slot
+    #slotc.slot
+    #slotr.slot
+    .clearfix
 
 -@sidenav=%w(items details reviews related)
 -@sidenav.delete "items" unless @display_items
@@ -64,7 +70,7 @@
         %tt 卖家:
         =s.nick
       .link
-        =link_to "进入淘宝店铺",s.url,:target=>'_blank',:id=>"shoplink-side",:class=>"shoplink btn btn-info",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
+        =link_to "进入店铺",s.url,:target=>'_blank',:id=>"shoplink-side",:class=>"shoplink label btn-info",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
     #related-section.section
       %a.loc#related
       -unless @store.mingan?
@@ -78,7 +84,7 @@
 -#-content_for :affix do
 -content_for :footer do
   =javascript_tag "rewrite_link('#{@store.real_url.reverse}')"
-  =javascript_tag "convert_shop('#{@store.nick}','show',#{@store.click_url.present?})"
+  =javascript_tag "convert_shop('#{@store.nick}','show',#{@store.click_url.present? and @store.click_url.match(/pid\=/).nil?})"
   -if @display_items && @store.items_stale? && @store.user_id.present?
     =javascript_tag "load_items('#{@store.id}')"
     

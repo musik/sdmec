@@ -24,6 +24,7 @@ describe TaobaoFu do
     # end
     #测试时间
     #api = TaobaoFu::Api.new
+    #pp api.taoke_get_report :page_size=>1
     #pp api.taobaoke_shops_convert 'rongrongaijunjun'
     #pp api.taobaoke_shops_convert 'jiroren'
     # for j in 1..10 do
@@ -48,7 +49,6 @@ describe TaobaoFu do
 
     # pp items["taobaoke_items"]["taobaoke_item"].size rescue "0"
     #pp items["taobaoke_items"]["taobaoke_item"].size
-    # pp api.taoke_get_report
 
     #,:page_size=>2
     #pp api.get_products_by_keyword '手机'

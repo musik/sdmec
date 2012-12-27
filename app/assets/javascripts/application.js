@@ -17,29 +17,37 @@ function goto(url,o){
 	}
 }
 function rewrite_link(str){
-  console.debug(rl(str))
+  //console.debug(rl(str))
   $('.shoplink').attr('href',reverse(str))
 }
 $(function () {
-  //$('#full1').html('<div class="container"><<img src="http://img02.taobaocdn.com/tps/i2/T1Gg.bXe0iXXbeBPzh-990-318.jpg"><img src="http://img03.taobaocdn.com/tps/i3/T1yXocXnFjXXaRrOzh-990-171.jpg" /></div>')
 	$('a.rl').click(function(){
 		$(this).attr("href",reverse(unescape($(this).attr('data'))))
 		$(this).attr("target","_blank")
 	})
-  $('.content').before('<div id="slot1"><div>')
-  $('.span3').prepend('<div id="slots"><div>')
+  //$('.content').before('<div id="slot1"><div>')
+  //$('.span3').prepend('<div id="slots"><div>')
 
-  $('#details-section').before('<div id="slotb"></div>')
-  $('#reviews-section').after('<div id="slotf"></div>')
+  //$('#details-section').before('<div id="slotb"></div>')
+  //$('#reviews-section').after('<div id="slotf"></div>')
   $.getScript('http://cbjs.baidu.com/js/m.js',function(){
-    BAIDU_CLB_fillSlotAsync('503903','full1')
-    BAIDU_CLB_fillSlotAsync('484907','slotb')
-    BAIDU_CLB_fillSlotAsync('537156','slots')
-    BAIDU_CLB_fillSlotAsync('484908','slotf')
+    loadIfExist('503903','full1')
+    loadIfExist('484907','slotb')
+    loadIfExist('537156','slots')
+    loadIfExist('484908','slotf')
+
+    loadIfExist('484907','slotl')
+    loadIfExist('475855','slotc')
+    loadIfExist('537156','slotr')
   })
-  $('.share').loadShare();
+  //$('.share').loadShare();
   $('#contact-note').html('以下为网站联系方式，用于网安/主机商/机房联系处理敏感内容，或其它各界与网站有关的诸如交换链接/意见反馈等用途。<br />此联系方式与本页可能展示的淘宝店铺无关。<br><span class="badge badge-important"> 敏感内容联系</span>0874-3335702 18087409631&nbsp;'+'<span class="badge badge-info">QQ</span><a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=f62e57b812e5ba6bcabb95e781a841ed8edb5efa46c90997">58265826</a>&nbsp;'+'<span class="badge badge-success">Email</span>admin@sdmec.com')
 })
+function loadIfExist(aid,id){
+  if($("#" + id).length == 1){
+    BAIDU_CLB_fillSlotAsync(aid,id)
+  }
+}
 $.fn.loadShare = function(){
   if (this.length == 0 ) return;
   html = '<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">'
@@ -70,6 +78,11 @@ $.fn.loadShare = function(){
 }
 function loadFull(){
   $('body').html('<iframe frameborder="0" marginheight="0" marginwidth="0" border="0" id="alimamaifrm" name="alimamaifrm" scrolling="no" height="2432px" width="100%" src="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_10853963&eventid=101329" ></iframe>').prepend('<div id="bookmark" data-area="top_add_fav">为保证购物安全 <a class="taf_add" target="_self" href="javascript:AddFavorite(window.location.href,document.title)">收藏淘店铺</a> 正品保证，安全购物！ ')
+}
+function full_frame(){
+  $(document).ready(function(){
+    $('body').css('overflow','hidden')
+  })
 }
 function appendFull(){
   return ;

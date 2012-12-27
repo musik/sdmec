@@ -22,23 +22,23 @@ zh_CN:
       keywords: "%{name}"
       description: "%{name}"
     search:
-      title: "淘宝%{q}店铺_哪里有卖%{q}_%{q}多少钱"
+      title: "购物%{q}店铺_哪里有卖%{q}_%{q}多少钱"
       keywords: "%{q},买%{q},%{q}店"
-      description: "想知道哪里有卖%{q}?淘宝%{q}频道为您提供最新的淘宝%{q}店铺、卖家、价格及批发零售信息,满足您不同的%{q}购买需求。%{q}网,提供最优质的淘宝%{q}信息"
+      description: "想知道哪里有卖%{q}?购物%{q}频道为您提供最新的购物%{q}店铺、卖家、价格及批发零售信息,满足您不同的%{q}购买需求。%{q}网,提供最优质的购物%{q}信息"
   cats:
     show:
-      title: "淘宝%{cat}_淘宝%{cat}店铺"
-      keywords: "%{cat},淘宝%{cat},%{cat}店"
-      description: "想知道哪里有卖%{cat}?淘宝%{cat}频道为您提供最新的淘宝%{cat}、%{cat}店铺、淘宝%{cat}卖家信息,满足您不同的%{cat}淘宝需求。%{cat}网,提供最优质的淘宝%{cat}信息"
+      title: "购物%{cat}_购物%{cat}店铺"
+      keywords: "%{cat},购物%{cat},%{cat}店"
+      description: "想知道哪里有卖%{cat}?购物%{cat}频道为您提供最新的购物%{cat}、%{cat}店铺、购物%{cat}卖家信息,满足您不同的%{cat}购物需求。%{cat}网,提供最优质的购物%{cat}信息"
     city:
-      title: "%{city}淘宝%{cat}店铺_淘宝%{cat}"
-      keywords: "%{city}%{cat},%{city}淘宝%{cat},%{city}%{cat}店"
-      description: "想知道%{city}哪里有卖%{cat}?%{city}%{cat}频道为您提供最新的%{city}淘宝%{cat}价格、店铺、卖家及批发零售信息,满足您不同的%{cat}购买需求。%{city}%{cat}网,提供最优质的淘宝%{cat}信息。"
+      title: "%{city}购物%{cat}店铺_购物%{cat}"
+      keywords: "%{city}%{cat},%{city}购物%{cat},%{city}%{cat}店"
+      description: "想知道%{city}哪里有卖%{cat}?%{city}%{cat}频道为您提供最新的%{city}购物%{cat}价格、店铺、卖家及批发零售信息,满足您不同的%{cat}购买需求。%{city}%{cat}网,提供最优质的购物%{cat}信息。"
   stores:
     newshow:
-      desc: "<tt>%{title}</tt>,系由掌柜<tt>%{nick}</tt>在淘宝网或天猫商城建立的网上店铺.本网页不是<tt>%{title}</tt>的官方网站."
+      desc: "<tt>%{title}</tt>,系由掌柜<tt>%{nick}</tt>在购物网或天猫商城建立的网上店铺.本网页不是<tt>%{title}</tt>的官方网站."
   city:
-    title: "%{name}淘宝"
+    title: "%{name}购物"
     nav:
       lady: 女人
       yifu: 衣服
@@ -50,23 +50,23 @@ zh_CN:
       muying: 母婴
       men: 男人
     home:
-      title: "%{city}淘宝店铺导航-%{city}淘宝导购网"
-      header: "%{city}淘宝导购"
-      keywords: "%{city}淘宝,%{city}淘宝网"
-      description: "sdmec.com %{city}淘宝信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}淘宝信息，满足您不同的%{city}淘宝需求。%{city}淘宝网，做最好的%{city}淘宝信息网。"
+      title: "%{city}店铺导航-%{city}导购网"
+      header: "%{city}导购"
+      keywords: "%{city}购物网"
+      description: "sdmec.com %{city}购物信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}购物信息，满足您不同的%{city}购物需求。%{city}购物网，做最好的%{city}购物信息网。"
         
       page:
-        title: "%{city}%{name}_淘宝%{city}%{name}卖家_%{city}%{name}网"
+        title: "%{city}%{name}_购物%{city}%{name}卖家_%{city}%{name}网"
         header: "%{city}%{name}"
-        keywords: "%{city}%{name},淘宝%{city}%{name}卖家,淘宝%{city}%{name}品牌"
-        description: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
-        description2: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+        keywords: "%{city}%{name},购物%{city}%{name}卖家,购物%{city}%{name}品牌"
+        description: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,购物%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+        description2: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,购物%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
     topics:
       index:
-        title: "%{city}淘宝网"
-        header: "%{city}淘宝热点"
-        keywords: "%{city}淘宝,%{city}淘宝网"
-        description: "sdmec.com %{city}淘宝信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}淘宝信息，满足您不同的%{city}淘宝需求。%{city}淘宝网，做最好的%{city}淘宝信息网。"
+        title: "%{city}购物网"
+        header: "%{city}购物热点"
+        keywords: "%{city}购物,%{city}购物网"
+        description: "sdmec.com %{city}购物信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}购物信息，满足您不同的%{city}购物需求。%{city}购物网，做最好的%{city}购物信息网。"
       popular:
         title: "%{city} - 热门关键词"
       browse:
@@ -82,9 +82,9 @@ zh_CN:
         other_cities: "去其它城市买%{name}"
         other_topics: "%{city}买别的宝贝"
         keywords: "%{city}%{name},%{city}买%{name},%{city}%{name}网"
-        description: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+        description: "%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,购物%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
         intro: "%{city}%{name}频道介绍"
-        description2: "%{city}哪里有%{name}卖?%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,淘宝%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
+        description2: "%{city}哪里有%{name}卖?%{city}%{name}频道为您提供最新的%{city}%{name},%{city}%{name}品牌,购物%{city}%{name}卖家信息。每天有大量优秀的%{city}%{name}卖家提供专业的%{city}%{name}信息，您可以随意查询和购买%{city}%{name}。 - sdmec.com"
   huatis:
     related:
       other_huatis: 相关搜索
@@ -94,7 +94,7 @@ zh_CN:
     items_not_found: "没找到<b>%{name}</b>信息"
     index:
       title: 热点关键词
-      header: 淘宝热点
+      header: 购物热点
     popular:
       title: 热门关键词
     browse:
@@ -105,14 +105,14 @@ zh_CN:
       loading: 正在为您载入数据...
       total_found: "找到<b>%{name}</b>%{count}件"
       recent_volume: "最近卖出%{count}件"
-      title: "淘宝%{name}_那里有%{name}卖?"
-      keywords: "%{name},淘宝%{name},买%{name}"
-      description: "%{name}网提供淘宝%{name}信息、%{name}品牌淘宝导购,淘宝%{name}卖家信息。信息涵盖全国各地如北京%{name}、上海%{name}、广东%{name}。"
+      title: "购物%{name}_那里有%{name}卖?"
+      keywords: "%{name},购物%{name},买%{name}"
+      description: "%{name}网提供购物%{name}信息、%{name}品牌购物导购,购物%{name}卖家信息。信息涵盖全国各地如北京%{name}、上海%{name}、广东%{name}。"
       intro: "%{name}频道介绍"
-      description2: "%{name}频道为您提供最新的%{name},%{name}品牌,淘宝%{name}卖家信息。每天有大量优秀的%{name}卖家提供专业的%{name}信息，您可以随意查询和购买%{name}。 - sdmec.com"
+      description2: "%{name}频道为您提供最新的%{name},%{name}品牌,购物%{name}卖家信息。每天有大量优秀的%{name}卖家提供专业的%{name}信息，您可以随意查询和购买%{name}。 - sdmec.com"
       header: "%{name}"
       items_not_found: "没找到<b>%{name}</b>信息"
-      more_results: "去淘宝查看更多%{name} &raquo;"
+      more_results: "去购物查看更多%{name} &raquo;"
       other_cities: "各地%{name}"
       other_topics: "相关搜索"
   auto_complete:

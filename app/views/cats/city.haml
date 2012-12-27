@@ -8,7 +8,7 @@
 .page-headerx
   %h1=[@city.name,@cat.name,"店铺"].join()
   %small
-    =js_write(link_to "去淘宝搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
+    =js_write(link_to "去搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
 -if @instead and @stores
   %p.text-warning
     暂时没找到<strong>#{@city.name}#{@cat.name}</strong>,以下是来自全国的#{@cat.name}店铺
@@ -23,7 +23,7 @@
 
 
 
-=js_link_to_with_class "&raquo; 去淘宝查看更多",taokq_url(@cat.name),"highlight"
+=js_link_to_with_class "&raquo; 去查看更多",taokq_url(@cat.name),"highlight"
 
 -content_for :sidebar do
   %h1="#{@city.name}#{@cat.name}"

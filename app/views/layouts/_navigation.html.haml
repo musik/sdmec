@@ -9,9 +9,11 @@
   -#%li=link_to "首页",root_url(:subdomain=>'www'),:rel=>"nofollow"
   -channels = APP_CONFIG[:channels]
   -channels.delete_if{|k| %w(数码 机票).include? k} if @city.present? && @city.name.length > 4
-  =javascript_tag do
-    -channels.each do |k,v|
-      ="document.write('<li><a href=\"#{v}\" target=\"_blank\" rel=\"nofollow\">#{k}</a></li>')".html_safe
+  -channels.each do |k,v|
+    %li=link_to k,frame_url(k,:subdomain=>'www'),:rel=>"nofollow"
+  -#=javascript_tag do
+    -#-channels.each do |k,v|
+      -#="document.write('<li><a href=\"#{v}\" target=\"_blank\" rel=\"nofollow\">#{k}</a></li>')".html_safe
     
   -if @city
     %li=link_to '城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
@@ -20,7 +22,7 @@
   -a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
   .input-append
     %input.search-queryx.input-medium{a}
-    %button.btn{:name=>'tb',:type=>"submit"} 淘
     %button.btn{:type=>"submit"} 搜店
+    %button.btn{:name=>'tb',:type=>"submit"} 淘
   %input{:type=>'hidden',:name=>'live',:value=>1}
 -#=render "layouts/unav"

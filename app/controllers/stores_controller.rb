@@ -3,15 +3,40 @@ class StoresController < ApplicationController
   caches_action :show,:expires_in => 3.days
   cache_sweeper :store_sweeper
   caches_action :city,:expires_in => 5.minutes 
-  caches_action :index,:expires_in => 10.minutes, :cache_path => Proc.new { |c| c.params }
+  caches_action :index,
+    :expires_in => Proc.new { |c|
+      c.params[:page].present? && c.params[:page] > 10 ?
+        3.days : 1.hour
+    },   
+    :cache_path => Proc.new { |c| c.params }
   # GET /stores
   # GET /stores.json
+  def check_out_page
+    if params.has_key?(:page) && params[:page].to_i > 100 
+      @out_page = true
+      @title = "不显示100页以后的内容"
+      params.delete :page
+      render :status=>410
+    end
+  end
   def index
-    @stores = Store.recent.updated.includes(:city).
-        page(params[:page] || 1).per(240)
-      @title = "淘宝店铺"
+    check_out_page
+    @stores = Store.credit_desc.fullscan.search :include=>[:city],
+      :per_page=>100,
+      :page=>params[:page] || 1, :max_matches => 10_000
+    @title = "店铺"
     @hide_recent = true
     breadcrumbs.add "店铺",nil
+  end
+  def city
+    check_out_page
+    @stores = Store.srecent.in_city(@city).fullscan.search :per_page=>100,
+      :include=>[:city],
+      :page=>params[:page] || 1
+    @title = "#{@city.name}店铺"
+    breadcrumbs.add "店铺",nil
+    @hide_recent = true
+    render :action=>:index
   end
   def top 
 
@@ -19,7 +44,7 @@ class StoresController < ApplicationController
       :per_page=>100,
       :page=>params[:page] || 1
     @stores = @stores.in_city(@city) if @city
-      @title = "淘宝名店榜"
+      @title = "名店榜"
       @title = @city.name + @title if @city.present?
     pages = (@stores.total_entries / 100).ceil
     @max_page = @city.present? ? 10 : 100
@@ -39,7 +64,7 @@ class StoresController < ApplicationController
     @dengjiming = arr[((@dengji-1)/5).to_i]
     @dengjishu = (@dengji).divmod(5)[1]
     @dengjishu = 5 if @dengjishu.zero?
-    @title = "淘宝#{@dengjishu}#{@dengjiming}店铺"
+    @title = "#{@dengjishu}#{@dengjiming}店铺"
     render :action=>'huangguan'
   end
   def huangguan
@@ -48,7 +73,7 @@ class StoresController < ApplicationController
       :with=>{:seller_credit=>10 + @cap.to_i},
       :per_page=>200,
       :page=>params[:page] || 1
-    @title = "淘宝#{@cap}皇冠店铺"
+    @title = "#{@cap}皇冠店铺"
     render :action=>'huangguan'
   end
   def jinhuangguan
@@ -56,17 +81,8 @@ class StoresController < ApplicationController
       :with=>{:seller_credit=>16..20},
       :per_page=>200,
       :page=>params[:page] || 1
-    @title = "淘宝金皇冠店铺"
+    @title = "金皇冠店铺"
     render :action=>'huangguan'
-  end
-  def city
-    @stores = Store.srecent.in_city(@city).fullscan.search :per_page=>240,
-      #:include=>[:city],
-      :page=>params[:page] || 1
-    @title = "#{@city.name}淘宝店铺"
-    breadcrumbs.add "店铺",nil
-    @hide_recent = true
-    render :action=>:index
   end
 
   # GET /stores/1
@@ -90,7 +106,8 @@ class StoresController < ApplicationController
     @store.remove_stale_items
     #@items = nil
     breadcrumbs.add @store.title,nil
-    render 'newshow'
+    #render  @store.click_url.present? ? 'newshow' : 'freeshow'
+    render  'newshow'
   end
   def patch
     if cookies[:sign].present?
@@ -105,6 +122,7 @@ class StoresController < ApplicationController
   def items
     @store = Store.find(params[:id])
     if params[:update].present?
+      TaobaoFu.use_front_key
       @store.update_items
       expire_action :action=>'show',:id=>@store.id if @store.cached_items.present?
     end

@@ -5,26 +5,20 @@
 %table.table
   %tr
     %th Stores
-    %th created
     %th updated
   %tr 
     %th total
-    %td= Store.count
-    %td= Store.where('shop_updated_at is not null').count
+    %td= Store.fullscan.search_count(nil)
   %tr 
     %th 1h
-    %td= Store.where('created_at > ?',1.hour.ago).count
-    %td= Store.where('shop_updated_at > ?',1.hour.ago).count
+    %td= Store.fullscan.search_count(nil,:with=>{:shop_updated_at => 1.hour.ago..Time.now})
   %tr 
     %th 24h
-    %td= Store.where('created_at > ?',1.day.ago).count
-    %td= Store.where('shop_updated_at > ?',1.day.ago).count
+    %td= Store.fullscan.search_count(nil,:with=>{:shop_updated_at => 1.day.ago..Time.now})
   %tr 
     %th 7d
-    %td= Store.where('created_at > ?',7.day.ago).count
-    %td= Store.where('shop_updated_at > ?',7.day.ago).count
+    %td= Store.fullscan.search_count(nil,:with=>{:shop_updated_at => 7.day.ago..Time.now})
   %tr 
     %th 30d
-    %td= Store.where('created_at > ?',30.day.ago).count
-    %td= Store.where('shop_updated_at > ?',30.day.ago).count
+    %td= Store.fullscan.search_count(nil,:with=>{:shop_updated_at => 30.day.ago..Time.now})
 

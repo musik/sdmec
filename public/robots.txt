@@ -7,3 +7,11 @@ Disallow: /tracklink/
 Disallow: /categories/
 Disallow: /mai/
 Disallow: /topics/
+
+
+User-agent: msnbot 
+Crawl-delay: 5
+User-agent: bingbot 
+Crawl-delay: 5
+User-agent: Yahoo! Slurp China
+Crawl-delay: 5

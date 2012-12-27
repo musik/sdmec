@@ -11,11 +11,12 @@
           =image_tag  shop.pic_url,:width=>40,:height=>40
           -#=image_tag  'http://www.sdmec.com/assets/loading.gif',:'data-original'=>"#{shop.pic_url}",:class=>'lazy',:width=>40,:height=>40
         .hd
-          #{link_to shop.nick,store_url(shop,:subdomain=>shop.city_slug)}
+          =link_to shop.nick,shop.url,:rel=>"nofollow",:target=>'_blank',:id=>"link-#{shop.id}",:title=>shop.title
+          -##{link_to shop.nick,store_url(shop,:subdomain=>shop.city_slug)}
           .rank{:class=>"seller-rank-#{shop.seller_credit}"}
             信誉等级: #{shop.seller_credit}
         .clearfix
-        .title=link_to shop.title.html_safe,shop.url,:rel=>"nofollow",:target=>'_blank',:id=>"link-#{shop.id}",:title=>shop.title
+        .title=link_to shop.title.html_safe,store_url(shop,:subdomain=>shop.city_slug)
         -#=javascript_tag "str='#{item.click_url.reverse}'.split('').reverse().join('');document.getElementById('link-#{item.num_iid}').href=str;document.getElementById('item-#{item.num_iid}').onclick=function(){document.getElementById('link-#{item.num_iid}').click()}"
 
     .clearfix

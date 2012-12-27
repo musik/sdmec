@@ -21,7 +21,7 @@ body.noad
   position: relative
 .double11
   width: 960px
-  margin: 2px auto 1em
+  margin: 15px auto 15px
   //height: 464px
   //height: 353px
   //background: url('http://img04.taobaocdn.com/tps/i4/T1klAoXmpdXXc_Jvfw-466-489.jpg') 0 0 repeat-x
@@ -364,19 +364,27 @@ body.store
   padding: 10px
   border: 1px solid #eee
   border-width: 0 0 1px
-  @include box-shadow(0px 1px rgba(0,0,0,.15))
+  //@include box-shadow(0px 1px rgba(0,0,0,.15))
   margin: 0 0 10px
   .photo
     margin: 0 10px 0 0 
+  .shop-profile
+    margin: 6px 0 0
   h1.shop-name
     margin: 0
+    font-family: Georgia
+    color: #09c
+    a
+      color: #09c
   img.credit
     margin: -5px 20px 0 10px
   .link
-    margin: 4px 30px 0 10px
+    margin: 19px 30px 0 10px
   .share
     margin: 0
-
+.about
+  .link
+    margin-top: 10px
   
 .share
   margin: 0 0 2em
@@ -515,6 +523,7 @@ ul.comments
 
 ul.item-3cols 
   margin-left: 0
+  margin-bottom: 18px
   li
     float: left
     list-style: none
@@ -522,6 +531,8 @@ ul.item-3cols
     margin: 10px 0 0 17px
     cursor: pointer
     border: 1px solid #eee
+  li:hover
+    border-color: #666
   li.a
     margin-left: 0
     clear: left
@@ -556,8 +567,10 @@ p.desc
   tt
     //text-decoration: underline
     border-bottom: 1px dashed #ccc
+    
 .belt-link    
-  display: block
+  //margin: 18px 0
+  //display: block
   
 .items-list  
   margin: 0 0 20px
@@ -566,6 +579,19 @@ p.desc
   margin: 0 20px 20px
 #slotf
   margin: 20px
+.arow    
+  margin: 20px 0
+  .slot
+    float: left
+
+#slotl  
+  width: 500px
+#slotc  
+  width: 200px
+  margin: 0 20px
+#slotr  
+  width: 200px
+  //margin: 20px 0 0
 .bdct  
   margin: 0 0 20px
 .form-horizontal.label-mini .control-label  

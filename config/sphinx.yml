@@ -5,6 +5,8 @@ development:
   #workers: prefork
   charset_type: zh_cn.utf-8
   charset_dictpath: /usr/local/mmseg3/etc/
+  port: 9393
+  max_matches: 10000
   indexed_models:
     - Store
     - Huati 
@@ -12,9 +14,10 @@ development:
 production:
   #address: 192.168.17.125
   bin_path: /usr/local/coreseek/bin
-  max_children: 6
+  #max_children: 6
   mem_limit: 512M
-  # workers: prefork
+  #workers: prefork
   charset_type: zh_cn.utf-8
   charset_dictpath: /usr/local/mmseg3/etc/
   port: 9393
+  max_matches: 10000

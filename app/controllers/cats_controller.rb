@@ -24,14 +24,14 @@ class CatsController < ApplicationController
       @instead = true
       @stores = Store.credit_desc.search @cat.name,:include=>[:city],:per_page=>10
     end
-    breadcrumbs.add "淘宝#{@cat.name}",tbcat_url(@cat,:subdomain=>"www")
+    breadcrumbs.add "#{@cat.name}",tbcat_url(@cat,:subdomain=>"www")
   end
   # GET /cats/1
   # GET /cats/1.json
   def show
     @cat = Cat.find(params[:id])
     @stores = Store.credit_desc.search @cat.name,:include=>[:city],:per_page=>10
-    breadcrumbs.add "淘宝#{@cat.name}",nil
+    breadcrumbs.add "#{@cat.name}",nil
   end
 
   # GET /cats/new

@@ -66,6 +66,7 @@ Tb::Application.routes.draw do
   match '/itemlink/:id/:position'=>"home#shopitem_go",:as=>'shopitem_go'
   match '/tracklink/:id'=>"home#store_go",:as=>'store_go'
   match '/ad/:id'=>'home#ad',:as=>'ad'
+  match '/frame/:id'=>'home#frame',:as=>'frame'
   resources :tbpages
   resources :cities,:only=>"index"
   resources :categories do 
@@ -80,6 +81,7 @@ Tb::Application.routes.draw do
   match '/search' => 'home#search',:as=>'search'
   match '/searched' => 'home#searched',:as=>'searched'
   match '/status' => 'home#status'
+  match '/reports' => 'home#reports'
   match '/zhuan' => 'home#zhuan'
   devise_for :users
   resources :users, :only => [:show, :index]

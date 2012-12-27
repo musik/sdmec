@@ -91,6 +91,11 @@ class HomeController < ApplicationController
     end
     # render :json=>@ad.items
   end
+  def frame
+    @frame_name = params[:id]
+    @frame_url = APP_CONFIG[:channels][@frame_name]
+    render :layout=>'iframe'
+  end
   def flush
     params[:act] ||= 'index'
     expire_action :action=>params[:act]
@@ -111,5 +116,22 @@ class HomeController < ApplicationController
   end
   def deleted
     render :file => "error/410",:layout=>'error', :status => 410
+  end
+  def reports
+    authorize! :edit,Store
+    api = TaobaoFu::Api.new
+    @per_page = 100
+    @current_page = params[:page] || 1
+    @current_page = @current_page.to_i
+    @date = params[:date].present? ? params[:date] : Date.yesterday.strftime('%Y%m%d')
+    defaults = {
+      :fields => 'trade_parent_id,trade_id,real_pay_fee,commission_rate,commission,app_key,outer_code,pay_time,pay_price,num_iid,item_title,item_num,category_id,category_name,shop_title,seller_nick',
+      :page_size => @per_page,
+      :page_no => @current_page,
+      :date => @date
+    }
+    @report = api.taoke_get_report defaults
+    @title = @date
+
   end
 end

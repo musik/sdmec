@@ -15,7 +15,7 @@
     -#=javascript_include_tag "http://cbjs.baidu.com/js/m.js" unless @nocbjs
     =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
   %body{:class=>@bodyname}
-    %header.navbar.navbar-fixed-top
+    %header.navbar.navbar-fixed-top.navbar-inverse
       %nav.navbar-inner
         =render 'layouts/unav'
         .container
@@ -26,6 +26,7 @@
         .double11#full1
           .container
       .clearfix
+
 
       .container.relative
         =yield :full

@@ -1,0 +1,15 @@
+admin
+www
+mail
+bbs
+forum
+club
+map
+free
+shop
+mall
+taobao
+tmall
+buy
+sell
+news

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219213838) do
+ActiveRecord::Schema.define(:version => 20121226152527) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -267,7 +267,7 @@ ActiveRecord::Schema.define(:version => 20121219213838) do
     t.integer  "seller_credit"
     t.string   "shop_type"
     t.string   "click_url"
-    t.decimal  "commission_rate",     :precision => 10, :scale => 0
+    t.decimal  "commission_rate",     :precision => 4,  :scale => 2
     t.integer  "total_auction"
     t.integer  "auction_count"
     t.integer  "sid"
@@ -278,9 +278,9 @@ ActiveRecord::Schema.define(:version => 20121219213838) do
     t.string   "pic_path"
     t.datetime "created"
     t.datetime "modified"
-    t.decimal  "delivery_score",      :precision => 10, :scale => 0
-    t.decimal  "item_score",          :precision => 10, :scale => 0
-    t.decimal  "service_score",       :precision => 10, :scale => 0
+    t.decimal  "delivery_score",      :precision => 2,  :scale => 1
+    t.decimal  "item_score",          :precision => 2,  :scale => 1
+    t.decimal  "service_score",       :precision => 2,  :scale => 1
     t.datetime "taoke_updated_at"
     t.datetime "shop_updated_at"
     t.datetime "created_at",                                                            :null => false
@@ -297,16 +297,8 @@ ActiveRecord::Schema.define(:version => 20121219213838) do
 
   add_index "stores", ["cid"], :name => "index_stores_on_cid"
   add_index "stores", ["city_id"], :name => "index_stores_on_city_id"
-  add_index "stores", ["comments_updated_at"], :name => "index_stores_on_comments_updated_at"
-  add_index "stores", ["commission_rate"], :name => "index_stores_on_commission_rate"
-  add_index "stores", ["delta"], :name => "index_stores_on_delta"
   add_index "stores", ["nick"], :name => "index_stores_on_nick"
-  add_index "stores", ["seller_credit"], :name => "index_stores_on_seller_credit"
-  add_index "stores", ["seller_score"], :name => "index_stores_on_seller_score"
-  add_index "stores", ["shop_updated_at"], :name => "index_stores_on_shop_updated_at"
-  add_index "stores", ["taoke_updated_at"], :name => "index_stores_on_taoke_updated_at"
-  add_index "stores", ["total_auction"], :name => "index_stores_on_total_auction"
-  add_index "stores", ["user_updated_at"], :name => "index_stores_on_user_updated_at"
+  add_index "stores", ["sid"], :name => "index_stores_on_sid"
 
   create_table "stores_sites", :id => false, :force => true do |t|
     t.integer "store_id"

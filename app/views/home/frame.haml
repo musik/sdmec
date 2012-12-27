@@ -1,0 +1,6 @@
+-title @frame_name,nil,false
+-#-@col1 = @hide_fullad =@hide_belt = true 
+-meta 'robots','noindex'
+%iframe#frame{:src=>@frame_url,:frameborder=>0,:width=>'100%',:scrolling=>'yes',:height=>'700px'}
+-content_for :footer do
+  =javascript_tag "full_frame()"

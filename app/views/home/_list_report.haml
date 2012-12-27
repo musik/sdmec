@@ -1,0 +1,76 @@
+-if data["error_response"]
+  .alert.alert-warning
+    =data["error_response"].values.join(":")
+-else  
+  -report = data["taobaoke_report"]
+  - arr = report["taobaoke_report_members"]["taobaoke_report_member"] rescue nil
+
+  - total = report["total_results"].to_i
+  %p 总成交#{total}笔
+  -if total > @per_page 
+    - total_pages = (total.to_f/@per_page).ceil
+    .pagination
+      - 1.upto total_pages do |i|
+        =link_to i,url_for(:page=>i)
+  -if arr.present?
+    %table.table.table-bordered
+      %tr
+        %th 总成交金额
+        %th 总佣金
+      %tr
+        %td=arr.inject(0){|sum,r| sum + r["real_pay_fee"].to_f}
+        %td=arr.inject(0){|sum,r| sum + r["commission"].to_f}.round(2)
+
+    %input.btn.pull-right#datepicker{:value=>@date}
+
+    %table.table
+      %thead
+        %tr
+          %th.time 付款时间
+          %th.title 商品
+          %th.num 数量
+          %th.price 价格
+          -#%th.fee 估算金额
+          %th.real_price 实际金额
+          %th.rate 比例
+          %th.commission 佣金
+          -#%th.outer_code
+      -arr.each do |r|
+        -r = OpenStruct.new(r)
+        %tr
+          %td
+            =r.pay_time
+            -if r.outer_code
+              %br
+              %span.label= r.outer_code
+          %td.title
+            =link_to r.item_title.truncate(25),"http://item.taobao.com/item.htm?spm=0.0.0.18.O0tfiE&id=#{r.num_iid}",:title=>r.item_title,:target=>'_blank'
+            %br
+            掌柜: #{r.seller_nick}
+            %br
+            店铺: 
+            %abbr{:title=>r.shop_title}= r.shop_title.truncate 22
+          %td.num
+            =r.item_num
+          %td.price
+            ￥
+            =r.pay_price
+          -#%td.fee
+            -#￥
+            -#=(r.pay_price.to_f * r.item_num.to_i).round(2)
+          %td.real_price
+            ￥
+            =r.real_pay_fee
+          %td.rate
+            =(r.commission_rate.to_f * 100).round(1)
+            #{'%'}
+          %td.commission
+            ￥
+            =r.commission.to_f.round(2)
+
+
+-content_for :head do
+  = stylesheet_link_tag "report", :media => "all"
+
+-content_for :footer do
+  =javascript_include_tag "report"

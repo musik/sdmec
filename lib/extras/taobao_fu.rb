@@ -29,10 +29,10 @@ module TaobaoFu
       apply_settings
     end
     def change_settings
-      #@settings = @all_settings[[Rails.env,"key2"].sample]
+      #@settings = @all_settings[[Rails.env,"back"].sample]
     end
     def use_front_key
-      @settings = @all_settings["front"]
+      #@settings = @all_settings["front"]
     end
 
     def apply_settings
@@ -121,7 +121,7 @@ module TaobaoFu
               sleep 70
             else
               Rails.logger.info [rs,options]
-              return false
+              return rs
             end
           else
             return rs[res_name(options[:method])]
@@ -144,7 +144,7 @@ module TaobaoFu
       @error.present?
     end
     def error_code
-      @error["code"]
+      @error["code"].to_i
     end
   end
   class Api
@@ -318,11 +318,11 @@ module TaobaoFu
 
     def taoke_get_report options={}
       args =  {
-        :date => Date.today.strftime('%Y%m%d'),
+        :date => Date.yesterday.strftime('%Y%m%d'),
         :page_no => 1,
         :fields => 'trade_id,pay_time,pay_price,num_iid,outer_code,commission_rate,commission,seller_nick,pay_time,app_key'
       }
-      pp args
+      #pp args
       args.merge! options
       args[:method] = 'taobao.taobaoke.report.get'
       TaobaoFu.fetch args

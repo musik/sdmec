@@ -1,4 +1,4 @@
--title t('.title',:cat=>@cat.name),"淘宝#{@cat.name}店铺",false
+-title t('.title',:cat=>@cat.name),"#{@cat.name}店铺",false
 -meta :keywords,t('.keywords',:cat=>@cat.name)
 -meta :description,t('.description',:cat=>@cat.name)
 .bdct
@@ -6,14 +6,14 @@
   =bdad 'SD5200-CAT-BEFORE，2012-12-5',1153607
   -#=javascript_tag 'BAIDU_CLB_fillSlot("484908");'
 .page-headerx
-  %h1="淘宝#{@cat.name}店铺"
+  %h1="#{@cat.name}店铺"
   %small
-    =js_write(link_to "去淘宝搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
+    =js_write(link_to "搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
 .share.pull-right
 .clear
 = render :partial => 'stores/list'
-=js_link_to_with_class "&raquo; 去淘宝查看更多",taokq_url(@cat.name),"highlight"
+=js_link_to_with_class "&raquo; 查看更多",taokq_url(@cat.name),"highlight"
 
 -content_for :sidebar do
-  %h1="淘宝#{@cat.name}"
+  %h1="#{@cat.name}"
   %p=@meta[:description]

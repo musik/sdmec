@@ -46,9 +46,13 @@ class Store < ActiveRecord::Base
     {:match_mode=>:fullscan}
   end
   sphinx_scope :in_city do |city|
-    {:with=>{
-        :city_id=> (city.parent_id>0 or city.zhixiashi?) ? city.id : City.where(:parent_id=>city.id).pluck(:id)
-    }}
+    if city.present?
+      {:with=>{
+          :city_id=> (city.parent_id>0 or city.zhixiashi?) ? city.id : City.where(:parent_id=>city.id).pluck(:id)
+      }}
+    else
+      {}
+    end
   end
   def name
     title
@@ -75,11 +79,41 @@ class Store < ActiveRecord::Base
   def import_shopdata
     rs = api.shop_get nick
     return if rs == false
+    if TaobaoFu.is_error? rs 
+      if TaobaoFu.error_code == 7
+        raise rs
+      elsif TaobaoFu.error_code == 560
+        if rs["error_response"]["sub_code"] == "isv.user-not-exist:invalid-nick"
+          # nick 出错 
+          Resque.enqueue FixNick,id
+          return
+        elsif rs["error_response"]["sub_code"] == 'isv.invalid-parameter:user-without-shop'
+          update_attribute :active,false 
+          return
+        end
+      end
+      raise
+    end
     rs["shop"].delete("shop_score").each do |k,v|
       rs["shop"][k] = v
     end
     rs["shop"]["shop_updated_at"] = Time.now
     update_attributes rs["shop"]
+  end
+  def fix_nick
+    raise if user_id.nil?
+    url = "http://rate.taobao.com/user-rate-#{user_id}.htm"
+    require 'open-uri'
+    open(url) do |f|
+      f.each_line do |line|
+        if m = line.match(/<title>(.*)购买心得评价/) and m.present?
+          update_attribute :nick,m[1]
+          Resque.enqueue(ShopdataQueue,id,false)
+          return
+        end
+      end
+    end
+    raise 
   end
   def import_taokeshopdata
     rs = api.taobaoke_shops_convert nick
@@ -216,11 +250,20 @@ class Store < ActiveRecord::Base
       end
       e
     end
+    def async_import_from_taoke data
+      Resque.enqueue Store::ShopImport,data
+    end
     def fix_seller_credits
       where("seller_credit > 0").find_each do |s|
         s.update_attribute :seller_credit,nil
         s.delay(:priority=>0).import_taokeshopdata
       end
+    end
+  end
+  class ShopImport
+    @queue = 'shop_import'
+    def self.perform data
+      Store.import_from_taoke data
     end
   end
   class TaokeShop
@@ -254,6 +297,7 @@ class Store < ActiveRecord::Base
       if results["total_results"] > 0
         shops = results["taobaoke_shops"]["taobaoke_shop"]
         shops.each do |s|
+          #Store.async_import_from_taoke s
           Store.import_from_taoke s
         end
       end
@@ -293,9 +337,9 @@ class Store < ActiveRecord::Base
       ]
     end
     def self.perform cid,page=1,run_next=true,options={}
-      keep_time 0.6 do
+      #keep_time 0.6 do
         Store::TaokeShop.new.fetch_by_cid cid,page,run_next,options
-      end
+      #end
     end
   end
   

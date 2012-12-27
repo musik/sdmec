@@ -10,7 +10,7 @@
 .page-headerx
   %h1= @q
   %small
-    =js_write(link_to "去淘宝搜索\"#{@q}\"",taokq_url(@q),:onclick=>"track_search_visit('#{@q}',_gaq)",:target=>'_blank',:rel=>"nofollow")
+    =js_write(link_to "去搜索\"#{@q}\"",taokq_url(@q),:onclick=>"track_search_visit('#{@q}',_gaq)",:target=>'_blank',:rel=>"nofollow")
 -#-@col1 = true
 -if @stores.present?  
   %p.stats

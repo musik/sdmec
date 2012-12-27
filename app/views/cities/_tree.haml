@@ -4,11 +4,11 @@
     %dt 直辖市: 
     %dd
       -cities[:zhixiashi].each do |r|
-        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝网"
+        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺导航"
   -cities[:parents].each do |p|
     %dl.cities
-      %dt= link_to p.name,root_url(:subdomain=>p.slug),:title=>"#{p.name}淘宝网"
+      %dt= link_to p.name,root_url(:subdomain=>p.slug),:title=>"#{p.name}店铺导航"
       %dd
         -cities[:children][p.id].each do |r|
-          =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝网"
+          =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺导航"
 

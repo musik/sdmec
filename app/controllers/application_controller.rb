@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
     end
     breadcrumbs.add :home, root_url(:subdomain=>'www'),:rel=>"nofollow"
     if @city.present?
-      breadcrumbs.add @city.parent.name,root_url(:subdomain=>@city.parent.slug),:title=>"#{@city.parent.name}淘宝网" unless @city.parent_id.zero?
+      breadcrumbs.add @city.parent.name,root_url(:subdomain=>@city.parent.slug),:title=>"#{@city.parent.name}网" unless @city.parent_id.zero?
     breadcrumbs.add @city.name, root_url(:subdomain=>@city.slug),:rel=>"nofollow" 
     end
 
