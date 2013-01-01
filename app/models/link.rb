@@ -12,6 +12,9 @@ class Link < ActiveRecord::Base
       rs
     end
   end
+  def self.get name
+    find_by_name(name).data rescue ""
+  end
   class Alivv
     def self.fetch(wid='gMQati59D2Q=',type=3,code=1)
       url = "http://links.alivv.com/getcode.aspx?code=#{code}&wid=#{wid}&type=#{type}"

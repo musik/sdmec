@@ -36,6 +36,7 @@ Tb::Application.routes.draw do
   resources :stores,:path=>"shop",:only=>[:show,:index] do
     collection do
       get 'top'
+      get 'recent'
       get 'jinhuangguan'
       get 'huangguan'
       get 'dengji'
@@ -57,7 +58,8 @@ Tb::Application.routes.draw do
       get 'tree'
     end
   end
-  resources :links
+  resources :links,:path=>'snips'
+  match '/links'=>'links#links',:as=>'partners'
 
   match '/to/:id' => 'topics#go',:as=>'go',:constraints=>{:id=>/[\w\d\.\_\%\-]+/}
   match '/taobao-:id'=>'cats#show',:as=>'tbcat'

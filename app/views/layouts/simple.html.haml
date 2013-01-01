@@ -33,6 +33,8 @@
         .content
           -unless @hide_bread
             .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
+          -if @shout
+            #shout
           -#= render 'layouts/messages'
           -if @col1
             .row
@@ -54,7 +56,8 @@
         =yield :affix
     .belt.container                
       = render :partial => 'layouts/belt' unless @hide_belt
-      #links=render 'layouts/links'
+      -if is_mainsite? and is_home?
+        #links=render 'layouts/links'
       =yield :links
     %footer
       .container

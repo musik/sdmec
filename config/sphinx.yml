@@ -15,7 +15,7 @@ production:
   #address: 192.168.17.125
   bin_path: /usr/local/coreseek/bin
   #max_children: 6
-  mem_limit: 512M
+  mem_limit: 1024M
   #workers: prefork
   charset_type: zh_cn.utf-8
   charset_dictpath: /usr/local/mmseg3/etc/

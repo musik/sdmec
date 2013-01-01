@@ -24,6 +24,8 @@ describe TaobaoFu do
     # end
     #测试时间
     #api = TaobaoFu::Api.new
+    #pp api.tmall_temai_subcats_search
+    #pp api.tmall_temai_cats
     #pp api.taoke_get_report :page_size=>1
     #pp api.taobaoke_shops_convert 'rongrongaijunjun'
     #pp api.taobaoke_shops_convert 'jiroren'

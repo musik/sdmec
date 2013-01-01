@@ -1,0 +1,23 @@
+-title t('.title'),nil,false
+-@col1 = true
+-@hide_top = true
+-#.bdc2
+  -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
+.share  
+-if @sites.present?
+  .sites.alert.alert-info
+    小站:
+    -@sites.each do |s|
+      =link_to s.name,root_url(:subdomain=>s.slug)
+%h2.inline 金冠名店推荐
+%small
+  =render :partial=>"stores/creditmap"
+-cache "home_popular",:expires_in=>1.day do
+  =render :partial=>"stores/pindex",:locals=>{:stores=>@stores}
+%h2 最新收录
+-cache "home_recent",:expires_in=>1.minutes do
+  =render :partial=>"stores/index",:locals=>{:stores=>@stores_recent}
+= render :partial => 'cities/less'
+.clear
+-@hide_cities = true
+        

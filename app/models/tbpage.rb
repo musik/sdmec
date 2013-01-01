@@ -83,4 +83,68 @@ class Tbpage < ActiveRecord::Base
       rs2
     end
   end
+  class Temai
+    @queue = "temai"
+    def cats_key
+      @cats_key ||= "temai:cats"
+    end
+    def data_key name
+      "temai:#{name}"
+    end
+    def get_cats
+      @cats ||= begin
+        results = Resque.redis.get cats_key
+        if results.nil?
+          async(:update_cats)
+          nil
+        else
+          JSON.parse results
+        end
+      end
+    end
+    def get_cats_with_items
+      @cats = get_cats
+      return nil if @cats.nil?
+      @cats.collect do |cat|
+        cat["items"] = get_items_by_cat(cat["sub_cat_id"])
+        cat
+      end
+    end
+    def get_items_by_cat id
+      @items ||= []
+      @items[id] ||= begin
+        results = Resque.redis.get data_key("items:#{id}")
+        if results.nil?
+          async(:update_items_by_cat,id)
+          nil
+        else
+          JSON.parse results
+        end
+       end
+      @items[id]
+    end
+    def update_items_by_cat id
+      api = TaobaoFu::Api.new
+      results = api.tmall_temai_items_search :cat=>id
+      results["items"] = results["item_list"]["tmall_search_tm_item"] 
+      results.delete "item_list"
+      Resque.redis.set data_key("items:#{id}"),results.to_json
+      results
+    end
+    def update_cats
+      api = TaobaoFu::Api.new
+      results = api.tmall_temai_cats
+      Resque.redis.set cats_key,results.to_json
+      results.each do |cat|
+        async :update_items_by_cat,cat["sub_cat_id"]
+      end
+      results
+    end
+    def self.perform(method, *args)
+      new.send(method, *args)
+    end
+    def async(method, *args)
+      Resque.enqueue(Tbpage::Temai, method, *args)
+    end
+  end
 end

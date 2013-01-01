@@ -16,6 +16,12 @@
 
 # minimal Rails specific artifacts
 db/*.sqlite3
+db*.json
+*~
+*.pid
+callgrind.out.posts_index_time
+cache
+*.sql
 db/sphinx/
 /log/*.log
 /tmp

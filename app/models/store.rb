@@ -26,21 +26,25 @@ class Store < ActiveRecord::Base
   #after_create :init_data
 
   define_index do
-    indexes :title,:bulletin,:desc
+    #indexes :title,:bulletin,:desc
+    indexes :title
     has :id
     has :city_id,:facets=>true
     has :seller_credit,:facets=>true
-    has :shop_updated_at
-    where "shop_updated_at is not null"
-    #set_property :delta => false
+    has :total_auction
+    has :commission_rate
+    where sanitize_sql(["active", true])
     set_property :delta => ThinkingSphinx::Deltas::ResqueDelta
   end
 
+  sphinx_scope :value_desc do
+    {:order=> "total_auction * commission_rate",:sort_mode=>:expr}
+  end
   sphinx_scope :credit_desc do
     {:order=> "seller_credit DESC, @relevance DESC"}
   end
   sphinx_scope :srecent do
-    {:order=> "shop_updated_at DESC, @relevance DESC"}
+    {:order=> "id DESC, @relevance DESC"}
   end
   sphinx_scope :fullscan do
     {:match_mode=>:fullscan}
@@ -58,7 +62,7 @@ class Store < ActiveRecord::Base
     title
   end
   def safe_title
-    title.gsub(/成人用品/,'成用')
+    title.nil? ? 'n/a' : title.gsub(/成人用品/,'成用')
   end
   def mingan?
     @mingan ||= (title.match(/成人用品|性福|性用品|情趣/)) ? true : false

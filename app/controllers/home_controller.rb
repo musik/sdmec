@@ -5,6 +5,16 @@ class HomeController < ApplicationController
   caches_action :city,:expires_in => 30.minutes
 
   def index
+    @temai_cats = Tbpage::Temai.new.get_cats_with_items
+    #@stores = Store.credit_desc.fullscan.search :include=>[:city],:per_page=>51
+    @stores = Store.value_desc.fullscan.search :include=>[:city],:per_page=>50
+    @stores_recent = Store.srecent.fullscan.search :include=>[:city],:per_page=>30
+    @sites = Site.limit(30)
+    @bodyname = 'home'
+    @hide_bread = true
+    #render :layout=>'simple'
+  end
+  def index_20121227
     @stores = Store.credit_desc.fullscan.search :include=>[:city],:per_page=>100
     @stores_recent = Store.srecent.fullscan.search :include=>[:city],:per_page=>51
     @sites = Site.limit(30)
@@ -29,18 +39,20 @@ class HomeController < ApplicationController
   end
   def search
     @q = params[:q]
-    if @q.match(/成人|性福|性用品|情趣/)
-      redirect_to "http://s8.taobao.com/search?q=#{CGI.escape(@q)}&cat=0&pid=mm_10894158_2495491_10807334&mode=23&commend=1%2C2&other_filter=tk_rate%5B1000%2C%5D&fs=1"
+    source = /lvh\.me\:3002|sqfy\.com/
+    referer = request.headers["HTTP_REFERER"]
+    if referer.present? && referer.match(source).present?
+      @url = "http://s8.taobao.com/search?q=#{CGI.escape(@q)}&cat=0&pid=mm_10894158_2495491_10807334&mode=23&commend=1%2C2&other_filter=tk_rate%5B1000%2C%5D&fs=1"
+      render :redirect,:layout=>false
+      return
+    end
+    if @q.present? and (params[:tb] or @q.match(/成人|性福|性用品|情趣/))
+      redirect_to "http://s8.taobao.com/search?q=#{CGI.escape(@q)}&cat=0&pid=mm_10894158_2495491_10807334&mode=23&commend=1%2C2&other_filter=tk_rate%5B1000%2C%5D&fs=1",:status=>303
       return
     end
     if params[:live] && @q.present?
       @s = Searched.create(:query=>@q,:created_at=>Time.now)
-
-      if params[:tb]
-        redirect_to "http://s8.taobao.com/search?q=#{CGI.escape(@q)}&cat=0&pid=mm_10894158_2495491_10807334&mode=23&commend=1%2C2&other_filter=tk_rate%5B1000%2C%5D&fs=1"
-        else
-        redirect_to search_url(:q=>@q)
-      end
+      redirect_to search_url(:q=>@q)
       return
     end
     @stores = Store.credit_desc.search @q,:include=>[:city],:per_page=>10,

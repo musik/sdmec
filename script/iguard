@@ -1,1 +1,1 @@
-rake ts:start && guard
+bundle exec rake ts:start && bundle exec guard

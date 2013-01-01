@@ -350,6 +350,21 @@ module TaobaoFu
       items = TaobaoFu.fetch(args)
       items.present? ? items["item_cats"]["item_cat"] : nil
     end
+    def tmall_temai_subcats_search cat=50100982
+      rs = TaobaoFu.fetch :cat=>cat,:method=>'tmall.temai.subcats.search'
+      rs["cat_list"]["tmall_tm_cat"]
+    end
+    def tmall_temai_cats
+      roots = tmall_temai_subcats_search
+      roots.collect do |v|
+        v["children"] = tmall_temai_subcats_search(v["sub_cat_id"])
+        v
+      end
+    end
+    def tmall_temai_items_search options={}
+      return nil if options[:cat].nil?
+      TaobaoFu.fetch options.merge(:method=>'tmall.temai.items.search')
+    end
   end
 
 end

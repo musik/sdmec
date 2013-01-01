@@ -1,0 +1,30 @@
+-items = results["items"] rescue nil
+-if items.present?
+  =debug items.first if params[:debug]
+  %ul.item-3cols
+    -i=-1
+    -items[0,limit].each do |item|
+      -i+=1
+      %li{:class=>cycle('a','b','c'),:id=>"item-#{i}"}
+        .photo
+          =image_tag  'http://www.sdmec.com/assets/loading.gif',:'data-original'=>"#{item["pic_url"].sub(/_b.jpg/,'_300x300.jpg')}",:class=>'lazy',:width=>300,:height=>300
+        .hd
+          .title=link_to item["title"],"javascript://",:rel=>"nofollow",:target=>'_blank',:id=>"link-#{cat}-#{i}"
+        =javascript_tag "str='#{item["detail_url"].reverse}'.split('').reverse().join('');document.getElementById('link-#{cat}-#{i}').href=str;document.getElementById('item-#{cat}-#{i}').onclick=function(){document.getElementById('link-#{cat}-#{i}').click()}"
+        .ft
+          .volume.pull-right
+            30天售出#{item["volume"]}件
+          %span.price
+            ￥
+            %tt=item["price"]
+
+
+    .clearfix
+
+  -unless @lazyloaded
+    -@lazyload = true
+    -content_for :footer do
+      =javascript_include_tag 'http://www.sdmec.com/assets/jquery.lazyload.js'
+      =javascript_tag "$('img.lazy').lazyload()"
+-else
+  .items_not_found

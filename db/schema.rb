@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226152527) do
+ActiveRecord::Schema.define(:version => 20121227114643) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -168,7 +168,6 @@ ActiveRecord::Schema.define(:version => 20121226152527) do
     t.datetime "updated_at",                                         :null => false
   end
 
-  add_index "items", ["cid"], :name => "index_items_on_cid"
   add_index "items", ["commission"], :name => "index_items_on_commission"
   add_index "items", ["commission_num"], :name => "index_items_on_commission_num"
   add_index "items", ["commission_rate"], :name => "index_items_on_commission_rate"
@@ -293,20 +292,16 @@ ActiveRecord::Schema.define(:version => 20121226152527) do
     t.datetime "comments_updated_at"
     t.integer  "seller_score"
     t.boolean  "delta",                                              :default => false, :null => false
+    t.boolean  "active",                                             :default => true
   end
 
   add_index "stores", ["cid"], :name => "index_stores_on_cid"
   add_index "stores", ["city_id"], :name => "index_stores_on_city_id"
   add_index "stores", ["nick"], :name => "index_stores_on_nick"
+  add_index "stores", ["shop_updated_at"], :name => "index_stores_on_shop_updated_at"
   add_index "stores", ["sid"], :name => "index_stores_on_sid"
-
-  create_table "stores_sites", :id => false, :force => true do |t|
-    t.integer "store_id"
-    t.integer "site_id"
-    t.integer "priority"
-  end
-
-  add_index "stores_sites", ["store_id", "site_id"], :name => "pri"
+  add_index "stores", ["taoke_updated_at"], :name => "index_stores_on_taoke_updated_at"
+  add_index "stores", ["user_updated_at"], :name => "index_stores_on_user_updated_at"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -356,9 +351,7 @@ ActiveRecord::Schema.define(:version => 20121226152527) do
 
   add_index "topics", ["acr"], :name => "index_topics_on_acr"
   add_index "topics", ["acr2"], :name => "index_topics_on_acr2"
-  add_index "topics", ["name"], :name => "name"
   add_index "topics", ["public"], :name => "index_topics_on_public"
-  add_index "topics", ["slug"], :name => "slug"
   add_index "topics", ["volume"], :name => "index_topics_on_volume"
 
   create_table "users", :force => true do |t|

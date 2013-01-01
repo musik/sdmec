@@ -1,4 +1,4 @@
-%h1 Listing links
+-title "友情链接"
 
 %table.table
   %tr
@@ -9,7 +9,7 @@
 
   - @links.each do |link|
     %tr
-      %td= pp_link link.data
+      %td= link.data
       %td= link.name
       %td= link.data.split("\r\n").size
       %td

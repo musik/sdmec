@@ -1,17 +1,24 @@
 # -*- encoding : utf-8 -*-
 class LinksController < ApplicationController
-  load_and_authorize_resource :except=>[]
+  load_and_authorize_resource :except=>[:links]
   cache_sweeper :link_sweeper
   caches_page :show
   # GET /links
   # GET /links.json
+  before_filter :hide_ad
+  def hide_ad
+    @hide_fullad = @col1 = true
+  end
   def index
+    authorize! :create,Link
     @links = Link.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @links }
     end
+  end
+  def links
   end
 
   # GET /links/1

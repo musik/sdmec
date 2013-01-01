@@ -3,12 +3,16 @@ class StoresController < ApplicationController
   caches_action :show,:expires_in => 3.days
   cache_sweeper :store_sweeper
   caches_action :city,:expires_in => 5.minutes 
-  caches_action :index,
-    :expires_in => Proc.new { |c|
-      c.params[:page].present? && c.params[:page] > 10 ?
-        3.days : 1.hour
-    },   
+  caches_action :index,:top,
+    :expires_in => 1.hour,
     :cache_path => Proc.new { |c| c.params }
+  caches_action :recent,
+    :expires_in => 3.minutes,
+    :cache_path => Proc.new { |c| c.params }
+    #:expires_in => Proc.new { |c|
+      #c.params[:page].present? && c.params[:page] > 10 ?
+        #3.days : 1.hour
+    #},   
   # GET /stores
   # GET /stores.json
   def check_out_page
@@ -21,7 +25,7 @@ class StoresController < ApplicationController
   end
   def index
     check_out_page
-    @stores = Store.credit_desc.fullscan.search :include=>[:city],
+    @stores = Store.value_desc.fullscan.search :include=>[:city],
       :per_page=>100,
       :page=>params[:page] || 1, :max_matches => 10_000
     @title = "店铺"
@@ -38,25 +42,37 @@ class StoresController < ApplicationController
     @hide_recent = true
     render :action=>:index
   end
+  def recent
+    check_out_page
+    @stores = Store.srecent.fullscan.search :include=>[:city],
+      :per_page=>100,
+      :page=>params[:page] || 1, :max_matches => 10_000
+    @stores = @stores.in_city(@city) if @city
+    @title = "最新收录的店铺"
+      @title = @city.name + @title if @city.present?
+    @hide_recent = true
+    breadcrumbs.add "最新收录",nil
+    render :index
+  end
   def top 
-
+    check_out_page
     @stores = Store.credit_desc.fullscan.search :include=>[:city],
       :per_page=>100,
       :page=>params[:page] || 1
     @stores = @stores.in_city(@city) if @city
       @title = "名店榜"
       @title = @city.name + @title if @city.present?
-    pages = (@stores.total_entries / 100).ceil
-    @max_page = @city.present? ? 10 : 100
-    @max_page = pages if pages < @max_page
+    #pages = (@stores.total_entries / 100).ceil
+    #@max_page = @city.present? ? 10 : 100
+    #@max_page = pages if pages < @max_page
     breadcrumbs.add "店铺",stores_url
     breadcrumbs.add "名店",nil
     @hide_top = true
-    #render :action=>"index"
+    render :action=>"index"
   end
   def dengji
     @dengji = params[:dengji].to_i
-    @stores = Store.credit_desc.fullscan.search :include=>[:city],
+    @stores = Store.value_desc.fullscan.search :include=>[:city],
       :with=>{:seller_credit=>@dengji.to_i},
       :per_page=>200,
       :page=>params[:page] || 1
@@ -77,7 +93,7 @@ class StoresController < ApplicationController
     render :action=>'huangguan'
   end
   def jinhuangguan
-    @stores = Store.credit_desc.fullscan.search :include=>[:city],
+    @stores = Store.value_desc.fullscan.search :include=>[:city],
       :with=>{:seller_credit=>16..20},
       :per_page=>200,
       :page=>params[:page] || 1
@@ -89,6 +105,12 @@ class StoresController < ApplicationController
   # GET /stores/1.json
   def show
     @store = Store.find(params[:id])
+    if @store.title.nil?
+      @store.init_data
+      render :text=>'503',:status=>503
+      return
+    end
+    logger.debug @store.inspect
     #if @store.mingan?
       #redirect_to @store.url
       #return
