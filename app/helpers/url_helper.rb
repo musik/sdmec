@@ -12,4 +12,7 @@ module UrlHelper
     end
     super
   end
+  def fenlei_link cat
+    "http://www#{APP_CONFIG[:domain]}/fenlei/#{cat['sub_cat_id'].to_s(36)}"
+  end
 end

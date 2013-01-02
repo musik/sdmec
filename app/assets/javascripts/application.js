@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery_ujs
+// = require bootstrap-dropdown
 // = require bootstrap-alert
 // = require bootstrap-affix
 //comment// = require jquery.ui.autocomplete
@@ -112,6 +113,26 @@ function link_load(id,link_id){
     })
   })
 }
+function convert_items(){
+  console.log(_iids)
+  TOP.api('rest','get',{
+      method:'taobao.taobaoke.widget.items.convert',
+      'fields': 'click_url,num_iid',
+      track_iids: _iids,
+      outer_code: 'temai'
+  },function(resp){
+    if(resp.error_response){
+      console.debug('Fail:widget.items.convert'+resp.error_response.msg);
+      return false;
+     }
+     items = resp.taobaoke_items.taobaoke_item
+     for(i in items){
+      item = items[i]
+      $('a[data-id=' + item.num_iid + ']').attr('href',item.click_url)
+         
+     }
+  })
+}
 function convert_shop(nick,context,valueable){
     fields = valueable ? 'click_url,commission_rate' : 'user_id,click_url,commission_rate,seller_credit,shop_type,total_auction,auction_count' 
     TOP.api('rest', 'get',{
@@ -121,7 +142,7 @@ function convert_shop(nick,context,valueable){
       outer_code: context
     },function(resp){
       if(resp.error_response){
-        console.debug('Fail:taobao.taobaoke.widget.shops.convert'+resp.error_response.msg);
+        console.debug('Fail:widget.shops.convert'+resp.error_response.msg);
         return false;
        }
        //console.debug(resp)

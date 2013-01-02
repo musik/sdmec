@@ -1,10 +1,18 @@
 # -*- encoding : utf-8 -*-
 class TbpagesController < ApplicationController
-  load_resource #:find_by => :slug,:except=>[]
-  authorize_resource :except=>[]
+  load_resource :find_by => :slug,:except=>[:fenlei]
+  authorize_resource :except=>[:fenlei]
   cache_sweeper :tbpage_sweeper
   def index
     @tbpages = Tbpage.all
+  end
+  def fenlei
+    @id = params[:id].to_i(36)
+    @cat = Tbpage::Temai.new.get_cat_by_id @id
+    @items = Tbpage::Temai.new.get_items_by_cat @id
+
+    breadcrumbs.add @cat["parent"]["sub_cat_name"],fenlei_link(@cat["parent"]) if @cat.has_key?("parent")
+    breadcrumbs.add @cat["sub_cat_name"]
   end
 
   def show

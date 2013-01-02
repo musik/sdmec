@@ -23,6 +23,10 @@ namespace :init do
   end
 end
 namespace :jobs do
+  desc "每日更新Temai"
+  task :temai => :environment do
+    Tbpage::Temai.new.async :update_cats
+  end
   desc "把dach数据转入kt"
   task :dach => :environment do
     Dache.select(:id).all.each do |d|

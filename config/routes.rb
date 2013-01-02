@@ -85,6 +85,7 @@ Tb::Application.routes.draw do
   match '/status' => 'home#status'
   match '/reports' => 'home#reports'
   match '/zhuan' => 'home#zhuan'
+  match '/fenlei/:id' => 'tbpages#fenlei',:as=>"fenlei"
   devise_for :users
   resources :users, :only => [:show, :index]
   #mount Resque::Server, :at => "/resque"

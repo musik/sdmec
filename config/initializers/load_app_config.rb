@@ -7,6 +7,7 @@ end
 APP_CONFIG[:channels] = YAML.load(File.read("#{Rails.root}/config/channels.yml"))
 APP_CONFIG[:city_slugs] = File.read("#{Rails.root}/config/city_slugs.yml").split("\n")
 APP_CONFIG[:site_excludes] = File.read("#{Rails.root}/config/site_excludes.txt").split("\n")
+APP_CONFIG[:domain] = Rails.env.production? ? ".sdmec.com" : ".vcap.me:3000"
 
 
 require 'extras/stringex_ex'

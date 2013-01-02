@@ -18,18 +18,21 @@ every "45 * * * *" do
   #rake "jobs:tbpage"
   rake "ts:in:delta"
 end
-every "20 8,11,14,17 * * *" do
-  rake "jobs:topbaidu_all"
+every "5 * * * *" do
+  rake "jobs:temai"
 end
-every "30 4 * * *" do
-  rake "jobs:pv_clear"
-end
+#every "20 8,11,14,17 * * *" do
+  #rake "jobs:topbaidu_all"
+#end
+#every "30 4 * * *" do
+  #rake "jobs:pv_clear"
+#end
 # every "0 8,14 * * *" do
   # rake "jobs:ad"
 # end
-every "5,35 * * * *" do
-  rake "jobs:topbaidu"
-end
+#every "5,35 * * * *" do
+  #rake "jobs:topbaidu"
+#end
 
 
 # Learn more: http://github.com/javan/whenever

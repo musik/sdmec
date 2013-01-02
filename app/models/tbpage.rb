@@ -102,6 +102,34 @@ class Tbpage < ActiveRecord::Base
         end
       end
     end
+    def all_cats
+      @all_cats ||= begin
+        @cats = get_cats
+        @cats + @cats.collect{|c| c["children"]}.flatten
+      end
+    end
+    def get_cat_by_id id
+      @cats = get_cats
+      cat = @cats.select{|r|
+        r["sub_cat_id"] == id
+      }.first
+      if cat.nil?
+         childrens = @cats.collect{|c| 
+           c["children"]
+         }
+         cat = childrens.flatten.each{|r|
+            r["sub_cat_id"] == id
+          }.first
+         return if cat.nil?
+         parent = @cats.select{|r|
+          r["children"].include? cat
+         }.first
+         cat["siblings"] = parent.delete "children"
+         cat["parent"] = parent
+         Rails.logger.debug cat
+      end
+      cat
+    end
     def get_cats_with_items
       @cats = get_cats
       return nil if @cats.nil?
@@ -135,7 +163,7 @@ class Tbpage < ActiveRecord::Base
       api = TaobaoFu::Api.new
       results = api.tmall_temai_cats
       Resque.redis.set cats_key,results.to_json
-      results.each do |cat|
+      all_cats.each do |cat|
         async :update_items_by_cat,cat["sub_cat_id"]
       end
       results
