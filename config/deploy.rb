@@ -50,7 +50,7 @@ require 'recipes/application'
 set :nginx_remote_config,"/etc/nginx/sites-enabled/sdmec.conf"
 set :nginx_local_config, "./lib/templates/nginx.conf.erb"
 set :application_uses_ssl, false
-set :nginx_host_name,"sdmec.com *.sdmec.com"
+set :nginx_host_name,"sdmec.me *.sdmec.me"
 
 require 'recipes/nginx'
 

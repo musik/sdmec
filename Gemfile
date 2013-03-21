@@ -1,7 +1,8 @@
 require 'rbconfig'
 #gem "bundler", "~> 1.1.5"
 HOST_OS = RbConfig::CONFIG['host_os']
-source 'http://ruby.taobao.org'
+#source 'http://ruby.taobao.org'
+source 'http://rubygems.org'
 gem 'rails', '3.2.5'
 gem 'mysql2'
 gem 'execjs'
