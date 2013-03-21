@@ -34,6 +34,7 @@ db/sphinx/
 .redcar/
 .sass-cache
 /config/config.yml
+/config/taobao.yml
 /config/database.yml
 /coverage.data
 /coverage/

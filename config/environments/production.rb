@@ -8,7 +8,7 @@ Tb::Application.configure do
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
-  config.cache_store = :redis_store,"redis://localhost:6379/9"
+  #config.cache_store = :redis_store,"redis://localhost:6379/9"
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = true
@@ -48,7 +48,7 @@ Tb::Application.configure do
   config.action_controller.asset_host = "http://www.sdmec.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w(ie6.css ie6.js html5*.js bootstrap-tab.js simple.css)
+  config.assets.precompile += %w(ie6.css ie6.js html5*.js jquery.lazyload.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

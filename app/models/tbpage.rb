@@ -117,7 +117,7 @@ class Tbpage < ActiveRecord::Base
          childrens = @cats.collect{|c| 
            c["children"]
          }
-         cat = childrens.flatten.each{|r|
+         cat = childrens.flatten.select{|r|
             r["sub_cat_id"] == id
           }.first
          return if cat.nil?

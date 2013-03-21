@@ -1,6 +1,6 @@
 #encoding: utf-8
 class StoresController < ApplicationController
-  caches_action :show,:expires_in => 3.days
+  #caches_action :show,:expires_in => 3.days
   cache_sweeper :store_sweeper
   caches_action :city,:expires_in => 5.minutes 
   caches_action :index,:top,
@@ -129,7 +129,8 @@ class StoresController < ApplicationController
     #@items = nil
     breadcrumbs.add @store.title,nil
     #render  @store.click_url.present? ? 'newshow' : 'freeshow'
-    render  'newshow'
+    #render  'newshow'
+    render 'gshow'
   end
   def patch
     if cookies[:sign].present?

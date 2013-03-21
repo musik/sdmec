@@ -23,7 +23,9 @@ describe TaobaoFu do
       # api.taoke_get_items_by_keyword("htc")
     # end
     #测试时间
-    #api = TaobaoFu::Api.new
+    api = TaobaoFu::Api.new
+    nick = '静静儿玺玺'
+    pp api.shop_get nick
     #pp api.tmall_temai_subcats_search
     #pp api.tmall_temai_cats
     #pp api.taoke_get_report :page_size=>1

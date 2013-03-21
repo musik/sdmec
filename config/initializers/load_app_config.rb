@@ -12,16 +12,16 @@ APP_CONFIG[:domain] = Rails.env.production? ? ".sdmec.com" : ".vcap.me:3000"
 
 require 'extras/stringex_ex'
 require 'extras/taobao_fu'
-require 'kts'
-require 'page_visit_tracker'
+#require 'kts'
+#require 'page_visit_tracker'
 #require 'c7words'
-require 'topbaidu'
+#require 'topbaidu'
 
-%w(news news_entry image image_entry image_thumbnail_entry).each do |str|
-  require "feedzirra/parser/bing_#{str}"
-end
+#%w(news news_entry image image_entry image_thumbnail_entry).each do |str|
+  #require "feedzirra/parser/bing_#{str}"
+#end
 
-require 'mzfetcher'
+#require 'mzfetcher'
 
 
-require 'bing_image_search'
+#require 'bing_image_search'
