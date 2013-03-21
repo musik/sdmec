@@ -27,7 +27,7 @@
       # page if it exists in the doc root. This is for capistrano's
       # disable web task
       
-      try_files /system/maintenance.html $uri $uri/index.html $uri.html /cache/$host$uri/index.html /cache/$host$uri.html @app;
+      try_files /system/maintenance.html $uri $uri/index.html $uri.html @app;
       location @maintenance {
         rewrite  ^(.*)$  /system/maintenance.html last;
         break;
@@ -47,33 +47,15 @@
         break;
         <% end %>
       }
-      
-      # Now this supposedly should work as it gets the filenames with querystrings that Rails provides.
-      # BUT there's a chance it could break the ajax calls.
-      location ~* \.(ico|css|gif|jpe?g|png)(\?[0-9]+)?$ {
-         expires max;
-         break;
+      location ~ ^/(categories|topics|mai)/ {
+           return 410;
       }
-      
-      location ~ ^/javascripts/.*\.js(\?[0-9]+)?$ {
-         expires max;
-         break;
-      }
-      
-      # if the request is for a static resource, nginx should serve it directly
-      # and add a far future expires header to it, making the browser
-      # cache the resource and navigate faster over the website
       location ~ ^/(images|javascripts|stylesheets|system)/ {
-        root <%= deploy_to %>/current/public;
+        root <%deploy_to%>/current/public;
         expires max;
         break;
       }
       
-      # Rails error pages
-      error_page 500 502 503 504 /500.html;
-      location = /500.html {
-        root <%= deploy_to %>/current/public;
-      }
   }
   
   <% if application_uses_ssl %>

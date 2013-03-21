@@ -46,8 +46,8 @@
       %a.loc#reviews
       %h3 评论
       %p #{@store.title}怎么样?有#{@store.title}优惠券可以分享?
-      =javascript_include_tag "http://open.denglu.cc/connect/commentcode?appid=36977denGHiyfkcbLRWFOT9XOO6jI3&postid=#{@store.sid}&title=#{@store.title}"
-      -#= render :partial => 'stores/comments'
+      #ccreviews-wrap Loading..
+      %script{:type=>'text/javascript',:data=>"http://open.denglu.cc/connect/commentcode?appid=36977denGHiyfkcbLRWFOT9XOO6jI3&postid=#{@store.sid}&title=#{@store.title}",:id=>'denglucc'}
     =slotf
 
   .span3.pull-right

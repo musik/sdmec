@@ -2,11 +2,13 @@
 -meta :keywords,t('city.home.keywords',:city=>@city.name)
 -meta :description,t('city.home.description',:city=>@city.name)
 -@hide_top = true
-.bdct
+-#.bdct
   -#=sogou 85072,500,200
   -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
-  =bdad 'SD5200-CITY-BEFORE，2012-12-5',1153604
+  -#=bdad 'SD5200-CITY-BEFORE，2012-12-5',1153604
   -#=javascript_tag 'BAIDU_CLB_fillSlot("484908");'
+.gslot  
+  =adsense '3958440645','sd-city-before'
 %h2="#{@city.name}店铺"
 .share
 
