@@ -2,25 +2,47 @@
 -meta :keywords,t('city.home.keywords',:city=>@city.name)
 -meta :description,t('city.home.description',:city=>@city.name)
 -@hide_top = true
--#.bdct
-  -#=sogou 85072,500,200
-  -#=javascript_tag 'BAIDU_CLB_fillSlot("484907");'
-  -#=bdad 'SD5200-CITY-BEFORE，2012-12-5',1153604
-  -#=javascript_tag 'BAIDU_CLB_fillSlot("484908");'
-.gslot  
-  =adsense '3958440645','sd-city-before'
-%h2="#{@city.name}店铺"
-.share
+-@col1=true
 
-= render :partial => 'stores/list'
--#= render :partial => 'categories/hlist'
+.row
+  .span2.sidebar
+    %h1=t('city.home.header',:city=>@city.name)
+    %p.description
+      =t('city.home.description',:city=>@city.name).html_safe
+    -cache "primary_cities_#{@city.slug}" do
+      -cities = @city.children_or_siblings  
+      %h4 相关城市
+      %p.cities
+        -cities.each do |r|
+          =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺"
+    =adsense '3568161046','sd-city-left',:width=>120,:height=>600
+  -content_for :full do    
+    .alert.alert-notice
+      本站不是淘宝官方网站。如果你要找的是淘宝，请 <a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_11424198&eventid=101329" target="_blank" rel="nofollow">点这里进入</a> 。
+  .span10
+    %h2="#{@city.name}店铺"
+    .gslot  
+      =adsense '3958440645','sd-city-before'
+    .row-fluid
+      .span8.narrow
+        = render :partial => 'stores/list',:locals=>{:hide_city=>!@city.parent_id.zero?}
         
-=link_to "更多",top_stores_url(:anchor=>"position-11")
+        =link_to "更多",top_stores_url(:anchor=>"position-11")
+      .span4
+        -recent_limit ||= 15        
+        -cache "recent-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.hour do
+          -recents = Store.srecent.in_city(@city).fullscan.search(:include=>[:city],:per_page=>recent_limit)
+          -#-recents = Store.recent.updated.incity(@city).limit(recent_limit).includes(:city).short.all
+          -if recents.present?
+            %h4 #{@city.present? ? @city.name : nil}最新发现
+            %ul.top.unstyled
+              -recents.each do |s|
+                %li{:class=>cycle('o','e')} 
+                  =link_to s.safe_title,store_url(s,:subdomain=>s.city_slug)
+    .gslot
+      =adsense '9475093849','sd-city-bottom',:width=>728,:height=>90
         
--content_for :sidebar do
-  %h1=t('city.home.header',:city=>@city.name)
-  %p.description
-    =t('city.home.description',:city=>@city.name).html_safe
+        
 
 -content_for :links do
   -citylink=city_link @city.name

@@ -1,4 +1,5 @@
 -stores ||= @stores
+-hide_city ||= false
 .store_list
   -i=0
   -stores.each do |s|
@@ -15,7 +16,7 @@
             .title= s.safe_title
 
         .summary
-          -if s.city.present?
+          -if !hide_city && s.city.present?
             =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
           =strip_tags(safe_print("#{s.bulletin} #{s.desc}")).truncate 60
         .meta 
