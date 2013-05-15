@@ -6,6 +6,7 @@ Capistrano::Configuration.instance.load do
     task :yml do      
       upload './config/resque.yml', "#{shared_path}/config/resque.yml"
       upload './config/taobao.yml', "#{shared_path}/config/taobao.yml"
+      upload './config/resque-pool.yml', "#{shared_path}/config/resque-pool.yml"
     end 
     task :symlink do
       run "if [ ! -d '#{shared_path}/html' ]; then mkdir #{shared_path}/html; fi;"

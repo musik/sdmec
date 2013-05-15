@@ -154,7 +154,7 @@ class Tbpage < ActiveRecord::Base
     def update_items_by_cat id
       api = TaobaoFu::Api.new
       results = api.tmall_temai_items_search :cat=>id
-      return if results.has_key? "error_response"
+      return if results.nil? or results.empty? or results.has_key? "error_response" 
       results["items"] = results["item_list"]["tmall_search_tm_item"] 
       results.delete "item_list"
       Resque.redis.set data_key("items:#{id}"),results.to_json
