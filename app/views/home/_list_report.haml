@@ -39,9 +39,12 @@
         -r = OpenStruct.new(r)
         %tr
           %td
+            =r.create_time
+            %br
             =r.pay_time
+            %br
+            =r.app_key
             -if r.outer_code
-              %br
               %span.label= r.outer_code
           %td.title
             =link_to r.item_title.truncate(25),"http://item.taobao.com/item.htm?spm=0.0.0.18.O0tfiE&id=#{r.num_iid}",:title=>r.item_title,:target=>'_blank'

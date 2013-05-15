@@ -16,7 +16,7 @@ guard 'livereload' do
   watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
 
-guard 'rails' do
+guard 'rails',:port=>3000 do
   watch('Gemfile.lock')
   watch(%r{^config/environments/development.rb})
   watch(%r{^config/initializers/*.rb})

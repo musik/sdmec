@@ -6,7 +6,7 @@ describe Tbpage do
   it "should be valid" do
     #Tbpage.new.should be_valid
     #Tbpage::Temai.new.get_cats
-    #pp Tbpage::Temai.new.update_items_by_cat 50101034
+    pp Tbpage::Temai.new.update_items_by_cat 625396204
   end
   it "should " do
     # t = FactoryGirl.create :tbpage

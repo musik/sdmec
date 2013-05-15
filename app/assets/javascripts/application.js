@@ -116,7 +116,7 @@ function link_load(id,link_id){
   })
 }
 function convert_items(){
-  console.log(_iids)
+  //console.log(_iids)
   TOP.api('rest','get',{
       method:'taobao.taobaoke.widget.items.convert',
       'fields': 'click_url,num_iid',
@@ -124,7 +124,7 @@ function convert_items(){
       outer_code: 'temai'
   },function(resp){
     if(resp.error_response){
-      console.debug('Fail:widget.items.convert'+resp.error_response.msg);
+      //console.debug('Fail:widget.items.convert'+resp.error_response.msg);
       return false;
      }
      items = resp.taobaoke_items.taobaoke_item
@@ -144,7 +144,7 @@ function convert_shop(nick,context,valueable){
       outer_code: context
     },function(resp){
       if(resp.error_response){
-        console.debug('Fail:widget.shops.convert'+resp.error_response.msg);
+        //console.debug('Fail:widget.shops.convert'+resp.error_response.msg);
         return false;
        }
        //console.debug(resp)

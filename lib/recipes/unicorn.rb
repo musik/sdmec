@@ -30,7 +30,7 @@ Capistrano::Configuration.instance.load do
   set(:unicorn_remote_config) { "#{shared_path}/config/unicorn.rb" }
 
   def unicorn_start_cmd
-    "cd #{current_path} && #{unicorn_bin} -c #{unicorn_remote_config} -E #{rails_env} -D"
+    "cd #{current_path} && #{unicorn_bin} -c #{current_path}/config/unicorn.rb -E #{rails_env} -D"
   end
   
   def unicorn_stop_cmd

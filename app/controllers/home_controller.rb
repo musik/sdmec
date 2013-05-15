@@ -138,7 +138,7 @@ class HomeController < ApplicationController
     @current_page = @current_page.to_i
     @date = params[:date].present? ? params[:date] : Date.yesterday.strftime('%Y%m%d')
     defaults = {
-      :fields => 'trade_parent_id,trade_id,real_pay_fee,commission_rate,commission,app_key,outer_code,pay_time,pay_price,num_iid,item_title,item_num,category_id,category_name,shop_title,seller_nick',
+      :fields => 'trade_parent_id,trade_id,real_pay_fee,commission_rate,commission,app_key,outer_code,pay_time,pay_price,num_iid,item_title,item_num,category_id,category_name,shop_title,seller_nick,create_time',
       :page_size => @per_page,
       :page_no => @current_page,
       :date => @date
