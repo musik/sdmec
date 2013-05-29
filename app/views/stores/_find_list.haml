@@ -10,8 +10,10 @@
           -else
             =link_to "add","javascript://",:class=>"btn-mini",:onclick=>"add_cat_store(#{@cat.id},#{s.id})"
         .details
-          %strong=link_to s.name,s,:target=>'_blank'
+          %strong=link_to s.name,s.url,:target=>'_blank'
           %br
+          =s.cat.name if s.cat.present?
+          \/
           =s.nick
           -if s.seller_credit
             .rank.pull-left.rank-27{:class=>"seller-rank-#{s.seller_credit}"}

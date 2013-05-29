@@ -5,7 +5,7 @@
       %section.span4.hlist{:class=>cycle('a','b','c')}
         %h2=link_to cat.name,tbcat_url(cat),:title=>"#{cat.name}店铺"
         %ol
-          -@stores_bycats[cat.id].each do |s|
+          -@stores_bycats[cat.id].slice(0,15).each do |s|
             %li
               .meta
                 -if s.seller_credit
