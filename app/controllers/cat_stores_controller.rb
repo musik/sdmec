@@ -57,6 +57,7 @@ class CatStoresController < ApplicationController
   end
   def find_cat
     @cat = Cat.find params[:cat_id]
+    authorize! :edit,@cat
   end
 
 end
