@@ -18,9 +18,9 @@ every "45 * * * *" do
   #rake "jobs:tbpage"
   rake "ts:in:delta"
 end
-every "5 * * * *" do
-  rake "jobs:temai"
-end
+#every "5 * * * *" do
+  #rake "jobs:temai"
+#end
 #every "20 8,11,14,17 * * *" do
   #rake "jobs:topbaidu_all"
 #end
