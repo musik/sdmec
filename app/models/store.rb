@@ -1,6 +1,7 @@
 #encoding: utf-8
 class Store < ActiveRecord::Base
   belongs_to :city
+  belongs_to :cat,:counter_cache=>'stores_count'
   attr_accessible :auction_count, :cid, :commission_rate, :created, :delivery_score, :item_score, :pic_path, :seller_credit, :seller_id, :nick, :service_score, :shop_id, :shop_title, :shop_type, :total_auction, :taoke_updated_at, :shop_updated_at,:city_id,:bulletin,:desc,:sid,:title,:modified,:click_url,:user_id,
     :buyer_credit, :hangye,:seller_rate,:extra_data,
     :user_updated_at, :comments_updated_at,:delta
@@ -29,6 +30,7 @@ class Store < ActiveRecord::Base
     #indexes :title,:bulletin,:desc
     indexes :title
     has :id
+    has :cat_id
     has :city_id,:facets=>true
     has :seller_credit,:facets=>true
     has :total_auction
@@ -212,6 +214,15 @@ class Store < ActiveRecord::Base
       @api ||= TaobaoFu::Api.new
     end
   class << self
+    def by_cats
+     rs = {}
+     where('cat_id is not null').includes(:city).all.each do |r|
+       rs.has_key?(r.cat_id) ? 
+         rs[r.cat_id] << r :
+          rs[r.cat_id] = []
+     end
+     rs
+    end
     def all_by_ids ids
       shops = Store.where(:id=>ids).includes(:city).all
       results = []

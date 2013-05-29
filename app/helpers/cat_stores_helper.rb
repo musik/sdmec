@@ -1,0 +1,2 @@
+module CatStoresHelper
+end

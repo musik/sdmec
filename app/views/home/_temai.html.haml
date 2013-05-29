@@ -1,0 +1,10 @@
+-if @temai_cats.present?
+  -@temai_cats.each do |cat|
+    .temai
+      %h2.inline{:id=>cat["sub_cat_id"]}
+        =link_to cat["sub_cat_name"],fenlei_link(cat)
+      %small
+        -cat['children'].each do |scat|
+          =link_to scat["sub_cat_name"],fenlei_link(cat)
+
+      =render :partial=>"items",:locals=>{:cat=>cat["sub_cat_id"],:results=>cat["items"],:limit=>3}

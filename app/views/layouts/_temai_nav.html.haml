@@ -1,0 +1,11 @@
+-cats = @temai_cats || Tbpage::Temai.new.get_cats
+-if cats.present?
+  -cats.each do |cat|
+    %li.dropdown
+      %a{:href=>fenlei_link(cat),:'data-toggle'=>'dropdown',:'data-target'=>'#',:id=>"#{cat['sub_cat_id'].to_s(36)}"}
+        #{cat['sub_cat_name']}
+        %b.caret
+
+      %ul.dropdown-menu{:'aria-labelledby'=>cat['sub_cat_id'].to_s(36)}
+        -cat["children"].each do |scat|
+          %li=link_to scat["sub_cat_name"],fenlei_link(scat)

@@ -1,0 +1,17 @@
+-if @cats.present?
+  .row
+    -@cats.each do |cat|
+      -next if !@stores_bycats.has_key? cat.id
+      %section.span4.hlist{:class=>cycle('a','b','c')}
+        %h2=link_to cat.name,tbcat_url(cat),:title=>"#{cat.name}店铺"
+        %ol
+          -@stores_bycats[cat.id].each do |s|
+            %li
+              .meta
+                -if s.seller_credit
+                  .rank.pull-left{:class=>"seller-rank-#{s.seller_credit}"}
+                    #{s.seller_credit}
+              [
+              =link_to s.nick.truncate(2,:omission=>''),store_url(s,:subdomain=>s.city_slug),:title=>s.nick
+              ]
+              =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121227114643) do
+ActiveRecord::Schema.define(:version => 20130529055448) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20121227114643) do
     t.integer "lft"
     t.integer "rgt"
     t.integer "depth"
+    t.integer "stores_count", :default => 0
   end
 
   add_index "cats", ["lft", "rgt"], :name => "lft_rgt"
@@ -293,8 +294,10 @@ ActiveRecord::Schema.define(:version => 20121227114643) do
     t.integer  "seller_score"
     t.boolean  "delta",                                              :default => false, :null => false
     t.boolean  "active",                                             :default => true
+    t.integer  "cat_id"
   end
 
+  add_index "stores", ["cat_id"], :name => "index_cat"
   add_index "stores", ["cid"], :name => "index_stores_on_cid"
   add_index "stores", ["city_id"], :name => "index_stores_on_city_id"
   add_index "stores", ["nick"], :name => "index_stores_on_nick"

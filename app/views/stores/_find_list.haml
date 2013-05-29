@@ -1,0 +1,26 @@
+-if !stores.present?
+  .alert 没有找到相应的结果
+-else
+  %ul.findlist.unstyled
+    -stores.each do |s|
+      %li.store{:id=>"store-#{s.id}"}
+        .actions
+          -if s.cat_id.present? and s.cat_id == @cat.id
+            =link_to "x","javascript://",:class=>"btn-mini",:onclick=>"delete_cat_store(#{@cat.id},#{s.id})"
+          -else
+            =link_to "add","javascript://",:class=>"btn-mini",:onclick=>"add_cat_store(#{@cat.id},#{s.id})"
+        .details
+          %strong=link_to s.name,s,:target=>'_blank'
+          %br
+          =s.nick
+          -if s.seller_credit
+            .rank.pull-left.rank-27{:class=>"seller-rank-#{s.seller_credit}"}
+              信誉等级: #{s.seller_credit}
+          =s.commission_rate
+          \/
+          =s.auction_count
+        %hr
+
+
+
+  

@@ -32,6 +32,14 @@ class StoresController < ApplicationController
     @hide_recent = true
     breadcrumbs.add "店铺",nil
   end
+  def find
+    @cat = Cat.find params[:cat_id]
+    @stores = Store.credit_desc.search params[:sq],
+      #:without => {:id=>@cat.id},
+      :include=>[:cat],
+      :per_page => 30, 
+      :page=>(params[:page] || 1)
+  end
   def city
     check_out_page
     @stores = Store.srecent.in_city(@city).fullscan.search :per_page=>100,

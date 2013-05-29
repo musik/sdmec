@@ -175,3 +175,9 @@ function convert_shop(nick,context,valueable){
 function load_items(id){ 
   $.get('/shop/' + String(id) + '/items.js',{update:true})
 }
+function add_cat_store(cat_id,store_id){
+  $.post('/cats/' + cat_id + '/stores',{store_id: store_id})
+}
+function delete_cat_store(cat_id,store_id){
+  $.ajax({url: '/cats/' + cat_id + '/stores/' + store_id, type: 'DELETE'})
+}

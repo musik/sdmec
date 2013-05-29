@@ -1,0 +1,12 @@
+-stores ||= @stores
+-hide_city ||= false
+%ol.store_list
+  -i=0
+  -stores.each do |s|
+    %li.store{:id=>"position-#{i}",:class=>s.click_url.present? ? "pro" : 'free'}
+      -i+=1
+      .title
+        -if s.click_url.present?
+          = link_to s.safe_title,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','shopinlist')"
+        -else
+          = s.safe_title

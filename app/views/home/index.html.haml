@@ -2,33 +2,22 @@
 -@col1 = true
 -@hide_fullad = true
 
--if @temai_cats.present?
-  -@temai_cats.each do |cat|
-    .temai
-      %h2.inline{:id=>cat["sub_cat_id"]}
-        =link_to cat["sub_cat_name"],fenlei_link(cat)
-      %small
-        -cat['children'].each do |scat|
-          =link_to scat["sub_cat_name"],fenlei_link(cat)
-
-      =render :partial=>"items",:locals=>{:cat=>cat["sub_cat_id"],:results=>cat["items"],:limit=>3}
-
--#.row
-  -#.span8
+= render :partial => 'home/cats'
+-#= render :partial => 'home/temai'
 -if @sites.present?
   .sites.alert.alert-info
     小站:
     -@sites.each do |s|
       =link_to s.name,root_url(:subdomain=>s.slug)
 %ul.nav.nav-tabs
-  %li.active
+  %li
     %a{:href=>'#recommended',:'data-toggle'=>'tab'} 推荐
   %li
     %a{:href=>'#recent',:'data-toggle'=>'tab'} 最新
-  %li
+  %li.active
     %a{:href=>'#cities',:'data-toggle'=>'tab'} 城市
 .tab-content
-  .tab-pane.active#recommended
+  .tab-pane#recommended
     %h2.inline 名店推荐
     %small
       =link_to '更多',stores_url
@@ -43,7 +32,7 @@
       =render :partial=>"stores/index",:locals=>{:stores=>@stores_recent}
       -#=render :partial=>"stores/index2col",:locals=>{:stores=>@stores_recent}
 
-  .tab-pane#cities
+  .tab-pane.active#cities
     = render :partial => 'cities/less'
 -@hide_cities = true
         

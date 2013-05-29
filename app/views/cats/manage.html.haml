@@ -5,17 +5,18 @@
   %tr
     %th Name
     %th Slug
-    %th Oid
+    %th stores
     %th Depth
     %th
 
   - @cats.each do |cat|
     %tr
-      %td=link_to ["--"*cat.depth,cat.name].join(' '),cat
+      %td=link_to ["--"*cat.depth,cat.name].join(' '),tbcat_url(cat)
       %td= cat.slug
-      %td= cat.oid
+      %td= cat.stores_count
       %td= cat.depth
       %td
+        = link_to 'stores', cat_stores_url(cat)
         = link_to 'URL', cat.url,:target=>"_blank"
         = link_to 'Edit', edit_cat_path(cat)
         = link_to 'Destroy', cat, :confirm => 'Are you sure?', :method => :delete

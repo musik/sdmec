@@ -18,7 +18,10 @@ Capistrano::Configuration.instance.load do
         run "kill -QUIT `cat #{shared_path}/pids/resque-pool.pid`"
       end
       task :restart, :roles => :app do
-        run "kill -HUP `cat #{shared_path}/pids/resque-pool.pid`"
+        #run "kill -HUP `cat #{shared_path}/pids/resque-pool.pid`"
+        pid_file = "#{shared_path}/pids/resque-pool.pid"
+        run "if [ -f #{pid_file} ];then kill -QUIT `cat #{pid_file}`; fi;"
+        run "cd #{current_path} && bundle exec resque-pool -c #{shared_path}/config/resque-pool.yml -d -p #{shared_path}/pids/resque-pool.pid -E #{environment}"
       end
     end
     namespace :worker do

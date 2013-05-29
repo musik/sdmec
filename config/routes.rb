@@ -40,6 +40,7 @@ Tb::Application.routes.draw do
       get 'jinhuangguan'
       get 'huangguan'
       get 'dengji'
+      post 'find'
     end
     member do
       get 'convert'
@@ -57,6 +58,7 @@ Tb::Application.routes.draw do
       get 'manage'
       get 'tree'
     end
+    resources :stores,:controller=>'cat_stores'
   end
   resources :links,:path=>'snips'
   match '/links'=>'links#links',:as=>'partners'

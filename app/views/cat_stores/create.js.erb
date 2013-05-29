@@ -1,0 +1,3 @@
+$('#store-<%=@store.id%>').remove();
+<% @stores = Store.where(:cat_id=>@cat.id).page(1)%>
+$('#rdata').html('<%=escape_javascript(render :partial => 'cat_stores/list',:locals=>{:stores=>@stores})%>')

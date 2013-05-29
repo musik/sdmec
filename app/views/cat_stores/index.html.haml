@@ -1,0 +1,17 @@
+-title @title
+-@col1 = true
+.row-fluid
+  .span8
+    #rdata= render :partial => 'cat_stores/list',:locals=>{:stores=>@stores}
+    -if can? :manage,Cat
+      -#= link_to 'add store', new_cat_store_url(@cat)
+      =link_to 'back',manage_cats_url
+  .span4
+    =form_for(@cat,:url=>find_stores_url,:remote=>true,:method=>'post') do |f|
+      %input{:name=>'sq',:value=> @cat.name}
+      %input{:name=>'cat_id',:value=> @cat.id,:type=>'hidden'}
+      %button 搜索
+    #results  
+
+
+

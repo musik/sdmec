@@ -5,11 +5,13 @@ class HomeController < ApplicationController
   caches_action :city,:expires_in => 30.minutes
 
   def index
-    @temai_cats = Tbpage::Temai.new.get_cats_with_items
+    #@temai_cats = Tbpage::Temai.new.get_cats_with_items
     #@stores = Store.credit_desc.fullscan.search :include=>[:city],:per_page=>51
     @stores = Store.value_desc.fullscan.search :include=>[:city],:per_page=>50
     @stores_recent = Store.srecent.fullscan.search :include=>[:city],:per_page=>30
-    @sites = Site.limit(30)
+    @cats = Cat.roots
+    @stores_bycats = Store.by_cats
+    #@sites = Site.limit(30)
     @bodyname = 'home'
     @hide_bread = true
     #render :layout=>'simple'

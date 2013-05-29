@@ -1,10 +1,11 @@
 # -*- encoding : utf-8 -*-
 class Cat < ActiveRecord::Base
-  attr_accessible :name, :oid, :slug,:parent_id
+  attr_accessible :name, :oid, :slug,:parent_id,:stores_count
   acts_as_nested_set
   # acts_as_url :name,  :url_attribute=>:slug,  :only_when_blank=>true
   # scope :leaves,where("rgt - lft = 1")
   resourcify
+  has_many :stores
   
   before_create :make_slug
   
@@ -37,7 +38,6 @@ class Cat < ActiveRecord::Base
     end
     def init_db
       delete_all
-      TaobaoTop.new.get_cats
     end
     def tree
       rs = {}
@@ -48,7 +48,12 @@ class Cat < ActiveRecord::Base
       rs
     end
     def nav
-      select(%w(name slug)).all
+      where("stores_count > 0").select(%w(id name slug)).all
+    end
+    def recount_stores
+      self.all.each do |r|
+         r.update_attribute :stores_count,r.stores.count
+      end
     end
   end
 end
