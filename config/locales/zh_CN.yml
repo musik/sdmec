@@ -50,8 +50,8 @@ zh_CN:
       muying: 母婴
       men: 男人
     home:
-      title: "%{city}店铺导航-%{city}导购网"
-      header: "%{city}导购"
+      title: "%{city}淘宝店铺导航-%{city}导航网"
+      header: "%{city}导航"
       keywords: "%{city}购物网"
       description: "sdmec.com %{city}购物信息网为您提供时尚女装、男装精品、女鞋男鞋、箱包配件、珠宝饰品、食品百货、数码3C配件等海量%{city}购物信息，满足您不同的%{city}购物需求。%{city}购物网，做最好的%{city}购物信息网。"
         

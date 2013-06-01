@@ -10,12 +10,12 @@
     -@sites.each do |s|
       =link_to s.name,root_url(:subdomain=>s.slug)
 %ul.nav.nav-tabs
+  %li.active
+    %a{:href=>'#cities',:'data-toggle'=>'tab'} 城市
   %li
     %a{:href=>'#recommended',:'data-toggle'=>'tab'} 推荐
   %li
     %a{:href=>'#recent',:'data-toggle'=>'tab'} 最新
-  %li.active
-    %a{:href=>'#cities',:'data-toggle'=>'tab'} 城市
 .tab-content
   .tab-pane#recommended
     %h2.inline 名店推荐

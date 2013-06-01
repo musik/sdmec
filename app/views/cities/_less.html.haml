@@ -4,14 +4,14 @@
     %h2.inline 城市导航
     %small
       -cities[:zhixiashi].each do |r|
-        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}导航"
+        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝店铺"
   %ul.cities
     -cities[:parents].each do |p|
       %li.prvs{:class=>cycle('a','b','c')}
-        = link_to p.name,root_url(:subdomain=>p.slug),:title=>"#{p.name}导航",:class=>"prov"
+        = link_to p.name,root_url(:subdomain=>p.slug),:title=>"#{p.name}淘宝店铺",:class=>"prov"
         -len = p.name.length
         -cities[:children][p.id].each do |r|
           -len += (r.name.length + 0.5)
           -break if len > 25
-          =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}导航"
+          =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝店铺"
 

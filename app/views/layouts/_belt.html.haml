@@ -4,7 +4,7 @@
       -rs = City.caps
       -rs.delete_if{|r| r.slug = @city.slug} if @city
       -City.caps.each do |r|
-        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}购物网"
+        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝店铺"
 %p.pagin
   =link_to "店铺",stores_url
   =link_to "最新收录",recent_stores_url
