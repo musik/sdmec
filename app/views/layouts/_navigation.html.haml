@@ -2,7 +2,7 @@
   -#= link_to t('appname_city',:city=>@city.name), root_path, :class => 'brand'
 -#-else
   -#= link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:rel=>"nofollow"
-= link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:rel=>"nofollow"
+= link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:title=>"淘宝皇冠店铺"
 -if @city.present?
   = link_to @city.name,root_path,:title=>t('appname_city',:city=>@city.name), :class => 'brand brand-mini'
 %ul.nav.nav-mini

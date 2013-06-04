@@ -2,8 +2,8 @@
 
 zh_CN:
   search: 搜索
-  appname: 热点导购
-  appname_city: "%{city}店铺导航"
+  appname: 皇冠店铺
+  appname_city: "%{city}淘宝店铺"
   breadcrumbs:
     home: 首页
     topics: 关键词列表
@@ -22,7 +22,7 @@ zh_CN:
       keywords: "%{name}"
       description: "%{name}"
     search:
-      title: "淘宝%{q}店铺_哪里有卖%{q}_%{q}多少钱"
+      title: "%{q}_淘宝%{q}店铺"
       keywords: "%{q},买%{q},%{q}店"
       description: "想知道哪里有卖%{q}?淘宝%{q}频道为您提供最新的淘宝%{q}店铺、卖家、价格及批发零售信息,满足您不同的%{q}购买需求。%{q}网,提供最优质的淘宝%{q}信息"
   cats:
