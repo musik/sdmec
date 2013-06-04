@@ -30,7 +30,7 @@ class CatsController < ApplicationController
   # GET /cats/1.json
   def show
     @cat = Cat.find(params[:id])
-    @stores = Store.credit_desc.search @cat.name,:include=>[:city],:per_page=>10
+    @stores = Store.credit_desc.search @cat.name,:include=>[:city],:per_page=>30,:page=>(params[:page])
     breadcrumbs.add "#{@cat.name}",nil
   end
 

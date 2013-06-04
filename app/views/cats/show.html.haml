@@ -12,7 +12,8 @@
 .share.pull-right
 .clear
 = render :partial => 'stores/list'
-=js_link_to_with_class "&raquo; 查看更多",taokq_url(@cat.name),"highlight"
+-#=js_link_to_with_class "&raquo; 查看更多",taokq_url(@cat.name),"highlight"
+=paginate @stores
 
 -content_for :sidebar do
   %h1="#{@cat.name}"
