@@ -2,11 +2,12 @@
   .row
     -@cats.each do |cat|
       -next if !@stores_bycats.has_key? cat.id
-      %section.span4.hlist{:class=>cycle('a','b','c')}
+      %section.span4.hlist{:class=>cycle('a','b','c',:name=>'section')}
         %h2=link_to cat.name,tbcat_url(cat),:title=>"#{cat.name}店铺"
         %ol.slist
           -@stores_bycats[cat.id].slice(0,15).each do |s|
-            %li.si
+            -#%li.si{:class=>['si-a','si-b'].sample}
+            %li.si{:class=>cycle('si-a','si-b')}
               .meta
                 -if s.seller_credit
                   -tmp = num_credit(s.seller_credit)

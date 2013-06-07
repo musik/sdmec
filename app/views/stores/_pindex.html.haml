@@ -3,8 +3,8 @@
 -i=0
 %ul.shoplist
   -stores.each do |s|
-    %li.si{:id=>"position-#{i}"}
-      -i+=1
+    -#%li.si{:class=>['si-a','si-b'].sample}
+    %li.si{:class=>cycle('si-a','si-b')}
       .meta
         -if s.seller_credit
           -tmp = num_credit(s.seller_credit)
