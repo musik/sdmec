@@ -1,10 +1,10 @@
 -cache "views-city-less" do
   -cities = City.tree
-  .page-headerv.mt1em
-    %h2.inline 城市导航
-    %small
-      -cities[:zhixiashi].each do |r|
-        =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝店铺"
+  -#.page-headerv.mt1em
+    -#%h2.inline 城市导航
+  .center
+    -cities[:zhixiashi].each do |r|
+      =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝店铺"
   %ul.cities
     -cities[:parents].each do |p|
       %li.prvs{:class=>cycle('a','b','c')}

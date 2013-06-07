@@ -179,6 +179,7 @@ ul.cities
     color: #f60
   .rank
     margin-left: 2px
+
 //
 // .item:hover
   // background: #f8f8f8
@@ -465,7 +466,7 @@ ul.top
       font-weight: 700
 ul.shoplist  
   font-size: 12px
-  margin: 1em 0
+  margin: 1em 0 0 -20px
   li
     float: left
     width: 300px
@@ -473,6 +474,8 @@ ul.shoplist
     list-style: circle
     height: 1.8em
     overflow: hidden
+  li.si
+    padding-right: 0
   a
     //float: left
   li.a
@@ -637,6 +640,13 @@ p.desc
     display: none
   .span12
     width: auto
+.home    
+  h1
+    text-align: center
+    font-size: 72px
+    line-height: 108px
+.center
+  text-align: center
 footer
   font-size: 12px
     
@@ -648,24 +658,37 @@ section.a
       size: 14px
     a
       color: #444
-  ol
-    font-size: 12px 
-    list-style: none
-    margin: .5em 0
-    li
-      overflow: hidden
-      height: 1.5em
-      position: relative
-      padding-right: 100px
-      .meta
-        position: absolute
-        right: 0
-        height: 1.5em
-        width: 90px
-        a
-          //float: right
-          //width: 2em
-          //overflow: hidden
+ol.slist
+  font-size: 12px 
+  list-style: none
+  margin: .5em 0
+li.si
+  overflow: hidden
+  height: 1.5em
+  position: relative
+  padding-right: 50px
+  .link
+    margin-right: 50px
+  a.nick
+    width: 2em
+    display: inline-block
+    text-align: center
+  a.title
+    margin-left: 2px
+    color: #999
+  a.title:hover
+    color: #333
+  .meta
+  .meta
+    position: absolute
+    right: 0
+    top: 0
+    height: 1.5em
+    width: 40px
+    a
+      //float: right
+      //width: 2em
+      //overflow: hidden
 
 
 .findlist  
@@ -677,3 +700,26 @@ section.a
       right: 5px
     .details
       margin-right: 50px
+.xrank      
+  display: block
+  //width: 60px
+  height: 16px
+  line-height: 16px
+  font-size: 13px
+  vertical-align: text-top
+  text-indent: 18px
+  overflow: hidden
+  background: url(rank_bg.gif) no-repeat scroll -999px -999px transparent
+  color: #999
+  i  
+    display: none 
+.xrank-red    
+  background-position: 0 0
+.xrank-blue    
+  background-position: 0 -32px
+.xrank-cap    
+  background-position: 0 -64px
+.xrank-crown    
+  background-position: 0 -80px
+  
+  

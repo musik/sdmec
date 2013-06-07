@@ -4,14 +4,15 @@
       -next if !@stores_bycats.has_key? cat.id
       %section.span4.hlist{:class=>cycle('a','b','c')}
         %h2=link_to cat.name,tbcat_url(cat),:title=>"#{cat.name}店铺"
-        %ol
+        %ol.slist
           -@stores_bycats[cat.id].slice(0,15).each do |s|
-            %li
+            %li.si
               .meta
                 -if s.seller_credit
-                  .rank.pull-left{:class=>"seller-rank-#{s.seller_credit}"}
-                    #{s.seller_credit}
-              [
-              =link_to s.nick.truncate(2,:omission=>''),store_url(s,:subdomain=>s.city_slug),:title=>s.nick
-              ]
-              =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow"
+                  -tmp = num_credit(s.seller_credit)
+                  .xrank{:class=>"xrank-#{tmp[0]}"}
+                    <i>#{tmp[0]}</i>x #{tmp[1]}
+              .link
+                =link_to s.nick.truncate(2,:omission=>''),store_url(s,:subdomain=>s.city_slug),:title=>s.nick,:class=>'nick'
+                \|
+                =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow",:class=>"title"

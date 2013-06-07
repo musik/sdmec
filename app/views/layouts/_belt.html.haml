@@ -17,7 +17,7 @@
     =link_to "名店",top_stores_url
     -Cat.nav.slice(0,6).each do |c|
       =link_to c.name,tbcat_url(c,:subdomain=>"www"),:title=>"购物#{c.name}"
-  =render "stores/creditmap" unless @creditmap_loaded
+  =render "stores/creditmap_btn" unless @creditmap_loaded
   -#-if is_home? and is_mainsite?
     -#-cache 'shops-paging',:expires_in => 1.hour do
       -#-i = 11
