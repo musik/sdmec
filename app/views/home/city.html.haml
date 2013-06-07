@@ -27,7 +27,7 @@
       .span8.narrow
         = render :partial => 'stores/list',:locals=>{:hide_city=>(!@city.parent_id.zero? or @city.zhixiashi?)}
         
-        =link_to "更多",top_stores_url(:anchor=>"position-11")
+        =link_to "更多",top_stores_url,:rel=>"nofollow"
       .span4
         -recent_limit ||= 15        
         -cache "recent-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.hour do

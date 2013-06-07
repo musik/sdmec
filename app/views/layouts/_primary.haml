@@ -22,12 +22,17 @@
     -#-recents = Store.credit.incity(@city).limit(recent_limit).includes(:city).short.all
     -recents = Store.credit_desc.in_city(@city).fullscan.search(:include=>[:city],:per_page=>recent_limit)
     -if recents.present?
-      %h4 #{@city.present? ? @city.name : nil}十大名店
-      %ul.top.unstyled
+      %h4 #{@city.present? ? @city.name : nil}店铺排行榜
+      %ol.slist
         -recents.each do |s|
-          %li{:class=>cycle('o','e')} 
-            =img_credit(s.seller_credit)
-            =link_to s.safe_title,store_url(s,:subdomain=>s.city_slug)
+          %li.si{:class=>cycle('si-a','si-b')} 
+            .meta
+              -if s.seller_credit
+                -tmp = num_credit(s.seller_credit)
+                .xrank{:class=>"xrank-#{tmp[0]}"}
+                  <i>#{tmp[0]}</i>x #{tmp[1]}
+            .link
+              =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow",:class=>"title"
 -unless @hide_recent        
   -recent_limit ||= 15        
   -cache "recent-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.hour do
@@ -35,7 +40,13 @@
     -#-recents = Store.recent.updated.incity(@city).limit(recent_limit).includes(:city).short.all
     -if recents.present?
       %h4 #{@city.present? ? @city.name : nil}最新发现
-      %ul.top.unstyled
+      %ol.slist
         -recents.each do |s|
-          %li{:class=>cycle('o','e')} 
-            =link_to s.safe_title,store_url(s,:subdomain=>s.city_slug)
+          %li.si{:class=>cycle('si-a','si-b')} 
+            .meta
+              -if s.seller_credit
+                -tmp = num_credit(s.seller_credit)
+                .xrank{:class=>"xrank-#{tmp[0]}"}
+                  <i>#{tmp[0]}</i>x #{tmp[1]}
+            .link
+              =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow",:class=>"title"

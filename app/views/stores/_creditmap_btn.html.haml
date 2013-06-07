@@ -1,14 +1,14 @@
 .btn-toolbar
   .btn-group
-    =link_to "金皇冠",jinhuangguan_stores_url,:class=>"btn"
+    =link_to "金皇冠",jinhuangguan_stores_url(:subdomain=>'www'),:class=>"btn"
   .btn-group
     -(1..5).to_a.reverse.each do |i| 
-      =link_to "#{i}皇冠",dengji_stores_url(:dengji=>i+10),:class=>"btn"
+      =link_to "#{i}皇冠",dengji_stores_url(:subdomain=>'www',:dengji=>i+10),:class=>"btn"
   .btn-group
     -(1..5).to_a.reverse.each do |i| 
-      =link_to "#{i}钻",dengji_stores_url(:dengji=>i+5),:class=>"btn"
+      =link_to "#{i}钻",dengji_stores_url(:subdomain=>'www',:dengji=>i+5),:class=>"btn"
   .btn-group
     -(1..5).to_a.reverse.each do |i| 
-      =link_to "#{i}心",dengji_stores_url(:dengji=>i),:class=>"btn"
+      =link_to "#{i}心",dengji_stores_url(:subdomain=>'www',:dengji=>i),:class=>"btn"
 
 -@creditmap_loaded = true  

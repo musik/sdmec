@@ -56,7 +56,7 @@ gem 'unicorn'
 gem 'rails-i18n'
 gem 'devise-i18n'
 
-gem 'kaminari','0.13.0'
+gem 'kaminari'
 
 gem 'nokogiri'
 

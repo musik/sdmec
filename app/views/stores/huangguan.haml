@@ -4,6 +4,6 @@
   %h1.inline= @title
   -if @city.nil?
     %small.nav
-      =render "stores/creditmap"
+      =render "stores/creditmap_btn"
 =paginate @stores
 =render :partial=>"stores/pindex",:locals=>{:stores=>@stores}
