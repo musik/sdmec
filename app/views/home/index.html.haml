@@ -2,6 +2,7 @@
 -@col1 = true
 -@hide_fullad = true
 
+.alert.alert-info=render :partial=>"stores/creditmap"
 = render :partial => 'home/cats'
 -#= render :partial => 'home/temai'
 -if @sites.present?
@@ -9,6 +10,7 @@
     小站:
     -@sites.each do |s|
       =link_to s.name,root_url(:subdomain=>s.slug)
+%br
 %ul.nav.nav-tabs
   %li.active
     %a{:href=>'#cities',:'data-toggle'=>'tab'} 城市
@@ -21,7 +23,6 @@
     %h2.inline 名店推荐
     %small
       =link_to '更多',stores_url
-      =render :partial=>"stores/creditmap"
     -cache "home_popular",:expires_in=>1.day do
       -#=render :partial=>"stores/pindex3col",:locals=>{:stores=>@stores}
       =render :partial=>"stores/pindex",:locals=>{:stores=>@stores}
