@@ -1,4 +1,8 @@
 -title t('.title',:name=>@tag.name),@tag.name
+-meta :keywords,t('.keywords',:name=>@tag.name)
+-meta :description,t('.description',:name=>@tag.name)
 
+%p.mute=@meta[:description]
 =render :partial=>"stores/list"
 =paginate @stores
+-#-content_for :sidebar do
