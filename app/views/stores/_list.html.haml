@@ -17,7 +17,7 @@
 
         .summary
           -if !hide_city && s.city.present?
-            =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
+            =link_to s.city.name,root_url(:subdomain=>s.city.slug)
           =strip_tags(safe_print("#{s.bulletin} #{s.desc}")).truncate 60
         .meta 
           -#=img_credit(s.seller_credit)

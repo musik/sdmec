@@ -68,15 +68,15 @@ class StoresController < ApplicationController
       :per_page=>100,
       :page=>params[:page] || 1
     @stores = @stores.in_city(@city) if @city
-      @title = "名店榜"
+      @title = "店铺排行榜"
       @title = @city.name + @title if @city.present?
     #pages = (@stores.total_entries / 100).ceil
     #@max_page = @city.present? ? 10 : 100
     #@max_page = pages if pages < @max_page
     breadcrumbs.add "店铺",stores_url
-    breadcrumbs.add "名店",nil
+    breadcrumbs.add "排行榜",nil
     @hide_top = true
-    render :action=>"index"
+    render :action=>"huangguan"
   end
   def dengji
     @dengji = params[:dengji].to_i
@@ -89,6 +89,9 @@ class StoresController < ApplicationController
     @dengjishu = (@dengji).divmod(5)[1]
     @dengjishu = 5 if @dengjishu.zero?
     @title = "#{@dengjishu}#{@dengjiming}店铺"
+    breadcrumbs.add "店铺",stores_url
+    breadcrumbs.add "名店",top_stores_url
+    breadcrumbs.add @title,nil
     render :action=>'huangguan'
   end
   def huangguan
@@ -98,6 +101,9 @@ class StoresController < ApplicationController
       :per_page=>200,
       :page=>params[:page] || 1
     @title = "#{@cap}皇冠店铺"
+    breadcrumbs.add "店铺",stores_url
+    breadcrumbs.add "名店",top_stores_url
+    breadcrumbs.add @title,nil
     render :action=>'huangguan'
   end
   def jinhuangguan
@@ -106,6 +112,9 @@ class StoresController < ApplicationController
       :per_page=>200,
       :page=>params[:page] || 1
     @title = "金皇冠店铺"
+    breadcrumbs.add "店铺",stores_url
+    breadcrumbs.add "名店",top_stores_url
+    breadcrumbs.add @title,nil
     render :action=>'huangguan'
   end
 

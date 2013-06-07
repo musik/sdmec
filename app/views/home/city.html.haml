@@ -25,7 +25,7 @@
       =adsense '3958440645','sd-city-before'
     .row-fluid
       .span8.narrow
-        = render :partial => 'stores/list',:locals=>{:hide_city=>!@city.parent_id.zero?}
+        = render :partial => 'stores/list',:locals=>{:hide_city=>(!@city.parent_id.zero? or @city.zhixiashi?)}
         
         =link_to "更多",top_stores_url(:anchor=>"position-11")
       .span4

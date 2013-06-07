@@ -6,10 +6,15 @@
 -if @city.present?
   = link_to @city.name,root_path,:title=>t('appname_city',:city=>@city.name), :class => 'brand brand-mini'
 %ul.nav.nav-mini
-  %li=link_to "标签",tags_url(:subdomain=>'www')
-  -cats = Cat.nav
-  -cats.each do |c|
-    %li=link_to c.name,tbcat_url(c,:subdomain=>'www')
+  -if @city
+    %li=link_to "排行榜",top_stores_url(),:title=>"#{@city.name}店铺排行榜"
+  -else
+    %li=link_to "排行榜",top_stores_url(:subdomain=>'www')
+  %li=link_to '城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
+  %li=link_to "分类",tags_url(:subdomain=>'www')
+  -#-cats = Cat.nav
+  -#-cats.each do |c|
+    -#%li=link_to c.name,tbcat_url(c,:subdomain=>'www')
   -#%li=link_to "首页",root_url(:subdomain=>'www'),:rel=>"nofollow"
   -#-channels = APP_CONFIG[:channels]
   -#-channels.delete_if{|k| %w(数码 机票).include? k} if @city.present? && @city.name.length > 4
@@ -18,8 +23,6 @@
   -#= render :partial => 'layouts/temai_nav'
 
     
-  -if @city
-    %li=link_to '城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
 %form.navbar-search.pull-right{:action=>search_url(:subdomain=>'www'),:method=>'get'}
   -a={:id=>'q',:type=>"text",:name=>"q"}
   -a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}

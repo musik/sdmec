@@ -2,7 +2,8 @@
 -@col1 = true
 %div.mt1em
   %h1.inline= @title
-%small
-  =render "stores/creditmap"
+  -if @city.nil?
+    %small.nav
+      =render "stores/creditmap"
 =paginate @stores
 =render :partial=>"stores/pindex",:locals=>{:stores=>@stores}
