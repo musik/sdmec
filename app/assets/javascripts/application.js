@@ -44,7 +44,7 @@ $(function () {
     })
   }
   //$('.share').loadShare();
-  $('#contact-note').html('以下为网站联系方式，用于网安/主机商/机房联系处理敏感内容，或其它各界与网站有关的诸如交换链接/意见反馈等用途。<br />此联系方式与本页可能展示的淘宝店铺无关。<br><span class="badge badge-important"> 敏感内容联系</span>0874-3335702 18087409631&nbsp;'+'<span class="badge badge-info">QQ</span><a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=f62e57b812e5ba6bcabb95e781a841ed8edb5efa46c90997">58265826</a>&nbsp;'+'<span class="badge badge-success">Email</span>admin@sdmec.com')
+  $('#contact-note').html('以下为网站联系方式，用于网安/主机商/机房联系处理敏感内容，或其它各界与网站有关的诸如交换链接/删除内容等用途。<br />此联系方式与本页可能展示的淘宝店铺<strong>无关</strong>。<br><span class="badge badge-important"> 删除内容请联系</span>'+'<span class="badge badge-info">QQ</span><a target="_blank" href="http://sighttp.qq.com/authd?IDKEY=f62e57b812e5ba6bcabb95e781a841ed8edb5efa46c90997">58265826</a>&nbsp;'+'<span class="badge badge-success">Email</span>admin@sdmec.com')
 })
 function loadIfExist(aid,id){
   if($("#" + id).length == 1){

@@ -131,6 +131,7 @@ class StoresController < ApplicationController
       end
     end
 
+    @tags = @store.tag_list
     #@store.sync_update_taokedata if @store.user_id.nil?
     @items = @store.cached_items
     @store.remove_stale_items
