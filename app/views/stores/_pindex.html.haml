@@ -11,7 +11,6 @@
           .xrank{:class=>"xrank-#{tmp[0]}"}
             <i>#{tmp[0]}</i>x #{tmp[1]}
       .link
-        -#[
         =link_to s.nick.truncate(2,:omission=>''),store_url(s,:subdomain=>s.city_slug),:title=>s.nick,:class=>'nick'
         \|
         =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow",:class=>"title"
