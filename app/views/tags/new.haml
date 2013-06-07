@@ -1,0 +1,12 @@
+-title "新标签"
+-meta "robots","noindex"
+
+
+=simple_form_for Tag.new,:url=>"/tags/preview",:remote=>true do |f|
+  .form-inputs
+    =text_area_tag :names,%w(服装 女装 男装 童装).join("\r\n"),:rows=>10
+
+  .form-actions
+    = f.button :submit,'Preview'
+    
+#results    

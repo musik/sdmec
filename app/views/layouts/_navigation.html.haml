@@ -6,6 +6,7 @@
 -if @city.present?
   = link_to @city.name,root_path,:title=>t('appname_city',:city=>@city.name), :class => 'brand brand-mini'
 %ul.nav.nav-mini
+  %li=link_to "标签",tags_url(:subdomain=>'www')
   -cats = Cat.nav
   -cats.each do |c|
     %li=link_to c.name,tbcat_url(c,:subdomain=>'www')

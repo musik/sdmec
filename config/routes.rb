@@ -41,6 +41,7 @@ Tb::Application.routes.draw do
       get 'huangguan'
       get 'dengji'
       post 'find'
+      get 'tag'
     end
     member do
       get 'convert'
@@ -50,7 +51,9 @@ Tb::Application.routes.draw do
     end
   end
   resources :tags do
-
+    collection do 
+      post "preview"
+    end
   end
 
   resources :cats do
@@ -92,8 +95,9 @@ Tb::Application.routes.draw do
   resources :users, :only => [:show, :index]
   #mount Resque::Server, :at => "/resque"
   resque_constraint = lambda do |request|
-    request.env['warden'].authenticate? and
-      request.env['warden'].user.has_role?(:admin)
+    Rails.env.development? or 
+    (request.env['warden'].authenticate? and
+      request.env['warden'].user.has_role?(:admin))
   end
   constraints resque_constraint do
     mount Resque::Server.new, :at => "/resque"

@@ -1,0 +1,14 @@
+=simple_form_for Tag.new,:remote=>true do |f|
+  %table.table
+    %tr
+      %th
+      %th name
+      %th count
+      %th exists?
+    -@results.each do |r|
+      %tr
+        %td=check_box_tag "tags[#{r[:name]}]",r[:count],true
+        %td=r[:name]
+        %td=r[:count]
+        %td=r[:exists] ? "是" : "否"
+  =f.button :submit

@@ -6,6 +6,7 @@ zh_CN:
   appname_city: "%{city}淘宝店铺"
   breadcrumbs:
     home: 首页
+    tags: 标签
     topics: 关键词列表
     browse: "%{acr}开头"
     popular: 热门
@@ -25,6 +26,9 @@ zh_CN:
       title: "%{q}_淘宝%{q}店铺"
       keywords: "%{q},买%{q},%{q}店"
       description: "想知道哪里有卖%{q}?淘宝%{q}频道为您提供最新的淘宝%{q}店铺、卖家、价格及批发零售信息,满足您不同的%{q}购买需求。%{q}网,提供最优质的淘宝%{q}信息"
+  tags:
+    show:
+      title: "%{name}_淘宝%{name}店铺"
   cats:
     show:
       title: "淘宝%{cat}_淘宝%{cat}店铺"
