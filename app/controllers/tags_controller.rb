@@ -2,7 +2,7 @@
 class TagsController < ApplicationController
   before_filter :_setting
   def index
-    @tags = Store.tag_counts_on(:tags)
+    @tags = Store.tag_counts_on(:tags,:limit=>50)
   end
   def new
     authorize! :manage,Tag
