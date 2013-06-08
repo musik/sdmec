@@ -5,4 +5,5 @@
 %p.mute=@meta[:description]
 =render :partial=>"stores/list"
 =paginate @stores
--#-content_for :sidebar do
+-content_for :sidebar do
+  =render 'widgets/top_tags'
