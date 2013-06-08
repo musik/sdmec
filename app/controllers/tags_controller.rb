@@ -4,6 +4,7 @@ class TagsController < ApplicationController
   def index
     #@tags = Store.tag_counts_on(:tags,:limit=>50)
     @tags = Tag.all_tagged_on('Store').page(params[:page]).per(100)
+    breadcrumbs.add "店铺分类",(params.has_key?('page') ? tags_url : nil)
   end
   def new
     authorize! :manage,Tag
