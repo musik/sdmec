@@ -28,7 +28,7 @@ class Tag < ActsAsTaggableOn::Tag
   end
   class << self
     def all_tagged_on taggable_type,context='tags'
-      joins(:taggings).where('taggings.taggable_type'=>taggable_type.classify).group('taggings.tag_id').select('tags.*,count(*) as count')
+      joins(:taggings).where('taggings.taggable_type'=>taggable_type.classify).group('tags.id').select('tags.*,count(*) as count')
     end
   end
 end
