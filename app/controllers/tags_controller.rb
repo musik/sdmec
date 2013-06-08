@@ -27,7 +27,7 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.named(params[:id]).first
-    @stores = Store.tagged_with(@tag.name).includes(:city).page(params[:page]).per(15)
+    @stores = Store.tagged_with(@tag.name).credit.includes(:city).page(params[:page]).per(15)
     #@s1 = Store.tagged_with(@tag.name).pluck("stores.id")
     #@s2 = Store.search(@tag.name,:per_page=>10000).map(&:id)
     #@stores = Store.where(:id=>(@s1-@s2))
