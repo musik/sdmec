@@ -26,6 +26,11 @@ class Tag < ActsAsTaggableOn::Tag
   def self.set_store_tag id,store_id,tagger_id=nil,context='tags'
     ActsAsTaggableOn::Tagging.create(:tag_id=>id,:taggable_id=>store_id,:taggable_type=>'Store',:context=>context,:tagger_id=>tagger_id)
   end
+  class << self
+    def all_tagged_on taggable_type,context='tags'
+      joins(:taggings).where('taggings.taggable_type'=>taggable_type.classify).group('taggings.tag_id').select('tags.*,count(*) as count')
+    end
+  end
 end
 module TagEx
   def to_param

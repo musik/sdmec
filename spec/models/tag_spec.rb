@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe Tag do
   it "should create" do
+    #Tag.all_tagged_on('store').all
     #tags = Tag.find_or_create_all_with_like_by_name ['女装','童装']
     #pp tags
     #tags.map(&:autotag)
