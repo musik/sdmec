@@ -5,25 +5,10 @@
       -rs.delete_if{|r| r.slug = @city.slug} if @city
       -City.caps.each do |r|
         =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}淘宝店铺"
-%p.pagin
+%small.nav.pull-right
+  索引:
   =link_to "店铺",stores_url
   =link_to "最新收录",recent_stores_url
-  -if @city
-    =link_to "#{@city.name}名店",top_stores_url
-    -if @city.name.length < 5
-      -Cat.nav.slice(0,6).each do |c|
-        =link_to c.name,cat_city_url(c,:subdomain=>@city.slug),:title=>"#{@city.name}购物#{c.name}"
-  -else
-    =link_to "名店",top_stores_url
-    -Cat.nav.slice(0,6).each do |c|
-      =link_to c.name,tbcat_url(c,:subdomain=>"www"),:title=>"购物#{c.name}"
-  =render "stores/creditmap_btn" unless @creditmap_loaded
-  -#-if is_home? and is_mainsite?
-    -#-cache 'shops-paging',:expires_in => 1.hour do
-      -#-i = 11
-      -#-max_page = (Store.count / 240 ).ceil
-      -#%br
-      -#%span.numbers
-        -#-while i <= max_page
-          -#=link_to i,stores_url(:page=>i,:subdomain=>'www')
-          -#-i+=10
+  =link_to '友情链接',partners_url(:subdomain=>'www')
+.clearfix  
+=render "stores/creditmap_btn" unless @creditmap_loaded

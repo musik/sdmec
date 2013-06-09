@@ -1,8 +1,10 @@
 # -*- encoding : utf-8 -*-
 class City < ActiveRecord::Base
   attr_accessible :name, :slug, :parent_id, :use_subdomain, :zhixiashi
+  attr_accessor :count
   acts_as_url :name,:url_attribute=>:slug,:only_when_blank=>true
   scope :roots,where(:parent_id=>0)
+  has_many :stores
   def to_param
     slug
   end

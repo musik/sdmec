@@ -3,7 +3,8 @@
 -meta :description,t('.description',:name=>@tag.name)
 
 %p.mute=@meta[:description]
-=render :partial=>"stores/list"
+=render :partial=>"stores/list",:locals=>{:hide_desc=>true}
 =paginate @stores
 -content_for :sidebar do
+  = render :partial => 'widgets/tag_cities',:locals=>{:cities=>@group,:tag=>@tag}
   =render 'widgets/top_tags'

@@ -31,6 +31,10 @@ zh_CN:
       title: "淘宝%{name}店铺_%{name}皇冠店铺大全,排行榜-皇冠店铺导航网"
       keywords: "%{name},淘宝%{name},淘宝%{name}店铺,%{name}旗舰店"
       description: "淘宝店铺标签: %{name}。推荐介绍淘宝%{name}店铺、%{name}皇冠卖家、天猫%{name}旗舰店信息。"
+    city:
+      title: "%{city}%{name}店铺_%{city}淘宝%{name}-皇冠店铺导航网"
+      keywords: "%{city}%{name},%{city}淘宝%{name}店铺"
+      description: "%{city}淘宝店铺标签: %{name}。推荐介绍%{city}淘宝%{name}店铺、皇冠卖家、天猫%{name}旗舰店信息。"
   cats:
     show:
       title: "淘宝%{cat}_淘宝%{cat}店铺"

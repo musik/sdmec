@@ -1,0 +1,10 @@
+-title t('.title',:name=>@tag.name,:city=>@city.name),"#{@city.name}#{@tag.name}"
+-meta :keywords,t('.keywords',:name=>@tag.name,:city=>@city.name)
+-meta :description,t('.description',:name=>@tag.name,:city=>@city.name)
+
+%p.mute=@meta[:description]
+=render :partial=>"stores/list",:locals=>{:hide_desc=>true,:hide_city=>true}
+=paginate @stores
+-content_for :sidebar do
+  = render :partial => 'widgets/tag_cities',:locals=>{:cities=>@group,:tag=>@tag}
+  =render 'widgets/top_tags'

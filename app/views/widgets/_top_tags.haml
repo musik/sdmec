@@ -5,5 +5,5 @@
   %p.tag_cloud
     -tag_cloud(tags, %w(css1 css2 css3 css4)) do |tag, css_class| 
       %span
-        = link_to tag.name,tag_path(tag), :class => css_class 
+        = link_to tag.name,tag_url(tag,:subdomain=>'www'), :class => css_class 
         %small=tag.count

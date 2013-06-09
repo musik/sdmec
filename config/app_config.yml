@@ -3,6 +3,7 @@ development:
   expires_in: 5.minute
   expires_in_city: 5.minute
   enable_sphinx: false
+  city_tag_min: 5
 
 test:
   domain: test.host
@@ -14,3 +15,4 @@ production:
   expires_in: 7.day
   expires_in_city: 14.day
   enable_sphinx: false
+  city_tag_min: 50

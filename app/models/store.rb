@@ -11,7 +11,8 @@ class Store < ActiveRecord::Base
   scope :priority_asc,order('sites_stores.priority asc')
   scope :rate_desc,order('commission_rate desc')
   scope :with_priority,select('stores.*,sites_stores.priority')
-  scope :short,select([:title,:id,:city_id,:seller_credit])
+  scope :short,select('stores.title,stores.id,stores.city_id,stores.seller_credit,click_url')
+  scope :list_field,select('stores.title,stores.id,stores.city_id,seller_credit,click_url,pic_path,sid,nick')
   scope :incity,lambda{|city|
     if city.present?
       where(
@@ -66,6 +67,9 @@ class Store < ActiveRecord::Base
   end
   def safe_title
     title.nil? ? 'n/a' : title.gsub(/成人用品/,'成用')
+  end
+  def city_with_count
+    [read_attribute(:count),city]
   end
   def mingan?
     @mingan ||= (title.match(/成人用品|性福|性用品|情趣/)) ? true : false

@@ -27,11 +27,8 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.named(params[:id]).first
-    @stores = Store.tagged_with(@tag.name).credit.includes(:city).page(params[:page]).per(15)
-    #@s1 = Store.tagged_with(@tag.name).pluck("stores.id")
-    #@s2 = Store.search(@tag.name,:per_page=>10000).map(&:id)
-    #@stores = Store.where(:id=>(@s1-@s2))
-
+    @stores = Store.tagged_with(@tag.name).credit.list_field.includes(:city).page(params[:page]).per(15)
+    @group = Store.tagged_with(@tag.name).includes(:city).group("city_id").select("stores.id,stores.city_id,count(*) as count").having("count > 5").map(&:city_with_count)
     breadcrumbs.add :tags,tags_path
     if params[:page].present?
       breadcrumbs.add @tag.name,tag_path(@tag)
@@ -39,6 +36,15 @@ class TagsController < ApplicationController
       else
       breadcrumbs.add @tag.name,nil
     end
+  end
+  def city
+    @tag = Tag.named(params[:id]).first
+    @stores = @city.stores.tagged_with(@tag.name).credit.list_field.includes(:city).page(params[:page]).per(15)
+    @group = Store.tagged_with(@tag.name).includes(:city).group("city_id").select("stores.id,stores.city_id,count(*) as count").having("count > ?",APP_CONFIG[:city_tag_min]).map(&:city_with_count)
+    @breadcrumbs.items.pop
+    breadcrumbs.add :tags,tags_path(:subdomain=>'www')
+    breadcrumbs.add @tag.name,tag_path(@tag,:subdomain=>'www')
+    breadcrumbs.add @city.name,nil
   end
   def _setting
     @hide_searches = @hide_top = @hide_recent = true
