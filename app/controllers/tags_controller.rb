@@ -40,7 +40,7 @@ class TagsController < ApplicationController
   def city
     @tag = Tag.named(params[:id]).first
     @stores = @city.stores.tagged_with(@tag.name).credit.list_field.includes(:city).page(params[:page]).per(15)
-    @group = Store.tagged_with(@tag.name).includes(:city).group("city_id").select("stores.id,stores.city_id,count(*) as count").having("count > ?",APP_CONFIG[:city_tag_min]).map(&:city_with_count)
+    @group = Store.tagged_with(@tag.name).includes(:city).group("city_id").select("stores.id,stores.city_id,count(*) as count").having("count > ?",Rails.env.production? ? 40 : 10).map(&:city_with_count)
     @breadcrumbs.items.pop
     breadcrumbs.add :tags,tags_path(:subdomain=>'www')
     breadcrumbs.add @tag.name,tag_path(@tag,:subdomain=>'www')
