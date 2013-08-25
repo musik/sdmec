@@ -10,7 +10,7 @@
 
 .home-list        
   -%w(女装 男装 童装).each do |tag_name|
-    .list
+    .list{:class=>cycle('a','b','c')}
       %h2=link_to tag_name,tag_url(tag_name)
       -stores = Store.tagged_with(tag_name).credit.list_field.includes(:city).limit(10)
       =render :partial=>"stores/home_list",:locals=>{:hide_desc=>true,:stores=>stores}
@@ -18,8 +18,8 @@
 -cache "top-tags-#{limit}",:expires_in => 30.minutes do
   -tags = Tag.all_tagged_on('Store').order('count desc').limit(limit)
   %h2 热点标签
-  %p.tag_cloud
+  %ul.taglist
     -tag_cloud(tags, %w(css1 css2 css3 css4)) do |tag, css_class| 
-      %span
+      %li
         = link_to tag.name,tag_url(tag,:subdomain=>'www'), :class => css_class 
         %small=tag.count
