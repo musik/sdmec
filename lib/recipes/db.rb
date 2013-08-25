@@ -43,7 +43,7 @@ Capistrano::Configuration.instance.load do
         prepare_for_db_command
 
         sql = <<-SQL
-        #CREATE DATABASE #{db_name};
+        CREATE DATABASE #{db_name};
         GRANT ALL PRIVILEGES ON #{db_name}.* TO #{db_user}@localhost IDENTIFIED BY '#{db_pass}';
         SQL
 

@@ -22,6 +22,9 @@
           = render 'layouts/navigation'
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
+      -if is_home?
+        =yield :home_line
+
       -unless @hide_fullad
         .double11#full1
           .container

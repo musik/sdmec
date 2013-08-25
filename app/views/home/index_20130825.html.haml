@@ -1,0 +1,37 @@
+-title t('.title'),nil,false
+-@col1 = true
+-@hide_fullad = true
+
+%small.nav=render :partial=>"stores/creditmap_btn"
+= render :partial => 'home/cats'
+-#= render :partial => 'home/temai'
+-if @sites.present?
+  .sites.alert.alert-info
+    小站:
+    -@sites.each do |s|
+      =link_to s.name,root_url(:subdomain=>s.slug)
+%section#recommended
+%hr.soften
+  %h1 名店推荐
+  .center
+    %small.nav=link_to '更多',stores_url
+  -cache "home_popular",:expires_in=>1.day do
+    -#=render :partial=>"stores/pindex3col",:locals=>{:stores=>@stores}
+    =render :partial=>"stores/pindex",:locals=>{:stores=>@stores}
+%section#recent
+%hr.soften
+  %h1 最新收录
+  .center
+    %small.nav=link_to '更多',recent_stores_url
+  -cache "home_recent",:expires_in=>1.minutes do
+    =render :partial=>"stores/pindex",:locals=>{:stores=>@stores_recent}
+    -#=render :partial=>"stores/index2col",:locals=>{:stores=>@stores_recent}
+
+%section#cities
+%hr.soften
+  %h1 城市导航
+  = render :partial => 'cities/less'
+-@hide_cities = true
+        
+-content_for :footer do    
+  =javascript_include_tag "bootstrap-tab"

@@ -5,6 +5,8 @@ class HomeController < ApplicationController
   caches_action :city,:expires_in => 30.minutes
 
   def index
+  end
+  def index_20130825
     #@temai_cats = Tbpage::Temai.new.get_cats_with_items
     #@stores = Store.credit_desc.fullscan.search :include=>[:city],:per_page=>51
     @stores = Store.value_desc.fullscan.search :include=>[:city],:per_page=>51
