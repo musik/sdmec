@@ -11,6 +11,7 @@ Tb::Application.routes.draw do
   constraints(CitySubdomain) do
     match '/t/:id'=>'city/home#page',:as=>'page'
     get '/shop'=>"stores#city",:as=>"shops_city"
+    get 'tags/auto_complete'=>"tags#auto_complete"
     get 'tags/:id'=>"tags#city",:as=>"city_tag"
     get '/:id'=>"cats#city",:as=>"cat_city"
     root :to => 'home#city'

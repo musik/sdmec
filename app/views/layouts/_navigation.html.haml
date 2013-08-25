@@ -21,14 +21,18 @@
   -#-channels.each do |k,v|
     -#%li=link_to k,frame_url(k,:subdomain=>'www'),:rel=>"nofollow"
   -#= render :partial => 'layouts/temai_nav'
-
-    
-%form.navbar-search.pull-right{:action=>search_url(:subdomain=>'www'),:method=>'get'}
+%form.navbar-search#navform
   -a={:id=>'q',:type=>"text",:name=>"q"}
   -a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
-  .input-append
-    %input.search-queryx.input-medium{a}
-    %button.btn{:type=>"submit"} 搜店
-    %button.btn{:name=>'tb',:type=>"submit"} 淘
-  %input{:type=>'hidden',:name=>'live',:value=>1}
+  %input.search-query.input-medium{a}
+
+    
+-#%form.navbar-search.pull-right{:action=>search_url(:subdomain=>'www'),:method=>'get'}
+  -#-a={:id=>'q',:type=>"text",:name=>"q"}
+  -#-a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
+  -#.input-append
+    -#%input.search-queryx.input-medium{a}
+    -#%button.btn{:type=>"submit"} 搜店
+    -#%button.btn{:name=>'tb',:type=>"submit"} 淘
+  -#%input{:type=>'hidden',:name=>'live',:value=>1}
 -#=render "layouts/unav"

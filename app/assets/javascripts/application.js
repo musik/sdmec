@@ -3,7 +3,7 @@
 //comment = require bootstrap-dropdown
 // = require bootstrap-alert
 // = require bootstrap-affix
-//comment// = require jquery.ui.autocomplete
+// = require jquery.ui.autocomplete
 function reverse(s){
     return s.split("").reverse().join("");
 }
@@ -22,6 +22,18 @@ function rewrite_link(str){
   $('.shoplink').attr('href',reverse(str))
 }
 $(function () {
+    $("#q").autocomplete({
+      //source: 'http://www' + window.location.host.match(/\..+/)[0] + '/tags/auto_complete',
+      source: '/tags/auto_complete',
+        focus: function(){
+          return false;
+        },
+        select: function(event, ui) {
+          if (ui.item.value == "0") return false;
+          window.location.href = ui.item.value
+          return false
+        }
+    });
 	$('a.rl').click(function(){
 		$(this).attr("href",reverse(unescape($(this).attr('data'))))
 		$(this).attr("target","_blank")

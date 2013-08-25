@@ -17,7 +17,7 @@ class TagsController < ApplicationController
     }
     @results.collect!{|t|
       {:label=>[classes[t.class.to_s],t.name].compact.join(":"),
-        :value=>(t.class.to_s == 'Tag' ? tag_url(t.name) : store_url(t))}
+        :value=>(t.class.to_s == 'Tag' ? tag_url(t.name) : store_url(t,:subdomain=>'www'))}
     }
     Rails.logger.info @results
 
@@ -27,7 +27,7 @@ class TagsController < ApplicationController
     if @results.empty?
         render :json => [{:label=>t('auto_complete.not_found'),:value=>0}].to_json
       else
-        @results << {:label=>"--> 查看更多",:value=>search_url(:q=>@term)}
+        @results << {:label=>"--> 查看更多",:value=>search_url(:q=>@term,:subdomain=>'www')}
         render :json => @results.to_json
     end
   end
