@@ -1,6 +1,6 @@
 #encoding: utf-8
 class StoresController < ApplicationController
-  #caches_action :show,:expires_in => 3.days
+  caches_action :show,:expires_in => 1.days
   cache_sweeper :store_sweeper
   caches_action :city,:expires_in => 5.minutes 
   caches_action :index,:top,
