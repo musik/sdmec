@@ -56,7 +56,7 @@ class HomeController < ApplicationController
       return
     end
     if params[:live] && @q.present?
-      @s = Searched.create(:query=>@q,:created_at=>Time.now)
+      #@s = Searched.create(:query=>@q,:created_at=>Time.now)
       redirect_to search_url(:q=>@q)
       return
     end

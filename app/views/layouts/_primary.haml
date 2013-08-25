@@ -1,12 +1,12 @@
 =yield :sidebar
--unless @hide_searches
-  -cache 'searches-recent',:expires_in=>3.minutes do
-    -searches = Searched.recent 20
-    %h4 最新搜索
-    -if searches.present?
-      -searches.each do |query|
-        =link_to query,search_url(:q=>query,:subdomain=>'www')
-      =link_to "更多",searched_url(:subdomain=>'www'),:class=>"moreinline"
+-#-unless @hide_searches
+  -#-cache 'searches-recent',:expires_in=>3.minutes do
+    -#-searches = Searched.recent 20
+    -#%h4 最新搜索
+    -#-if searches.present?
+      -#-searches.each do |query|
+        -#=link_to query,search_url(:q=>query,:subdomain=>'www')
+      -#=link_to "更多",searched_url(:subdomain=>'www'),:class=>"moreinline"
 
     
 -if @city.present? and !@city.zhixiashi?
