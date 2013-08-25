@@ -9,8 +9,7 @@ development:
   max_matches: 10000
   indexed_models:
     - Store
-    - Huati 
-    - Topic
+    - Tag
 production:
   #address: 192.168.17.125
   bin_path: /usr/local/coreseek/bin

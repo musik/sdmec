@@ -7,6 +7,9 @@ class Tag < ActsAsTaggableOn::Tag
       Resque.enqueue(TagQ,'set_store_tag', id, s.id)
     end
   end
+  define_index do
+    indexes :name
+  end
   def async_autotag
     async 'autotag'
   end

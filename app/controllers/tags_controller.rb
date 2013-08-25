@@ -9,13 +9,25 @@ class TagsController < ApplicationController
   end
   def auto_complete
     @term = params[:term].strip
-    @tags = Tag.all_tagged_on('Store').where(["tags.name like ?","%#{params[:term]}%"]).limit(10).collect{|t|
-      {:label=>t.name,:value=>tag_url(t.name)}
+    @results = ThinkingSphinx.search(@term,:per=>10)
+    Rails.logger.info @results.inspect
+    classes = {
+      'Store'=> nil,
+      "Tag"=> "标签"
     }
-    if @tags.empty?
+    @results.collect!{|t|
+      {:label=>[classes[t.class.to_s],t.name].compact.join(":"),
+        :value=>(t.class.to_s == 'Tag' ? tag_url(t.name) : store_url(t))}
+    }
+    Rails.logger.info @results
+
+    #@tags = Tag.all_tagged_on('Store').where(["tags.name like ?","%#{@term}%"]).limit(10).collect{|t|
+      #{:label=>t.name,:value=>tag_url(t.name)}
+    #}
+    if @results.empty?
         render :json => [{:label=>t('auto_complete.not_found'),:value=>0}].to_json
       else
-        render :json => @tags.to_json
+        render :json => @results.to_json
     end
   end
   def new

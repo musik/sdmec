@@ -29,8 +29,8 @@ class Store < ActiveRecord::Base
   #after_create :init_data
 
   define_index do
-    #indexes :title,:bulletin,:desc
-    indexes :title
+    indexes :title,:bulletin,:desc
+    #indexes :title
     has :id
     has :cat_id
     has :city_id,:facets=>true
