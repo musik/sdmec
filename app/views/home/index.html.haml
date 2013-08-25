@@ -2,17 +2,19 @@
 -@col1 = true
 -@hide_fullad = true
 -@hide_bread = true
+-@js = 'home'
 -content_for :home_line do
   .home-line
     .container
       %h1 发现靠谱网店.
-      %input#hq.input.span12{type: 'text',name: 'hq',placeholder: "女装",disabled: true}
+      %input#hq.input.span12{type: 'text',name: 'hq',placeholder: "女装",disabled: false}
 
 .home-list        
+  -num = 5
   -%w(女装 男装 童装).each do |tag_name|
     .list{:class=>cycle('a','b','c')}
       %h2=link_to tag_name,tag_url(tag_name)
-      -stores = Store.tagged_with(tag_name).credit.list_field.includes(:city).limit(10)
+      -stores = Store.tagged_with(tag_name).credit.list_field.includes(:city).limit(num)
       =render :partial=>"stores/home_list",:locals=>{:hide_desc=>true,:stores=>stores}
 -limit ||= 30
 -cache "top-tags-#{limit}",:expires_in => 30.minutes do

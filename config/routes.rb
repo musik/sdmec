@@ -54,6 +54,7 @@ Tb::Application.routes.draw do
   resources :tags do
     collection do 
       post "preview"
+      get 'auto_complete'
     end
   end
 

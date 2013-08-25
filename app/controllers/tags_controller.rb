@@ -1,10 +1,22 @@
 #encoding: utf-8
 class TagsController < ApplicationController
+  authorize_resource :except=>%w(preview auto_complete)
   before_filter :_setting
   def index
     #@tags = Store.tag_counts_on(:tags,:limit=>50)
     @tags = Tag.all_tagged_on('Store').page(params[:page]).per(100)
     breadcrumbs.add "店铺分类",(params.has_key?('page') ? tags_url : nil)
+  end
+  def auto_complete
+    @term = params[:term].strip
+    @tags = Tag.all_tagged_on('Store').where(["tags.name like ?","%#{params[:term]}%"]).limit(10).collect{|t|
+      {:label=>t.name,:value=>tag_url(t.name)}
+    }
+    if @tags.empty?
+        render :json => [{:label=>t('auto_complete.not_found'),:value=>0}].to_json
+      else
+        render :json => @tags.to_json
+    end
   end
   def new
     authorize! :manage,Tag

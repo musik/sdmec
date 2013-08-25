@@ -70,7 +70,7 @@
           %p=yield :title
         .clear
         %p#contact-note
-    = javascript_include_tag "application"
+    = javascript_include_tag (@js || "application")
     =render "layouts/iefixjs"
     =yield :footer
     -#=javascript_tag "link_load('#mingdian',1);"
