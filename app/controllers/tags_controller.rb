@@ -9,7 +9,7 @@ class TagsController < ApplicationController
   end
   def auto_complete
     @term = params[:term].strip
-    @results = ThinkingSphinx.search(@term,:per=>10)
+    @results = ThinkingSphinx.search(@term,:per_page=>10)
     Rails.logger.info @results.inspect
     classes = {
       'Store'=> nil,
@@ -27,6 +27,7 @@ class TagsController < ApplicationController
     if @results.empty?
         render :json => [{:label=>t('auto_complete.not_found'),:value=>0}].to_json
       else
+        @results << {:label=>"--> 查看更多",:value=>search_url(:q=>@term)}
         render :json => @results.to_json
     end
   end
