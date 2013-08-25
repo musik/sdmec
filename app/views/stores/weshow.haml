@@ -69,7 +69,8 @@
     %p.desc=t('stores.newshow.desc',@store.attributes.to_options).html_safe
     =slotf
   .span3
-    =render "layouts/primary"
+    .bdleft
+      =render "layouts/primary"
 
 -if @display_items
   %hr
