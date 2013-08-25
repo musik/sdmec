@@ -1,4 +1,8 @@
 =yield :sidebar
+-unless @hide_sidebar_ad 
+  =bdad 'sd-side',1354376
+  =bdad 'sd-side2',1354377
+
 -#-unless @hide_searches
   -#-cache 'searches-recent',:expires_in=>3.minutes do
     -#-searches = Searched.recent 20

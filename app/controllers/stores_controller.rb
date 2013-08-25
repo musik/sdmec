@@ -148,7 +148,7 @@ class StoresController < ApplicationController
     breadcrumbs.add @store.title,nil
     #render  @store.click_url.present? ? 'newshow' : 'freeshow'
     #render  'newshow'
-    render 'gshow'
+    render 'weshow'
   end
   def patch
     if cookies[:sign].present?
