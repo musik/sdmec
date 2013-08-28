@@ -39,11 +39,12 @@ var sogou_ad_width=#{width};
   def slotb
     #rand(2) > 0 ?
       #"<div class='slot' id='slotb'></div>".html_safe :
-        adsense('3040110643','sd-shop-before')
+        #adsense('3040110643','sd-shop-before')
+      ("<div class='bdct'>" + bdad('SD5200-SHOP-BEFORE，2012-12-5',1151174) + "</div>").html_safe
   end
   def slotf
     #rand(2) > 0 ?
       #"<div class='slot' id='slotf'></div>".html_safe :
-        adsense('5993577049','sd-shop-bottom')
+        #adsense('5993577049','sd-shop-bottom')
   end
 end
