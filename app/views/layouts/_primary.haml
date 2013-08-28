@@ -20,7 +20,7 @@
     %p.cities
       -cities.each do |r|
         =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺"
--unless @hide_top        
+-unless @hide_top or @city.nil?       
   -recent_limit ||= 10
   -cache "top-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.day do
     -#-recents = Store.credit.incity(@city).limit(recent_limit).includes(:city).short.all
@@ -37,7 +37,7 @@
                   <i>#{tmp[0]}</i>x #{tmp[1]}
             .link
               =link_to s.name,store_url(s,:subdomain=>@city.slug),:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow",:class=>"title"
--unless @hide_recent        
+-unless @hide_recent or @city.nil?
   -recent_limit ||= 15        
   -cache "recent-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.hour do
     -recents = Store.srecent.in_city(@city).fullscan.search(:include=>[:city],:per_page=>recent_limit)
