@@ -1,6 +1,6 @@
 #encoding: utf-8
 class TagsController < ApplicationController
-  authorize_resource :except=>%w(preview auto_complete)
+  authorize_resource :except=>%w(preview auto_complete city)
   before_filter :_setting
   def index
     #@tags = Store.tag_counts_on(:tags,:limit=>50)
