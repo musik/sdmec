@@ -113,7 +113,7 @@ module TaobaoFu
         params = generate_query_vars(sorted_params(options))
         @response = Typhoeus::Request.get(@base_url, :params=>params)
         if @response.success?
-          pp @response.body
+          #pp @response.body
           rs = options[:format].present? ? parse_xml(@response.body) : JSON.parse(@response.body)
           if is_error? rs
             if error_code == 7
