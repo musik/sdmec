@@ -13,6 +13,7 @@ Capistrano::Configuration.instance.load do
       EOF
       task :dump, :roles => :db, :only => { :primary => true } do
         prepare_from_yaml
+        run "mkdir #{shared_path}/backup"
         run "mysqldump --user=#{db_user} -p --host=#{db_host} #{db_name} | bzip2 -z9 > #{db_remote_file}" do |ch, stream, out|
         ch.send_data "#{db_pass}\n" if out =~ /^Enter password:/
           puts out
@@ -23,6 +24,16 @@ Capistrano::Configuration.instance.load do
       task :restore, :roles => :db, :only => { :primary => true } do
         prepare_from_yaml
         run "bzcat #{db_remote_file} | mysql --user=#{db_user} -p --host=#{db_host} #{db_name}" do |ch, stream, out|
+        ch.send_data "#{db_pass}\n" if out =~ /^Enter password:/
+          puts out
+        end
+      end
+      task :restore_local do
+        prepare_from_yaml
+        set :db_user,'root'
+        set :db_pass,''
+        set :db_name,'sdmec_development'
+        run_locally "bzcat #{db_local_file} | mysql --user=#{db_user} -p #{db_name}" do |ch, stream, out|
         ch.send_data "#{db_pass}\n" if out =~ /^Enter password:/
           puts out
         end
