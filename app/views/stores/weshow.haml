@@ -80,7 +80,7 @@
       = render :partial => 'stores/items',:locals=>{:items=>@items}
 =   javascript_tag "var nobd = true;"
 -content_for :footer do
-  -#=javascript_tag "rewrite_link('#{@store.real_url.reverse}')"
+  =javascript_tag "rewrite_link('#{@store.real_url.reverse}')"
   -#=javascript_tag "convert_shop('#{@store.nick}','show',#{@store.click_url.present? and @store.click_url.match(/pid\=/).nil?})"
   -#-if @display_items && @store.items_stale? && @store.user_id.present?
     -#=javascript_tag "load_items('#{@store.id}')"
