@@ -6,8 +6,8 @@ describe Store do
     #city = City.create :name=>"曲靖"
     #Store::Jie.new.search_by_city city.id,1,false
     #e = Store.import_by_username_and_city "usedcar",city
-    e = Store.create :nick=>'y_camping',:user_id=>66781367
-    e.update_items
+    #e = Store.create :nick=>'y_camping',:user_id=>66781367
+    #e.update_items
     #e = Store.create :nick=>'古臣轩旗舰店',:user_id=>765416082
     #e.import_shopdata
     #e.fix_nick
