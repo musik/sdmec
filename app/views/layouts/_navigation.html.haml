@@ -5,13 +5,14 @@
 = link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:title=>"淘宝皇冠店铺"
 -if @city.present?
   = link_to @city.name,root_path,:title=>t('appname_city',:city=>@city.name), :class => 'brand brand-mini'
-%ul.nav.nav-mini
+%ul.nav.nav-minix
   -if @city
     %li=link_to "排行榜",top_stores_url(),:title=>"#{@city.name}店铺排行榜"
   -else
     %li=link_to "排行榜",top_stores_url(:subdomain=>'www')
   %li=link_to '城市',cities_url(:subdomain=>'www'),:rel=>"nofollow"
   %li=link_to "分类",tags_url(:subdomain=>'www')
+  %li.uz=link_to "淘宝U站","http://uz.sdmec.com",targe: "_blank"
   -#-cats = Cat.nav
   -#-cats.each do |c|
     -#%li=link_to c.name,tbcat_url(c,:subdomain=>'www')
