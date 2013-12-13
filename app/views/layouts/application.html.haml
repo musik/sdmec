@@ -23,8 +23,8 @@
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
       =yield :home_line
-      .double11#full1=render "ads/tb_a960"
-      .clearfix
+      -#.double11#full1=render "ads/tb_a960"
+      -#.clearfix
 
 
       .container.relative
@@ -51,10 +51,10 @@
               .span3.pull-right#primary
                 =render "layouts/primary"
         =yield :affix
-    .belt.container                
-      = render :partial => 'layouts/belt' unless @hide_belt
-      #links=render 'layouts/links'
-      =yield :links
+      .belt.container                
+        = render :partial => 'layouts/belt' unless @hide_belt
+        #links=render 'layouts/links'
+        =yield :links
     %footer
       .container
         .left
