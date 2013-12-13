@@ -72,6 +72,8 @@
     -#=javascript_tag "link_load('#mingdian',1);"
     -#-unless @hide_xuanfu
       -#=bdad "悬浮，120*120，创建于2012-11-9",1118592,'f'
-    .hidden
-      ='<script type="text/javascript" src="http://js.tongji.linezing.com/3017959/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/3017959/tongji.gif"/></a></noscript>'.html_safe
-      = render :file=>'analytics/google'
+    -if Rails.env.production?
+      .hidden
+        <script language="javascript" type="text/javascript" src="http://js.users.51.la/4045275.js"></script>
+        <noscript><a href="http://www.51.la/?4045275" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/4045275.asp" style="border:none" /></a></noscript>
+        = render :file=>'analytics/google'
