@@ -45,6 +45,10 @@ zh_CN:
       keywords: "%{city}%{cat},%{city}淘宝%{cat},%{city}%{cat}店"
       description: "想知道%{city}哪里有卖%{cat}?%{city}%{cat}频道为您提供最新的%{city}淘宝%{cat}价格、店铺、卖家及批发零售信息,满足您不同的%{cat}购买需求。%{city}%{cat}网,提供最优质的淘宝%{cat}信息。"
   stores:
+    show:
+      title: "%{title}(%{nick}的淘宝店铺)"
+      title_mall: "%{title}_点评"
+      keywords: "%{nick},%{title},%{nick}评价"
     newshow:
       desc: "<tt>%{title}</tt>,系由掌柜<tt>%{nick}</tt>在淘宝网或天猫商城建立的网上店铺.本网页不是<tt>%{title}</tt>的官方网站."
   city:

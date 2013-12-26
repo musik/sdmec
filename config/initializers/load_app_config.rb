@@ -8,10 +8,11 @@ APP_CONFIG[:channels] = YAML.load(File.read("#{Rails.root}/config/channels.yml")
 APP_CONFIG[:city_slugs] = File.read("#{Rails.root}/config/city_slugs.yml").split("\n")
 APP_CONFIG[:site_excludes] = File.read("#{Rails.root}/config/site_excludes.txt").split("\n")
 APP_CONFIG[:domain] = Rails.env.production? ? ".sdmec.com" : ".vcap.me:3000"
+I18n.enforce_available_locales = false
 
 
 require 'extras/stringex_ex'
-require 'extras/taobao_fu'
+#require 'extras/taobao_fu'
 #require 'kts'
 #require 'page_visit_tracker'
 #require 'c7words'

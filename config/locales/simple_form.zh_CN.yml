@@ -37,6 +37,8 @@ zh_CN:
         slug: 域名
         slogan: 副标题
         description: 小站简介
+      store:
+        nick: 卖家昵称
     hints:
       defaults:
         password: '不建议使用特殊字符'

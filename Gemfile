@@ -1,23 +1,23 @@
 require 'rbconfig'
 #gem "bundler", "~> 1.1.5"
 HOST_OS = RbConfig::CONFIG['host_os']
-#source 'http://ruby.taobao.org'
-source 'http://rubygems.org'
-gem 'rails', '3.2.5'
+source 'http://ruby.taobao.org'
+#source 'http://rubygems.org'
+gem 'rails', '3.2.16'
 gem 'mysql2'
 gem 'execjs'
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
 end
 gem 'jquery-rails','2.1.3'
 gem "haml", ">= 3.1.4"
 gem "haml-rails", ">= 0.3.4", :group => :development
-gem "rspec-rails", ">= 2.9.0.rc2", :group => [:development, :test]
+gem "rspec-rails",  :group => [:development, :test]
 gem "factory_girl_rails", ">= 3.2.0", :group => [:development, :test]
-gem "email_spec", ">= 1.2.1", :group => :test
+gem "email_spec", :group => :test
 gem "devise", ">= 2.1.0.rc"
 gem "cancan", ">= 1.6.7"
 gem "rolify", ">= 3.1.0"
@@ -32,12 +32,12 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-rails'
   gem 'guard-bundler'
-  gem 'capistrano'
+  gem 'capistrano','~> 2.15.5'
   #gem 'capistrano-ext'
   gem 'capistrano-recipes'
   gem 'capistrano-helpers'
   #gem 'rvm-capistrano'
-  gem 'capistrano-unicorn',:git=>'git://github.com/sosedoff/capistrano-unicorn.git'
+  #gem 'capistrano-unicorn',:git=>'git://github.com/sosedoff/capistrano-unicorn.git'
   gem 'capistrano-resque'
   gem 'thin'
 end
@@ -108,3 +108,5 @@ gem 'ohm'
 
 gem 'acts-as-taggable-on'
 #gem 'best_in_place'
+gem 'open_taobao'
+gem 'angularjs-rails'

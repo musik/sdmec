@@ -1,5 +1,6 @@
--title @store.safe_title,nil,false
+-title t("stores.show.title" + (@store.title == @store.nick ? "_mall" : ""),title:@store.safe_title,nick: @store.nick),nil,false
 -metalink "canonical",store_url(@store,:subdomain=>@store.city_slug) 
+-meta :keywords,t('stores.show.keywords',title: @store.title,nick: @store.nick)
 -@bodyname = "store"
 -@col1 = true
 -@nomingdian = true
@@ -47,8 +48,11 @@
       %a.loc#details
       %h3 简介
       .desc
-        =slotb
-        -unless @store.mingan?
+        -if (s.bulletin.nil? && s.desc.nil?) or @store.mingan?
+          %p.empty 暂无简介
+          =slotb
+        -else
+          =slotb
           =sanitize safe_print(s.bulletin)
           =sanitize safe_print(s.desc)
     #reviews-section.section

@@ -56,7 +56,7 @@ class Store < ActiveRecord::Base
   sphinx_scope :in_city do |city|
     if city.present?
       {:with=>{
-          :city_id=> (city.parent_id>0 or city.zhixiashi?) ? city.id : City.where(:parent_id=>city.id).pluck(:id)
+        :city_id=> (city.parent_id>0 or city.zhixiashi?) ? city.id : City.where(:parent_id=>city.id).pluck(:id)
       }}
     else
       {}
@@ -75,20 +75,25 @@ class Store < ActiveRecord::Base
     @mingan ||= (title.match(/成人用品|性福|性用品|情趣/)) ? true : false
   end
   def init_data
-    Resque.enqueue(ShopdataQueue,id,false)
+    #Resque.enqueue(ShopdataQueue,id,false)
   end
   def related limit=10
     self.class.search(title.gsub(/[ \^\@\$\&\(\)\[\]\-\/【】、（）☆]/,''),
-        :without => {:id=>id},
-        :include => [:city],
-        :match_mode => :any,
-        :sort_mode => :extended,
-        :order => "@relevance DESC,seller_credit DESC",
-        :per_page=>limit
-      )
+                      :without => {:id=>id},
+                      :include => [:city],
+                      :match_mode => :any,
+                      :sort_mode => :extended,
+                      :order => "@relevance DESC,seller_credit DESC",
+                      :per_page=>limit
+                     )
   end
   def import_shopdata
-    rs = api.shop_get nick
+    hash = OpenTaobao.get(
+      :method => "taobao.shop.get",
+      :fields => "sid,cid,title,nick,desc,bulletin,pic_path,created,modified",
+      :nick => nick)
+    pp hash
+    return 
     return if rs == false
     if TaobaoFu.is_error? rs 
       if TaobaoFu.error_code == 7
@@ -130,7 +135,7 @@ class Store < ActiveRecord::Base
     rs = api.taobaoke_shops_convert nick
     if rs.present?
       rs = rs["taobaoke_shops"]["taobaoke_shop"].first
-      else
+    else
       rs = {}
     end
     rs["delta"] = true
@@ -145,8 +150,8 @@ class Store < ActiveRecord::Base
     pp Typhoeus::Request.get(url) 
   end
   def delay_jobs_require_user_id
-      #delay(:priority=>2).import_userdata 
-      #delay(:priority=>2).import_comments 
+    #delay(:priority=>2).import_userdata 
+    #delay(:priority=>2).import_comments 
   end
   def import_userdata
     tb = Taobao.new
@@ -203,7 +208,7 @@ class Store < ActiveRecord::Base
   end
 
   def shop_url
-    "http://shop#{sid}.taobao.com"
+    sid.present? ? "http://shop#{sid}.taobao.com" : "http://store.taobao.com/shop/view_shop.htm?user_number_id=#{user_id}"
   end
   def user_url
     "http://rate.taobao.com/user-rate-#{user_id}.htm"
@@ -215,18 +220,18 @@ class Store < ActiveRecord::Base
     city ? city.slug : "www"
   end
 
-    def api
-      @api ||= TaobaoFu::Api.new
-    end
+  def api
+    @api ||= TaobaoFu::Api.new
+  end
   class << self
     def by_cats
-     rs = {}
-     where('cat_id is not null').includes(:city).all.each do |r|
-       rs.has_key?(r.cat_id) ? 
-         rs[r.cat_id] << r :
+      rs = {}
+      where('cat_id is not null').includes(:city).all.each do |r|
+        rs.has_key?(r.cat_id) ? 
+          rs[r.cat_id] << r :
           rs[r.cat_id] = []
-     end
-     rs
+      end
+      rs
     end
     def all_by_ids ids
       shops = Store.where(:id=>ids).includes(:city).all
@@ -250,12 +255,36 @@ class Store < ActiveRecord::Base
       end
       e
     end
-    def import_by_uname_and_cityname uname,cityname
+    def import_by_uname_and_cityname uname,cityname = nil
       e = where(:nick=>uname).first_or_initialize
       if e.new_record?
         e.city = City.find_by_name cityname unless cityname.nil?
         e.save
         e.init_data
+      end
+      e
+    end
+    def build_by_nick nick
+      e = where(:nick=>nick).first_or_initialize
+      if e.new_record?
+        hash = OpenTaobao.get(
+          :method => "taobao.tbk.shops.detail.get",
+          fields: 'user_id,shop_title,pic_url',
+          :seller_nicks => nick)
+        #if hash.key?("error_response")
+          #e.errors.add :nick,hash["error_response"]["msg"]
+          #return e
+        #end
+        data = hash["tbk_shops_detail_get_response"]["tbk_shops"]["tbk_shop"].first rescue nil
+        if data.nil?
+          e.errors.add :nick,"没有找到相应的店铺。请确认卖家昵称正确，并已加入淘宝客推广联盟。"
+          return e
+        end
+        data["pic_path"] = data.delete("pic_url").sub('http://logo.taobaocdn.com/shop-logo','')
+        data["title"] = data.delete("shop_title")
+        e.update_attributes data
+      else
+        e.errors.add :nick,"此店铺已存在"
       end
       e
     end
@@ -358,14 +387,14 @@ class Store < ActiveRecord::Base
     end
     def self.perform cid,page=1,run_next=true,options={}
       #keep_time 0.6 do
-        Store::TaokeShop.new.fetch_by_cid cid,page,run_next,options
+      Store::TaokeShop.new.fetch_by_cid cid,page,run_next,options
       #end
     end
   end
-  
+
   class Jie
     def run
-      
+
     end
     def run_all_cities
       City.where("parent_id > 0 or zhixiashi = ?",true).all.each do |city|
@@ -405,23 +434,23 @@ class Store < ActiveRecord::Base
       @has_next_page = true
     end
     def fetch_user str
-        url = "http://rate.taobao.com/user-rate-#{str}.htm"
-        Rails.logger.debug url
-        response = Typhoeus::Request.get(url)
-        if response.success?
-          doc = Nokogiri::HTML(response.body)
-          #content = res.body.encode("UTF-8","GBK")
-          data = {} 
-          body = doc.at_css('body').content
-          mt = body.match(/卖家信用：(\d+)/)
-          if mt.present?
-            data[:seller_score] = mt[1].to_i
-          end
-          #p body
-          data[:buyer_credit] = body.match(/买家信用：\s+(\d+)/)[1].to_i rescue nil
-          return data
+      url = "http://rate.taobao.com/user-rate-#{str}.htm"
+      Rails.logger.debug url
+      response = Typhoeus::Request.get(url)
+      if response.success?
+        doc = Nokogiri::HTML(response.body)
+        #content = res.body.encode("UTF-8","GBK")
+        data = {} 
+        body = doc.at_css('body').content
+        mt = body.match(/卖家信用：(\d+)/)
+        if mt.present?
+          data[:seller_score] = mt[1].to_i
         end
-        false
+        #p body
+        data[:buyer_credit] = body.match(/买家信用：\s+(\d+)/)[1].to_i rescue nil
+        return data
+      end
+      false
     end
     def fetch_comments str
       url = "http://rate.taobao.com/member_rate.htm?content=1&result=&from=rate&user_id=#{str}&identity=1&rater=3&direction=1"
@@ -440,12 +469,12 @@ class Store < ActiveRecord::Base
         rater:1, # 卖家 3 买家 1  //3 1 给出
         direction:0,# 1 给出 0 得到 //3 0 来自卖家 1 0 来自买家
         page:page}
-      options = defaults.merge options
-      url = "http://rate.taobao.com/member_rate.htm?#{options.to_query}"
-      res = Typhoeus::Request.get(url)
-      data =  JSON.parse(res.body.strip.encode("utf-8","GBK").match(/^\((.+)\)$/)[1])
-      @has_next_page = data["maxPage"] > data["currentPageNum"]
-      data["rateListDetail"]
+        options = defaults.merge options
+        url = "http://rate.taobao.com/member_rate.htm?#{options.to_query}"
+        res = Typhoeus::Request.get(url)
+        data =  JSON.parse(res.body.strip.encode("utf-8","GBK").match(/^\((.+)\)$/)[1])
+        @has_next_page = data["maxPage"] > data["currentPageNum"]
+        data["rateListDetail"]
     end
   end
 

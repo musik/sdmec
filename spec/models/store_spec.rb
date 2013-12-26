@@ -3,6 +3,9 @@ require 'spec_helper'
 
 describe Store do
   it "should jie" do
+    #e = Store.build_by_nick "韩都衣舍旗舰店"
+    #p e
+    #e.import_shopdata
     #city = City.create :name=>"曲靖"
     #Store::Jie.new.search_by_city city.id,1,false
     #e = Store.import_by_username_and_city "usedcar",city

@@ -1,6 +1,6 @@
 -limit ||= 30
 -cache "top-tags-#{limit}",:expires_in => 30.minutes do
-  -tags = Tag.all_tagged_on('Store').order('count desc').limit(limit)
+  -tags = Tag.all_tagged_on('Store').order('count_all desc').limit(limit)
   %h2 热点标签
   %p.tag_cloud
     -tag_cloud(tags, %w(css1 css2 css3 css4)) do |tag, css_class| 

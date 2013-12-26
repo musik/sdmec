@@ -88,14 +88,14 @@ require './lib/recipes/unicorn.rb'
 after "deploy:create_symlink","unicorn:symlink"
 after 'deploy:start','unicorn:start'
 after 'deploy:restart', 'unicorn:restart' # app IS NOT preloaded
-after 'deploy:restart', 'resque:pool:restart'
+#after 'deploy:restart', 'resque:pool:restart'
 #require 'recipes/unicorn'
 #require 'capistrano-unicorn'
 
 #Resque
 
-set :resque_service,'resque-sdmec'
-require './lib/recipes/resque.rb'
+#set :resque_service,'resque-sdmec'
+#require './lib/recipes/resque.rb'
 #before 'deploy:restart','resque:restart'
 #role :resque_worker, "gxr"
 #role :resque_scheduler, "gxr"

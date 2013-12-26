@@ -117,6 +117,10 @@ class StoresController < ApplicationController
     breadcrumbs.add @title,nil
     render :action=>'huangguan'
   end
+  def submit
+    @store = Store.new
+    breadcrumbs.add "店铺提交"
+  end
 
   # GET /stores/1
   # GET /stores/1.json
@@ -127,7 +131,7 @@ class StoresController < ApplicationController
       render :text=>'503',:status=>503
       return
     end
-    logger.debug @store.inspect
+    #logger.debug @store.inspect
     #if @store.mingan?
       #redirect_to @store.url
       #return
@@ -142,8 +146,8 @@ class StoresController < ApplicationController
 
     @tags = @store.tag_list
     #@store.sync_update_taokedata if @store.user_id.nil?
-    @items = @store.cached_items
-    @store.remove_stale_items
+    #@items = @store.cached_items
+    #@store.remove_stale_items
     #@items = nil
     breadcrumbs.add @store.title,nil
     #render  @store.click_url.present? ? 'newshow' : 'freeshow'
@@ -203,14 +207,19 @@ class StoresController < ApplicationController
   # POST /stores
   # POST /stores.json
   def create
-    @store = Store.new(params[:store])
+    @store = Store.build_by_nick(params[:store][:nick])
 
     respond_to do |format|
-      if @store.save
+      if @store.errors.messages.empty?
         format.html { redirect_to @store, notice: 'Store was successfully created.' }
         format.json { render json: @store, status: :created, location: @store }
       else
-        format.html { render action: "new" }
+        format.html {
+          @tmp = @store
+          @store = Store.new(nick: @tmp.nick)
+          @store.errors.add :nick,@tmp.errors.messages[:nick][0]
+          render action: "submit" 
+        }
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
     end

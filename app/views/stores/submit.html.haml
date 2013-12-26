@@ -1,0 +1,9 @@
+-title "店铺提交"
+= simple_form_for(@store) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :nick
+
+  .form-actions
+    = f.button :submit,"提交店铺"

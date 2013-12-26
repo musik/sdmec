@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130529055448) do
+ActiveRecord::Schema.define(:version => 20131226081326) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -48,6 +48,10 @@ ActiveRecord::Schema.define(:version => 20130529055448) do
     t.integer "rgt"
     t.integer "depth"
     t.integer "stores_count", :default => 0
+    t.string  "title"
+    t.string  "keywords"
+    t.text    "description"
+    t.integer "position",     :default => 9
   end
 
   add_index "cats", ["lft", "rgt"], :name => "lft_rgt"
@@ -169,6 +173,7 @@ ActiveRecord::Schema.define(:version => 20130529055448) do
     t.datetime "updated_at",                                         :null => false
   end
 
+  add_index "items", ["cid"], :name => "index_items_on_cid"
   add_index "items", ["commission"], :name => "index_items_on_commission"
   add_index "items", ["commission_num"], :name => "index_items_on_commission_num"
   add_index "items", ["commission_rate"], :name => "index_items_on_commission_rate"

@@ -35,7 +35,7 @@ Tb::Application.routes.draw do
     end
     root :to => 'home#site'
   end
-  resources :stores,:path=>"shop",:only=>[:show,:index] do
+  resources :stores,:path=>"shop",:only=>[:show,:index,:create] do
     collection do
       get 'top'
       get 'recent'
@@ -44,6 +44,7 @@ Tb::Application.routes.draw do
       get 'dengji'
       post 'find'
       get 'tag'
+      get "submit"
     end
     member do
       get 'convert'
