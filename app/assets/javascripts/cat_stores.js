@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require angular
 var App = angular.module('Sdmec',[]);
-App.controller('CatStores',function ($scope,$http) {
+App.controller('CatStores',['$scope','$http',function ($scope,$http) {
   $http.get('/cats/'+ cat_id + '/stores.json').success(function(data){
     $scope.results =  data;
     $scope.ids = [];
@@ -28,4 +28,4 @@ App.controller('CatStores',function ($scope,$http) {
     })
       $scope.shop_url = "";
   }
-})
+}])
