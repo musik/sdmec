@@ -1,34 +1,47 @@
 -title @title
 -@col1 = true
 -@nojs = true
+=javascript_tag "var cat_id = '#{@cat.id}';"
 =javascript_include_tag "cat_stores"
-.row-fluid
-  =javascript_tag "var cat_id = '#{@cat.id}';"
-  .span8{'ng-controller'=>'CatStores'}
+.row-fluid{'ng-controller'=>'CatStores'}
+  .span9
+    %ul.inhome
+      %li
+        %h3
+          <a href="/taobao-#{@cat.slug}">#{@cat.name}</a>
+        .list
+          %a{'ng-repeat'=>'store in results | filter:{inhome: true} | orderBy:"position"'}
+            \{{store.short}}
     %table.table
       %tr 
         %th 首页
+        %th
         %th
         %th ORDER
       %tr{'ng-repeat'=>'store in results | orderBy:"position"'}
         %td
           %input{type: "checkbox","ng-model"=>"store.inhome","ng-click"=>"InhomeChange(store)"}
         %td
-          %a{href: ""} {{store.short}}
+          %input.input.input-medium{type: "text","ng-model"=>"store.short"}
+        %td
+          %input.input.input-medium{type: "text","ng-model"=>"store.click_url"}
         %td
           %input.input.input-mini{type: "text","ng-model"=>"store.position"}
-          %button.btn.btn-success{"ng-click"=>"PositionChange(store)"} Save
+          %button.btn.btn-success{"ng-click"=>"save(store)"} Save
 
     -##rdata= render :partial => 'cat_stores/list',:locals=>{:stores=>@stores}
     -if can? :manage,Cat
       -#= link_to 'add store', new_cat_store_url(@cat)
       =link_to 'back',manage_cats_url
-  .span4
-    =form_for(@cat,:url=>find_stores_url,:remote=>true,:method=>'post') do |f|
-      %input{:name=>'sq',:value=> @cat.name}
-      %input{:name=>'cat_id',:value=> @cat.id,:type=>'hidden'}
-      %button 搜索
-    #results  
+  .span3
+    %form{"ng-submit"=>"addShop()"}
+      %input.input{'ng-model'=>'shop_url',type: 'text'}
+      %input.btn.btn-primary{type: "submit",value:"add"}
+    -#=form_for(@cat,:url=>find_stores_url,:remote=>true,:method=>'post') do |f|
+      -#%input{:name=>'sq',:value=> @cat.name}
+      -#%input{:name=>'cat_id',:value=> @cat.id,:type=>'hidden'}
+      -#%button 搜索
+    -##results  
 
 
 

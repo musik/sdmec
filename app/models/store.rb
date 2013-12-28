@@ -233,7 +233,7 @@ class Store < ActiveRecord::Base
   class << self
     def import_by_url str
       if data = Taobao.parse_url(str)
-        e = self.where(user_id: data[:user_id]).first_or_initialize data
+        e = self.where(nick: data[:nick]).first_or_initialize data
         e.new_record? ?  e.save : e.update_attributes(data) 
         e
       end
