@@ -10,7 +10,7 @@
         %h3
           <a href="/taobao-#{@cat.slug}">#{@cat.name}</a>
         .list
-          %a{'ng-repeat'=>'store in results | filter:{inhome: true} | orderBy:"position"'}
+          %a{'ng-repeat'=>'store in results | filter:{inhome: true} | orderBy:"position":true'}
             \{{store.short}}
     %table.table
       %tr 
@@ -19,7 +19,7 @@
         %th
         %th
         %th ORDER
-      %tr{'ng-repeat'=>'store in results | orderBy:"position"'}
+      %tr{'ng-repeat'=>'store in results | orderBy:"position":true'}
         %td
           %input{type: "checkbox","ng-model"=>"store.inhome","ng-click"=>"InhomeChange(store)"}
         %td

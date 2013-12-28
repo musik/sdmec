@@ -240,7 +240,7 @@ class Store < ActiveRecord::Base
     end
     def by_cats
       rs = {}
-      select('id,short,title,user_id,city_id,click_url,sid,nick,pic_path,cat_id').where(inhome: true).order('position asc').includes(:city).all.each do |r|
+      select('id,short,title,user_id,city_id,click_url,sid,nick,pic_path,cat_id').where(inhome: true).order('position desc').includes(:city).all.each do |r|
         rs.has_key?(r.cat_id) ? 
           rs[r.cat_id] << r :
           rs[r.cat_id] = [r]
