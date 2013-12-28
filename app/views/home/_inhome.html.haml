@@ -1,0 +1,10 @@
+-@stores = Store.inhome_by_cats false
+%ul.inhome
+  -@stores.each do |cat,stores|
+    -next if stores.nil?
+    %li
+      %h3=link_to cat.name,"/taobao-#{cat.slug}"
+      .list
+        -stores.each do |store|
+          =link_to store.short,store.url,target: "_blank",rel: "nofollow"
+.clearfix

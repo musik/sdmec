@@ -2,9 +2,10 @@
 class Store < ActiveRecord::Base
   belongs_to :city
   belongs_to :cat,:counter_cache=>'stores_count'
-  attr_accessible :auction_count, :cid, :commission_rate, :created, :delivery_score, :item_score, :pic_path, :seller_credit, :seller_id, :nick, :service_score, :shop_id, :shop_title, :shop_type, :total_auction, :taoke_updated_at, :shop_updated_at,:city_id,:bulletin,:desc,:sid,:title,:modified,:click_url,:user_id,
+  attr_accessible :auction_count, :cid, :commission_rate, :created, :delivery_score, :item_score, :pic_path, :seller_credit, :seller_id, :nick, :service_score, :shop_id, :shop_title, :shop_type, :total_auction, :taoke_updated_at, :shop_updated_at,:city_id,:bulletin,:desc,:sid,:title,:modified,:click_url,:user_id,:short,
     :buyer_credit, :hangye,:seller_rate,:extra_data,
-    :user_updated_at, :comments_updated_at,:delta
+    :user_updated_at, :comments_updated_at,:delta,
+    :source_url,:follow_count,:inhome,:position
   scope :updated,where('shop_updated_at is not null')
   scope :credit,order('seller_credit desc')
   scope :recent,order('id desc')
@@ -27,6 +28,10 @@ class Store < ActiveRecord::Base
   belongs_to :category,:foreign_key => 'cid',:primary_key => 'cid'
 
   #after_create :init_data
+  before_save :check_short
+  def check_short
+    self[:short] = title if short.nil?
+  end
 
   define_index do
     indexes :title,:bulletin,:desc
@@ -65,6 +70,9 @@ class Store < ActiveRecord::Base
   def name
     title
   end
+  def short
+    self[:short] || title
+  end
   def safe_title
     title.nil? ? 'n/a' : title.gsub(/成人用品/,'成用')
   end
@@ -92,7 +100,6 @@ class Store < ActiveRecord::Base
       :method => "taobao.shop.get",
       :fields => "sid,cid,title,nick,desc,bulletin,pic_path,created,modified",
       :nick => nick)
-    pp hash
     return 
     return if rs == false
     if TaobaoFu.is_error? rs 
@@ -224,14 +231,35 @@ class Store < ActiveRecord::Base
     @api ||= TaobaoFu::Api.new
   end
   class << self
+    def import_by_url str
+      if data = Taobao.parse_url(str)
+        e = self.where(user_id: data[:user_id]).first_or_initialize data
+        e.new_record? ?  e.save : e.update_attributes(data) 
+        e
+      end
+    end
     def by_cats
       rs = {}
-      where('cat_id is not null').includes(:city).all.each do |r|
+      select('id,short,title,user_id,city_id,click_url,sid,nick,pic_path,cat_id').where(inhome: true).order('position asc').includes(:city).all.each do |r|
         rs.has_key?(r.cat_id) ? 
           rs[r.cat_id] << r :
-          rs[r.cat_id] = []
+          rs[r.cat_id] = [r]
       end
       rs
+    end
+    def inhome_by_cats json = true
+      cats = Cat.select('name,slug,id,position').roots.all
+      stores = by_cats
+      cats.sort{|a,b| a.position <=> b.position}
+      if json
+        arr = cats.collect{|cat| [cat.id,[cat,
+            (stores[cat.id].nil? ? [] : stores[cat.id])]]}
+        Hash[arr]
+        else
+        arr = cats.collect{|cat| [cat,stores[cat.id]]}
+        #arr.delete_if{|r| r[1].nil?}
+        Hash[arr]
+      end
     end
     def all_by_ids ids
       shops = Store.where(:id=>ids).includes(:city).all
@@ -475,6 +503,55 @@ class Store < ActiveRecord::Base
         data =  JSON.parse(res.body.strip.encode("utf-8","GBK").match(/^\((.+)\)$/)[1])
         @has_next_page = data["maxPage"] > data["currentPageNum"]
         data["rateListDetail"]
+    end
+    def self.parse_url url
+      url = url.match(/^http:\/\/.+?\.(taobao|tmall)\.com/)[0]
+      target = url
+      if target.match(/tmall.com/)
+        target += '/?tbpm=3'
+        shop_type = 'B'
+      else
+        shop_type = 'C'
+      end
+      response = Typhoeus::Request.get(url,followlocation: true,verbose: false)
+      if response.success?
+        data = {}
+        if matches = response.body.scan(/\"(shopId|userId|user_nick|shopCategoryId)\": *"(.+?)"/i)
+          matches = Hash[matches]
+          data = {
+            sid: matches["shopId"],
+            user_id: matches["userId"],
+            nick: CGI.unescape(matches["user_nick"]),
+            cid: matches["shopCategoryId"]
+          }
+        end
+        doc = Nokogiri::HTML(response.body)
+        if node = doc.at_css('.shop-logo img')
+          data[:pic_path] = node.attr('src')
+        end
+        if node = doc.at_css('a.shop-name')
+          data[:title] = node.text.strip
+        else
+          data[:title] = doc.at_css('title').text.strip
+        end
+        #data[:short] = data[:title]
+        data[:source_url] = url
+        if node = doc.at_css('img.rank')
+          arr = node.attr('src').match(/s_(.+?)_(\d)\.gif/)
+          ranks = %w(red blue cap crown)
+          data[:seller_credit] = ranks.index(arr[1]) * 5 + arr[2].to_i
+        end
+        if node = doc.at_css('.follow-count')
+          data[:follow_count] = node.text()
+        end
+        data[:shop_type] = shop_type
+        data.each do |k,v|
+          data.delete(k) if v.nil?
+        end
+        data 
+      else
+        nil
+      end
     end
   end
 

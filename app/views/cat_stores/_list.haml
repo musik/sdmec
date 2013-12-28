@@ -7,6 +7,6 @@
       -i+=1
       .title
         -if s.click_url.present?
-          = link_to s.safe_title,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','shopinlist')"
+          = link_to s.short,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','shopinlist')"
         -else
-          = s.safe_title
+          = s.short

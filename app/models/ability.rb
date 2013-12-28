@@ -7,6 +7,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.has_role? :admin
       can :manage, :all
+      can :remove_all, :all
     else
       can :read,:all
       can [:browse,:auto_complete,:search],Topic

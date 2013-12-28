@@ -4,7 +4,11 @@ class CatStoresController < ApplicationController
   def index
     @stores = Store.where(:cat_id=>@cat.id).page(params[:page] || 1)
     @title = "#{@cat.name}店铺"
-    breadcrumbs.add "店铺",nil
+    breadcrumbs.add "店铺",manage_cats_url
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @stores }
+    end
   end
   # GET /stores/new
   # GET /stores/new.json
@@ -52,12 +56,15 @@ class CatStoresController < ApplicationController
     @store = @cat.stores.find(params[:id])
     @store.cat = nil
     @store.save!
+    respond_to do |format|
+      format.html { redirect_to '/cats/preview'}
+      format.js { head :no_content }
+    end
     #@cat.stores.delete @store
-    render :action=>"create"
+    #render :action=>"create"
   end
   def find_cat
     @cat = Cat.find params[:cat_id]
-    authorize! :edit,@cat
   end
 
 end

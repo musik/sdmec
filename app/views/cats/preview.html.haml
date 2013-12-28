@@ -1,0 +1,47 @@
+-@col1 = true
+-#=javascript_tag "var cats = #{Store.inhome_by_cats.to_json}"
+-@nojs = true
+=javascript_include_tag "inhome_manage"
+.row-fluid{'ng-controller'=> "InhomeCtrl"}
+  .span9
+    %ul.inhome
+      %li{'ng-repeat'=> "(cat_id,row) in results"}
+        %h3
+          <a href="/cats/{{row[0].slug}}/stores">{{row[0].name}}</a>
+        .list
+          %span{'ng-repeat' => "store in row[1] track by $index"}
+            -#,"ng-show"=>"store.removed"}
+            %a{:href=>"#\{{store.click_url}}","ng-hide"=>"store.edit","ng-click"=>"edit(store)"} {{store.short}}
+            %form{"ng-show"=>"store.edit"}
+              %input.input{'ng-model'=>'store.short',type: 'text'}
+              %input.input{'ng-model'=>'store.click_url',type: 'text',placeholder: "click url"}
+              %input.btn.btn-primary{"ng-click"=>"save()",type: "submit",value:"save"}
+              <a class="btn btn-danger" href="" ng-click="remove()">Del</a>
+              %button.btn.btn-default{"ng-click"=>"store.edit = false"} cancel
+            -#<a class="btn btn-mini" href="" ng-click="edit(store)">e</a>
+  .span3
+    %p
+      %button.btn{"ng-click"=>"removeAll()"} Remove all
+      %form{"ng-submit"=>"addShop()"}
+        %select{"ng-model"=>"store_cat_id"}
+          %option{'ng-repeat'=>"(cat_id,row) in results",value: "{{cat_id}}"}
+            \{{row[0].name}}
+        %input.input{'ng-model'=>'shop_url',type: 'text'}
+        %input.btn.btn-primary{type: "submit",value:"add"}
+-#<a data-type="1" biz-sellerid="263817957" data-style="2" data-tmpl="140x190" target="_blank">
+-#淘点金_店铺_直接展示140x190
+-#</a>
+-#<script type="text/javascript"> (function(win,doc){ var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_10894158_2495491_15278824",/*推广单元ID，用于区分不同的推广渠道*/ appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window,document);</script>
+-#-@stores = Store.inhome_by_cats
+-#%ul.inhome{ng: {controller: "InhomeCtrl"}}
+  -#-@stores.each do |cat,stores|
+    -#-next if stores.nil?
+    -#%li
+      -#%h3
+        -#=link_to cat.name,tbcat_url(cat.slug)
+      -#.list
+        -#-stores.each do |s|
+          -#=link_to s.name.truncate(8)
+-#=debug @stores
+-#-content_for :footer do
+  -#= javascript_include_tag ("inhome_manage")

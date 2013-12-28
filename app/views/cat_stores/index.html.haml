@@ -1,8 +1,25 @@
 -title @title
 -@col1 = true
+-@nojs = true
+=javascript_include_tag "cat_stores"
 .row-fluid
-  .span8
-    #rdata= render :partial => 'cat_stores/list',:locals=>{:stores=>@stores}
+  =javascript_tag "var cat_id = '#{@cat.id}';"
+  .span8{'ng-controller'=>'CatStores'}
+    %table.table
+      %tr 
+        %th 首页
+        %th
+        %th ORDER
+      %tr{'ng-repeat'=>'store in results | orderBy:"position"'}
+        %td
+          %input{type: "checkbox","ng-model"=>"store.inhome","ng-click"=>"InhomeChange(store)"}
+        %td
+          %a{href: ""} {{store.short}}
+        %td
+          %input.input.input-mini{type: "text","ng-model"=>"store.position"}
+          %button.btn.btn-success{"ng-click"=>"PositionChange(store)"} Save
+
+    -##rdata= render :partial => 'cat_stores/list',:locals=>{:stores=>@stores}
     -if can? :manage,Cat
       -#= link_to 'add store', new_cat_store_url(@cat)
       =link_to 'back',manage_cats_url

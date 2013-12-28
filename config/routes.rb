@@ -35,7 +35,7 @@ Tb::Application.routes.draw do
     end
     root :to => 'home#site'
   end
-  resources :stores,:path=>"shop",:only=>[:show,:index,:create] do
+  resources :stores,:path=>"shop" do
     collection do
       get 'top'
       get 'recent'
@@ -64,6 +64,10 @@ Tb::Application.routes.draw do
     collection do
       get 'manage'
       get 'tree'
+      get 'preview'
+      post 'update_store'
+      post 'remove_all'
+      post 'add'
     end
     resources :stores,:controller=>'cat_stores'
   end

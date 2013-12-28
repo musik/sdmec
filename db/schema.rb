@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131226081326) do
+ActiveRecord::Schema.define(:version => 20131228081832) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -300,11 +300,17 @@ ActiveRecord::Schema.define(:version => 20131226081326) do
     t.boolean  "delta",                                              :default => false, :null => false
     t.boolean  "active",                                             :default => true
     t.integer  "cat_id"
+    t.boolean  "inhome"
+    t.string   "short"
+    t.string   "source_url"
+    t.integer  "follow_count"
+    t.integer  "position",                                           :default => 11
   end
 
   add_index "stores", ["cat_id"], :name => "index_cat"
   add_index "stores", ["cid"], :name => "index_stores_on_cid"
   add_index "stores", ["city_id"], :name => "index_stores_on_city_id"
+  add_index "stores", ["inhome"], :name => "index_stores_on_inhome"
   add_index "stores", ["nick"], :name => "index_stores_on_nick"
   add_index "stores", ["shop_updated_at"], :name => "index_stores_on_shop_updated_at"
   add_index "stores", ["sid"], :name => "index_stores_on_sid"

@@ -1,12 +1,14 @@
 # -*- encoding : utf-8 -*-
 
 class CatsController < ApplicationController
-  load_and_authorize_resource :except=>[:tree,:city]
+  load_and_authorize_resource :only=>%w(update create destroy)
   caches_action :city,:expires_in => 30.minutes
   # GET /cats
   # GET /cats.json
   def manage
     @cats = Cat.page(params[:page] || 1).per(50)
+    breadcrumbs.add "manage",manage_cats_url
+    breadcrumbs.add "preview",preview_cats_url
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +17,34 @@ class CatsController < ApplicationController
   end
   def tree
     
+  end
+  def preview
+    breadcrumbs.add "manage",manage_cats_url
+    breadcrumbs.add "preview",preview_cats_url
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: Store.inhome_by_cats.to_json }
+      #format.json { render json: Cat.pluck(:name).to_json }
+    end
+  end
+  def update_store
+    Store.find(params[:id]).update_attributes(params[:store])
+    render text: '1'
+  end
+  def remove_all
+    Store.where("cat_id is not null").update_all(cat_id: nil)
+    head :no_content
+  end
+  def add
+    @store = Store.import_by_url(params[:shop_url])
+    if @store.present? and @store.cat_id.nil?
+      cat = Cat.find(params[:cat_id])
+      @store.cat  = cat
+      @store.save
+      render json: @store.to_json
+      return
+    end
+    head :no_content
   end
 
   def city

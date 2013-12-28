@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   #,:reload_rails_admin
   include UrlHelper
   rescue_from CanCan::AccessDenied do |exception|
+    logger.debug exception
     redirect_to root_path, :alert => exception.message
   end
 
