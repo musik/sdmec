@@ -1,8 +1,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
-//= require_self
-function CatStores($scope,$http) {
+var App = angular.module('Sdmec',[]);
+App.controller('CatStores',function ($scope,$http) {
   $http.get('/cats/'+ cat_id + '/stores.json').success(function(data){
     $scope.results =  data;
     $scope.ids = [];
@@ -28,4 +28,4 @@ function CatStores($scope,$http) {
     })
       $scope.shop_url = "";
   }
-}
+})
