@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require angular
+//= require_self
 function CatStores($scope,$http) {
   $http.get('/cats/'+ cat_id + '/stores.json').success(function(data){
     $scope.results =  data;
