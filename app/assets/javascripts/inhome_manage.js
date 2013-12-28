@@ -35,3 +35,5 @@ function InhomeCtrl($scope,$http) {
     })
   }
 }
+var App = angular.module('Sdmec',[]);
+App.controller('InhomeCtrl',['$scope','$http',InhomeCtrl])

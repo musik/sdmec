@@ -17,6 +17,7 @@
         %th 首页
         %th
         %th
+        %th
         %th ORDER
       %tr{'ng-repeat'=>'store in results | orderBy:"position"'}
         %td
@@ -26,8 +27,11 @@
         %td
           %input.input.input-medium{type: "text","ng-model"=>"store.click_url"}
         %td
+          {{store.seller_credit || store.follow_count}}
+        %td
           %input.input.input-mini{type: "text","ng-model"=>"store.position"}
-          %button.btn.btn-success{"ng-click"=>"save(store)"} Save
+          %input.btn.btn-success{type: "submit","ng-click"=>"save(store)",value: "Save"}
+          <a href="{{store.click_url}}" target="_blank">url</a>
 
     -##rdata= render :partial => 'cat_stores/list',:locals=>{:stores=>@stores}
     -if can? :manage,Cat
