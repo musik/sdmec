@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class HomeController < ApplicationController
   include CityHelper,ApplicationHelper
-  caches_action :index,:expires_in => 12.hours
+  #caches_action :index,:expires_in => 12.hours
   caches_action :city,:expires_in => 3.hours
 
   def index
