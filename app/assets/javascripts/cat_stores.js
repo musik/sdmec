@@ -15,7 +15,7 @@ App.controller('CatStores',['$scope','$http',function ($scope,$http) {
     $http.post('/cats/update_store.js',{id: store.id,store: {inhome: store.inhome ? null : 1}})
   }
   $scope.save = function(store){
-    store.position = Number(store.position);
+    store.position = Number(store.position0);
     $http.post('/cats/update_store.js',{id: store.id,store: {position: store.position,short: store.short,click_url: store.click_url}});
   }
   $scope.search = function(){
@@ -46,5 +46,10 @@ App.controller('CatStores',['$scope','$http',function ($scope,$http) {
       }
     })
       $scope.shop_url = "";
+  }
+  $scope.remove = function(store){
+    $http.delete('/cats/' + String(store.cat_id)+ '/stores/'+ String(store.id) + '.js').success(function(data){
+      store.removed = true
+    })
   }
 }])

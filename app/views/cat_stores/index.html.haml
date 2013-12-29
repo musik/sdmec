@@ -14,25 +14,30 @@
             \{{store.short}}
     %table.table
       %tr 
-        %th 首页
+        %th 首
         %th
         %th
+        %th 级
+        %th 序
         %th
-        %th ORDER
-      %tr{'ng-repeat'=>'store in results | orderBy:"position":true'}
+      %tr{'ng-repeat'=>'store in results | orderBy:"position":true',"ng-hide"=>"store.removed"}
         %td
           %input{type: "checkbox","ng-model"=>"store.inhome","ng-click"=>"InhomeChange(store)"}
         %td
-          %input.input.input-medium{type: "text","ng-model"=>"store.short"}
+          %input.input.input-small{type: "text","ng-model"=>"store.short"}
         %td
-          %input.input.input-medium{type: "text","ng-model"=>"store.click_url"}
+          %input.input.input-mini{type: "text","ng-model"=>"store.click_url"}
         %td
           {{store.seller_credit || store.follow_count}}
         %td
-          %input.input.input-mini{type: "text","ng-model"=>"store.position"}
-          %input.btn.btn-success{type: "submit","ng-click"=>"save(store)",value: "Save"}
-          <a href="{{store.click_url}}" target="_blank">url</a>
-          <a href="http://pub.alimama.com/?spm=0.0.0.0.fcXh60#!/promo/self/shop_detail?userNumberId={{store.user_id}}" target="_blank">ali</a>
+          %input.input.input-xmini{type: "text","ng-model"=>"store.position0","ng-value"=>"store.position"}
+        %td
+          .btn-group
+            %input.btn.btn-success{type: "submit","ng-click"=>"save(store)",value: "S"}
+            <a class="btn btn-danger" href="" ng-click="remove(store)">D</a>
+            <a class="btn" href="/shop/{{store.id}}" target="_show">show</a>
+            <a class="btn" href="{{store.click_url}}" target="_url">url</a>
+            <a class="btn" href="http://pub.alimama.com/?spm=0.0.0.0.fcXh60#!/promo/self/shop_detail?userNumberId={{store.user_id}}" target="_ali">ali</a>
 
     -##rdata= render :partial => 'cat_stores/list',:locals=>{:stores=>@stores}
     -if can? :manage,Cat
