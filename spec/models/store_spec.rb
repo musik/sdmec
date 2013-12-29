@@ -3,8 +3,8 @@ require 'spec_helper'
 
 describe Store do
   it "should jie" do
-    %w(http://osa.tmall.com http://eraserdiary.taobao.com/ http://linnan.taobao.com/ http://peipeiwangluofushi.taobao.com/ http://shop57831817.taobao.com/).each do |url|
-      pp  Store.import_by_url url
+    %w(http://store.taobao.com/shop/view_shop.htm?user_number_id=116043003 http://store.taobao.com/shop/view_shop.htm?user_number_id=228784630 http://osa.tmall.com http://eraserdiary.taobao.com/ http://linnan.taobao.com/ http://peipeiwangluofushi.taobao.com/ http://shop57831817.taobao.com/).each do |url|
+      #pp  Store.import_by_url url
     end
     #Store::Taobao.parse_url('http://shop217225.taobao.com/')
     #Store::Taobao.parse_url('http://ripfs.tmall.com/')

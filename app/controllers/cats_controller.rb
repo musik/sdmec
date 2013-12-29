@@ -27,6 +27,9 @@ class CatsController < ApplicationController
       #format.json { render json: Cat.pluck(:name).to_json }
     end
   end
+  def search
+    render json: Store.api_search(params[:cat_id])
+  end
   def update_store
     Store.find(params[:id]).update_attributes(params[:store])
     render text: '1'

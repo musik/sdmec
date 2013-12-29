@@ -68,6 +68,7 @@ Tb::Application.routes.draw do
       post 'update_store'
       post 'remove_all'
       post 'add'
+      post 'search'
     end
     resources :stores,:controller=>'cat_stores'
   end

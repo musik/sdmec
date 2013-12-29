@@ -292,6 +292,18 @@ class Store < ActiveRecord::Base
       end
       e
     end
+    def api_search cat_id
+      hash = OpenTaobao.get(
+        method: 'taobao.tbk.shops.get',
+        fields: 'user_id,seller_nick,shop_title,pic_url,shop_url',
+        cid: cat_id,
+        sort_field: 'total_auction',
+        sort_type: 'desc'
+      )
+      hash.key?('tbk_shops_get_response') ? 
+        hash['tbk_shops_get_response']['tbk_shops']['tbk_shop'] :
+        []
+    end
     def build_by_nick nick
       e = where(:nick=>nick).first_or_initialize
       if e.new_record?
@@ -505,13 +517,11 @@ class Store < ActiveRecord::Base
         data["rateListDetail"]
     end
     def self.parse_url url
-      url = url.match(/^http:\/\/.+?\.(taobao|tmall)\.com/)[0]
       target = url
-      if target.match(/tmall.com/)
+      if target.match(/tmall\.com/)
+        target = target.match(/^http:\/\/.+?\.(taobao|tmall)\.com/)[0]
         target += '/?tbpm=3'
         shop_type = 'B'
-      else
-        shop_type = 'C'
       end
       response = Typhoeus::Request.get(url,followlocation: true,verbose: false)
       if response.success?
@@ -528,14 +538,19 @@ class Store < ActiveRecord::Base
         doc = Nokogiri::HTML(response.body)
         if node = doc.at_css('.shop-logo img')
           data[:pic_path] = node.attr('src')
+        elsif node = doc.at_css('img.logo-img')
+          data[:pic_path] = node.attr('src')
         end
         if node = doc.at_css('a.shop-name')
           data[:title] = node.text.strip
+          data[:source_url] = node.attr('href')
         else
           data[:title] = doc.at_css('title').text.strip
+          if node = doc.at_css('a.hCard')
+            data[:source_url] = node.attr('href')
+          end
         end
         #data[:short] = data[:title]
-        data[:source_url] = url
         if node = doc.at_css('img.rank')
           arr = node.attr('src').match(/s_(.+?)_(\d)\.gif/)
           ranks = %w(red blue cap crown)
@@ -544,6 +559,8 @@ class Store < ActiveRecord::Base
         if node = doc.at_css('.follow-count')
           data[:follow_count] = node.text()
         end
+        data[:source_url] ||= url
+        shop_type ||= data[:source_url].match(/tmall\.com/) ? "B" : "C"
         data[:shop_type] = shop_type
         data.each do |k,v|
           data.delete(k) if v.nil?

@@ -1,7 +1,7 @@
 -title @title
 -@col1 = true
 -@nojs = true
-=javascript_tag "var cat_id = '#{@cat.id}';"
+=javascript_tag "var cat_id = '#{@cat.id}';cat_oid = #{@cat.oid}"
 =javascript_include_tag "cat_stores"
 .row-fluid{'ng-controller'=>'CatStores'}
   .span9
@@ -39,9 +39,21 @@
       -#= link_to 'add store', new_cat_store_url(@cat)
       =link_to 'back',manage_cats_url
   .span3
+    %form{"ng-submit"=>"search()"}
+      %input.input.input-mini{'ng-model'=>'shop_cat_id',type: 'text'}
+      %input.btn.btn-default{type: "submit",value:"search"}
+    %ul.unstyled{"ng-show"=>"searching"}
+      %li{"ng-repeat"=>"shop in shops","ng-hide"=>"shop.hide"}
+        %meta
+          <a ng-click="addThis(shop)">add</a>
+          \|
+          <a href="{{shop.shop_url}}" target="_blank">ali</a>
+          \|
+        <a href="{{shop.shop_url}}" target="_blank">{{shop.seller_nick}}</a>
+    %hr
     %form{"ng-submit"=>"addShop()"}
-      %input.input{'ng-model'=>'shop_url',type: 'text'}
-      %input.btn.btn-primary{type: "submit",value:"add"}
+      %input.input.input-small{'ng-model'=>'shop_url',type: 'text'}
+      %input.btn.btn-info{type: "submit",value:"add"}
     -#=form_for(@cat,:url=>find_stores_url,:remote=>true,:method=>'post') do |f|
       -#%input{:name=>'sq',:value=> @cat.name}
       -#%input{:name=>'cat_id',:value=> @cat.id,:type=>'hidden'}

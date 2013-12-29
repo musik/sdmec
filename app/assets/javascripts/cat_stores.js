@@ -3,11 +3,12 @@
 //= require angular
 var App = angular.module('Sdmec',[]);
 App.controller('CatStores',['$scope','$http',function ($scope,$http) {
+  $scope.shop_cat_id = cat_oid;
   $http.get('/cats/'+ cat_id + '/stores.json').success(function(data){
     $scope.results =  data;
     $scope.ids = [];
     for(i in data){
-      $scope.ids.push(data.id)
+      $scope.ids.push(data[i].user_id)
     }
   })
   $scope.InhomeChange = function(store){
@@ -17,13 +18,31 @@ App.controller('CatStores',['$scope','$http',function ($scope,$http) {
     store.position = Number(store.position);
     $http.post('/cats/update_store.js',{id: store.id,store: {position: store.position,short: store.short,click_url: store.click_url}});
   }
+  $scope.search = function(){
+    $http.post('/cats/search.js',{cat_id: $scope.shop_cat_id}).success(function(data){
+      $scope.shops = [];
+      for(i in data){
+        if($scope.ids.indexOf(data[i].user_id) == -1){
+          //$scope.shops[data[i].user_id] = data[i];
+          $scope.shops.push(data[i]);
+        }
+      }
+      $scope.searching = true;
+    });
+  }
+  //$scope.search();
+  $scope.addThis = function(shop){
+    $scope.shop_url = shop.shop_url;
+    $scope.addShop();
+    shop.hide = true
+  }
   $scope.addShop = function(){
     $http.post('/cats/add.json',
         {cat_id: cat_id,
           shop_url: $scope.shop_url}).success(function(data){
-      if($scope.ids.indexOf(data.id) == -1){
+      if($scope.ids.indexOf(data.user_id) == -1){
         $scope.results.push(data);
-        $scope.ids.push(data.id);
+        $scope.ids.push(data.user_id);
       }
     })
       $scope.shop_url = "";
