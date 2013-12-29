@@ -11,9 +11,13 @@
     =js_write(link_to "搜索\"#{@cat.name}\"",taokq_url(@cat.name),:onclick=>"track_search_visit('#{@cat.name}',_gaq)",:target=>'_blank',:rel=>"nofollow")
 .share.pull-right
 .clear
+-if @links.present?
+  .shoplinks
+    -@links.each do |shop|
+      =link_to shop.short,shop.url
 = render :partial => 'stores/list'
 -#=js_link_to_with_class "&raquo; 查看更多",taokq_url(@cat.name),"highlight"
-=paginate @stores
+-#=paginate @stores
 
 -content_for :sidebar do
   %h1="#{@cat.name}"
