@@ -11,7 +11,7 @@
           .xrank{:class=>"xrank-#{tmp[0]}"}
             <i>#{tmp[0]}</i>x #{tmp[1]}
       .link
-        =link_to s.nick.truncate(2,:omission=>''),store_url(s,:subdomain=>s.city_slug),:title=>s.nick,:class=>'nick'
+        <a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="2" data-border="1" href="#" target="_blank" class="shoplink label btn-info" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">进入店铺</a>
         \|
         =link_to s.name,s.url,:title=>"#{s.nick}/#{s.name}",:target=>'_blank',:rel=>"nofollow",:class=>"title"
 .clear      

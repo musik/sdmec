@@ -12,6 +12,7 @@
     = csrf_meta_tags
     = yield(:head)
     =javascript_include_tag 'http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=12060575' unless @no_xtao
+    <script type="text/javascript"> (function(win,doc){ var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_10894158_2495491_15278824",/*推广单元ID，用于区分不同的推广渠道*/ appkey: "12060575",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window,document);</script>
     -#=javascript_include_tag "http://cbjs.baidu.com/js/m.js" unless @nocbjs
     =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
   %body{:class=>@bodyname}

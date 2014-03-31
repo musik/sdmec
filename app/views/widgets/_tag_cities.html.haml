@@ -1,6 +1,6 @@
 %h2 城市分布
 %p.tag_cloud
-  -cities.sort.reverse.each do |count,c|
+  -cities.sort{|a,b| b[1] <=> a[1]}.slice(0,20).each do |c,count|
     -next if c.nil?
     %span
       =link_to c.name,url_for(:subdomain=>c.slug),:title=>"#{c.name}#{tag.name}"

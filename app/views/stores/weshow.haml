@@ -33,9 +33,9 @@
             %tt 卖家:
             =s.nick
           .link
-            =link_to "进入店铺",s.url,:target=>'_blank',:id=>"shoplink-side",:class=>"shoplink label btn-info",:rel=>"nofollow",:onclick=>"track_store_click(#{s.sid},'#{s.id}|#{s.title}','#{s.click_url.present? ? 'shopshow' : 'shopfree'}')"
+            <a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="2" data-border="1" href="#" target="_blank" class="shoplink label btn-info" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">进入店铺</a>
       .clearfix
-
+              
 -@sidenav=%w(details reviews related items)
 -@sidenav.delete "items" unless @display_items
 .doc-sidebar{'data-spy'=>"affix",'data-offset-top'=>"10"}
