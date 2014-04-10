@@ -33,7 +33,7 @@ class HomeController < ApplicationController
     @hide_bread = true
   end
   def city
-    @stores = Store.credit_desc.in_city(@city).fullscan.search :include=>[:city],:per_page=>15
+    @stores = Store.credit_desc.in_city(@city).fullscan.search :include=>[:city],:per_page=>10
 
     @cities = @city.children_or_siblings unless @city.zhixiashi?
     render :view=>'newcity'
