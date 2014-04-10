@@ -77,7 +77,7 @@ class Store < ActiveRecord::Base
     title.nil? ? 'n/a' : title.gsub(/成人用品/,'成用')
   end
   def city_with_count
-    [city,read_attribute(:count)]
+    [read_attribute(:count),city]
   end
   def mingan?
     @mingan ||= (title.match(/成人用品|性福|性用品|情趣/)) ? true : false

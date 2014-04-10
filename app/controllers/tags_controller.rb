@@ -53,7 +53,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.named(params[:id]).first
     @stores = Store.tagged_with(@tag.name).credit.list_field.includes(:city).page(params[:page]).per(15)
-    @group = Store.tagged_with(@tag.name).includes(:city).group("city_id").select("stores.id,stores.city_id,count(*) as count").having("count > ?",Rails.env.production? ? 40 : 40).map(&:city_with_count)
+    @group = Store.tagged_with(@tag.name).includes(:city).group("city_id").select("stores.id,stores.city_id,count(*) as count").having("count > ?",Rails.env.production? ? 40 : 10).map(&:city_with_count)
     breadcrumbs.add :tags,tags_path
     if params[:page].present?
       breadcrumbs.add @tag.name,tag_path(@tag)
