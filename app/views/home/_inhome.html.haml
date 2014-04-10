@@ -7,5 +7,5 @@
       .list
         -stores.each do |s|
           -#=link_to s.short,store_url(s,subdomain: s.city_slug),target: "_blank",rel: "nofollow"
-          <a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="2" data-border="1" href="#" target="_blank" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">#{s.short}</a>
+          <a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="1" data-border="1" href="#" target="_blank" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">#{s.short}</a>
 .clearfix
