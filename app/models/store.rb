@@ -12,8 +12,8 @@ class Store < ActiveRecord::Base
   scope :priority_asc,order('sites_stores.priority asc')
   scope :rate_desc,order('commission_rate desc')
   scope :with_priority,select('stores.*,sites_stores.priority')
-  scope :short,select('stores.title,stores.id,stores.city_id,stores.seller_credit,click_url,user_id')
-  scope :list_field,select('stores.title,stores.id,stores.city_id,seller_credit,click_url,pic_path,sid,nick,user_id')
+  scope :short,select('stores.title,stores.id,stores.city_id,stores.seller_credit,click_url')
+  scope :list_field,select('stores.title,stores.id,stores.city_id,seller_credit,click_url,pic_path,sid,nick')
   scope :incity,lambda{|city|
     if city.present?
       where(
