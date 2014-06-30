@@ -8,6 +8,10 @@ Tb::Application.routes.draw do
     match '(:id)'=>'home#deleted'
   end
   match '/xtao' => 'home#xtao'
+  constraints(ToolsSubdomain) do
+    match '/xiaoliang/:id'=>'tools#xiaoliang',:as=>'xiaoliang'
+    root :to => 'tools#xiaoliang'
+  end
   constraints(CitySubdomain) do
     match '/t/:id'=>'city/home#page',:as=>'page'
     get '/shop'=>"stores#city",:as=>"shops_city"

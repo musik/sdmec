@@ -16,9 +16,9 @@
         -cities.each do |r|
           =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺"
     -#=adsense '3568161046','sd-city-left',:width=>120,:height=>600
-  -content_for :full do    
-    .alert.alert-notice
-      本站不是淘宝官方网站。如果你要找的是淘宝，请 <a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_11424198&eventid=101329" target="_blank" rel="nofollow">点这里进入</a> 。
+  -#-content_for :full do    
+    -#.alert.alert-notice
+      -#本站不是淘宝官方网站。如果你要找的是淘宝，请 <a href="http://www.taobao.com/go/chn/tbk_channel/channelcode.php?pid=mm_10894158_2495491_11424198&eventid=101329" target="_blank" rel="nofollow">点这里进入</a> 。
   .span10
     %h2="#{@city.name}店铺"
     .bdct

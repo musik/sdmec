@@ -5,9 +5,9 @@ set :repository,  "git@github.com:musik/sdmec.git"
 set :scm, :git
 
 set :deploy_to, "/www/sdmec"
-role :web, "gxr"                          # Your HTTP server, Apache/etc
-role :app, "gxr"                          # This may be the same as your `Web` server
-role :db,  "gxr", :primary => true # This is where Rails migrations will run
+role :web, "nxr"                          # Your HTTP server, Apache/etc
+role :app, "nxr"                          # This may be the same as your `Web` server
+role :db,  "nxr", :primary => true # This is where Rails migrations will run
 #role :db,  "your slave db-server here"
 set :user, "muzik"
 set :group, "muzik"
@@ -97,8 +97,8 @@ after 'deploy:restart', 'unicorn:restart' # app IS NOT preloaded
 #set :resque_service,'resque-sdmec'
 #require './lib/recipes/resque.rb'
 #before 'deploy:restart','resque:restart'
-#role :resque_worker, "gxr"
-#role :resque_scheduler, "gxr"
+#role :resque_worker, "nxr"
+#role :resque_scheduler, "nxr"
 #set :workers, { "update_keywords,update_items" => 1 }
 #require 'capistrano-resque'
 

@@ -51,6 +51,12 @@ zh_CN:
       keywords: "%{nick},%{title},%{nick}评价"
     newshow:
       desc: "<tt>%{title}</tt>,系由掌柜<tt>%{nick}</tt>在淘宝网或天猫商城建立的网上店铺.本网页不是<tt>%{title}</tt>的官方网站."
+  tools:
+    xiaoliang:
+      nick: 昵称
+      name: 店名
+      xiaoliang: 销售量
+      xse: 销售额
   city:
     title: "%{name}淘宝"
     nav:

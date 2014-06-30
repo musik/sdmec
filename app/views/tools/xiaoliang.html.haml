@@ -1,0 +1,66 @@
+-title @page_title,@title
+%form.form-inline{action: root_url(subdomain: 'tools'),method: "GET",'accept-charset'=> "UTF-8"}
+  =label_tag :name,"请输入卖家昵称或店铺网址"
+  %br
+  =text_field_tag :name,@name
+  %button{type: "submit"} 查询
+
+
+-if @name || @store
+  .results
+    -if @url.nil?
+      .alert.alert-warning
+        没找到相应的店铺!
+    -elsif @data.nil?
+      .alert.alert-warning
+        因故暂时无法获取更多数据!
+      %dl.liketable
+        %dt 店铺网址
+        %dd=link_to @realurl,@url,target: "_blank",rel: "nofollow"
+        .c_b
+    -else
+      %dl.liketable
+        %dt 店铺名称
+        %dd
+          %h1.normal=@data[:name]
+        %dt 店铺网址
+        %dd=link_to @realurl,@url,target: "_blank",rel: "nofollow"
+        -%w(nick).each do |k|
+          -if @data[k.to_sym]
+            %dt=t(".#{k}")
+            %dd=@data[k.to_sym]
+        -if @data[:vols]
+          %dt #{@data[:label]} <sup><a href="#f1">1</a></sup>
+          %dd &asymp; #{number_with_delimiter @data[:xiaoliang]} 件
+          %dt 销售额 <sup><a href="#f2">2</a></sup>
+          %dd &asymp; #{number_with_delimiter @data[:xse].round(2)} &yen;
+        .clearfix
+      -if @data[:vols]
+        .footnotes
+          #f1 注释1：销量系该店销量最高的#{@data[:items].size}件宝贝之销量总和，其等于或略小于店铺实际销量。
+          #f2 注释2：销售额系以宝贝单价乘以宝贝的成交量，再求和所得。因为存在促销打折的关系，其可能大于实际销售额。
+      -if !@data[:vols]
+        .alert.alert-warning
+          此店铺未公开销量数据!
+      %h2.sh #{@data[:name]}热卖宝贝
+      -if @data[:items].empty?
+        .alert.alert-warning
+          暂无!
+      -else
+        %ol.item-list
+          %li.head
+            %span.i
+            %span.fn
+            %span.price 单价
+            %span.vol=@data[:label]
+            %span.sv 销售额(预估)
+          -@data[:items].each_with_index do |item,i|
+            %li
+              %span.i=i+1
+              =link_to item[:title],item[:url],target: "_blank", rel: "nofollow",class: "fn"
+              %span.price #{number_with_delimiter item[:price]} &yen;
+              %span.vol #{number_with_delimiter item[:vol]} 件
+              %span.sv #{number_with_delimiter item[:xse].round} &yen;
+          .clearfix
+
+      -#=debug @data
