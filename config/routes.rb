@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 Tb::Application.routes.draw do
-  resources :entries,path: "websites"
+  resources :entries,path: "websites",
+    :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ }
 
   #resources :posts
   #resources :fenleis,path: "fenlei"

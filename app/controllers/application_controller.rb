@@ -91,8 +91,8 @@ class ApplicationController < ActionController::Base
   def _parse_ref
     return if request.referer.nil?
     refuri = URI(request.referer)
-    url = "http://#{refuri.host}"
-    entry = Entry.where(url: url).first
+    return if refuri.host.match(/\.(baidu.com|sogou.com|so.com|sdmec.com|42foo.com)/).present?
+    entry = Entry.find_by_host(refuri.host)
     return if entry.nil?
     entry.update_attribute :clicked_at,Time.now
   end

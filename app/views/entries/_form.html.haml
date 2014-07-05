@@ -22,7 +22,9 @@
       -#= f.error_notification
 
       .form-inputs
-        = f.input :url,placeholder: "http://",input_html: {disabled: @form_disable}
+        -@id_disable = @entry.id.present? ? true : @form_disable
+        = f.input :url,placeholder: "http://",input_html: {disabled: @id_disable}
+
         = f.input :name,input_html: {disabled: @form_disable}
         = f.input :content,input_html: {disabled: @form_disable,rows: 8,class: "input-xxlarge"}
         = f.input :description,as: :text,input_html: {disabled: @form_disable,rows: 2,class: "input-xxlarge"}

@@ -8,7 +8,7 @@ class Entry < ActiveRecord::Base
     end
   end
   attr_accessible :clicked_at, :link_checked_at, :link_status, :name, :pwd, :qq, :url,:description,:keywords,:content
-  validates :url,presence: true,format: {with: /^http:\/\/([a-z0-9\-\.]+)\/*$/i},uniqueness: true
+  validates :url,presence: true,format: {with: /^http:\/\/([a-z0-9\-\.]+)\/*$/i},uniqueness: true,on: :create
   validates :name,presence: true,uniqueness: true
   #validates :pwd,presence: true
   validates :link_status,link: true,on: :create
@@ -33,5 +33,11 @@ class Entry < ActiveRecord::Base
   def clean_url
     self[:url] = self[:url][0,self[:url].length-1] if self[:url][-1] == "/"
     self[:keywords].gsub!(/，/,',') if self[:keywords].present?
+  end
+  def to_param
+    url.sub('http://','')
+  end
+  def self.find_by_host host
+    where(url: "http://#{host}").first
   end
 end

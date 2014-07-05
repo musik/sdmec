@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  load_and_authorize_resource except: %w(new)
+  authorize_resource except: %w(new)
   def index
     @entries = Entry.page(params[:page]).per(200)
 
@@ -12,7 +12,7 @@ class EntriesController < ApplicationController
   # GET /entries/1
   # GET /entries/1.json
   def show
-    @entry = Entry.find(params[:id])
+    @entry = Entry.find_by_host(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +33,7 @@ class EntriesController < ApplicationController
 
   # GET /entries/1/edit
   def edit
-    @entry = Entry.find(params[:id])
+    @entry = Entry.find_by_host(params[:id])
   end
 
   # POST /entries
@@ -55,7 +55,9 @@ class EntriesController < ApplicationController
   # PUT /entries/1
   # PUT /entries/1.json
   def update
-    @entry = Entry.find(params[:id])
+    params[:entry].delete :url
+    logger.debug params[:entry]
+    @entry = Entry.find_by_host(params[:id])
 
     respond_to do |format|
       if @entry.update_attributes(params[:entry])
@@ -71,7 +73,7 @@ class EntriesController < ApplicationController
   # DELETE /entries/1
   # DELETE /entries/1.json
   def destroy
-    @entry = Entry.find(params[:id])
+    @entry = Entry.find_by_host(params[:id])
     @entry.destroy
 
     respond_to do |format|
