@@ -6,12 +6,4 @@
       =link_to "全部",entries_url,target: "_self"
 -@entries = Entry.recent_click.limit(100)
 %section.scontent
-  -if @entries.empty?
-    暂无网站加入
-  -else
-    %p.sites
-      -entry = @entries.shift
-      = link_to entry.name, entry.url,target: "_blank",class: "big"
-      - @entries.each_with_index do |entry,i|
-        = link_to entry.name, entry.url,target: "_blank"
-
+  = render :partial => 'entries/list',locals:{entries: @entries,big: true}

@@ -1,0 +1,16 @@
+-big ||= false
+-if entries.empty?
+  暂无网站加入
+-else 
+  .websites
+    -if big
+      -entry = @entries.shift
+      .website
+        = link_to entry.name, entry.url,target: "_blank",class: "big"
+        %a{href: entry_url(entry)}
+          %i.icon-file
+    - entries.each do |entry|
+      .website
+        = link_to entry.name, entry.url,target: "_blank"
+        %a{href: entry_url(entry)}
+          %i.icon-file
