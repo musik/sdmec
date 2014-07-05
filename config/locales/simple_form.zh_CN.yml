@@ -93,4 +93,4 @@ zh_CN:
         #body: "此处不解析链接."
       post:
         source: 可以是你的网址链接
-        content: 最少100个字
+        content: 最少50个字

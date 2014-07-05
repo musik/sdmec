@@ -12,7 +12,7 @@ class Entry < ActiveRecord::Base
   validates :name,presence: true,uniqueness: true
   #validates :pwd,presence: true
   validates :link_status,link: true,on: :create
-  validates :content,presence: true,length: {minimum: 100}
+  validates :content,presence: true,length: {minimum: 50}
   #validates :description,presence: true,length: {maximum: 200}
 
   scope :recent_click,order("clicked_at desc")
