@@ -77,7 +77,7 @@ zh_CN:
       entry:
         new:
           pwd: 用于以后修改资料
-        content: 至少100字
+        content: 至少50字
         description: 200字以内
         keywords: 多个用逗号隔开，最多三个
       site:
