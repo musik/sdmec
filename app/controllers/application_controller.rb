@@ -58,6 +58,9 @@ class ApplicationController < ActionController::Base
     if %(entries).include? controller_name
       _parse_ref
     end
+    if %(new edit).include? action_name
+      @hide_sidebar_ad = 1
+    end
   end
   def find_city
     @city = City.find_by_slug(request.subdomain)

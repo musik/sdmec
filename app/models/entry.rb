@@ -32,5 +32,6 @@ class Entry < ActiveRecord::Base
   before_validation :clean_url
   def clean_url
     self[:url] = self[:url][0,self[:url].length-1] if self[:url][-1] == "/"
+    self[:keywords].gsub!(/，/,',') if self[:keywords].present?
   end
 end
