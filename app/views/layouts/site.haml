@@ -26,14 +26,14 @@
       .container.relative
         .content
           .site-header
-            .name=link_to @site.name,root_url(:subdomain=>@site.slug)
+            .name=link_to @site.name,site_url
             %p= @site.slogan
           -if user_signed_in? and can? :settings,@site
             .site-config-nav.pull-left
               小站管理:
-              =link_to '设置',settings_path
-              =link_to '管理宝贝',manage_items_path
-              =link_to '管理店铺',manage_shops_path
+              =link_to '设置',settings_path(@site.slug)
+              -#=link_to '管理宝贝',manage_items_path
+              -#=link_to '管理店铺',manage_shops_path
               -#=link_to '添加宝贝',add_item_path
               -#=link_to '添加店铺',add_shop_path
             .clearfix

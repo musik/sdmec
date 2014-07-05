@@ -55,6 +55,9 @@ class ApplicationController < ActionController::Base
       @hide_ad = true
       @hide_fullad = @col1 = @hide_belt = @hide_bread = true
     end 
+    if %(entries).include? controller_name
+      _parse_ref
+    end
   end
   def find_city
     @city = City.find_by_slug(request.subdomain)
@@ -63,7 +66,7 @@ class ApplicationController < ActionController::Base
     end
   end
   def find_site
-    @site = Site.find_by_slug(request.subdomain)
+    @site = Site.find_by_slug(params[:id])
     if @site.nil?
       redirect_to new_site_url(:subdomain=>'www',:slug=>request.subdomain),:notice=>'你访问的小站暂不存在！'
     else
@@ -81,6 +84,14 @@ class ApplicationController < ActionController::Base
   end
   def smart_layout 
     @layout || 'application'
+  end
+  def _parse_ref
+    return if request.referer.nil?
+    refuri = URI(request.referer)
+    url = "http://#{refuri.host}"
+    entry = Entry.where(url: url).first
+    return if entry.nil?
+    entry.update_attribute :clicked_at,Time.now
   end
 
 end

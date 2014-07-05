@@ -1,6 +1,12 @@
 # -*- encoding : utf-8 -*-
 Tb::Application.routes.draw do
-  resources :sites
+  resources :entries,path: "websites"
+
+  #resources :posts
+  #resources :fenleis,path: "fenlei"
+
+
+  #resources :sites
   resources :comments,:except=>[:new]
 
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
@@ -21,23 +27,26 @@ Tb::Application.routes.draw do
     root :to => 'home#city'
   end
   constraints SiteSubdomain do
-    match 'settings' => 'sites#settings',:as=>'settings'
-    match 'options' => 'sites#options',:as=>'options',:via=>'post'
-    resources :items,:controller=>'site/items' do
-      collection do
-        get 'manage'
-        get 'apisearch'
-        post 'add'
-      end
+    #resources :items,:controller=>'site/items' do
+      #collection do
+        #get 'manage'
+        #get 'apisearch'
+        #post 'add'
+      #end
+    #end
+    #resources :shops,:controller=>'site/shops' do
+      #collection do
+        #get 'manage'
+        #get 'apisearch'
+        #post 'add'
+      #end
+    #end
+    get "/:id"=>"home#site" ,as: :site
+    scope ":id" do
+      match 'settings' => 'sites#settings',:as=>'settings'
+      match 'options' => 'sites#options',:as=>'options',:via=>'post'
     end
-    resources :shops,:controller=>'site/shops' do
-      collection do
-        get 'manage'
-        get 'apisearch'
-        post 'add'
-      end
-    end
-    root :to => 'home#site'
+    root :to => 'sites#index'
   end
   resources :stores,:path=>"shop" do
     collection do
@@ -104,7 +113,7 @@ Tb::Application.routes.draw do
   match '/reports' => 'home#reports'
   match '/zhuan' => 'home#zhuan'
   match '/fenlei/:id' => 'tbpages#fenlei',:as=>"fenlei"
-  devise_for :users
+  devise_for :users,controllers: {registrations: "registrations"}
   resources :users, :only => [:show, :index]
   #mount Resque::Server, :at => "/resque"
   resque_constraint = lambda do |request|
@@ -115,6 +124,7 @@ Tb::Application.routes.draw do
   constraints resque_constraint do
     mount Resque::Server.new, :at => "/resque"
   end
+  get "/*id" => 'pages#show', as: :page, format: false
   #match '/(topics|mai|start|browse)/:any'=>"home#deleted"
   #match "/:action/:any" => "home#deleted",:constraints=>{:action=>/topics|mai|start|browse/}
 end

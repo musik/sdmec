@@ -5,6 +5,7 @@ class City < ActiveRecord::Base
   acts_as_url :name,:url_attribute=>:slug,:only_when_blank=>true
   scope :roots,where(:parent_id=>0)
   has_many :stores
+  has_many :posts
   def to_param
     slug
   end

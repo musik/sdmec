@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131228081832) do
+ActiveRecord::Schema.define(:version => 20140705143254) do
 
   create_table "categories", :force => true do |t|
     t.integer  "cid"
@@ -126,6 +126,35 @@ ActiveRecord::Schema.define(:version => 20131228081832) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "entries", :force => true do |t|
+    t.string   "url"
+    t.string   "name"
+    t.string   "pwd"
+    t.string   "qq"
+    t.boolean  "link_status"
+    t.datetime "link_checked_at"
+    t.datetime "clicked_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "user_id"
+    t.string   "description"
+    t.string   "keywords"
+    t.text     "content"
+  end
+
+  create_table "fenleis", :force => true do |t|
+    t.string  "name"
+    t.string  "slug"
+    t.integer "posts_count", :default => 0
+    t.integer "position"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "parent_id"
+    t.integer "depth"
+  end
+
+  add_index "fenleis", ["slug"], :name => "index_fenleis_on_slug"
+
   create_table "huatis", :force => true do |t|
     t.string   "name"
     t.string   "slug"
@@ -209,6 +238,20 @@ ActiveRecord::Schema.define(:version => 20131228081832) do
   add_index "page_views", ["created_at"], :name => "created_at"
   add_index "page_views", ["viewable_type", "viewable_id"], :name => "viewable"
   add_index "page_views", ["visitor_hash"], :name => "visitor"
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.string   "summary"
+    t.string   "keywords"
+    t.text     "content"
+    t.string   "source"
+    t.integer  "fenlei_id"
+    t.integer  "user_id"
+    t.integer  "city_id"
+    t.boolean  "publish"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "rails_admin_histories", :force => true do |t|
     t.text     "message"
@@ -382,6 +425,7 @@ ActiveRecord::Schema.define(:version => 20131228081832) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
+    t.integer  "entries_count",          :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

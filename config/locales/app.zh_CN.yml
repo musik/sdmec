@@ -186,11 +186,11 @@ zh_CN:
       exclusion: "是保留关键字"
       invalid: "是无效的"
       confirmation: "与确认值不匹配"
-      accepted: "必须是可被接受的"
+      accepted: "必须打勾"
       empty: "不能留空"
       blank: "不能为空字符"
-      too_long: "过长（最长为 %{count} 个字符）"
-      too_short: "过短（最短为 %{count} 个字符）"
+      too_long: "%{count}字以内"
+      too_short: "至少%{count} 字"
       wrong_length: "长度非法（必须为 %{count} 个字符）"
       not_a_number: "不是数字"
       not_an_integer: "必须是整数"
@@ -211,6 +211,13 @@ zh_CN:
     errors:
       full_messages:
         format: "%{attribute} %{message}"
+      models:
+        user:
+          attributes:
+            name: 
+              taken: 用户名已存在
+            email: 
+              taken: 邮箱已存在
       messages:
         <<: *errors_messages
       template:

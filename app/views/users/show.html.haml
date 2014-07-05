@@ -1,4 +1,17 @@
-%p
-  User: #{@user.name}
-%p
-  Email: #{@user.email if @user.email}
+-title "#{@user.name}"
+
+%h2 #{@user.name}发布的网站
+
+-@entries = @user.entries.all
+-if @entries.empty?
+  暂无
+-else
+  -@can_manage = can? :edit,@entries.first
+  %table.table.table-bordered
+    - @entries.each do |entry|
+      %tr
+        %td= link_to entry.name, entry.url,target: "_blank"
+        -if @can_manage
+          %td.action
+            =link_to "修改资料",edit_entry_url(entry)
+

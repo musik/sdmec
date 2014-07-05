@@ -1,24 +1,8 @@
 %h1 Listing sites
 
-%table
-  %tr
-    %th Name
-    %th Slug
-    %th Description
-    %th User
-    %th
-    %th
-    %th
-
+.sites
   - @sites.each do |site|
-    %tr
-      %td= site.name
-      %td= site.slug
-      %td= site.description
-      %td= site.user
-      %td= link_to 'Show', site
-      %td= link_to 'Edit', edit_site_path(site)
-      %td= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to site.name,site_url(site.slug,subdomain: 'site')
 
 %br
 

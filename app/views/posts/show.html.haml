@@ -1,0 +1,14 @@
+-title @post.title
+-meta :robots,"noindex" unless @post.publish?
+-if !@post.publish?
+  .alert
+    尚未通过审核。
+%div
+  =simple_format strip_tags(@post.content)
+  %p.source
+    %b 来源:
+    =link_to  @post.source,@post.source,target: "_blank"
+
+= link_to 'Edit', edit_post_path(@post)
+\|
+= link_to 'Back', posts_path

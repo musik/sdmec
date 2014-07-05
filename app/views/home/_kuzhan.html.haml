@@ -1,0 +1,14 @@
+%header.sheader
+  .row-fluid
+    .span10
+      %h2 最新点入网站
+    .span2
+      =link_to "全部",entries_url,target: "_self"
+-@entries = Entry.recent_click.limit(100)
+%section.scontent
+  %p.sites
+    -entry = @entries.shift
+    = link_to entry.name, entry.url,target: "_blank",class: "big"
+    - @entries.each_with_index do |entry,i|
+      = link_to entry.name, entry.url,target: "_blank"
+

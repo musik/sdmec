@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @fenlei.name
+%p
+  %b Slug:
+  = @fenlei.slug
+%p
+  %b Posts count:
+  = @fenlei.posts_count
+%p
+  %b Position:
+  = @fenlei.position
+%p
+  %b Lft:
+  = @fenlei.lft
+%p
+  %b Rgt:
+  = @fenlei.rgt
+%p
+  %b Parent:
+  = @fenlei.parent_id
+%p
+  %b Depth:
+  = @fenlei.depth
+
+= link_to 'Edit', edit_fenlei_path(@fenlei)
+\|
+= link_to 'Back', fenleis_path

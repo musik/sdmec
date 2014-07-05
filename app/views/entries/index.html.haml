@@ -1,0 +1,7 @@
+-title "网站目录"
+%p.sites
+  - @entries.each do |entry|
+    = link_to entry.name, entry.url,target: "_blank"
+
+=paginate @entries
+

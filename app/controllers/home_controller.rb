@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   caches_action :city,:expires_in => 3.hours
 
   def index
+    _parse_ref
   end
   def index_20130825
     #@temai_cats = Tbpage::Temai.new.get_cats_with_items

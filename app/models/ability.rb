@@ -12,7 +12,11 @@ class Ability
       can :read,:all
       can [:browse,:auto_complete,:search],Topic
       can :create,Comment
-      can :settings,Site,:user_id => user.id
+      if user.id.present?
+        can :settings,Site,:user_id => user.id
+        can :create,Entry
+        can :update,Entry,:user_id => user.id
+      end
     end
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions here are

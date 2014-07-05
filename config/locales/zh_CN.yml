@@ -2,7 +2,7 @@
 
 zh_CN:
   search: 搜索
-  appname: 皇冠店铺
+  appname: 自助链接
   appname_city: "%{city}淘宝店铺"
   breadcrumbs:
     home: 首页
@@ -14,7 +14,7 @@ zh_CN:
     huatis: 热点话题
   home:
     index:
-      title: 淘宝皇冠店铺导航_金冠店铺排行,大全,排行榜
+      title: 淘宝皇冠店铺导航-自助链接_网站免费收录
       desco: 本站采用<a href="http://open.taobao.com">taobao api</a>建立,为你提供分城市话题导购。
       desc: 跟踪淘宝热点
     page:

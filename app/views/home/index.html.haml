@@ -1,28 +1,31 @@
 -title t('.title'),nil,false
--meta :keywords,"淘宝金冠店铺,导航网站排名,淘宝皇冠店铺大全,淘宝金冠店铺排行,淘宝店铺排名,皇冠网店,淘宝童装店铺排名,淘宝金冠店,淘宝店铺排行榜,淘宝店排名,淘宝店铺排行,淘宝皇冠店铺排行榜,淘宝店排行,淘宝皇冠店铺导航,淘宝皇冠店,淘宝皇冠店大全"
+-meta :keywords,"自助链接,自助链,自助友情链接,网站免费收录,免费收录网站,免费网站收录,免费网站目录,友链平台,免费友情链接,自动友情链接,友链交换平台,交换友链,免费友情链接网,免费推广平台"
 -@col1 = true
 -@hide_fullad = true
 -@hide_bread = true
 -@js = 'home'
 -content_for :home_line do
-  .home-line
+  %section.welcome
     .container
-      %h1 发现靠谱网店.
-      %input#hq.input.span12{type: 'text',name: 'hq',placeholder: "女装",disabled: false}
-= render :partial => 'home/inhome'
--#.home-list        
-  -#-num = 5
-  -#-%w(女装 男装 童装).each do |tag_name|
-    -#.list{:class=>cycle('a','b','c')}
-      -#%h2=link_to tag_name,tag_url(tag_name)
-      -#-stores = Store.tagged_with(tag_name).credit.list_field.includes(:city).limit(num)
-      -#=render :partial=>"stores/home_list",:locals=>{:hide_desc=>true,:stores=>stores}
--limit ||= 30
--cache "top-tags-#{limit}",:expires_in => 30.minutes do
-  -tags = Tag.all_tagged_on('Store').order('count_all desc').limit(limit)
-  %h2 热点标签
-  %ul.taglist
-    -tag_cloud(tags, %w(css1 css2 css3 css4)) do |tag, css_class| 
-      %li
-        = link_to tag.name,tag_url(tag,:subdomain=>'www'), :class => css_class 
-        %small=tag.count_all
+      -#%h1 免费发布文章
+      -#= render :partial => 'posts/form'
+      -#%h1 免费收录网站
+      -#= render :partial => 'entries/form'
+      %h1 免费收录网站
+      %p 我站是一个<strong>自助收录</strong>的网站目录,也可称之为自助友情链接平台。
+      %p 你只需要在你的网站上放上我站的链接，然后把你的网站提交到我站，即可自行收录。<a href="/websites/new" target="_self">点此开始</a>
+      %p 被收录后，你的链接将默认出现在我站首页。以后每一次有人从你的网站点击链接来到我站，你的链接都将被提升到第一的位置。
+
+  %section.welcome
+    .container
+      %ul.nav.nav-tabs
+        %li.active
+          =link_to "网址导航",'#kuzhan',target: "_self",data:{toggle: "tab"}
+        %li
+          =link_to "店铺导航",'#shop',target: "_self",data:{toggle: "tab"}
+
+      .tab-content
+        .tab-pane.active#kuzhan
+          = render :partial => 'home/kuzhan'
+        .tab-pane#shop
+          = render :partial => 'home/inhome'

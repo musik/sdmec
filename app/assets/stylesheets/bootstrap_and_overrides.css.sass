@@ -3,12 +3,16 @@ $iconSpritePath: url('glyphicons-halflings.png')
 $iconWhiteSpritePath: url('glyphicons-halflings-white.png')
 $iconLoadingPath: url('process.png')
 //@import "bootstrap/variables"
+@import "readable/variables"
+@import "readable/bootswatch"
 @import "bootstrap"
 //@import "bootstrap-responsive"
 body
-  padding-top: 40px
+  //padding-top: 40px
   //background: #f8f8f8
-  background: #444
+  background: #fff
+a
+  outline: 0
 body.noad
   padding-top: 40px
 .rec
@@ -19,8 +23,13 @@ body.noad
   // margin: 0 -20px 20px
 #main
   position: relative
-  background: #fff url(/images/mainbg.png) 0 0 repeat-x
+  //background: #fff url(/images/mainbg.png) 0 0 repeat-x
   padding: 0 0 2em
+.form-box
+  border: 1px solid #eee
+  margin: 15px 0
+  padding: 39px 19px 14px
+  @include border-radius(4px)
 .double11
   width: 960px
   margin: 15px auto 15px
@@ -29,10 +38,15 @@ body.noad
   //background: url('http://img04.taobaocdn.com/tps/i4/T1klAoXmpdXXc_Jvfw-466-489.jpg') 0 0 repeat-x
   .container
     width: 990px
+select
+  margin-bottom: 0
+.slogan
+  border-left: 1px solid #e4e4e4
+  padding-left: 5px
 .home-line    
-  background: url(/images/hlbg.jpg) 50% 0 no-repeat
+  //background: url(/images/hlbg.jpg) 50% 0 no-repeat
   padding: 50px 0  80px
-  color: #fff
+  color: #999
   border-bottom: 1px solid #eee
   h1
     font-size: 48px
@@ -142,11 +156,11 @@ body.noad
 footer
   margin: 1em auto 0
   padding: 1em 0 3em
-  color: #ccc
-  a
-    color: #999
-  a:hover
-    color: #ccc
+  //color: #333
+  //a
+    //color: #666
+  //a:hover
+    //color: #333
   p#contact-note
     margin: 8px 0
     span
@@ -484,9 +498,9 @@ a.loc
   .meta
     font-size: 12px
 .navbar .nav > li > a
-  padding: 0 3px
-  line-height: 40px
-  font-size: 12px
+  //padding: 0 3px
+  //line-height: 40px
+  //font-size: 12px
 a.highlight
   color: #f60
     
@@ -817,7 +831,6 @@ ul.inhome
   li
     list-style: none
     float: left
-    width: 100%
     padding: 5px
   h3
     float: left
@@ -906,3 +919,87 @@ dl.liketable
     
 h2.sh
   margin-top: 20px
+.widget-famoussite
+  margin: 20px 0 10px
+  span
+    display: inline-block
+    width: 100px
+    line-height: 30px
+#kuzhan
+  ul
+    margin: 0 0 20px
+    padding-bottom: 20px
+    border-bottom: 1px solid #eee
+li.coolsite-item
+  text-align: center
+  position: relative
+  height: 30px
+  line-height: 30px
+  overflow: hidden
+  list-style: none
+  h4
+    font-size: 14px
+    font-weight: 500
+    margin: 0
+    line-height: 30px
+    a
+      color: #080
+  .g_fl
+    float: left
+  .g_fr
+    float: right
+.mt4e
+  margin-top: 4em
+p.source
+  margin: 1em 0
+#fheader
+  margin: 15px 0
+.xnav
+  background: #f8f8f8
+  border: 1px solid #e7e7e7
+  border-width: 1px 0
+  margin-top: 10px
+  .navbar
+    border: 0
+    margin: 0
+  .navbar a
+    border-right: 1px solid #f1f1f1
+  .navbar li.first a
+    border-left: 1px solid #f1f1f1
+  .input-append
+    margin-bottom: 0
+  form
+    border-right: 1px solid #f1f1f1
+    padding-right: 10px
+    height: 40px
+.navbar .nav > .active > a,
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus
+  @include box-shadow(none)
+.welcome
+  //background: #f8f8f8
+  padding: 40px 0
+  h1
+    color: #333
+  h4
+    font-weight: 500
+  border-bottom: 1px solid #eee
+.help-block
+  font-size: 12px
+  color: #999
+.form-actions
+  background: transparent
+  border: 0
+header.sheader
+  padding: 10px 0
+  line-height: 30px
+  h1,h2,h3
+    margin: 0
+    line-height: 30px
+    text-indent: 10px
+section.scontent
+  margin: 10px
+.sites
+  a.big
+    font-size: 2em
+    color: #f00

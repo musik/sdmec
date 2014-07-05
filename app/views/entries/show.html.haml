@@ -1,0 +1,10 @@
+-title [@entry.name,@entry.url].join('-'),nil,false
+%h1=link_to @entry.name,@entry.url,target: "_blank"
+%p
+  %b QQ:
+  = @entry.qq.present? ? @entry.qq : "暂无"
+%p
+  %b 发布者:
+  =link_to @entry.user.name,@entry.user
+
+= link_to '资料修改', edit_entry_path(@entry) if can? :edit,@entry

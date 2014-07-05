@@ -6,12 +6,12 @@
     = f.input :slogan
     = f.input :slug do
       -if @site.id.present?
-        %span.add-on #{@site.slug}.sdmec.com
+        %span.add-on http://site.sdmec.com/#{@site.slug}
       -else
-        .input-append.input-url
-          =f.input_field :slug,:class=>"input-mini"
-          %span.add-on .sdmec.com
-    = f.input :description,:input_html=>{:rows=>6,:class=>"input-xlarge"}
+        .input-prepend.input-url
+          %span.add-on http://site.sdmec.com/
+          =f.input_field :slug,:class=>"input-small"
+    = f.input :description,:input_html=>{:rows=>8,:class=>"input-xxlarge"}
 
   .form-actions
     = f.button :submit,'提交'

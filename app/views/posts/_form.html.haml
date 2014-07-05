@@ -1,0 +1,37 @@
+.row
+  .span7
+    -@form_disable = !user_signed_in?
+    -if @form_disable
+      .alert
+        请先
+        =link_to('登录', new_user_session_url(:subdomain=>"www"),:rel=>"nofollow")
+        或
+        = link_to('注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow")
+    = simple_form_for(@post || Post.new,html:{target: "_self"}) do |f|
+      = f.error_notification
+
+      .form-inputs.row
+        =f.input :fenlei_id,collection: Fenlei.all,wrapper_html:{class: "span2"},input_html: {class: "span2",disabled: @form_disable}
+        =f.input :title,wrapper_html:{class: "span5"},input_html: {class: "span5",disabled: @form_disable}
+        -#= f.input :title do
+          -#=f.input_field :fenlei_id,collection: Fenlei.all,class: "span2",disabled: @form_disable
+          -#=f.input_field :title,class: "span5",disabled: @form_disable
+
+      .form-inputs
+        = f.input :content,input_html: {class: "span7",rows: 10,disabled: @form_disable}
+        = f.input :source,input_html: {class: "span7",disabled: @form_disable}
+
+      -#.form-inputs.row
+        -#= f.input :city,collection: City.roots,wrapper_html: {class: "span2"},input_html:{class: "span2"}
+        -#= f.input :source,wrapper_html: {class: "span6"},input_html: {class: "span5"}
+
+
+      .form-actions
+        = f.button :submit,class: "btn-primary",disabled: @form_disable
+  .span5
+    %h4 注意事项
+    %ul
+      %li 发布文章是免费的;
+      %li 你可以发布你网站的任何页面,快速增加SEO反链;
+      -#%li 发布后需要经过审核,才会公开;
+      %li 但请不要发布非法信息,以免浪费彼此的时间;

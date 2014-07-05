@@ -1,0 +1,33 @@
+%h1 Listing fenleis
+
+%table
+  %tr
+    %th Name
+    %th Slug
+    %th Posts count
+    %th Position
+    %th Lft
+    %th Rgt
+    %th Parent
+    %th Depth
+    %th
+    %th
+    %th
+
+  - @fenleis.each do |fenlei|
+    %tr
+      %td= fenlei.name
+      %td= fenlei.slug
+      %td= fenlei.posts_count
+      %td= fenlei.position
+      %td= fenlei.lft
+      %td= fenlei.rgt
+      %td= fenlei.parent_id
+      %td= fenlei.depth
+      %td= link_to 'Show', fenlei
+      %td= link_to 'Edit', edit_fenlei_path(fenlei)
+      %td= link_to 'Destroy', fenlei, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Fenlei', new_fenlei_path

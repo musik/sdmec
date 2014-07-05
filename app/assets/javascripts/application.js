@@ -1,9 +1,9 @@
 //= require jquery
 //= require jquery_ujs
 //comment = require bootstrap-dropdown
-// = require bootstrap-alert
-// = require bootstrap-affix
-// = require jquery.ui.autocomplete
+//= require bootstrap-alert
+//= require bootstrap-affix
+//= require jquery.ui.autocomplete
 function reverse(s){
     return s.split("").reverse().join("");
 }

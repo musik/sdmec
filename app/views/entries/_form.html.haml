@@ -1,0 +1,38 @@
+
+-sidebar ||= false
+.alertx
+  %ol
+    %li 
+      请在您的网站首页加入我站链接：<br />
+      -@link_url = "http://www.sdmec.com"
+      -@link_txt = %w(自助链接 免费收录网站 网站免费收录 自助链接平台).sample
+      %code
+        ="<a href=\"#{@link_url}\">#{@link_txt}</a>"
+    -unless user_signed_in?
+      %li 
+        = link_to('注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
+        一个帐号,并
+        = link_to('登录', new_user_session_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
+    %li 然后填写以下表单:
+.row-fluid
+  .span10
+    -@entry ||= Entry.new
+    -@form_disable = !user_signed_in?
+    = simple_form_for(@entry,html:{class: "form-box form-horizontal"}) do |f|
+      -#= f.error_notification
+
+      .form-inputs
+        = f.input :url,placeholder: "http://",input_html: {disabled: @form_disable}
+        = f.input :name,input_html: {disabled: @form_disable}
+        = f.input :content,input_html: {disabled: @form_disable,rows: 8,class: "input-xxlarge"}
+        = f.input :description,as: :text,input_html: {disabled: @form_disable,rows: 2,class: "input-xxlarge"}
+        = f.input :keywords,input_html: {disabled: @form_disable}
+        = f.input :qq,input_html: {disabled: @form_disable}
+        =f.input :link_status,label: false,inline_label: "我已在网站首页放置链接",input_html: {disabled: @form_disable}
+      .form-actions
+        = f.button :submit,"提交",class: "btn-primary",disabled: @form_disable
+    =js_write "当您完成以上几步后，您的链接会立即自动添加到本站。（注意：您必须首先完成第一步，才能继续提交。违反中国法律的网站请不要加入本站。已经加入的网站如果想取消加入，只需要在您的网站去掉我站的链接，那么我们的系统就会在下次更新时自动去掉您站的链接。谢谢您的理解和支持。） "
+  .span8
+    -#%h4 注意事项
+    -#%ul
+      -#%li 

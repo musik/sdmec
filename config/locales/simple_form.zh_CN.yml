@@ -1,6 +1,19 @@
 zh_CN:
   date:
     order: ""
+  helpers:
+    submit:
+      post:
+        create: 提交
+  activerecord:
+    errors:
+      models:
+        entry:
+          attributes:
+            url:
+              taken: 此网站已收录
+            name:
+              taken: 此名称已被其它网站使用
   simple_form:
     "yes": '是'
     "no": '否'
@@ -17,14 +30,26 @@ zh_CN:
       defaults:
         name: 名称
         password: '密码'
-        password_confirmation: 请再确认你的密码
+        password_confirmation: 再次输入密码
         current_password: 你的密码
+      entry:
+        url: 网址
+        name: 网站名称
+        pwd: 密码
+        qq: 站长QQ
+        link_status: 请确保已链接至本站
+        keywords: 关键词
+        description: 摘要
+        content: 详细描述
+        edit: 
+          pwd: 密码验证
       user:
         name: '用户名'
+        login: '用户名或邮箱'
         new:
-          email: '电子邮件'
+          email: '电子邮箱'
         edit:
-          email: '电子邮件'
+          email: '电子邮箱'
           password: '修改密码'
           password_confirmation: 请再确认你的新密码
       comment:
@@ -34,14 +59,30 @@ zh_CN:
         guest_website: 个人网站
       site:
         name: 小站名称
-        slug: 域名
+        slug: 网址
         slogan: 副标题
         description: 小站简介
       store:
         nick: 卖家昵称
+      post:
+        title: 标题
+        content: 正文
+        city: 城市
+        source: 出处网址
+        fenlei_id: 类别
     hints:
       defaults:
-        password: '不建议使用特殊字符'
+        password: '密码不能小于6位'
+        password_confirmation: '再输入一遍密码'
+      entry:
+        new:
+          pwd: 用于以后修改资料
+        content: 至少100字
+        description: 200字以内
+        keywords: 多个用逗号隔开，最多三个
+      site:
+        new:
+          slug: 仅限英文字母或字母与数字的组合,长度限制为4-20
       user:
         edit:
           password: '如不修改请留空'
@@ -50,3 +91,6 @@ zh_CN:
         guest_name: '你怎么称呼?'
         guest_email: 若有必要时用于联系,不会公开
         #body: "此处不解析链接."
+      post:
+        source: 可以是你的网址链接
+        content: 最少100个字
