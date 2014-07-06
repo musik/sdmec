@@ -1,12 +1,12 @@
--if Rails.env == 'development' or params[:dev] or user_signed_in? 
-  %ul.nav.pull-right.nav-user
-    - if user_signed_in?
-      %li= link_to("我发布的网站", user_url(current_user,:subdomain=>"www"),target: "_self")
-      -#%li.first= link_to(current_user.display, edit_user_registration_url(:subdomain=>"www"),target: "_self")
-      - if current_user.has_role? :admin
-        %li= link_to "管理",rails_admin_url(:subdomain=>"www"),target: "_self"
+-#-if Rails.env == 'development' or params[:dev] or user_signed_in? 
+%ul.nav.pull-right.nav-user
+  - if user_signed_in?
+    %li= link_to("我发布的网站", user_url(current_user,:subdomain=>"www"),target: "_self")
+    -#%li.first= link_to(current_user.display, edit_user_registration_url(:subdomain=>"www"),target: "_self")
+    - if current_user.has_role? :admin
+      %li= link_to "管理",rails_admin_url(:subdomain=>"www"),target: "_self"
 
-      %li= link_to('退出'.html_safe, destroy_user_session_url(:subdomain=>"www"), :method=>'delete',:title=>'退出',target: "_self")
-    - else
-      %li.first= link_to('登录', new_user_session_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
-      %li= link_to('注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
+    %li= link_to('退出'.html_safe, destroy_user_session_url(:subdomain=>"www"), :method=>'delete',:title=>'退出',target: "_self")
+  - else
+    %li.first= link_to('登录', new_user_session_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
+    %li= link_to('注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
