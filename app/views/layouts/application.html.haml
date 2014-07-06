@@ -40,6 +40,7 @@
           -#= render 'layouts/navigation'
       -# -if request.url != root_url(:subdomain=>'www')
     #main{:role => "main"}
+      = render 'layouts/messages'
       =yield :home_line
       -#.double11#full1=render "ads/tb_a960"
       -#.clearfix
@@ -50,7 +51,6 @@
         .content
           -unless @hide_bread
             .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
-          -#= render 'layouts/messages'
           -if @col1
             .row
               .span12

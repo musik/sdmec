@@ -15,6 +15,7 @@ zh_CN:
         signed_out: 你已退出.
         signed_in: 你已登入.
         unauthenticated: 继续操作前请注册或者登录.
+        not_found_in_database: 帐号不存在        
       unconfirmed: 继续操作前请先确认您的帐号.
     mailer:
       confirmation_instructions:
