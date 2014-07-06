@@ -10,6 +10,8 @@
         -@link_txt = %w(自助链接 免费收录网站 网站免费收录 自助链接平台).sample
         %code
           ="<a href=\"#{@link_url}\">#{@link_txt}</a>"
+        %br
+        如果您不是在首页源文件里直接添加链接，而是使用您的网站后台添加，请在名称栏填<strong>#{@link_txt}</strong>，URL栏填<i>#{@link_url}</i>即可。 
       -unless user_signed_in?
         %li 
           = link_to('注册', new_user_registration_url(:subdomain=>"www"),:rel=>"nofollow",target: "_self")
