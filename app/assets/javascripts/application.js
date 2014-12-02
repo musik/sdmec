@@ -3,7 +3,7 @@
 //comment = require bootstrap-dropdown
 //= require bootstrap-alert
 //= require bootstrap-affix
-//= require jquery.ui.autocomplete
+//comment= require jquery.ui.autocomplete
 function reverse(s){
     return s.split("").reverse().join("");
 }

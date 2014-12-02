@@ -2,6 +2,6 @@
  *= require_self
  *= require bootstrap_and_overrides
  *= require rank
- *= require jquery.ui.autocomplete
+ *comment= require jquery.ui.autocomplete
  *xxxxxx= require ibox
 */
