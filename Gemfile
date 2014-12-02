@@ -3,7 +3,7 @@ require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'http://ruby.taobao.org'
 #source 'http://rubygems.org'
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.21'
 gem 'mysql2'
 gem 'execjs'
 group :assets do
@@ -39,7 +39,7 @@ group :development do
   #gem 'rvm-capistrano'
   #gem 'capistrano-unicorn',:git=>'git://github.com/sosedoff/capistrano-unicorn.git'
   gem 'capistrano-resque'
-  gem 'thin'
+  #gem 'thin'
 end
 
 

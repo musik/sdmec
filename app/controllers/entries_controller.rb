@@ -1,6 +1,6 @@
 #encoding: utf-8
 class EntriesController < ApplicationController
-  authorize_resource except: %w(new)
+  authorize_resource except: %w(new check)
   def index
     @entries = Entry.page(params[:page]).per(200)
 
@@ -19,6 +19,12 @@ class EntriesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @entry }
     end
+  end
+  def check
+    @entry = Entry.find_by_host(params[:id])
+    @entry.check_link
+    @entry.save
+    render nothing: true
   end
 
   # GET /entries/new

@@ -15,7 +15,7 @@ class Entry < ActiveRecord::Base
   validates :content,presence: true,length: {minimum: 50}
   #validates :description,presence: true,length: {maximum: 200}
 
-  scope :recent_click,order("clicked_at desc")
+  scope :recent_click,->{where(link_status: true).order("clicked_at desc")}
   belongs_to :user,counter_cache: true
   def check_link
     begin

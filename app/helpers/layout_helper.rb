@@ -106,7 +106,7 @@ document.write(\'<A href="mailto:\' + emailE + \'">\' + emailE + \'</a>\')
     javascript_tag "document.write('#{str}')"
   end
   def bdad desc,id,js='c'
-    "<script type=\"text/javascript\">\n/*#{desc}*/\nvar cpro_id = \"u#{id}\";\n</script>\n<script src=\"http://cpro.baidustatic.com/cpro/ui/#{js}.js\" type=\"text/javascript\"></script>".html_safe
+    #"<script type=\"text/javascript\">\n/*#{desc}*/\nvar cpro_id = \"u#{id}\";\n</script>\n<script src=\"http://cpro.baidustatic.com/cpro/ui/#{js}.js\" type=\"text/javascript\"></script>".html_safe
   end
   def city_link name
     txt = File.read("#{Rails.root}/db/cities/ndrc.ac.cn")
