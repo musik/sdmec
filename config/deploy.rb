@@ -1,7 +1,7 @@
 set :application, "sdmec"
 #set :repository,  "git@gitcafe.com:muzik/sdmec.git"
-#set :repository,  "git@github.com:musik/sdmec.git"
-set :repository,  "git@git.oschina.net:muzik/sdmec.git"
+set :repository,  "git@github.com:musik/sdmec.git"
+#set :repository,  "git@git.oschina.net:muzik/sdmec.git"
 
 set :scm, :git
 
