@@ -17,7 +17,7 @@ class Entry < ActiveRecord::Base
 
   scope :recent_click,->{where(link_status: true).order("clicked_at desc")}
   belongs_to :user,counter_cache: true
-  def check_link
+  def check_link update_clicked_at = true
     begin
       data = open(url).read
     rescue 
@@ -26,7 +26,7 @@ class Entry < ActiveRecord::Base
     patt = Regexp.new('<a.+?href=["\']*http://www.sdmec.com/*["\']*')
     self[:link_status] = data.match(patt).present? ? true : false
     self[:link_checked_at] = Time.now
-    self[:clicked_at] = Time.now
+    self[:clicked_at] = Time.now if update_clicked_at
     self[:link_status]
   end
   before_validation :clean_url

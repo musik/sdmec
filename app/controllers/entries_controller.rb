@@ -22,9 +22,8 @@ class EntriesController < ApplicationController
   end
   def check
     @entry = Entry.find_by_host(params[:id])
-    @entry.check_link
+    @entry.check_link false
     @entry.save
-    render nothing: true
   end
 
   # GET /entries/new

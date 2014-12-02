@@ -1,0 +1,7 @@
+%b 是否已链接到本站:
+=entry.link_status ? "是" : "否"
+(上次检查于 #{time_tag(entry.link_checked_at)})
+-if Time.now - entry.link_checked_at > 3600
+  =javascript_tag "entry_check('#{entry.to_param}')"
+-else
+  =button_tag "立即检查",onclick: "entry_check('#{entry.to_param}')"

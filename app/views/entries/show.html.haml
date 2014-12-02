@@ -14,8 +14,8 @@
 .keywords
   %b 关键词：
   =@entry.keywords
+=javascript_include_tag :entries
+.link_status
+  = render  'link_status',entry: @entry
 
 = link_to '资料修改', edit_entry_path(@entry),class: "mt1em btn btn-primary" if can? :edit,@entry
--content_for :footer do
-  =javascript_include_tag :entries
-  =javascript_tag "entry_check('#{@entry.to_param}')"
