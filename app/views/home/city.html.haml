@@ -47,9 +47,12 @@
 
 -content_for :links do
   -citylink=city_link @city.name
-  -if citylink
-    %div
-      友情链接
+  %div
+    友情链接
+    -if citylink
       =link_to citylink[0],citylink[1],:target=>"_blank"
--content_for :footer do
-  -javascript_tag 'appendFull()' if Rails.env.production?
+    -url_key = (Digest::MD5.hexdigest(request.url)[0,1].to_i(16).to_f/4).ceil
+    -arr = %w(玛卡批发 玛卡报价 玛卡通)
+    -str = arr[url_key] || "玛卡"
+    =link_to str,"http://www.makatong.com",target: "_blank"
+

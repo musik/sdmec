@@ -11,7 +11,8 @@
       .details
         -#.title= link_to s.title,s.url,:rel=>"nofollow",:target=>"_blank",:onclick=>"track_store_action(#{s.sid},_gaq,'#{s.click_url.present? ? 'link' : 'free'}')"
         .title
-          <a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="1" data-border="1" href="#" target="_blank" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">#{s.short}</a>
+          =link_to s.short,s.shop_url,target: "_blank",rel: "nofollow"
+          -#<a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="1" data-border="1" href="#" target="_blank" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">#{s.short}</a>
 
         .meta 
           -#=img_credit(s.seller_credit)
