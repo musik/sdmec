@@ -11,6 +11,10 @@
           %i.icon-file
     - entries.each do |entry|
       .website
-        = link_to entry.name, entry.url,target: "_blank"
-        %a{href: entry_url(entry)}
-          %i.icon-file
+        -if entry.link_status?
+          = link_to entry.name, entry.url,target: "_blank"
+          %a{href: entry_url(entry)}
+            %i.icon-file
+        -else
+          = link_to entry.name, entry_url(entry),target: "_blank"
+          (无反链)
