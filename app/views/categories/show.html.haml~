@@ -1,8 +1,0 @@
--title @title
--logger.debug @category.to_yaml
-- @category.children.each do |c|
-  =link_to c.name,c
-
--if @items.present?
-  =paginate @items
-  =render :partial=>"items",:locals=>{:items=>@items}

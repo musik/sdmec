@@ -1,8 +1,7 @@
 //= require jquery
 //= require jquery_ujs
-// = require bootstrap-alert
-//= require bootstrap-tab
-//= require jquery.ui.autocomplete
+// = require bootstrap
+//comment= require jquery.ui.autocomplete
 $(function () {
     //$("#hq").autocomplete({
         //source: '/tags/auto_complete',

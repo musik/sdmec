@@ -6,14 +6,14 @@ class Store < ActiveRecord::Base
     :buyer_credit, :hangye,:seller_rate,:extra_data,
     :user_updated_at, :comments_updated_at,:delta,
     :source_url,:follow_count,:inhome,:position
-  scope :updated,where('shop_updated_at is not null')
-  scope :credit,order('seller_credit desc')
-  scope :recent,order('id desc')
-  scope :priority_asc,order('sites_stores.priority asc')
-  scope :rate_desc,order('commission_rate desc')
-  scope :with_priority,select('stores.*,sites_stores.priority')
-  scope :short,select('stores.title,stores.id,stores.city_id,stores.seller_credit,click_url,user_id')
-  scope :list_field,select('stores.title,stores.id,stores.city_id,seller_credit,click_url,pic_path,sid,nick,user_id')
+  scope :updated,->{where('shop_updated_at is not null')}
+  scope :credit,->{order('seller_credit desc')}
+  scope :recent,->{order('id desc')}
+  scope :priority_asc,->{order('sites_stores.priority asc')}
+  scope :rate_desc,->{order('commission_rate desc')}
+  scope :with_priority,->{select('stores.*,sites_stores.priority')}
+  scope :short,->{select('stores.title,stores.id,stores.city_id,stores.seller_credit,click_url,user_id')}
+  scope :list_field,->{select('stores.title,stores.id,stores.city_id,seller_credit,click_url,pic_path,sid,nick,user_id')}
   scope :incity,lambda{|city|
     if city.present?
       where(

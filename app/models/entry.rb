@@ -8,7 +8,7 @@ class Entry < ActiveRecord::Base
     end
   end
   attr_accessible :clicked_at, :link_checked_at, :link_status, :name, :pwd, :qq, :url,:description,:keywords,:content
-  validates :url,presence: true,format: {with: /^http:\/\/([a-z0-9\-\.]+)\/*$/i},uniqueness: true,on: :create
+  validates :url,presence: true,format: {with: /\Zhttp:\/\/([a-z0-9\-\.]+)\/*\Z/i},uniqueness: true,on: :create
   validates :name,presence: true,uniqueness: true
   #validates :pwd,presence: true
   validates :link_status,link: true,on: :create

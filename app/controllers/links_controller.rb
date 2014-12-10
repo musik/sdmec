@@ -1,8 +1,8 @@
 # -*- encoding : utf-8 -*-
 class LinksController < ApplicationController
   load_and_authorize_resource :except=>[:links]
-  cache_sweeper :link_sweeper
-  caches_page :show
+  #cache_sweeper :link_sweeper
+  #caches_page :show
   # GET /links
   # GET /links.json
   before_filter :hide_ad

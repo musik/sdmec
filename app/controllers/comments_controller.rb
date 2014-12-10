@@ -1,6 +1,6 @@
 
 class CommentsController < ApplicationController
-  cache_sweeper :comment_sweeper
+  #cache_sweeper :comment_sweeper
   # GET /comments
   # GET /comments.json
   authorize_resource

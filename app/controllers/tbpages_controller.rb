@@ -2,7 +2,7 @@
 class TbpagesController < ApplicationController
   load_resource :find_by => :slug,:except=>[:fenlei]
   authorize_resource :except=>[:fenlei]
-  cache_sweeper :tbpage_sweeper
+  #cache_sweeper :tbpage_sweeper
   def index
     @tbpages = Tbpage.all
   end

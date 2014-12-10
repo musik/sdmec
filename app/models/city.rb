@@ -58,7 +58,7 @@ class City < ActiveRecord::Base
 
     end
     def tree
-      Rails.cache.fetch "model-city-tree" do
+      #Rails.cache.fetch "model-city-tree" do
         rs = self.all
         ns={
           :zhixiashi => [],
@@ -76,7 +76,7 @@ class City < ActiveRecord::Base
           end
         end
         ns
-      end 
+      #end 
     end
     def cached_roots
       Rails.cache.fetch "model-city-roots" do

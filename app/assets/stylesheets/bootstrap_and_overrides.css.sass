@@ -2,9 +2,10 @@
 $iconSpritePath: url('glyphicons-halflings.png')
 $iconWhiteSpritePath: url('glyphicons-halflings-white.png')
 $iconLoadingPath: url('process.png')
+$blue: #007
 //@import "bootstrap/variables"
-@import "readable/variables"
-@import "readable/bootswatch"
+//@import "readable/variables"
+//@import "readable/bootswatch"
 @import "bootstrap"
 //@import "bootstrap-responsive"
 body
@@ -29,7 +30,7 @@ body.noad
   border: 1px solid #eee
   margin: 15px 0
   padding: 39px 19px 14px
-  @include border-radius(4px)
+  //@include border-radius(4px)
 .double11
   width: 960px
   margin: 15px auto 15px
@@ -132,9 +133,9 @@ select
   padding: .2em .6em
   margin: .8em 0 0
   border: 1px solid #444
-  @include border-radius(5)
-  @include box-shadow(0 1px 0 #444)
-  @include gradient-vertical(#ddd,#eee)
+  //@include border-radius(5)
+  //@include box-shadow(0 1px 0 #444)
+  //@include gradient-vertical(#ddd,#eee)
   li
     float: left
     list-style: none
@@ -148,7 +149,7 @@ select
   a
     float: left
     background: #eee
-    @include border-radius(5)
+    //@include border-radius(5)
     padding: .1em .4em
     margin: .4em .4em
 
@@ -475,8 +476,8 @@ body.store
   margin-right: 0
   position: absolute
   border: 1px solid #eee
-  @include border-radius(6px 0 0 6px)
-  @include box-shadow(1px 1px 2px rgba(0,0,0,.15))
+  //@include border-radius(6px 0 0 6px)
+  //@include box-shadow(1px 1px 2px rgba(0,0,0,.15))
   //display: none
 .doc-sidebar.affix
   //display: block
@@ -690,7 +691,7 @@ p.desc
   input
     border-width: 0 0 1px
     text-align: right
-    @include box-shadow(none)
+    //@include box-shadow(none)
   .add-on
     background: none
     border-width: 0 
@@ -975,7 +976,7 @@ p.source
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus
-  @include box-shadow(none)
+  //@include box-shadow(none)
 .welcome
   //background: #f8f8f8
   padding: 40px 0

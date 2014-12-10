@@ -42,7 +42,7 @@
   -cache "recent-#{@city.nil? ? "home-#{recent_limit}" : @city.slug}" ,:expires_in=>1.hour do
     -recents = Store.srecent.in_city(@city).fullscan.search(:include=>[:city],:per_page=>recent_limit)
     -#-recents = Store.recent.updated.incity(@city).limit(recent_limit).includes(:city).short.all
-    -if recents.present?
+    -if recents.total_entries > 0
       %h4 #{@city.present? ? @city.name : nil}最新发现
       %ol.slist
         -recents.each do |s|
