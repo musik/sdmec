@@ -1,6 +1,7 @@
 #encoding: utf-8
 class StoresController < ApplicationController
   load_and_authorize_resource :only=>%w(edit update create)
+  #layout "old"
   #caches_action :show,:expires_in => 1.days
   #cache_sweeper :store_sweeper
   caches_action :city,:expires_in => 5.minutes 

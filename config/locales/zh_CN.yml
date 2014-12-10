@@ -3,7 +3,7 @@
 zh_CN:
   search: 搜索
   appname: 自助链接
-  appname_city: "%{city}淘宝店铺"
+  appname_city: "%{city}"
   breadcrumbs:
     home: 首页
     tags: 标签

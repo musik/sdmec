@@ -5,6 +5,7 @@
     %title= content_for?(:title) ? yield(:title) : 'sdmec.com'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Tb'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag @css, media: 'all', 'data-turbolinks-track' => true if @css
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
@@ -15,13 +16,18 @@
           .col-md-2
             %a{href: root_url(subdomain: "www"),target: "_self"}
               =image_tag "logo.png",alt: "sdmec开放网址目录"
+          .col-md-1
+            -if @city.present?
+              = link_to t('appname_city',:city=>@city.name), root_path, :class => 'city'
+            -else
+              = link_to '切换城市', root_url(:subdomain=>'www'), :class => 'change',:rel=>"nofollow"
           .col-md-5
             %form.form-inline{action: root_url,method: 'get',target: "_self"}
               -a={:id=>'q',:type=>"text",:name=>"q",class: "form-control"}
               -a.merge! @q.nil?  ? {:placeholder=>t('search')} : {:value=>@q}
               %input{a}
               %button.btn.btn-default 搜索
-          .col-md-5
+          .col-md-4
             =link_to "免费发布信息",nil,class: "btn btn-success add-post"
     = render 'layouts/navigation'
     .main{:role => "main"}

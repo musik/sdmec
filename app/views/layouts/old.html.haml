@@ -7,7 +7,7 @@
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
     ='<meta name="baidu-site-verification" content="me8boZYUw0ffz4s0" />'.html_safe
     %title= content_for?(:title) ? yield(:title) : "Tb"
-    = stylesheet_link_tag    @noad ? "simple" : "application", :media => "all"
+    = stylesheet_link_tag    @noad ? "simple" : "old", :media => "all"
     = render :partial=>'layouts/iefix'
     = csrf_meta_tags
     = yield(:head)
@@ -17,7 +17,7 @@
     =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
     -if is_home?
       <base target="_blank">
-    = javascript_include_tag(@js || "application") unless @nojs
+    = javascript_include_tag(@js || "old") unless @nojs
     =render "layouts/iefixjs"
   %body{:class=>@bodyname}
     %header#fheader

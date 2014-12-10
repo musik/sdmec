@@ -5,78 +5,79 @@
 -@col1 = true
 -@nomingdian = true
 
+-@css = "shop"
 -@nocbjs = true
 -@xtao = true
 -@display_items = @store.click_url.present?
 
 -s = @store
--content_for :home_line do
-  .shop-top
-    .container
-      .photo.pull-left
-        =image_tag s.pic_url,:width=>60,:height=>60,:alt=>s.title unless @store.mingan?
-      .shop-profile
-        %h1.shop-name.inline=@store.safe_title
-        -if s.seller_credit
-          =img_credit(s.seller_credit)
-        .share
-        .about
-          -if @tags.present?
-            标签:
-            -@tags.each do |t|
-              =link_to t,tag_url(CGI.escape(t),:subdomain=>'www')
-          .meta
-            -if s.city.present?
-              %tt 所在:
-              =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
-              %small /
-            %tt 卖家:
-            =s.nick
-          .link
-            &raquo;
-            =link_to "进入店铺",s.shop_url,target: "_blank",rel: "nofollow"
-            -#<a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="1" data-border="1" href="#" target="_blank" class="shoplink label btn-info" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">进入店铺</a>
-      .clearfix
-              
+.shop-top
+  .container
+    .photo.pull-left
+      =image_tag s.pic_url,:width=>60,:height=>60,:alt=>s.title unless @store.mingan?
+    .shop-profile
+      %h1.shop-name.inline=@store.safe_title
+      -if s.seller_credit
+        =img_credit(s.seller_credit)
+      .share
+      .about
+        -if @tags.present?
+          标签:
+          -@tags.each do |t|
+            =link_to t,tag_url(CGI.escape(t),:subdomain=>'www')
+        .meta
+          -if s.city.present?
+            %tt 所在:
+            =link_to s.city.name,root_url(:subdomain=>s.city.slug),:rel=>"nofollow"
+            %small /
+          %tt 卖家:
+          =s.nick
+        .link
+          &raquo;
+          =link_to "进入店铺",s.shop_url,target: "_blank",rel: "nofollow"
+          -#<a data-type="1" biz-sellerid="#{s.user_id}" data-tmpl="140x190" data-tmplid="3" data-rd="2" data-style="1" data-border="1" href="#" target="_blank" class="shoplink label btn-info" onclick="track_store_click(#{s.sid},'#{s.id}|#{s.title}','data')">进入店铺</a>
+    .clearfix
+            
 -@sidenav=%w(details reviews related items)
 -@sidenav.delete "items" unless @display_items
 .doc-sidebar{'data-spy'=>"affix",'data-offset-top'=>"10"}
   %ul.nav.nav-list.doc-sidenav
     -@sidenav.each do |n|
       %li=link_to t("sidenav.#{n}"),"##{n}"
-.row
-  .span9
-    #details-section.section
-      %a.loc#details
-      %h3 简介
-      .desc
-        -if (s.bulletin.nil? && s.desc.nil?) or @store.mingan?
-          %p.empty 暂无简介
-          =slotb
-        -else
-          =slotb
-          =sanitize safe_print(s.bulletin)
-          =sanitize safe_print(s.desc)
-    #reviews-section.section
-      %a.loc#reviews
-      %h3 评论
-      %p #{@store.title}怎么样?有#{@store.title}优惠券可以分享?
-      #ccreviews-wrap Loading..
-      %script{:type=>'text/javascript',:data=>"http://open.denglu.cc/connect/commentcode?appid=36977denGHiyfkcbLRWFOT9XOO6jI3&postid=#{@store.sid}&title=#{@store.title}",:id=>'denglucc'}
+.container
+  .row
+    .col-md-9
+      #details-section.section
+        %a.loc#details
+        %h3 简介
+        .desc
+          -if (s.bulletin.nil? && s.desc.nil?) or @store.mingan?
+            %p.empty 暂无简介
+            =slotb
+          -else
+            =slotb
+            =sanitize safe_print(s.bulletin)
+            =sanitize safe_print(s.desc)
+      #reviews-section.section
+        %a.loc#reviews
+        %h3 评论
+        %p #{@store.title}怎么样?有#{@store.title}优惠券可以分享?
+        #ccreviews-wrap Loading..
+        %script{:type=>'text/javascript',:data=>"http://open.denglu.cc/connect/commentcode?appid=36977denGHiyfkcbLRWFOT9XOO6jI3&postid=#{@store.sid}&title=#{@store.title}",:id=>'denglucc'}
 
-    #related-section.section
-      %a.loc#related
-      -unless @store.mingan?
-        %h3 相关
-        -stores = @store.related 8
-        -if stores.present? 
-          =render :partial => 'stores/list',:locals=>{:stores=>stores}
-          -#= render :partial => 'stores/list_related',:locals=>{:stores=>stores}
-    %p.desc=t('stores.newshow.desc',@store.attributes.to_options).html_safe
-    =slotf
-  .span3
-    .bdleft
-      =render "layouts/primary"
+      #related-section.section
+        %a.loc#related
+        -unless @store.mingan?
+          %h3 相关
+          -stores = @store.related 8
+          -if stores.present? 
+            =render :partial => 'stores/list',:locals=>{:stores=>stores}
+            -#= render :partial => 'stores/list_related',:locals=>{:stores=>stores}
+      %p.desc=t('stores.newshow.desc',@store.attributes.to_options).html_safe
+      =slotf
+    .col-md-3
+      .bdleft
+        =render "layouts/primary"
 
 -if @display_items
   %hr
