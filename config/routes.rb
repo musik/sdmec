@@ -109,7 +109,7 @@ Tb::Application.routes.draw do
   end
   get "syncs/:type/new" => "syncs#new", :as => :sync_new
   get "syncs/:type/callback" => "syncs#callback", :as => :sync_callback
-  root :to => "home#index"
+  root :to => "home#welcome"
   get '/flush' => 'home#flush',:as=>'flush'
   get '/search' => 'home#search',:as=>'search'
   get '/searched' => 'home#searched',:as=>'searched'

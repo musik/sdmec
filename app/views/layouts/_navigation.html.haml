@@ -1,43 +1,18 @@
--#-if @city.present?
-  -#= link_to t('appname_city',:city=>@city.name), root_path, :class => 'brand'
--#-else
-  -#= link_to t('appname'), root_url(:subdomain=>'www'), :class => 'brand',:rel=>"nofollow"
--#-if @city.present?
-  -#= link_to @city.name,root_path,:title=>t('appname_city',:city=>@city.name), :class => 'brand brand-mini',target: "_self"
-%ul.nav
-  %li.first=link_to "首页",root_url(subdomain: "www"),rel: "nofollow",target: "_self"
-  %li=link_to "提交网站",new_entry_url(subdomain: "www"),rel: "nofollow",target: "_self"
-
-  -#%li=link_to "资料修改"
-  -#%li=link_to "链接代码"
-
-
-  -#-cats = Fenlei.roots
-  -#-cats.each do |c|
-    -#%li=link_to c.name,fenlei_url(c,:subdomain=>'www')
-  -#%li.submit=link_to "提交店铺",submit_stores_url(:subdomain=>'www')
-  -#%li.uz=link_to "店铺销量分析",root_url(subdomain: "tools"),target: "_blank"
-  -#-cats = Cat.nav
-  -#-cats.each do |c|
-    -#%li=link_to c.name,tbcat_url(c,:subdomain=>'www')
-  -#%li=link_to "首页",root_url(:subdomain=>'www'),:rel=>"nofollow"
-  -#-channels = APP_CONFIG[:channels]
-  -#-channels.delete_if{|k| %w(数码 机票).include? k} if @city.present? && @city.name.length > 4
-  -#-channels.each do |k,v|
-    -#%li=link_to k,frame_url(k,:subdomain=>'www'),:rel=>"nofollow"
-  -#= render :partial => 'layouts/temai_nav'
--#%form.navbar-search#navform
-  -#-a={:id=>'q',:type=>"text",:name=>"q"}
-  -#-a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
-  -#%input.search-query.input-medium{a}
-
-    
--#%form.navbar-search.pull-right{:action=>search_url(:subdomain=>'www'),:method=>'get'}
-  -#-a={:id=>'q',:type=>"text",:name=>"q"}
-  -#-a.merge! @q.nil? ? {:placeholder=>t('search')} : {:value=>@q}
-  -#.input-append
-    -#%input.search-queryx.input-medium{a}
-    -#%button.btn{:type=>"submit"} 搜店
-    -#%button.btn{:name=>'tb',:type=>"submit"} 淘
-  -#%input{:type=>'hidden',:name=>'live',:value=>1}
-=render "layouts/unav"
+-# navigation styled for Bootstrap 3.0
+#nav.navbar.navbar-inverse
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      -#= link_to '全部分类', root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li=link_to "首页"
+        %li=link_to "生活服务"
+        %li=link_to "商业服务"
+        %li=link_to "汽车服务"
+        %li=link_to "教育培训"
+        -#= render 'layouts/navigation_links'

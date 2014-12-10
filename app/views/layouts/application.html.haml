@@ -1,99 +1,29 @@
--_set_xtao_cookie if @xtao
-='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.html_safe
-%html{"ng-app"=>"Sdmec"}
+!!!
+%html
   %head
-    %meta{:charset => "utf-8"}
-    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
-    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
-    ='<meta name="baidu-site-verification" content="me8boZYUw0ffz4s0" />'.html_safe
-    %title= content_for?(:title) ? yield(:title) : "Tb"
-    = stylesheet_link_tag    @noad ? "simple" : "application", :media => "all"
-    = render :partial=>'layouts/iefix'
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : 'sdmec.com'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Tb'}"}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-    = yield(:head)
-    =javascript_include_tag 'http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=12060575' unless @no_xtao
-    <script type="text/javascript"> (function(win,doc){ var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0]; if (!win.alimamatk_show) { s.charset = "gbk"; s.async = true; s.src = "http://a.alimama.cn/tkapi.js"; h.insertBefore(s, h.firstChild); }; var o = { pid: "mm_10894158_2495491_15278824",/*推广单元ID，用于区分不同的推广渠道*/ appkey: "12060575",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/ unid: ""/*自定义统计字段*/ }; win.alimamatk_onload = win.alimamatk_onload || []; win.alimamatk_onload.push(o); })(window,document);</script>
-    -#=javascript_include_tag "http://cbjs.baidu.com/js/m.js" unless @nocbjs
-    =javascript_tag "var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-247543-31']);"
-    -if is_home?
-      <base target="_blank">
-    = javascript_include_tag(@js || "application") unless @nojs
-    =render "layouts/iefixjs"
-  %body{:class=>@bodyname}
-    %header#fheader
+  %body
+    .pre-header
+    .header
       .container
-        .row-fluid
-          #logo.span4
+        .row
+          .col-md-2
             %a{href: root_url(subdomain: "www"),target: "_self"}
               =image_tag "logo.png",alt: "sdmec开放网址目录"
-            =image_tag "slogan.png",alt: "免费收录网站",class: "slogan"
-    %section.xnav
-      .container
-        .navbar
-          = render 'layouts/navigation'
-
-
-    -#%header.navbar.navbar-fixed-top.navbar-inversex
-      -#%nav.navbar-inner
-        -#=render 'layouts/unav'
-        -#.container
-          -#= render 'layouts/navigation'
-      -# -if request.url != root_url(:subdomain=>'www')
-    #main{:role => "main"}
+          .col-md-5
+            %form.form-inline{action: root_url,method: 'get',target: "_self"}
+              -a={:id=>'q',:type=>"text",:name=>"q",class: "form-control"}
+              -a.merge! @q.nil?  ? {:placeholder=>t('search')} : {:value=>@q}
+              %input{a}
+              %button.btn.btn-default 搜索
+          .col-md-5
+            =link_to "免费发布信息",nil,class: "btn btn-success add-post"
+    = render 'layouts/navigation'
+    .main{:role => "main"}
       = render 'layouts/messages'
-      =yield :home_line
-      -#.double11#full1=render "ads/tb_a960"
-      -#.clearfix
-
-
-      .container.relative
-        =yield :full
-        .content
-          -unless @hide_bread
-            .container.breadcrumbx= breadcrumbs.render :format=>:inline, :separator => '/'
-          -if @col1
-            .row
-              .span12
-                =render "layouts/content"
-          -elsif @col2l
-            .row
-              .span3#primary
-                =render "layouts/primary"
-              .span9
-                =render "layouts/content"
-
-          -else
-            .row
-              .span8
-                =render "layouts/content"
-              .span3.pull-right#primary
-                =render "layouts/primary"
-        =yield :affix
-      .belt.container                
-        -#= render :partial => 'layouts/belt' unless @hide_belt
-        #links=render 'layouts/links'
-        =yield :links
-    %footer
-      .container
-        .left
-          &copy; 2012
-          =t('footer_left').html_safe
-          <br >
-          =link_to '城市',cities_url(:subdomain=>'www'),:rel=>"nofollow",target: "_self"
-          &middot;
-          =link_to "淘宝U站","http://uz.sdmec.com",target: "_blank"
-
-        .right
-          =t('footer_right').html_safe
-          %p=yield :title
-        .clear
-        %p#contact-note
-    =yield :footer
-    -#=javascript_tag "link_load('#mingdian',1);"
-    -#-unless @hide_xuanfu
-      -#=bdad "悬浮，120*120，创建于2012-11-9",1118592,'f'
-    -if Rails.env.production?
-      .hidden
-        <script language="javascript" type="text/javascript" src="http://js.users.51.la/4045275.js"></script>
-        <noscript><a href="http://www.51.la/?4045275" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/4045275.asp" style="border:none" /></a></noscript>
-        -#= render :file=>'analytics/google'
+      = yield

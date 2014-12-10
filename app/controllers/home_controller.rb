@@ -4,6 +4,8 @@ class HomeController < ApplicationController
   #caches_action :index,:expires_in => 12.hours
   caches_action :city,:expires_in => 3.hours
 
+  def welcome
+  end
   def index
     _parse_ref
   end
