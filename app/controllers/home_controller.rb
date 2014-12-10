@@ -35,12 +35,13 @@ class HomeController < ApplicationController
     @stores = Store.srecent.fullscan.search :include=>[:city],:per_page=>90
     @hide_bread = true
   end
+  def incity
+  end
   def city
     @stores = Store.credit_desc.in_city(@city).fullscan.search :include=>[:city],:per_page=>15
 
     @cities = @city.children_or_siblings unless @city.zhixiashi?
     render :view=>'newcity'
-
   end
   def site
 

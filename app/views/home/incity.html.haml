@@ -1,0 +1,10 @@
+.container
+  .row.catalog
+    -%w(生活服务 商业服务 汽车服务 教育培训).each do |name|
+      .col-md-3
+        %dl.category{class: cycle("a","b","c","d")}
+          %dt
+            %h3=name
+          -(1..7).each do |r|
+            %dd
+              =link_to "二手车"

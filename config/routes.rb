@@ -28,7 +28,7 @@ Tb::Application.routes.draw do
     get 'tags/auto_complete'=>"tags#auto_complete"
     get 'tags/:id'=>"tags#city",:as=>"city_tag"
     get '/:id'=>"cats#city",:as=>"cat_city"
-    root :to => 'home#city',as: "city_root"
+    root :to => 'home#incity',as: "city_root"
   end
   constraints SiteSubdomain do
     #resources :items,:controller=>'site/items' do
