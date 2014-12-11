@@ -1,5 +1,5 @@
 class Fenlei < ActiveRecord::Base
-  attr_accessible :depth, :lft, :name, :parent_id, :position, :posts_count, :rgt, :slug
+  #attr_accessible :depth, :lft, :name, :parent_id, :position, :posts_count, :rgt, :slug
   acts_as_nested_set
   resourcify
   has_many :posts

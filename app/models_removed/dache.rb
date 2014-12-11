@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Dache < ActiveRecord::Base
-  attr_accessible :context_type, :context_id, :value
+  #attr_accessible :context_type, :context_id, :value
   
   def val
     # return nil if self[:value].nil? 

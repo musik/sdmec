@@ -1,0 +1,25 @@
+%h1 Listing fl_categories
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Slug
+      %th Keywords
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @fl_categories.each do |fl_category|
+      %tr
+        %td= fl_category.name
+        %td= fl_category.slug
+        %td= fl_category.keywords
+        %td= link_to 'Show', fl_category
+        %td= link_to 'Edit', edit_fl_category_path(fl_category)
+        %td= link_to 'Destroy', fl_category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Category', new_fl_category_path

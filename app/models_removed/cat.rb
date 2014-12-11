@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Cat < ActiveRecord::Base
-  attr_accessible :name, :oid, :slug,:parent_id,:stores_count
+  #attr_accessible :name, :oid, :slug,:parent_id,:stores_count
   acts_as_nested_set
   # acts_as_url :name,  :url_attribute=>:slug,  :only_when_blank=>true
   # scope :leaves,where("rgt - lft = 1")

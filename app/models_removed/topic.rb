@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Topic < ActiveRecord::Base
-  attr_accessible :name,:volume,:acr,:acr2,:items_updated_at,:public
+  #attr_accessible :name,:volume,:acr,:acr2,:items_updated_at,:public
   # acts_as_url :name,  :url_attribute=>:slug,  :only_when_blank=>true
   has_many :page_views, :as => :viewable, :dependent => :destroy
   resourcify

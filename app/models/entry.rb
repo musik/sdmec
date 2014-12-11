@@ -7,7 +7,7 @@ class Entry < ActiveRecord::Base
       record.errors.add attribute, "没有找到链接" unless record.check_link
     end
   end
-  attr_accessible :clicked_at, :link_checked_at, :link_status, :name, :pwd, :qq, :url,:description,:keywords,:content
+  #attr_accessible :clicked_at, :link_checked_at, :link_status, :name, :pwd, :qq, :url,:description,:keywords,:content
   validates :url,presence: true,format: {with: /\Zhttp:\/\/([a-z0-9\-\.]+)\/*\Z/i},uniqueness: true,on: :create
   validates :name,presence: true,uniqueness: true
   #validates :pwd,presence: true

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Link < ActiveRecord::Base
-  attr_accessible :data, :name
+  #attr_accessible :data, :name
   resourcify
 
   def self.cached_all

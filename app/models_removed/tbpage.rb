@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Tbpage < ActiveRecord::Base
-  attr_accessible :name, :slug, :tburl, :last_fetched_at,:tagid
+  #attr_accessible :name, :slug, :tburl, :last_fetched_at,:tagid
   acts_as_url :name,  :url_attribute=>:slug#,  :only_when_blank=>true
   resourcify
   after_create :delayed_update

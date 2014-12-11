@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
-  attr_accessible :cid, :click_url, :commission, :commission_num, :commission_rate, :commission_volume,
-   :delist_time, :desc, :detail_url, :express_fee, :item_imgs, :item_location,
-   :location_city, :location_state, :nick, :num_iid, :pic_url, :price, :sell_promise,
-   :seller_credit_score, :shop_click_url, :title, :volume,:detail_updated_at
+  #attr_accessible :cid, :click_url, :commission, :commission_num, :commission_rate, :commission_volume,
+   #:delist_time, :desc, :detail_url, :express_fee, :item_imgs, :item_location,
+   #:location_city, :location_state, :nick, :num_iid, :pic_url, :price, :sell_promise,
+   #:seller_credit_score, :shop_click_url, :title, :volume,:detail_updated_at
   scope :top,order("commission_volume desc")
   def import_detail data
     loc = data["item"].delete "location"

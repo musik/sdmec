@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
 
 
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
-  attr_accessible :commentable_type,:commentable_id,:guest_name,:guest_email,:guest_website,:body
+  #attr_accessible :commentable_type,:commentable_id,:guest_name,:guest_email,:guest_website,:body
 
   validates_presence_of :body
   #validates_presence_of :user

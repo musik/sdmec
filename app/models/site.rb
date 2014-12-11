@@ -1,12 +1,12 @@
 class Site < ActiveRecord::Base
   belongs_to :user
-  has_and_belongs_to_many :items,:uniq=>true
-  has_and_belongs_to_many :shops,:uniq=>true,:class_name=>'Store'
+  #has_and_belongs_to_many :items,:uniq=>true
+  #has_and_belongs_to_many :shops,:uniq=>true,:class_name=>'Store'
   has_many :site_stores
   has_many :stores,:through=>:site_stores
   has_many :options,:class_name=>'SiteOption'
 
-  attr_accessible :description, :name, :slug, :slogan
+  #attr_accessible :description, :name, :slug, :slogan
   validates_presence_of :name,:slug
   validates_length_of :slug,:in=>4..16
 

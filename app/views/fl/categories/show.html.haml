@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @fl_category.name
+%p
+  %b Slug:
+  = @fl_category.slug
+%p
+  %b Keywords:
+  = @fl_category.keywords
+
+= link_to 'Edit', edit_fl_category_path(@fl_category)
+\|
+= link_to 'Back', fl_categories_path

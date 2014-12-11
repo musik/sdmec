@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //xx= require turbolinks
 //= require bootstrap-sprockets
+//= require bootstrap-hover-dropdown

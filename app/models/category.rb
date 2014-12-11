@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Category < ActiveRecord::Base
-  attr_accessible :cid, :is_parent, :name, :parent_cid, :sort_order, :status,:children_fetched,:parent_id,:display,:slug,:nicename,:keywords,:priority
+  #attr_accessible :cid, :is_parent, :name, :parent_cid, :sort_order, :status,:children_fetched,:parent_id,:display,:slug,:nicename,:keywords,:priority
   scope :sorted,order("sort_order asc")
   scope :display_with_priority,where(:display=>true).order("priority desc")
   #default_scope where(:display=>true).order("priority desc")

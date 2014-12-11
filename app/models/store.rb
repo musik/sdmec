@@ -2,10 +2,6 @@
 class Store < ActiveRecord::Base
   belongs_to :city
   belongs_to :cat,:counter_cache=>'stores_count'
-  attr_accessible :auction_count, :cid, :commission_rate, :created, :delivery_score, :item_score, :pic_path, :seller_credit, :seller_id, :nick, :service_score, :shop_id, :shop_title, :shop_type, :total_auction, :taoke_updated_at, :shop_updated_at,:city_id,:bulletin,:desc,:sid,:title,:modified,:click_url,:user_id,:short,
-    :buyer_credit, :hangye,:seller_rate,:extra_data,
-    :user_updated_at, :comments_updated_at,:delta,
-    :source_url,:follow_count,:inhome,:position
   scope :updated,->{where('shop_updated_at is not null')}
   scope :credit,->{order('seller_credit desc')}
   scope :recent,->{order('id desc')}

@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class PageView < ActiveRecord::Base
-  attr_accessible :viewable_type, :viewable_id, :user_id, :referer, :user_agent, :ip, :visitor_hash
+  #attr_accessible :viewable_type, :viewable_id, :user_id, :referer, :user_agent, :ip, :visitor_hash
   belongs_to :viewable, :polymorphic => true
 
   scope :today, where(['created_at > ?',Time.zone.now.beginning_of_day])

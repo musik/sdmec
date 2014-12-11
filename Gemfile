@@ -1,8 +1,8 @@
 require 'rbconfig'
 #gem "bundler", "~> 1.1.5"
 HOST_OS = RbConfig::CONFIG['host_os']
-source 'http://ruby.taobao.org'
-#source 'http://rubygems.org'
+#source 'http://ruby.taobao.org'
+source 'http://rubygems.org'
 ruby '2.1.4'
 gem 'rails', '~> 4.0.12'
 gem 'rails-i18n'
@@ -24,6 +24,7 @@ gem "devise"
 gem "cancancan"
 gem "rolify"
 gem "bootstrap-sass"
+gem 'font-awesome-rails','3.0.1.0'
 gem "simple_form"
 
 group :development do
@@ -31,7 +32,7 @@ group :development do
   gem 'better_errors'
   gem 'libnotify', :group => :development
   gem 'rb-inotify', :require => false
-  gem 'guard'
+  #gem 'guard'
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-rails'
@@ -57,7 +58,6 @@ gem 'typhoeus'
 gem 'thin'
 gem 'unicorn'
 
-gem 'rails-i18n'
 gem 'devise-i18n'
 
 gem 'kaminari'
@@ -117,8 +117,10 @@ gem 'angularjs-rails'
 gem 'high_voltage'
 
 #gem 'upmin-admin'
-gem 'activeadmin', github: 'activeadmin'
-gem 'protected_attributes'
+#gem 'activeadmin', github: 'activeadmin'
+gem 'rails_admin'
+gem 'rails_admin_nested_set'
+#gem 'protected_attributes'
 gem 'actionpack-action_caching'
 gem 'actionpack-page_caching'
 gem 'rails_layout'

@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :city_id, :content, :fenlei_id, :publish, :source, :summary, :title, :user_id
+  #attr_accessible :city_id, :content, :fenlei_id, :publish, :source, :summary, :title, :user_id
   belongs_to :fenlei
   belongs_to :user
   belongs_to :city

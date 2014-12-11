@@ -1,10 +1,14 @@
+- title t('city.home.title',:city=>@city.name),nil,false
+-meta :keywords,t('city.home.keywords',:city=>@city.name)
+-meta :description,t('city.home.description',:city=>@city.name)
 .container
   .row.catalog
-    -%w(生活服务 商业服务 汽车服务 教育培训).each do |name|
+    -cats = Fl::Category.roots.includes(:children)
+    -cats.each do |c|
       .col-md-3
         %dl.category{class: cycle("a","b","c","d")}
           %dt
-            %h3=name
-          -(1..7).each do |r|
+            %h3=c.name
+          -c.children.each do |c1|
             %dd
-              =link_to "二手车"
+              =link_to c1.name,fl_city_cat_url(c.slug)

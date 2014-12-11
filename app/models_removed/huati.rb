@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Huati < ActiveRecord::Base
-  attr_accessible :content, :name, :slug,:published,:acr,:acr2,:priority,:delta
+  #attr_accessible :content, :name, :slug,:published,:acr,:acr2,:priority,:delta
   
   resourcify
   

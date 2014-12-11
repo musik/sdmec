@@ -1,0 +1,2 @@
+module Fl::CategoriesHelper
+end

@@ -1,5 +1,10 @@
 # -*- encoding : utf-8 -*-
 Tb::Application.routes.draw do
+  namespace :fl do
+    resources :categories
+  end
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :entries,path: "websites",
     :constraints => { :id => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/ } do
     post :check,on: :member
@@ -27,7 +32,7 @@ Tb::Application.routes.draw do
     get '/shop'=>"stores#city",:as=>"shops_city"
     get 'tags/auto_complete'=>"tags#auto_complete"
     get 'tags/:id'=>"tags#city",:as=>"city_tag"
-    get '/:id'=>"cats#city",:as=>"cat_city"
+    get '/:id'=>"fl/categories#city",:as=>"fl_city_cat"
     root :to => 'home#incity',as: "city_root"
   end
   constraints SiteSubdomain do
