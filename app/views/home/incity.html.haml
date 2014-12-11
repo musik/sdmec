@@ -11,4 +11,4 @@
             %h3=c.name
           -c.children.each do |c1|
             %dd
-              =link_to c1.name,fl_city_cat_url(c.slug)
+              =link_to c1.name,fl_city_cat_url(c1.slug)

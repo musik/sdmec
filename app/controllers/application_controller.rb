@@ -2,9 +2,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :add_initial_breadcrumbs
-  after_filter :store_location
+  #after_filter :store_location
   layout :smart_layout
-  #,:reload_rails_admin
+  before_filter :reload_rails_admin ,if: :rails_admin_path?
   include UrlHelper
   rescue_from CanCan::AccessDenied do |exception|
     logger.debug exception
@@ -19,20 +19,19 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end
-  #def reload_rails_admin
-    #return unless rails_admin_path?
-    #models = %W(User UserProfile)
-    #models.each do |m|
-      #RailsAdmin::Config.reset_model(m)
-    #end
-    #RailsAdmin::Config::Actions.reset
+  def reload_rails_admin
+    models = %W(User UserProfile)
+    models.each do |m|
+      RailsAdmin::Config.reset_model(m)
+    end
+    RailsAdmin::Config::Actions.reset
 
-    #load("#{Rails.root}/config/initializers/rails_admin.rb")
-  #end
+    load("#{Rails.root}/config/initializers/rails_admin.rb")
+  end
 
-  #def rails_admin_path?
-    #controller_path =~ /rails_admin/ && Rails.env == "development"
-  #end
+  def rails_admin_path?
+    controller_path =~ /rails_admin/ && Rails.env == "development"
+  end
   def add_initial_breadcrumbs
     return if request.url.match("/admin") 
     if request.subdomain.blank? 
