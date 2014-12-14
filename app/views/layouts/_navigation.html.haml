@@ -20,7 +20,7 @@
                 %span.caret
             %ul.dropdown-menu
               -c.children.each do |c1|
-                %li=link_to c1.name,fl_city_cat_url(c.slug)
+                %li=link_to c1.name,fl_city_cat_url(c1.slug)
               
 
         -#= render 'layouts/navigation_links'
