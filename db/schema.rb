@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141211133450) do
+ActiveRecord::Schema.define(version: 20141214141710) do
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -187,6 +187,24 @@ ActiveRecord::Schema.define(version: 20141211133450) do
 
   add_index "fl_categories", ["parent_id", "lft", "rgt"], name: "plr", using: :btree
   add_index "fl_categories", ["slug"], name: "index_categories_on_slug", using: :btree
+
+  create_table "fl_posts", force: true do |t|
+    t.string   "title"
+    t.string   "summary"
+    t.string   "keywords"
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "city_id"
+    t.integer  "category_id"
+    t.datetime "published_at"
+    t.boolean  "publish"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fl_posts", ["category_id"], name: "index_fl_posts_on_category_id", using: :btree
+  add_index "fl_posts", ["city_id"], name: "index_fl_posts_on_city_id", using: :btree
+  add_index "fl_posts", ["user_id"], name: "index_fl_posts_on_user_id", using: :btree
 
   create_table "huatis", force: true do |t|
     t.string   "name"

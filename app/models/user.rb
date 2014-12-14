@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
     :case_sensitive => false
   }
 
-  has_many :sites
+  #has_many :sites
   has_many :posts
   has_many :entries
   def display

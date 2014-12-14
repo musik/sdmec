@@ -82,3 +82,4 @@ db/sphinx/
 # vim artifacts
 **.swp
 *.bak
+*_removed

@@ -1,0 +1,37 @@
+%h1 Listing fl_posts
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Summary
+      %th Keywords
+      %th Content
+      %th User
+      %th City
+      %th Published at
+      %th Publish
+      %th Category
+      %th
+      %th
+      %th
+      
+  %tbody
+    - @fl_posts.each do |fl_post|
+      %tr
+        %td= fl_post.title
+        %td= fl_post.summary
+        %td= fl_post.keywords
+        %td= fl_post.content
+        %td= fl_post.user
+        %td= fl_post.city
+        %td= fl_post.published_at
+        %td= fl_post.publish
+        %td= fl_post.category
+        %td= link_to 'Show', fl_post
+        %td= link_to 'Edit', edit_fl_post_path(fl_post)
+        %td= link_to 'Destroy', fl_post, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_fl_post_path

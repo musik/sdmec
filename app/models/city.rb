@@ -3,7 +3,7 @@ class City < ActiveRecord::Base
   #attr_accessible :name, :slug, :parent_id, :use_subdomain, :zhixiashi
   attr_accessor :count
   acts_as_url :name,:url_attribute=>:slug,:only_when_blank=>true
-  scope :roots,where(:parent_id=>0)
+  scope :roots,->{where(:parent_id=>0)}
   has_many :stores
   has_many :posts
   def to_param

@@ -1,7 +1,5 @@
 class Comment < ActiveRecord::Base
-  scope :recent,order('id desc')
-
-
+  scope :recent,->{order('id desc')}
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
   #attr_accessible :commentable_type,:commentable_id,:guest_name,:guest_email,:guest_website,:body
 

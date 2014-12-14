@@ -1,0 +1,33 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @fl_post.title
+%p
+  %b Summary:
+  = @fl_post.summary
+%p
+  %b Keywords:
+  = @fl_post.keywords
+%p
+  %b Content:
+  = @fl_post.content
+%p
+  %b User:
+  = @fl_post.user
+%p
+  %b City:
+  = @fl_post.city
+%p
+  %b Published at:
+  = @fl_post.published_at
+%p
+  %b Publish:
+  = @fl_post.publish
+%p
+  %b Category:
+  = @fl_post.category
+
+= link_to 'Edit', edit_fl_post_path(@fl_post)
+\|
+= link_to 'Back', fl_posts_path

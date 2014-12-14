@@ -1,0 +1,2 @@
+module Fl::PostsHelper
+end

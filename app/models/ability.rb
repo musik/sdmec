@@ -10,7 +10,7 @@ class Ability
       can :remove_all, :all
     else
       can :read,:all
-      can [:browse,:auto_complete,:search],Topic
+      #can [:browse,:auto_complete,:search],Topic
       can :create,Comment
       if user.id.present?
         can :settings,Site,:user_id => user.id

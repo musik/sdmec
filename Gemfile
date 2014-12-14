@@ -8,12 +8,10 @@ gem 'rails', '~> 4.0.12'
 gem 'rails-i18n'
 gem 'mysql2'
 gem 'execjs'
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-  gem 'jquery-ui-rails'
-end
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'jquery-ui-rails'
 gem 'jquery-rails'
 gem "haml"
 gem "haml-rails", :group => :development
@@ -24,7 +22,7 @@ gem "devise"
 gem "cancancan"
 gem "rolify"
 gem "bootstrap-sass"
-gem 'font-awesome-rails','3.0.1.0'
+#gem 'font-awesome-rails','3.0.1.0'
 gem "simple_form"
 
 group :development do

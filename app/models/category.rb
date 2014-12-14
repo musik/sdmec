@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 class Category < ActiveRecord::Base
   #attr_accessible :cid, :is_parent, :name, :parent_cid, :sort_order, :status,:children_fetched,:parent_id,:display,:slug,:nicename,:keywords,:priority
-  scope :sorted,order("sort_order asc")
-  scope :display_with_priority,where(:display=>true).order("priority desc")
+  scope :sorted,->{order("sort_order asc")}
+  scope :display_with_priority,->{where(:display=>true).order("priority desc")}
   #default_scope where(:display=>true).order("priority desc")
-  has_many :children_displayed,
-      :class_name=>Category,:conditions=>{:display=>true},
-      :foreign_key=>'parent_id'
+  #has_many :children_displayed,
+      #:class_name=>Category,:conditions=>{:display=>true},
+      #:foreign_key=>'parent_id'
       #:order=>"priority desc"
   acts_as_nested_set
   resourcify

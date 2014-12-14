@@ -1,8 +1,8 @@
-# -*- encoding : utf-8 -*-
 Tb::Application.routes.draw do
-  namespace :fl do
-    resources :categories
-  end
+  #namespace :fl do
+    #resources :posts
+    #resources :categories
+  #end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :entries,path: "websites",
@@ -22,16 +22,21 @@ Tb::Application.routes.draw do
   scope ':deleted',:deleted=>/topics|mai|start|browse|categories/ do
     get '(:id)'=>'home#deleted'
   end
-  get '/xtao' => 'home#xtao'
-  constraints(ToolsSubdomain) do
-    get '/xiaoliang/:id'=>'tools#xiaoliang',:as=>'xiaoliang'
-    root :to => 'tools#xiaoliang',as: "tools_root"
-  end
+  #constraints(ToolsSubdomain) do
+    #get '/xiaoliang/:id'=>'tools#xiaoliang',:as=>'xiaoliang'
+    #root :to => 'tools#xiaoliang',as: "tools_root"
+  #end
   constraints(CitySubdomain) do
     get '/t/:id'=>'city/home#page',:as=>'city_page'
     get '/shop'=>"stores#city",:as=>"shops_city"
     get 'tags/auto_complete'=>"tags#auto_complete"
     get 'tags/:id'=>"tags#city",:as=>"city_tag"
+
+    get '/new'=>"fl/posts#new",:as=>"fl_post_new"
+    namespace :fl do
+      resources :posts
+      resources :categories
+    end
     get '/:id'=>"fl/categories#city",:as=>"fl_city_cat"
     root :to => 'home#incity',as: "city_root"
   end

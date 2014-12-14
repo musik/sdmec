@@ -98,8 +98,8 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.6)
-    font-awesome-rails (3.0.1.0)
-      railties (>= 3.1)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     god (0.13.4)
     guard (2.10.2)
@@ -122,7 +122,7 @@ GEM
     guard-rspec (4.4.1)
       guard (~> 2.1)
       rspec (>= 2.99.0, < 4.0)
-    haml (4.1.0.beta.1)
+    haml (4.0.6)
       tilt
     haml-rails (0.6.0)
       actionpack (>= 4.0.1)
@@ -394,7 +394,6 @@ DEPENDENCIES
   email_spec
   execjs
   factory_girl_rails
-  font-awesome-rails (= 3.0.1.0)
   god
   guard-bundler
   guard-livereload

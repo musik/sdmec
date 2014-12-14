@@ -6,6 +6,7 @@
 module LayoutHelper
   def title(page_title, page_header = nil, show_title = true)
     page_header ||= page_title
+    @title = page_header
     if params[:page].present? and params[:page].to_i > 1
       page_title = "第#{params[:page]}页_#{page_title}"
       page_header += " / 第#{params[:page]}页"
