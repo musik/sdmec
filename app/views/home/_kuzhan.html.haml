@@ -1,9 +1,3 @@
-%header.sheader
-  .row-fluid
-    .span10
-      %h2 最新点入网站
-    .span2
-      =link_to "全部",entries_url,target: "_self"
+%h4 最新点入网站
 -@entries = Entry.recent_click.limit(100)
-%section.scontent
-  = render :partial => 'entries/list',locals:{entries: @entries,big: true}
+= render :partial => 'entries/list',locals:{entries: @entries,big: true}

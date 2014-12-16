@@ -10,26 +10,31 @@
     = csrf_meta_tags
   %body
     .pre-header
+      .container
+        .row
+          .col-md-12
+            =render "layouts/unav"
     .header
       .container
         .row
           .col-md-2
             %a{href: root_url(subdomain: "www"),target: "_self"}
-              =image_tag "logo.png",alt: "sdmec开放网址目录"
-          .col-md-1
+              =image_tag "logo.png",alt: "sdmec分类信息网"
+          .col-md-2
             -if @city.present?
               = link_to t('appname_city',:city=>@city.name), root_path, :class => 'city'
               = link_to  cities_url(:subdomain=>'www'), :class => 'change',:rel=>"nofollow" do
                 %span.caret
             -else
-              = link_to '切换城市', cities_url(:subdomain=>'www'), :class => 'change',:rel=>"nofollow"
+              -unless is_home?("www")
+                = link_to '切换城市', root_url(:subdomain=>'www'), :class => 'change',:rel=>"nofollow"
           .col-md-5
             %form.form-inline{action: root_url,method: 'get',target: "_self"}
               -a={:id=>'q',:type=>"text",:name=>"q",class: "form-control"}
               -a.merge! @q.nil?  ? {:placeholder=>t('search')} : {:value=>@q}
               %input{a}
               %button.btn.btn-default 搜索
-          .col-md-4
+          .col-md-3
             =link_to "免费发布信息",fl_post_new_url,class: "btn btn-success add-post"
     = render 'layouts/navigation'
     .main{:role => "main"}

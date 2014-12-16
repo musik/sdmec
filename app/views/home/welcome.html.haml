@@ -1,0 +1,20 @@
+-title t('.title'),nil,false
+-meta :keywords,"自助链接,自助链,自助友情链接,网站免费收录,免费收录网站,免费网站收录,免费网站目录,友链平台,免费友情链接,自动友情链接,友链交换平台,交换友链,免费友情链接网,免费推广平台"
+.container
+  %h2 地区导航
+  -cities = City.tree
+  .city-rows
+    .row.first
+      .col-md-1 直辖市: 
+      .col-md-11
+        -cities[:zhixiashi].each do |r|
+          =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺导航"
+    -cities[:parents].each do |p|
+      .row
+        .col-md-1
+          = p.name
+        .col-md-11
+          -cities[:children][p.id].each do |r|
+            =link_to r.name,root_url(:subdomain=>r.slug),:title=>"#{r.name}店铺导航"
+.container.mt1e
+  = render :partial => 'home/kuzhan'

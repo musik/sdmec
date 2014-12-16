@@ -22,7 +22,7 @@ body
   .add-post
     margin-top: 6px
 #nav
-  margin: 0 -10px
+  margin: 0
 .navbar-brand
   padding-left: 0
   padding-right: 0
@@ -32,6 +32,22 @@ body
 
 #main
 .navbar-brand
+.pre-header
+  height: 30px
+  background: #f8f8f8
+  border-bottom: #eee
+.nav-users
+  > li
+    float: left
+    > a,.nav-text
+      padding: 0 8px
+      line-height: 30px
+      color: #666
+    > a:hover, > a:focus
+      background: transparent !important
+  > li + li 
+    margin-left: 2px
+      
 .footer
   border-top: 1px solid #eee
   padding: 40px 0
@@ -52,3 +68,11 @@ body
     line-height: 2em
     a
       color: #999
+.city-rows
+  .row
+    padding-top: 10px
+    padding-bottom: 10px
+    border-top: 1px dashed #ccc
+  .row.first
+    border-top: none
+

@@ -1,6 +1,10 @@
 -#-if Rails.env == 'development' or params[:dev] or user_signed_in? 
-%ul.nav.pull-right.nav-user
+%ul.pull-right.nav.nav-users
   - if user_signed_in?
+    %li
+      %p.nav-text
+        欢迎你
+        =link_to current_user.display,edit_user_registration_url,target: "_self"
     %li= link_to("我发布的网站", user_url(current_user,:subdomain=>"www"),target: "_self")
     -#%li.first= link_to(current_user.display, edit_user_registration_url(:subdomain=>"www"),target: "_self")
     - if current_user.has_role? :admin

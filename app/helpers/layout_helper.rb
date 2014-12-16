@@ -125,4 +125,7 @@ document.write(\'<A href="mailto:\' + emailE + \'">\' + emailE + \'</a>\')
       javascript_include_tag *files
     end
   end
+  def is_home?(subdomain)
+    request.url == root_url(subdomain)
+  end
 end

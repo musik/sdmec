@@ -27,6 +27,12 @@ zh_CN:
       default_message: "请检查以下错误:"
     # Labels and hints examples
     labels:
+      fl_post:
+        title: 标题
+        summary: 摘要
+        keywords: 关键词
+        content: 正文
+        category: 分类
       defaults:
         name: 名称
         password: '密码'

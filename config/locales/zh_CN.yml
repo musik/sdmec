@@ -3,7 +3,7 @@
 zh_CN:
   search: 搜索
   appname: 自助链接
-  appname_city: "%{city}"
+  appname_city: "%{city}分类信息网"
   breadcrumbs:
     home: 首页
     tags: 标签
@@ -13,6 +13,8 @@ zh_CN:
     comments: 评论
     huatis: 热点话题
   home:
+    welcome:
+      title: 淘宝皇冠店铺导航-自助链接_网站免费收录
     index:
       title: 淘宝皇冠店铺导航-自助链接_网站免费收录
       desco: 本站采用<a href="http://open.taobao.com">taobao api</a>建立,为你提供分城市话题导购。

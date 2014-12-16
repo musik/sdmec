@@ -11,16 +11,17 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li=link_to "首页"
-        -cats = Fl::Category.roots.includes(:children)
-        -cats.each do |c|
-          %li{class: c.leaf? ? nil : "dropdown"}
-            =link_to c.leaf? ? fl_city_cat_url(c.slug) : 'javascript://void(0)',c.leaf? ? nil : {class: "dropdown-toggle",data: {hover: "dropdown"}} do
-              =c.name
-              -unless c.leaf?
-                %span.caret
-            %ul.dropdown-menu
-              -c.children.each do |c1|
-                %li=link_to c1.name,fl_city_cat_url(c1.slug)
+        -if @city.present?
+          -cats = Fl::Category.roots.includes(:children)
+          -cats.each do |c|
+            %li{class: c.leaf? ? nil : "dropdown"}
+              =link_to c.leaf? ? fl_city_cat_url(c.slug) : 'javascript://void(0)',c.leaf? ? nil : {class: "dropdown-toggle",data: {hover: "dropdown"}} do
+                =c.name
+                -unless c.leaf?
+                  %span.caret
+              %ul.dropdown-menu
+                -c.children.each do |c1|
+                  %li=link_to c1.name,fl_city_cat_url(c1.slug)
               
 
         -#= render 'layouts/navigation_links'
