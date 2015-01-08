@@ -35,7 +35,8 @@
               %input{a}
               %button.btn.btn-default 搜索
           .col-md-3
-            =link_to "免费发布信息",fl_post_new_url,class: "btn btn-success add-post"
+            -if @city.present?
+              =link_to "免费发布信息",fl_post_new_url,class: "btn btn-success add-post"
     = render 'layouts/navigation'
     .main{:role => "main"}
       = render 'layouts/messages'
