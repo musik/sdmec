@@ -36,8 +36,22 @@
               %button.btn.btn-default 搜索
           .col-md-3
             -if @city.present?
-              =link_to "免费发布信息",fl_post_new_url,class: "btn btn-success add-post"
+              -#=link_to "免费发布信息",fl_post_new_url,class: "btn btn-success add-post"
     = render 'layouts/navigation'
     .main{:role => "main"}
       = render 'layouts/messages'
       = yield
+
+    .footer
+      .container
+        .row
+          .col-md-6
+            &copy; 2012
+            =t('footer_left').html_safe
+          .col-md-6.text-right
+            =t('footer_right').html_safe
+            =yield :title
+    .hidden
+      <script language="javascript" type="text/javascript" src="http://js.users.51.la/4045275.js"></script>
+      <noscript><a href="http://www.51.la/?4045275" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/4045275.asp" style="border:none" /></a></noscript>
+      = render :file=>'analytics/google'            
